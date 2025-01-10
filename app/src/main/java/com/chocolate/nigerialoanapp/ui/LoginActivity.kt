@@ -7,7 +7,6 @@ import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.BaseResponseBean
-import com.chocolate.nigerialoanapp.bean.LiveBean
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -15,19 +14,21 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 
-class SplashActivity : BaseActivity() {
+class LoginActivity : BaseActivity() {
 
     companion object {
-      const val TAG = "SplashActivity"
+        const val TAG = "LoginActivity"
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        requestLive()
+        setContentView(R.layout.activity_login)
+        checkMobilePhone()
     }
 
-    private fun requestLive() {
+
+    private fun checkMobilePhone() {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
         } catch (e: JSONException) {
@@ -36,7 +37,7 @@ class SplashActivity : BaseActivity() {
         if (BuildConfig.DEBUG) {
             Log.i(TAG, " launcher activity ... = " + jsonObject.toString())
         }
-        OkGo.post<String>(Api.LIVE).tag(TAG)
+        OkGo.post<String>(Api.CHECK_PHONE_NUMBER).tag(TAG)
             .upJson(jsonObject)
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
@@ -61,7 +62,6 @@ class SplashActivity : BaseActivity() {
                     } else {
 
                     }
-//                    mHandler?.mHandlersendEmptyMessageDelayed(if (successEnter) TO_MAIN_PAGE else TO_WELCOME_PAGE,100)
                 }
 
                 override fun onError(response: Response<String>) {
@@ -69,7 +69,6 @@ class SplashActivity : BaseActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
-//                    mHandler?.sendEmptyMessage(TO_WELCOME_PAGE)
                 }
             })
     }

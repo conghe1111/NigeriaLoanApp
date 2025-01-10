@@ -10,7 +10,10 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         jcenter()
-//        maven { url 'https://jitpack.io' }
+        google()
+        //compile 'com.lzy.net:okgo:3.0.4'
+        maven { url = uri("https://jitpack.io") }
+        maven { url = uri("https://maven.aliyun.com/repository/jcenter") }
     }
 }
 dependencyResolutionManagement {
@@ -18,6 +21,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        jcenter()
+        maven { url = uri("https://jitpack.io") }
+        maven { url = uri("https://maven.aliyun.com/repository/jcenter") }
     }
 }
 

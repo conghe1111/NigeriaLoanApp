@@ -13,7 +13,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField("boolean", "IS_AAB_BUILD", "true")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -38,6 +38,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -68,16 +69,15 @@ dependencies {
     implementation(libs.glide.compiler)
     implementation(libs.fastjson)
     implementation(libs.okgo)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.messaging)
+    implementation(libs.integrity)
+    implementation(libs.gson)
+    implementation(libs.eventbus)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-//    implementation "androidx.appcompat:appcompat:$appcompat_version"
-//    implementation "com.google.android.material:material:$material_version"
-//
-//    implementation 'com.google.code.gson:gson:2.8.9'
-//    implementation 'androidx.multidex:multidex:2.0.1'
-//    implementation 'org.greenrobot:eventbus:3.3.1'
-//    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-//    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
-//
-//    implementation "com.blankj:utilcodex:$utilcodex_version"
 }
