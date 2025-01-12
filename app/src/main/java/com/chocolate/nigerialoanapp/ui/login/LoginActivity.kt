@@ -1,12 +1,16 @@
-package com.chocolate.nigerialoanapp.ui
+package com.chocolate.nigerialoanapp.ui.login
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.View.OnClickListener
+import android.widget.Button
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.BaseResponseBean
+import com.chocolate.nigerialoanapp.bean.response.CheckPhoneNumResponse
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -24,7 +28,13 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        checkMobilePhone()
+        findViewById<Button>(R.id.btn).setOnClickListener(object : OnClickListener {
+            override fun onClick(v: View?) {
+                checkMobilePhone()
+            }
+
+        })
+
 //        sendVerifyCode()
     }
 
@@ -49,23 +59,15 @@ class LoginActivity : BaseActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
-                    var successEnter = false
-//                    val body = response.body()
-                    var responseBean: BaseResponseBean? = null
+                    val response = checkResponseSuccess(response, CheckPhoneNumResponse::class.java)
                     try {
-                        responseBean = com.alibaba.fastjson.JSONObject.parseObject(
-                            response.body().toString(),
-                            BaseResponseBean::class.java
-                        )
+                        Log.e("Test", "1 " + response?.mobile)
+                        Log.e("Test", "2 " + response?.is_registered)
+                        Log.e("Test", "3 " + response?.server_time)
                     } catch (e: Exception) {
                         if (BuildConfig.DEBUG) {
                             throw e
                         }
-                    }
-                    if (responseBean?.isRequestSuccess() == true) {
-
-                    } else {
-
                     }
                 }
 

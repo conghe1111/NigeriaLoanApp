@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.LongSerializationPolicy
 
 class BaseResponseBean {
-    var body: Any? = null
+    var data: Any? = null
     var code: Int? = null
     var message: String? = null
 
@@ -28,14 +28,14 @@ class BaseResponseBean {
         return message
     }
 
-    fun getData(): Any? {
-        return body
+    fun getDataBody(): Any? {
+        return data
     }
 
     fun getBodyStr(): String? {
         val gson = GsonBuilder() //             # 将DEFAULT改为STRING
             .setLongSerializationPolicy(LongSerializationPolicy.STRING)
             .serializeNulls().create()
-        return gson.toJson(body)
+        return gson.toJson(data)
     }
 }

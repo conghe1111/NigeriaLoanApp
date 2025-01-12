@@ -71,11 +71,11 @@ object NetworkUtils {
             ToastUtils.showShort(responseBean.getMsg())
             return null
         }
-        if (responseBean.getData() == null) {
+        if (responseBean.getDataBody() == null) {
             ToastUtils.showShort("request failure 2.")
             return null
         }
-        return com.alibaba.fastjson.JSONObject.toJSONString(responseBean.getData())
+        return com.alibaba.fastjson.JSONObject.toJSONString(responseBean.getDataBody())
     }
 
     fun toBuildParams(jsonObject : JSONObject) : String {
