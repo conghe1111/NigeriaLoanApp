@@ -107,7 +107,7 @@ abstract class BaseCollectDataMgr {
                         if (BuildConfig.DEBUG) {
                             Log.e("Test", locationStr)
                         }
-                        locationBeanStr = EncodeUtils.encryptAES(locationStr)
+                        locationBeanStr = locationStr
                     }
                     val durationLocation = (System.currentTimeMillis() - startMillions)
                     logFile(" read location duration = $durationLocation")
@@ -295,11 +295,11 @@ abstract class BaseCollectDataMgr {
 
         val aesSmsStr = authParams.sms
         if (!TextUtils.isEmpty(aesSmsStr)) {
-            originSms = EncodeUtils.decryptAES(aesSmsStr!!)
+            originSms = aesSmsStr
         }
         val aesAppListStr = authParams.appList
         if (!TextUtils.isEmpty(aesAppListStr)) {
-            originAppInfo = EncodeUtils.decryptAES(aesAppListStr!!)
+            originAppInfo = aesAppListStr
         }
 
         val sb = StringBuffer()

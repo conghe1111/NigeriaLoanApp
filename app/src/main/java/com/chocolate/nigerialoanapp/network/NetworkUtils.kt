@@ -2,9 +2,10 @@ package com.chocolate.nigerialoanapp.network
 
 import android.text.TextUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.bean.BaseResponseBean
+import com.chocolate.nigerialoanapp.collect.utils.AESUtil
 import com.chocolate.nigerialoanapp.event.LoginTimeOut
-import com.lzy.okgo.BuildConfig
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.HttpHeaders
 import com.lzy.okgo.model.Response
@@ -15,8 +16,8 @@ object NetworkUtils {
 
     fun buildHead() {
         val header = HttpHeaders()
-        header.put("AppId","1")
-        header.put("AppName","owo")
+        header.put("AppId","2")
+        header.put("AppName","oyo")
         header.put("AppVersion","1.0.1")
         header.put("VersionCode","101")
 //        AppId	string	Y	客户端APPID	1
@@ -32,9 +33,9 @@ object NetworkUtils {
 //        access_token	string	Y	客户Token
 //                signature	string	Y	签名：服务端会验证签名是否正确，测试阶段可以不验证
         val jsonObject = JSONObject()
-        jsonObject.put("request_time", System.currentTimeMillis())
-        jsonObject.put("access_token", "1")
-        jsonObject.put("signature", "1")
+        jsonObject.put("request_time", System.currentTimeMillis().toString())
+        jsonObject.put("access_token", "")
+        jsonObject.put("signature", "")
         return jsonObject
     }
 
@@ -75,5 +76,21 @@ object NetworkUtils {
             return null
         }
         return com.alibaba.fastjson.JSONObject.toJSONString(responseBean.getData())
+    }
+
+    fun toBuildParams(jsonObject : JSONObject) : String {
+        return if (BuildConfig.DEBUG) {
+            jsonObject.toString()
+        } else {
+            AESUtil.decrypt(jsonObject.toString())
+        }
+    }
+
+    fun toBuildParams(content : String) : String {
+        return if (BuildConfig.DEBUG) {
+            content
+        } else {
+            AESUtil.decrypt(content)
+        }
     }
 }

@@ -9,7 +9,6 @@ import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.Utils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
-import com.chocolate.nigerialoanapp.collect.EncodeUtils
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.log.LogSaver
 import java.util.regex.Pattern
@@ -51,7 +50,7 @@ class CollectSmsMgr {
         }
         var aesSmsStr = ""
         try {
-            aesSmsStr = EncodeUtils.encryptAES(mSmsStr!!)
+            aesSmsStr = mSmsStr!!
         } catch (e : Exception) {
 
         }

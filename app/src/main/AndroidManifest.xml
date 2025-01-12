@@ -30,6 +30,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.LoginActivity">
+
+        </activity>
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

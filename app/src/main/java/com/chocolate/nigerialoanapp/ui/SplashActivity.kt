@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.blankj.utilcode.BuildConfig
@@ -7,7 +8,7 @@ import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.BaseResponseBean
-import com.chocolate.nigerialoanapp.bean.LiveBean
+import com.chocolate.nigerialoanapp.collect.utils.AESUtil
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -37,7 +38,7 @@ class SplashActivity : BaseActivity() {
             Log.i(TAG, " launcher activity ... = " + jsonObject.toString())
         }
         OkGo.post<String>(Api.LIVE).tag(TAG)
-            .upJson(jsonObject)
+            .params("data",  AESUtil.encrypt(jsonObject.toString()))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
                     if (isFinishing || isDestroyed) {
@@ -57,7 +58,8 @@ class SplashActivity : BaseActivity() {
                         }
                     }
                     if (responseBean?.isRequestSuccess() == true) {
-
+                        val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+                        startActivity(intent)
                     } else {
 
                     }

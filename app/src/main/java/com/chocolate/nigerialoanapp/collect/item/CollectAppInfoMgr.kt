@@ -11,7 +11,6 @@ import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.Utils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
-import com.chocolate.nigerialoanapp.collect.EncodeUtils
 import com.chocolate.nigerialoanapp.collect.utils.TimeUtil
 import com.loan.icredit.creditng.card.collect.item.AppInfoRequest
 
@@ -50,7 +49,7 @@ class CollectAppInfoMgr {
 
      fun getAppInfoAesStrInternal(){
         val originAppInfo = GsonUtils.toJson(readAllAppInfo())
-        val tempAppInfo = EncodeUtils.encryptAES(originAppInfo)
+        val tempAppInfo = originAppInfo
         aesAppInfoStr = if (TextUtils.isEmpty(tempAppInfo)) "" else tempAppInfo
     }
 

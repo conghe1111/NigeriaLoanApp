@@ -1,7 +1,7 @@
 package com.chocolate.nigerialoanapp.api
 
 object Api {
-    private val FORMAL_HOST = "https://app.owocredit.com"
+    private val FORMAL_HOST = "https://srv.owocredit.com"
     private val TEST_HOST = "http://srvtest.owocredit.com"
     private val HOST = TEST_HOST
 
