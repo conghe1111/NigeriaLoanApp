@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Eyocredit</string>
+    <string name="login_title">The best loan experience starts here, quick, easy, no hidden fee</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="please_enter_phone_number">Please enter your mobile number</string>
+    <string name="login_register_apply">Login/Register to Apply</string>
+    <string name="please_read_all">Please read all the &#60;Privacy Policy&#62; carefully.</string>
 </resources>

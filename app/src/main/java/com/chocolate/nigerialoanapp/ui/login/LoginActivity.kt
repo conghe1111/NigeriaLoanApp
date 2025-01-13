@@ -2,15 +2,11 @@ package com.chocolate.nigerialoanapp.ui.login
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.View.OnClickListener
-import android.widget.Button
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.BaseResponseBean
-import com.chocolate.nigerialoanapp.bean.response.CheckPhoneNumResponse
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -28,57 +24,15 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        findViewById<Button>(R.id.btn).setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                checkMobilePhone()
-            }
 
-        })
-
-//        sendVerifyCode()
+        val loginRegisterFragment = LoginRegisterFragment()
+        toFragment(loginRegisterFragment)
     }
 
-
-    private fun checkMobilePhone() {
-        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
-        try {
-            // TODO
-            jsonObject.put("mobile","2341234567890")
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        var dataStr = jsonObject.toString()
-        if (BuildConfig.DEBUG) {
-            Log.i(TAG, " launcher activity ... = " + dataStr)
-        }
-
-        OkGo.post<String>(Api.CHECK_PHONE_NUMBER).tag(TAG)
-            .params("data",  NetworkUtils.toBuildParams(dataStr))
-            .execute(object : StringCallback() {
-                override fun onSuccess(response: Response<String>) {
-                    if (isFinishing || isDestroyed) {
-                        return
-                    }
-                    val response = checkResponseSuccess(response, CheckPhoneNumResponse::class.java)
-                    try {
-                        Log.e("Test", "1 " + response?.mobile)
-                        Log.e("Test", "2 " + response?.is_registered)
-                        Log.e("Test", "3 " + response?.server_time)
-                    } catch (e: Exception) {
-                        if (BuildConfig.DEBUG) {
-                            throw e
-                        }
-                    }
-                }
-
-                override fun onError(response: Response<String>) {
-                    super.onError(response)
-                    if (isFinishing || isDestroyed) {
-                        return
-                    }
-                }
-            })
+    override fun getFragmentContainerRes(): Int {
+        return R.id.fl_container
     }
+
 
     private fun sendVerifyCode() {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
