@@ -18,6 +18,7 @@ firebase-bom = "33.2.0"
 integrity = "1.1.0"
 gson = "2.8.9"
 eventbus = "3.3.1"
+installreferrer = "2.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +47,7 @@ firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging
 integrity = { group = "com.google.android.play", name = "integrity" , version.ref = "integrity"}
 gson = { group = "com.google.code.gson", name = "gson" , version.ref = "gson"}
 eventbus = { group = "org.greenrobot", name = "eventbus" , version.ref = "eventbus"}
+installreferrer = { group = "com.android.installreferrer", name = "installreferrer" , version.ref = "installreferrer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

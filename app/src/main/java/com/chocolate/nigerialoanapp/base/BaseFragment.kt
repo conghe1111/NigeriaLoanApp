@@ -1,8 +1,15 @@
 package com.chocolate.nigerialoanapp.base
 
+import android.content.Intent
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
+import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.chocolate.nigerialoanapp.bean.response.LoginResponse
+import com.chocolate.nigerialoanapp.global.Constant
+import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.MainActivity
 import com.lzy.okgo.model.Response
 
 open class BaseFragment : Fragment() {
@@ -45,5 +52,24 @@ open class BaseFragment : Fragment() {
             return true
         }
         return false
+    }
+
+    fun toMainPage(loginResponse: LoginResponse, password: String) {
+        if (isDestroy()) {
+            return
+        }
+        if (loginResponse == null ||
+            loginResponse.account_id == null || loginResponse.access_token == null) {
+            return
+        }
+        SPUtils.getInstance().put(LocalConfig.LC_PASSWORD, password)
+
+        Constant.mAccountId = loginResponse.account_id
+        Constant.mAccountToken = loginResponse.access_token
+        SPUtils.getInstance().put(LocalConfig.LC_ACCOUNT_ID, Constant.mAccountId!!)
+        SPUtils.getInstance().put(LocalConfig.LC_ACCOUNT_TOKEN, Constant.mAccountToken)
+        val intent = Intent(this@BaseFragment.context, MainActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 }

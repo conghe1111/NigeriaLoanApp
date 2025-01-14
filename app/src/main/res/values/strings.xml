@@ -5,4 +5,25 @@
     <string name="please_enter_phone_number">Please enter your mobile number</string>
     <string name="login_register_apply">Login/Register to Apply</string>
     <string name="please_read_all">Please read all the &#60;Privacy Policy&#62; carefully.</string>
+    <string name="register">Register</string>
+    <string name="dears_234_x">Dears 234 %s</string>
+    <string name="ussd">USSD</string>
+    <string name="sms">SMS</string>
+    <string name="enter_verification_code">Enter verification code</string>
+    <string name="set_up_digit_password">Set up a 6-digit password</string>
+    <string name="enter_password_again">Enter password again</string>
+    <string name="get_code">Get Code</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="resend_sms_desc">Re-send the \n code in %ss</string>
+    <string name="log_in">Log in</string>
+    <string name="login">Login</string>
+    <string name="enter_password">Enter password</string>
+    <string name="forget_password">Forgot password？</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset">Reset</string>
+
+    <string name="str_validate_num_input_hint"> please enter your SMS Code</string>
+    <string name="str_login_phone_error"> please enter your correct phone number</string>
+    <string name="str_login_password_error"> please enter your correct password</string>
+    <string name="str_Illegal_verification_code">Illegal verification code</string>
 </resources>

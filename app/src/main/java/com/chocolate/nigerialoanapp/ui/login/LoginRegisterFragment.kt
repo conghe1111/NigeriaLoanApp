@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import com.blankj.utilcode.util.RegexUtils
 import com.blankj.utilcode.util.SPUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -61,7 +63,12 @@ class LoginRegisterFragment : BaseFragment() {
                 if (etMobileNum == null) {
                     return
                 }
-                checkMobilePhone()
+                val phoneNum = etMobileNum!!.text.toString()
+                if (RegexUtils.isTel(phoneNum)){
+                    ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
+                    return
+                }
+                checkMobilePhone(phoneNum)
             }
 
         })
@@ -100,16 +107,16 @@ class LoginRegisterFragment : BaseFragment() {
         updateState()
     }
 
-    private fun checkMobilePhone() {
+    private fun checkMobilePhone(mobileNum : String) {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
-            jsonObject.put("mobile","2341234567890")
+            jsonObject.put("mobile", "234$mobileNum")
         } catch (e: JSONException) {
             e.printStackTrace()
         }
         var dataStr = jsonObject.toString()
         if (BuildConfig.DEBUG) {
-            Log.i(TAG, " launcher activity ... = " + dataStr)
+            Log.i(TAG, " login register ... = $dataStr")
         }
 
         OkGo.post<String>(Api.CHECK_PHONE_NUMBER).tag(TAG)
@@ -120,13 +127,27 @@ class LoginRegisterFragment : BaseFragment() {
                         return
                     }
                     val response = checkResponseSuccess(response, CheckPhoneNumResponse::class.java)
+                    if (response == null) {
+                        ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
+                        return
+                    }
                     try {
-                        if (response?.is_registered == 1) {
-
-                        } else {
-
+                        if (response.mobile.startsWith("234")) {
+                            val mobileStr = response.mobile.substring(3, response.mobile.length)
+                            if (activity is LoginActivity) {
+                                (activity as LoginActivity).mPhoneNum = mobileStr
+                            }
+                            SPUtils.getInstance().put(KEY_PHONE_NUM, mobileStr)
                         }
-                         Log.e("Test", "2 " + response?.is_registered)
+                        if (response.is_registered == 1) {
+                            if (activity is LoginActivity) {
+                                (activity as LoginActivity).toLoginFragment()
+                            }
+                        } else {
+                            if (activity is LoginActivity) {
+                                (activity as LoginActivity).toRegisterFragment(true)
+                            }
+                        }
                     } catch (e: Exception) {
                         if (BuildConfig.DEBUG) {
                             throw e
@@ -139,6 +160,7 @@ class LoginRegisterFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
                 }
             })
     }

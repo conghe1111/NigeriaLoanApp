@@ -1,13 +1,19 @@
 package com.chocolate.nigerialoanapp.global
 
 import android.app.Application
+import android.text.TextUtils
+import androidx.appcompat.app.AppCompatDelegate
+import com.blankj.utilcode.util.LanguageUtils
+import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.GooglePlaySdk
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cookie.CookieJarImpl
 import com.lzy.okgo.cookie.store.DBCookieStore
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor
 import com.lzy.okgo.model.HttpHeaders
 import okhttp3.OkHttpClient
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 import java.util.logging.Level
 
@@ -23,6 +29,15 @@ class App : Application() {
         instance = this
         initializeOkGo()
         NetworkUtils.buildHead()
+
+        LanguageUtils.applyLanguage(Locale.ENGLISH, false)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        val s = SPUtils.getInstance().getString(LocalConfig.LC_UTMSOURCE, "")
+        val s1 = SPUtils.getInstance().getString(LocalConfig.LC_UTMMEDIUM, "")
+        val instanceId = SPUtils.getInstance().getString(LocalConfig.LC_FIREBASE_INSTANCE_ID, "")
+        if (TextUtils.isEmpty(s) || TextUtils.isEmpty(s1) || TextUtils.isEmpty(instanceId)) {
+            GooglePlaySdk.getInstance(this)?.start()
+        }
     }
 
     private fun initializeOkGo() {

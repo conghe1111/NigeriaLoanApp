@@ -77,6 +77,11 @@ dependencies {
     implementation(libs.integrity)
     implementation(libs.gson)
     implementation(libs.eventbus)
+    implementation(libs.installreferrer) {
+
+    }
+
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

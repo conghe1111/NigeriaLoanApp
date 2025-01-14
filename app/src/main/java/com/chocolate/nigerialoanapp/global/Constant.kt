@@ -9,4 +9,8 @@ object Constant {
     }
 
     const val IS_COLLECT= !BuildConfig.IS_AAB_BUILD
+
+    var mAccountId : Long? = null
+
+    var mAccountToken : String? = null
 }
