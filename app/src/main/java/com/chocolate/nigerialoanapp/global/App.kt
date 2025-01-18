@@ -28,7 +28,6 @@ class App : Application() {
         super.onCreate()
         instance = this
         initializeOkGo()
-        NetworkUtils.buildHead()
 
         LanguageUtils.applyLanguage(Locale.ENGLISH, false)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

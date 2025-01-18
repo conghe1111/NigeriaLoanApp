@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_request_permission" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="@string/permission"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
+
+                <!--        <ScrollView-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="100dp">-->
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:gravity="start"
+                    android:text="@string/request_permission_desc"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/sp_14" />
+
+                <!--        </ScrollView>-->
+
+                <LinearLayout
+                    style="@style/request_permission_container"
+                    android:layout_marginTop="@dimen/dp_10">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/request_permission_tv_top"
+                        android:text="@string/request_permission_sms_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/request_permission_tv_bottom"
+                        android:text="@string/request_permission_sms_desc" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/request_permission_container">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/request_permission_tv_top"
+                        android:text="@string/request_permission_location_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/request_permission_tv_bottom"
+                        android:text="@string/request_permission_location_desc" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/request_permission_container">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/request_permission_tv_top"
+                        android:text="@string/request_permission_camera_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/request_permission_tv_bottom"
+                        android:text="@string/request_permission_camera_desc" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="start"
+                android:text="@string/i_agree_to"
+                android:textColor="#ff999999"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp_50">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_request_permission_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_42"
+                        android:layout_gravity="center"
+                        android:background="@drawable/request_permission_cancel"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/dp_4"
+                        android:paddingEnd="@dimen/dp_4"
+                        android:text="@string/reject"
+                        android:textStyle="bold"
+                        android:layout_marginStart="@dimen/dp_24"
+                        android:layout_marginEnd="@dimen/dp_11_33"
+                        android:textColor="#40B950"
+                        android:textSize="@dimen/sp_16" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_request_permission_agree"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_42"
+                        android:layout_gravity="center"
+                        android:background="@drawable/request_permission_comfirm"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/dp_4"
+                        android:paddingEnd="@dimen/dp_4"
+                        android:text="@string/agree_and_continue"
+                        android:layout_marginStart="@dimen/dp_11_33"
+                        android:layout_marginEnd="@dimen/dp_24"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/sp_16" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

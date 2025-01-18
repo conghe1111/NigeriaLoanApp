@@ -1,7 +1,9 @@
 package com.chocolate.nigerialoanapp.ui.login
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -15,7 +17,6 @@ import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.LoginResponse
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
-import com.chocolate.nigerialoanapp.ui.login.ForgetRegisterFragment.Companion.TAG
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -23,6 +24,10 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class LoginFragment : BaseFragment() {
+
+    companion object {
+        const val TAG = "LoginFragment"
+    }
 
     private var tvUserDesc: AppCompatTextView? = null
     private var tvForgetPwd: AppCompatTextView? = null
@@ -74,6 +79,37 @@ class LoginFragment : BaseFragment() {
             }
 
         })
+        var password = SPUtils.getInstance().getString(LocalConfig.LC_PASSWORD, "")
+        if (TextUtils.isEmpty(password)) {
+//            password = mPhoneNum
+        }
+        if (etPwd != null && !TextUtils.isEmpty(password)) {
+            etPwd?.setText(password)
+            etPwd?.setSelection(password.length - 1)
+            tvLogin?.isEnabled = true
+        } else {
+            tvLogin?.isEnabled = false
+        }
+        etPwd?.addTextChangedListener(textChangeWatcher)
+    }
+
+    private val textChangeWatcher : TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            if (TextUtils.isEmpty(s.toString())) {
+                tvLogin?.isEnabled = false
+            } else {
+                tvLogin?.isEnabled = true
+            }
+        }
+
     }
 
     private fun pwdLogin(password: String) {
@@ -118,5 +154,10 @@ class LoginFragment : BaseFragment() {
                     }
                 }
             })
+    }
+
+    override fun onDestroy() {
+        etPwd?.removeTextChangedListener(textChangeWatcher)
+        super.onDestroy()
     }
 }

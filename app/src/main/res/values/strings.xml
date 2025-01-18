@@ -21,9 +21,22 @@
     <string name="forget_password">Forgot password？</string>
     <string name="reset_password">Reset Password</string>
     <string name="reset">Reset</string>
+    <string name="i_agree_to">I agree to the  &#60;Privacy Policy&#62;and &#60;Terms and Conditions&#62;</string>
+
+    <string name="request_permission_sms_title">Sms</string>
+    <string name="request_permission_sms_desc">Collect and monitor only financial transaction text messages including the name of the transaction party. The purpose is to conduct a credit risk assessment of the transaction and the description of the transaction amount. This credit risk assessment speeds up loan disbursement without any My Account text messages being deleted, read or collected</string>
+    <string name="request_permission_location_title">Location</string>
+    <string name="request_permission_location_desc">Collect and monitor only financial transaction text messages including the name of the transaction party. The purpose is to conduct a credit risk assessment of the transaction and the description of the transaction amount. This credit risk assessment speeds up loan disbursement without any My Account text messages being deleted, read or collected</string>
+    <string name="request_permission_camera_title">Camera</string>
+    <string name="request_permission_camera_desc">Collect and monitor only financial transaction text messages including the name of the transaction party. The purpose is to conduct a credit risk assessment of the transaction and the description of the transaction amount. This credit risk assessment speeds up loan disbursement without any My Account text messages being deleted, read or collected</string>
+    <string name="reject">Reject</string>
+    <string name="agree_and_continue">Agree and continue</string>
+
 
     <string name="str_validate_num_input_hint"> please enter your SMS Code</string>
     <string name="str_login_phone_error"> please enter your correct phone number</string>
     <string name="str_login_password_error"> please enter your correct password</string>
     <string name="str_Illegal_verification_code">Illegal verification code</string>
+    <string name="permission">Permission</string>
+    <string name="request_permission_desc">Hi there, to access your eligibility and facilitate faster disbursal of your loan, we need these permissions</string>
 </resources>

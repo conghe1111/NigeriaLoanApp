@@ -14,7 +14,7 @@ import org.json.JSONObject
 
 object NetworkUtils {
 
-    fun buildHead() {
+    fun addCommonWithoutLogin() {
         val header = HttpHeaders()
         header.put("AppId","2")
         header.put("AppName","oyo")
