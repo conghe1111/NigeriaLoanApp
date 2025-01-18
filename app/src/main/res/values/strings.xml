@@ -32,6 +32,16 @@
     <string name="reject">Reject</string>
     <string name="agree_and_continue">Agree and continue</string>
 
+    <string name="setting_information">Edit Information</string>
+    <string name="setting_customer_service">Customer Service</string>
+    <string name="setting_history_record">Historical Record</string>
+    <string name="setting_privacy">Notice of Privacy</string>
+    <string name="setting_term_condition">Terms and Conditions</string>
+    <string name="setting_version">Version</string>
+    <string name="setting_debug">Debug</string>
+
+    <string name="under_review">Under Review</string>
+    <string name="we_are_currently_verifying">We are currently verifying your loan details. The results will be available soon.</string>
 
     <string name="str_validate_num_input_hint"> please enter your SMS Code</string>
     <string name="str_login_phone_error"> please enter your correct phone number</string>

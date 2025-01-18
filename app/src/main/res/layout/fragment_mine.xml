@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_232">
+
+
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_content_mine"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_login"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:textSize="@dimen/sp_20"
-        android:text="mine"
-        android:background="@drawable/bg_green_login_bg"
-        android:layout_height="@dimen/dp_46"/>
+        android:layout_height="@dimen/dp_48" />
 
-</FrameLayout>
+</LinearLayout>

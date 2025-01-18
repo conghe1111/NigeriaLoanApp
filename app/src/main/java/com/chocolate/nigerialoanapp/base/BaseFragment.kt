@@ -63,7 +63,7 @@ open class BaseFragment : Fragment() {
         }
         SPUtils.getInstance().put(LocalConfig.LC_PASSWORD, password)
 
-        Constant.mAccountId = loginResponse.account_id
+        Constant.mAccountId = loginResponse.account_id.toString()
         Constant.mToken = loginResponse.access_token
         SPUtils.getInstance().put(LocalConfig.LC_ACCOUNT_ID, Constant.mAccountId!!)
         SPUtils.getInstance().put(LocalConfig.LC_ACCOUNT_TOKEN, Constant.mToken)

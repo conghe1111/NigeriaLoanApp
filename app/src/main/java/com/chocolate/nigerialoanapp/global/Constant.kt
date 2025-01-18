@@ -13,7 +13,7 @@ object Constant {
 
     var mLaunchOrderInfo : OrderDetailResponse? = null
 
-    var mAccountId: Long? = null
+    var mAccountId: String? = null
 
     var mToken: String? = null
 }

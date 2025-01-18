@@ -5,6 +5,7 @@ import android.text.TextUtils
 import androidx.appcompat.app.AppCompatDelegate
 import com.blankj.utilcode.util.LanguageUtils
 import com.blankj.utilcode.util.SPUtils
+import com.chocolate.nigerialoanapp.collect.LocationMgr
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.GooglePlaySdk
 import com.lzy.okgo.OkGo
@@ -28,7 +29,7 @@ class App : Application() {
         super.onCreate()
         instance = this
         initializeOkGo()
-
+        LocationMgr.getInstance().init(this)
         LanguageUtils.applyLanguage(Locale.ENGLISH, false)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         val s = SPUtils.getInstance().getString(LocalConfig.LC_UTMSOURCE, "")

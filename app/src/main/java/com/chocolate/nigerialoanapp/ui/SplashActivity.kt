@@ -90,7 +90,7 @@ class SplashActivity : BaseActivity() {
     private fun orderDetail(accountId: Long, token: String) {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
-            jsonObject.put("account_id", accountId)
+            jsonObject.put("account_id", accountId.toString())
             jsonObject.put("access_token", token) //FCM Token
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -110,7 +110,7 @@ class SplashActivity : BaseActivity() {
                     if (orderDetail != null) {
                         Constant.mLaunchOrderInfo = orderDetail
                         successEnter = true
-                        Constant.mAccountId = accountId
+                        Constant.mAccountId = accountId.toString()
                         Constant.mToken = token
                     }
                     mHandler?.sendEmptyMessageDelayed(if (successEnter) TO_MAIN_PAGE else TO_LOGIN_PAGE,100)
