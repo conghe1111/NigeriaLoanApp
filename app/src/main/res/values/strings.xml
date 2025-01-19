@@ -42,6 +42,16 @@
 
     <string name="under_review">Under Review</string>
     <string name="we_are_currently_verifying">We are currently verifying your loan details. The results will be available soon.</string>
+    <string name="loan_in_progress">Loan in progress</string>
+    <string name="loan_in_progress_desc">We are processing your loan disbursement, you should receive the fund in 2 hours, Thanks for your patience.</string>
+    <string name="disbursement_fail">Disbursement failed</string>
+    <string name="update_account">Update Account</string>
+    <string name="the_system_detect_that">The system detects that your  bank account information is incorrect, please check and modify it.</string>
+    <string name="sorry">Sorry</string>
+    <string name="order_number_x">Order Number: %s</string>
+    <string name="pending_repayment">Pending Repayment</string>
+    <string name="repayment">Repayment</string>
+    <string name="repayment_detail">Repayment Details</string>
 
     <string name="str_validate_num_input_hint"> please enter your SMS Code</string>
     <string name="str_login_phone_error"> please enter your correct phone number</string>
@@ -49,4 +59,17 @@
     <string name="str_Illegal_verification_code">Illegal verification code</string>
     <string name="permission">Permission</string>
     <string name="request_permission_desc">Hi there, to access your eligibility and facilitate faster disbursal of your loan, we need these permissions</string>
+
+    <string name="repayment_time">Repayment time</string>
+    <string name="due_amount">Due amount</string>
+    <string name="loan_amount">Loan amount</string>
+    <string name="Interest">Interest</string>
+    <string name="service_fee">Service Fee</string>
+    <string name="amount_of_reduction">Amount of reduction</string>
+    <string name="overdue_x_days">Overdue %s Days</string>
+    <string name="your_loan_x_day">Your loan is %s days overdue. Please repay it as soon as possible to avoid affecting your credit report. If you deliberately default, you will bear legal responsibility and litigation costs.</string>
+    <string name="you_have_success_repaid">You have successfully repaid!</string>
+    <string name="loan_again">Loan Again</string>
+    <string name="you_repayment_current_process">Your repayment is currently being processed, please be patient and wait</string>
+    <string name="refresh">Refresh</string>
 </resources>

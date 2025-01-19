@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.chocolate.nigerialoanapp.R
 
-class VerifyLoanFragment : BaseLoanStatusFragment() {
+class LoanProcessFragment : BaseLoanStatusFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_verify_loan, container, false)
+        return inflater.inflate(R.layout.fragment_loan_process, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
 }

@@ -12,6 +12,9 @@ import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.loan.LoanDeclineFragment
+import com.chocolate.nigerialoanapp.ui.loan.LoanProcessFragment
+import com.chocolate.nigerialoanapp.ui.loan.LoanVerifyFragment
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -25,6 +28,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private var mOrderDetail : OrderDetailResponse? = null
+//    private var mVerifyFragment : LoanVerifyFragment? = null
+//    private var mProcessFragment : LoanProcessFragment? = null
+//    private var mOrderDetail : LoanDeclineFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
