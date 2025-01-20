@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
 
-class EditInfoActivity : BaseActivity() {
+class EditInfoMenuActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                app:edit_view_hint="@string/please_fill_in"
+                app:edit_view_title="@string/first_name" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_middle_name"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp_80"
+                app:edit_view_hint="@string/please_fill_in"
+                app:edit_view_optional="true"
+                app:edit_view_title="@string/middle_name" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_last_name"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp_80"
+                app:edit_view_hint="@string/please_fill_in"
+                app:edit_view_title="@string/last_name" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_bvn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10"
+                app:edit_view_hint="@string/please_fill_in"
+                app:edit_view_title="@string/bvn" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_do_not_know_bvn"
+                    android:layout_width="wrap_content"
+                    android:text="@string/do_not_know_bvn"
+                    android:textColor="#333333"
+
+                    android:layout_gravity="center_vertical|start"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:text="Dial*565*0#"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="#40B950"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_height="wrap_content"/>
+
+            </FrameLayout>
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_birth"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10"
+                app:edit_view_title="@string/date_of_birth" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_gender"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10"
+                app:edit_view_title="@string/gender" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_marital"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10"
+                app:edit_view_title="@string/marital_status" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_education"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10"
+                app:edit_view_title="@string/level_of_education" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10"
+                app:edit_view_hint="@string/please_fill_in"
+                app:edit_view_title="@string/email" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10"
+                app:edit_view_title="@string/address" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_street"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10"
+                app:edit_view_title="@string/street" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

@@ -74,7 +74,7 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 //        requestLive()
-        val accountId = SPUtils.getInstance().getLong(LocalConfig.LC_ACCOUNT_ID)
+        val accountId = SPUtils.getInstance().getString(LocalConfig.LC_ACCOUNT_ID)
         val token = SPUtils.getInstance().getString(LocalConfig.LC_ACCOUNT_TOKEN)
         NetworkUtils.addCommonWithoutLogin()
 
