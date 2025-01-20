@@ -78,16 +78,16 @@ class SplashActivity : BaseActivity() {
         val token = SPUtils.getInstance().getString(LocalConfig.LC_ACCOUNT_TOKEN)
         NetworkUtils.addCommonWithoutLogin()
 
-        if (accountId != null || TextUtils.isEmpty(token)) {
+        if (accountId == null || TextUtils.isEmpty(token)) {
 //        if (BuildConfig.DEBUG) {
             mHandler?.sendEmptyMessageDelayed(TO_LOGIN_PAGE, 1000)
         } else {
-            orderDetail(accountId!!, token!!)
+            orderDetail(accountId, token!!)
             mHandler?.sendEmptyMessageDelayed(TO_LOGIN_PAGE, 3000)
         }
     }
 
-    private fun orderDetail(accountId: Long, token: String) {
+    private fun orderDetail(accountId: String, token: String) {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", accountId.toString())

@@ -11,6 +11,7 @@ import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.SettingMineBean
+import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
 import com.chocolate.nigerialoanapp.ui.mine.MineAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor
 import com.chocolate.nigerialoanapp.ui.mine.PageType
@@ -46,7 +47,7 @@ class MineFragment : BaseFragment() {
             override fun OnClick(pos: Int, settingBean: SettingMineBean) {
                 when (settingBean.type) {
                     INFORMATION -> {
-                        val intent = Intent(context, MainActivity::class.java)
+                        val intent = Intent(context, EditInfoMenuActivity::class.java)
                         startActivity(intent)
                     }
                     PageType.CUSTOMER_SERVICE -> {

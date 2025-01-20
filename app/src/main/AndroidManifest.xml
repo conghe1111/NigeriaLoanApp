@@ -56,16 +56,18 @@
 
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.NigeriaLoanApp">
 
         </activity>
 
         <activity
-            android:name=".ui.edit.EditInfoActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NigeriaLoanApp">
+            android:name=".ui.edit.EditInfoActivity">
+
+        </activity>
+
+        <activity
+            android:name=".ui.edit.EditInfoMenuActivity">
 
         </activity>
     </application>
