@@ -95,4 +95,13 @@
     <string name="receive_account">Receiving account</string>
     <string name="edit">Edit</string>
     <string name="next">next</string>
+
+    <string name="employment">Employment</string>
+    <string name="monthly_income">Monthly Income</string>
+    <string name="position">Position</string>
+    <string name="pay_period">Pay Period</string>
+    <string name="do_you_have_any_outstand">Do you have any outstanding loans on other credit platforms?</string>
+    <string name="company_name">Company Name</string>
+    <string name="company_phone_number">Company Phone number</string>
+    <string name="company_address">Company Address</string>
 </resources>

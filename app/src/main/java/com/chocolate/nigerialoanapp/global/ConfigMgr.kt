@@ -23,10 +23,13 @@ object ConfigMgr {
     val mDebtList = ArrayList<Pair<String, String>>()
     val mGenderList = ArrayList<Pair<String, String>>()
     val mEducationList = ArrayList<Pair<String, String>>()
-    val mSalaryList = ArrayList<Pair<String, String>>()
+    val mEmploymentList = ArrayList<Pair<String, String>>()
+    val mMonthlyIncomeList = ArrayList<Pair<String, String>>()
     val mMaritalList = ArrayList<Pair<String, String>>()
     val mRelationShipList = ArrayList<Pair<String, String>>()
-    val mWorkList = ArrayList<Pair<String, String>>()
+    val mPositionList = ArrayList<Pair<String, String>>()
+    val mPayPeriodList = ArrayList<Pair<String, String>>()
+    val mHaveOtherDebtList = ArrayList<Pair<String, String>>()
     val mAreaMap = HashMap<String, ArrayList<String>>()
 
 //        val mBankList = ArrayList<BankResponseBean.Bank>()
@@ -35,6 +38,12 @@ object ConfigMgr {
         mDebtList.clear()
         mDebtList.add(Pair("yes", "0"))
         mDebtList.add(Pair("no", "1"))
+
+        mHaveOtherDebtList.clear()
+        mHaveOtherDebtList.add(Pair("not have", "1"))
+        mHaveOtherDebtList.add(Pair("have", "2"))
+
+        initPayPeriod()
 
         mGenderList.clear()
         mGenderList.add(Pair("male", "1"))
@@ -47,6 +56,13 @@ object ConfigMgr {
         }
 
         getProfileConfig()
+    }
+
+    private fun initPayPeriod() {
+        mPayPeriodList.clear()
+        for (index in 1 until 32) {
+            mPayPeriodList.add(Pair(index.toString(), index.toString()))
+        }
     }
 
     private fun getProfileConfig() {
@@ -87,6 +103,11 @@ object ConfigMgr {
     private fun handleDataByJson(json: String) {
         try {
             val dataJSONObject = JSONObject(json)
+            val employmentList = parseItem("employment", dataJSONObject)
+            if (employmentList.isNotEmpty()) {
+                mEmploymentList.clear()
+                mEmploymentList.addAll(employmentList)
+            }
 
             val educationList = parseItem("education", dataJSONObject)
             if (educationList.isNotEmpty()) {
@@ -95,8 +116,8 @@ object ConfigMgr {
             }
             val salaryList = parseItem("monthly_income", dataJSONObject)
             if (salaryList.isNotEmpty()) {
-                mSalaryList.clear()
-                mSalaryList.addAll(salaryList)
+                mMonthlyIncomeList.clear()
+                mMonthlyIncomeList.addAll(salaryList)
             }
             val maritalList = parseItem("marital_status", dataJSONObject)
             if (maritalList.isNotEmpty()) {
@@ -110,8 +131,8 @@ object ConfigMgr {
             }
             val positionList = parseItem("position", dataJSONObject)
             if (positionList.isNotEmpty()) {
-                mWorkList.clear()
-                mWorkList.addAll(positionList)
+                mPositionList.clear()
+                mPositionList.addAll(positionList)
             }
             val stateCity = parseCityItem(dataJSONObject.optJSONObject("state_city"))
             if (stateCity != null && stateCity.isNotEmpty()) {
@@ -119,7 +140,7 @@ object ConfigMgr {
                 mAreaMap.putAll(stateCity)
             }
 
-        } catch (e : Exception) {
+        } catch (e: Exception) {
             if (BuildConfig.DEBUG) {
                 throw e
             }
@@ -160,7 +181,7 @@ object ConfigMgr {
         val list: ArrayList<Pair<String, String>> = ArrayList<Pair<String, String>>()
         try {
             val keyJSONObject = bodyJSONObject.optJSONObject(key)
-            if (keyJSONObject == null){
+            if (keyJSONObject == null) {
                 return list
             }
             val iterator = keyJSONObject.keys()

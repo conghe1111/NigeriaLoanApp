@@ -20,11 +20,13 @@ import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
-import com.chocolate.nigerialoanapp.base.BaseFragment
+import com.chocolate.nigerialoanapp.bean.response.EditProfileBean
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.dialog.selectdata.SelectDataDialog
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
 import com.lzy.okgo.OkGo
@@ -32,8 +34,9 @@ import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 
-class EditBasic1Fragment : BaseFragment() {
+class EditBasic1Fragment : BaseEditFragment() {
 
     companion object {
         private const val TAG = "EditBasicInfoFragment"
@@ -67,6 +70,9 @@ class EditBasic1Fragment : BaseFragment() {
     private var homeAddress: String? = null
     private var mBirthday: String? = null
 
+    private var mMaritalStatus: Pair<String, String>? = null
+    private var mEducation: Pair<String, String>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -91,8 +97,85 @@ class EditBasic1Fragment : BaseFragment() {
         editStreet = view.findViewById<InfoEditView>(R.id.edit_street)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_basic_next)
 
-        tvNext?.setOnClickListener(object : OnClickListener {
+        selectBirth?.setOnClickListener(object : OnClickListener {
             override fun onClick(v: View?) {
+                if (checkClickFast()){
+                    return
+                }
+                showTimePicker { date, v ->
+                    val sdf = SimpleDateFormat("yyyy-MM-dd")
+                    val datef = sdf.format(date)
+                    mBirthday = datef
+                    selectBirth?.setText(mBirthday)
+                }
+            }
+
+        })
+        selectGender?.setOnClickListener(object : OnClickListener {
+            override fun onClick(v: View?) {
+                if (checkClickFast()){
+                    return
+                }
+                showListDialog(ConfigMgr.mGenderList, object : SelectDataDialog.Observer {
+                    override fun onItemClick(content: Pair<String, String>?, pos: Int) {
+                        if (content == null) {
+                            return
+                        }
+                        genderPos = content!!.second.toInt()
+                        updateDescByGenderPos()
+                    }
+
+                })
+            }
+
+        })
+        selectMarital?.setOnClickListener(object : OnClickListener {
+            override fun onClick(v: View?) {
+                if (checkClickFast()){
+                    return
+                }
+                showListDialog(ConfigMgr.mMaritalList, object : SelectDataDialog.Observer {
+                    override fun onItemClick(content: Pair<String, String>?, pos: Int) {
+                        if (content == null) {
+                            return
+                        }
+                        mMaritalStatus = content
+                        if (mMaritalStatus != null) {
+                            selectMarital?.setText(mMaritalStatus!!.first)
+                        }
+                    }
+
+                })
+            }
+
+        })
+        selectEducation?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                showListDialog(ConfigMgr.mEducationList, object : SelectDataDialog.Observer {
+                    override fun onItemClick(content: Pair<String, String>?, pos: Int) {
+                        if (content == null) {
+                            return
+                        }
+                        mEducation = content
+                        if (mEducation != null) {
+                            selectEducation?.setText(mEducation!!.first)
+                        }
+                    }
+
+                })
+            }
+
+        })
+
+        selectAddress?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                showAreaPicker()
+            }
+
+        })
+
+        tvNext?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
                 val check = checkProfileParams()
                 if (check) {
                     uploadBase()
@@ -105,34 +188,45 @@ class EditBasic1Fragment : BaseFragment() {
 
     private fun checkProfileParams(): Boolean {
         if (editFirstName == null || TextUtils.isEmpty(editFirstName!!.getText())) {
-            scrollView?.scrollTo(0,0)
+            scrollToPos(1, scrollView)
             editFirstName?.setSelectState()
 //            ToastUtils.showShort("Please fill correct fist name")
             return false
         }
         if (editLastName == null || TextUtils.isEmpty(editLastName!!.getText())) {
-            ToastUtils.showShort("Please fill correct last name")
-            return false
-        }
-        if (mBirthday == null) {
-            ToastUtils.showShort("Please select birthday")
-            return false
-        }
-        if (state == null || area == null) {
-            ToastUtils.showShort("Please fill correct Residential address")
+           scrollToPos(3, scrollView)
+            editLastName?.setSelectState()
+//            ToastUtils.showShort("Please fill correct last name")
             return false
         }
         if (editBvn == null || TextUtils.isEmpty(editBvn!!.getText())) {
-            ToastUtils.showShort("Please fill correct bvn")
+            scrollToPos(4, scrollView)
+            editBvn?.setSelectState()
+//            ToastUtils.showShort("Please fill correct bvn")
             return false
         }
         if (editEmail == null || TextUtils.isEmpty(editEmail!!.getText())) {
-            ToastUtils.showShort("Please fill correct email")
+            scrollToPos(9, scrollView)
+            editBvn?.setSelectState()
+//            ToastUtils.showShort("Please fill correct email")
             return false
         }
         if (editStreet == null || TextUtils.isEmpty(editStreet!!.getText())) {
-            ToastUtils.showShort("street is null")
-            ToastUtils.showShort("Please fill correct street")
+            scrollToPos(11, scrollView)
+            editBvn?.setSelectState()
+//            ToastUtils.showShort("Please fill correct street")
+            return false
+        }
+        if (mBirthday == null) {
+            scrollToPos(5, scrollView)
+            selectBirth?.setSelectState(true)
+//            ToastUtils.showShort("Please select birthday")
+            return false
+        }
+        if (state == null || area == null) {
+            scrollToPos(12, scrollView)
+            selectAddress?.setSelectState(true)
+//            ToastUtils.showShort("Please fill correct Residential address")
             return false
         }
         return true
@@ -144,26 +238,25 @@ class EditBasic1Fragment : BaseFragment() {
         try {
             jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken) //FCM Token
-            jsonObject.put("first_name", Constant.mToken) //FCM Token
-            jsonObject.put("middle_name", Constant.mToken) //FCM Token
-            jsonObject.put("last_name", Constant.mToken) //FCM Token
-            jsonObject.put("bvn", Constant.mToken) //FCM Token
-            jsonObject.put("gender", Constant.mToken) //FCM Token
-            jsonObject.put("birthday", Constant.mToken) //FCM Token
-            jsonObject.put("marital_status", Constant.mToken) //FCM Token
-            jsonObject.put("education", Constant.mToken) //FCM Token
-            jsonObject.put("email", Constant.mToken) //FCM Token
-            jsonObject.put("home_address", Constant.mToken) //FCM Token
-            jsonObject.put("home_street", Constant.mToken) //FCM Token
+            jsonObject.put("first_name", editFirstName?.getText())
+            jsonObject.put("middle_name", editMiddleName?.getText())
+            jsonObject.put("last_name", editLastName?.getText())
+            jsonObject.put("bvn", editBvn?.getText())
+            jsonObject.put("gender", genderPos.toString())
+            jsonObject.put("birthday", mBirthday)
+            jsonObject.put("marital_status", mMaritalStatus?.second.toString())
+            jsonObject.put("education", mEducation?.second.toString())
+            jsonObject.put("email", email)
+            jsonObject.put("home_address", "$state-$area") //FCM Token
+            jsonObject.put("home_street", editStreet?.getText()) //FCM Token
 
         } catch (e: JSONException) {
             e.printStackTrace()
         }
         if (BuildConfig.DEBUG) {
-            Log.i("OkHttpClient", " get profile info = " + jsonObject.toString())
+            Log.i("OkHttpClient", " update base = " + jsonObject.toString())
         }
-        //        Log.e(TAG, "111 id = " + Constant.mAccountId);
-        OkGo.post<String>(Api.PROFILE_INFO).tag(TAG)
+        OkGo.post<String>(Api.UPDATE_BASE).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
@@ -172,10 +265,10 @@ class EditBasic1Fragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
-                    val profileInfo: ProfileInfoResponse? =
-                        checkResponseSuccess(response, ProfileInfoResponse::class.java)
-                    if (profileInfo == null) {
-                        Log.e(TAG, " profile info error ." + response.body())
+                    val editProfileBean: EditProfileBean? =
+                        checkResponseSuccess(response, EditProfileBean::class.java)
+                    if (editProfileBean == null) {
+                        Log.e(TAG, " update base ." + response.body())
                         return
                     }
                 }
@@ -188,13 +281,13 @@ class EditBasic1Fragment : BaseFragment() {
 //                    pbLoading?.visibility = View.GONE
 //                    refreshLayout?.finishRefresh()
                     if (BuildConfig.DEBUG) {
-                        Log.e(TAG, "order profile failure = " + response.body())
+                        Log.e(TAG, " update base = " + response.body())
                     }
                 }
             })
     }
 
-    fun bindData(profile1Bean: ProfileInfoResponse?) {
+    override fun bindData(profile1Bean: ProfileInfoResponse?) {
         updateData(profile1Bean)
         bindDataInternal()
     }
@@ -237,6 +330,12 @@ class EditBasic1Fragment : BaseFragment() {
                 }
             }
         }
+        if (mMaritalStatus == null) {
+            mMaritalStatus = getPairByValue(ConfigMgr.mMaritalList,  profile1Bean.account_profile.marital_status.toString())
+        }
+        if (mEducation == null) {
+            mEducation = getPairByValue(ConfigMgr.mEducationList,  profile1Bean.account_profile.education.toString())
+        }
         if (TextUtils.isEmpty(homeAddress)) {
             homeAddress = profile1Bean.account_profile.home_street
         }
@@ -255,21 +354,7 @@ class EditBasic1Fragment : BaseFragment() {
         if (!TextUtils.isEmpty(lastName)) {
             editLastName?.setEditTextAndSelection(lastName!!)
         }
-        if (genderPos != 0) {
-            when (genderPos) {
-                (1) -> {
-                    selectGender?.setText("male")
-                }
-
-                (2) -> {
-                    selectGender?.setText("female")
-                }
-
-                (3) -> {
-                    selectGender?.setText("third gender")
-                }
-            }
-        }
+        updateDescByGenderPos()
         if (!TextUtils.isEmpty(bvn)) {
             editBvn?.setEditTextAndSelection(bvn!!)
         }
@@ -287,11 +372,30 @@ class EditBasic1Fragment : BaseFragment() {
         if (!TextUtils.isEmpty(mBirthday)) {
             selectBirth?.setText(mBirthday)
         }
+        if (mMaritalStatus != null) {
+            selectMarital?.setText(mMaritalStatus!!.first)
+        }
+        if (mEducation != null) {
+            selectEducation?.setText(mEducation!!.first)
+        }
+    }
 
-        selectMarital
-        selectEducation
-        selectAddress
+    private fun updateDescByGenderPos() {
+        if (genderPos != 0) {
+            when (genderPos) {
+                (1) -> {
+                    selectGender?.setText("male")
+                }
 
+                (2) -> {
+                    selectGender?.setText("female")
+                }
+
+                (3) -> {
+                    selectGender?.setText("third gender")
+                }
+            }
+        }
     }
 
     private fun showTimePicker(listener: OnTimeSelectListener?) {
@@ -375,4 +479,6 @@ class EditBasic1Fragment : BaseFragment() {
             stateList.add(stateItemList)
         }
     }
+
+
 }

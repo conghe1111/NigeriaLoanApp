@@ -1,16 +1,11 @@
 package com.chocolate.nigerialoanapp.widget
 
-import android.R.attr.maxLength
 import android.content.Context
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.LinearLayout
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
@@ -68,5 +63,21 @@ class InfoSelectView : LinearLayout {
             return
         }
         tvDesc?.text = str
+    }
+
+    private var isRedSelectState : Boolean = false
+
+    fun setSelectState(selectFlag : Boolean) {
+        if (selectFlag) {
+            isRedSelectState = true
+            tvDesc?.setTextColor(resources.getColor(R.color.color_dd0000))
+            tvDesc?.setBackgroundResource(R.drawable.bg_edit_red)
+        } else {
+            if (isRedSelectState == false) {
+                return
+            }
+            tvDesc?.setTextColor(resources.getColor(R.color.color_c7c7c7))
+            tvDesc?.setBackgroundResource(R.drawable.bg_edit_grey)
+        }
     }
 }

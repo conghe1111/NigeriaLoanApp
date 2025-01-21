@@ -8,6 +8,7 @@ import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
+import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
@@ -33,13 +34,14 @@ class EditInfoActivity : BaseActivity() {
         }
     }
 
-    private var mCurFragment : EditBasic1Fragment? = null
+    private var mCurFragment : BaseFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_info)
         getProfileInfo()
-        val basicFragment = EditBasic1Fragment()
+//        val basicFragment = EditBasic1Fragment()
+        val basicFragment = EditWork2Fragment()
         mCurFragment = basicFragment
         toFragment(basicFragment)
     }
@@ -76,7 +78,12 @@ class EditInfoActivity : BaseActivity() {
                         Log.e(TAG, " profile info error ." + response.body())
                         return
                     }
-                    mCurFragment?.bindData(profileInfo)
+                    if (mCurFragment is EditBasic1Fragment) {
+                        (mCurFragment as EditBasic1Fragment).bindData(profileInfo)
+                    } else if (mCurFragment is EditWork2Fragment) {
+                        (mCurFragment as EditWork2Fragment).bindData(profileInfo)
+                    }
+
                 }
 
                 override fun onError(response: Response<String>) {

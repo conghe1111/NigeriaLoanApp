@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:id="@+id/sv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_employment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:edit_view_title="@string/employment" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_monthly_income"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_height="wrap_content"
+                app:edit_view_title="@string/monthly_income" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/position" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_pay_period"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/pay_period" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_has_other_outstand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/do_you_have_any_outstand" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                app:edit_view_optional="true"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/company_name" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_company_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:edit_view_optional="true"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/company_phone_number" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_company_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:edit_view_optional="true"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/company_address" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_edit_basic_next"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/dp_20"
+                android:textSize="@dimen/sp_20"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/dp_13"
+                android:text="@string/next"
+                android:background="@drawable/selector_btn_theme"
+                android:layout_height="@dimen/dp_48"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:text="@string/please_read_all"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/dp_45"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

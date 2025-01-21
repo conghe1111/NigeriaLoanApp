@@ -17,6 +17,7 @@ import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.collect.LocationMgr
 import com.chocolate.nigerialoanapp.collect.item.CollectSmsMgr
+import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 
@@ -36,7 +37,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         initView()
         requestPermission()
-
+        ConfigMgr.getAllConfig()
     }
 
     private fun initView() {

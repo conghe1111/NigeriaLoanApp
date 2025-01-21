@@ -85,11 +85,11 @@ class InfoEditView : FrameLayout {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             if (!TextUtils.isEmpty(s) && s.length > 0) {
                 if (ivClear != null) {
-                    ivClear!!.visibility = VISIBLE
+                    ivClear!!.visibility = INVISIBLE
                 }
             } else {
                 if (ivClear != null) {
-                    ivClear!!.visibility = INVISIBLE
+                    ivClear!!.visibility = VISIBLE
                 }
             }
         }

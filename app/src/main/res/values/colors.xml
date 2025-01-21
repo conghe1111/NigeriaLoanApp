@@ -8,7 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="theme_color">#03A6B9</color>
+    <color name="theme_color">#40B950</color>
     <color name="color_dd0000">#DD0000</color>
     <color name="color_c7c7c7">#C7C7C7</color>
+    <color name="view_line_unselect">#EBEBEB</color>
 </resources>
