@@ -77,6 +77,7 @@ dependencies {
     implementation(libs.integrity)
     implementation(libs.gson)
     implementation(libs.eventbus)
+    implementation(libs.android.pickerview)
     implementation(libs.installreferrer) {
 
     }

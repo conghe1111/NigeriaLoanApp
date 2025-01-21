@@ -38,6 +38,7 @@ class App : Application() {
         if (TextUtils.isEmpty(s) || TextUtils.isEmpty(s1) || TextUtils.isEmpty(instanceId)) {
             GooglePlaySdk.getInstance(this)?.start()
         }
+        ConfigMgr.getAllConfig()
     }
 
     private fun initializeOkGo() {

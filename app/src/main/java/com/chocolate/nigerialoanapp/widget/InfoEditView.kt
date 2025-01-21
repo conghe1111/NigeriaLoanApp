@@ -95,7 +95,39 @@ class InfoEditView : FrameLayout {
         }
 
         override fun afterTextChanged(s: Editable?) {
+            if (isRedSelectState) {
+                isRedSelectState = false
+                etDesc?.setHintTextColor(resources.getColor(R.color.color_c7c7c7))
+                etDesc?.setBackgroundResource(R.drawable.bg_edit_grey)
+            }
+        }
+    }
 
+    private var isRedSelectState : Boolean = false
+
+    fun setText(str : String) {
+        etDesc?.setText(str)
+    }
+
+    fun setSelectState() {
+        isRedSelectState = true
+        etDesc?.setHintTextColor(resources.getColor(R.color.color_dd0000))
+        etDesc?.setBackgroundResource(R.drawable.bg_edit_red)
+    }
+
+    fun getText() : String {
+        if (etDesc == null || etDesc?.text == null) {
+            return ""
+        }
+        return etDesc!!.text.toString()
+    }
+
+    fun setEditTextAndSelection(editTextStr: String) {
+        post {
+            if (etDesc != null && !TextUtils.isEmpty(editTextStr)) {
+                etDesc!!.setText(editTextStr)
+                etDesc!!.setSelection(etDesc!!.text!!.length)
+            }
         }
     }
 }

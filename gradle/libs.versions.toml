@@ -19,6 +19,7 @@ integrity = "1.1.0"
 gson = "2.8.9"
 eventbus = "3.3.1"
 installreferrer = "2.2"
+pickerview = "4.1.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +49,7 @@ integrity = { group = "com.google.android.play", name = "integrity" , version.re
 gson = { group = "com.google.code.gson", name = "gson" , version.ref = "gson"}
 eventbus = { group = "org.greenrobot", name = "eventbus" , version.ref = "eventbus"}
 installreferrer = { group = "com.android.installreferrer", name = "installreferrer" , version.ref = "installreferrer" }
+android-pickerview = { group = "com.contrarywind", name = "Android-PickerView" , version.ref = "pickerview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

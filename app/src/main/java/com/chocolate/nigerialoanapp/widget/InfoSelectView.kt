@@ -63,5 +63,10 @@ class InfoSelectView : LinearLayout {
 
     }
 
-
+    fun setText(str : String?) {
+        if (str == null) {
+            return
+        }
+        tvDesc?.text = str
+    }
 }
