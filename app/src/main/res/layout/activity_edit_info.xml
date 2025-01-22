@@ -11,17 +11,19 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_24"
+            android:id="@+id/iv_edit_info_back"
+            android:layout_width="@dimen/dp_22"
+            android:layout_height="@dimen/dp_22"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/dp_20"
             android:src="@drawable/ic_back" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_edit_info_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_6"
+            android:layout_marginStart="@dimen/dp_14"
             android:layout_weight="1"
             android:text="@string/edit_information"
             android:textColor="#333333"

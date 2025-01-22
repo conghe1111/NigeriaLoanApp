@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -12,6 +15,7 @@ import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -28,6 +32,9 @@ import org.json.JSONObject
  *
  */
 class EditInfoActivity : BaseActivity() {
+
+    private var ivBack : AppCompatImageView? = null
+    private var tvTitle : AppCompatTextView? = null
 
     companion object {
 
@@ -56,14 +63,18 @@ class EditInfoActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_info)
+        ivBack =  findViewById<AppCompatImageView>(R.id.iv_edit_info_back)
+        tvTitle =  findViewById<AppCompatTextView>(R.id.tv_edit_info_title)
         getProfileInfo()
         mFrom = intent.getIntExtra(KEY_FROM, FROM_WORK_MENU)
         mStep = intent.getIntExtra(KEY_STEP, STEP_1)
         when(mStep) {
             (STEP_1) -> {
+                tvTitle?.text = resources.getString(R.string.basic_information)
                 mCurFragment = EditBasic1Fragment()
             }
             (STEP_2) -> {
+                tvTitle?.text = resources.getString(R.string.work_information)
                 mCurFragment = EditWork2Fragment()
             }
             (STEP_3) -> {
@@ -73,6 +84,12 @@ class EditInfoActivity : BaseActivity() {
         mCurFragment?.let {
             toFragment(mCurFragment)
         }
+        ivBack?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                finish()
+            }
+
+        })
     }
 
     override fun getFragmentContainerRes(): Int {
