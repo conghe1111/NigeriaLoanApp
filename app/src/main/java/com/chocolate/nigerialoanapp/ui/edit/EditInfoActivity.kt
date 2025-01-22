@@ -18,32 +18,61 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 
+/**
+ * 101	基本信息填写完成（第一页）
+ * 102	工作信息填写完成（第二页）
+ * 103	联系人信息填写完成（第三页）
+ * 104	收款信息填写完成（第四页）
+ * 105	活体信息上传完成（第五页）
+ * 111	完成首贷KYC流程
+ *
+ */
 class EditInfoActivity : BaseActivity() {
 
     companion object {
 
         private const val TAG = "EditInfoActivity"
+        private const val KEY_FROM = "key_edit_info_from"
+        private const val KEY_STEP = "key_edit_info_step"
 
-        private const val STEP_1 = "step_1"
-        private const val STEP_2 = "step_2"
-        private const val STEP_3 = "step_3"
+        const val STEP_1 = 1111
+        const val STEP_2 = 1112
+        const val STEP_3 = 1113
+        const val STEP_4 = 1114
 
-        fun showActivity(context: Context) {
+        const val FROM_WORK_MENU = 111
+        fun showActivity(context: Context, step: Int = STEP_1, from: Int = FROM_WORK_MENU) {
             val intent = Intent(context, EditInfoActivity::class.java)
+            intent.putExtra(KEY_FROM, from)
+            intent.putExtra(KEY_STEP, step)
             context.startActivity(intent)
         }
     }
 
-    private var mCurFragment : BaseFragment? = null
+    private var mCurFragment: BaseEditFragment? = null
+    private var mFrom: Int? = null
+    private var mStep: Int = STEP_1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_info)
         getProfileInfo()
-//        val basicFragment = EditBasic1Fragment()
-        val basicFragment = EditWork2Fragment()
-        mCurFragment = basicFragment
-        toFragment(basicFragment)
+        mFrom = intent.getIntExtra(KEY_FROM, FROM_WORK_MENU)
+        mStep = intent.getIntExtra(KEY_STEP, STEP_1)
+        when(mStep) {
+            (STEP_1) -> {
+                mCurFragment = EditBasic1Fragment()
+            }
+            (STEP_2) -> {
+                mCurFragment = EditWork2Fragment()
+            }
+            (STEP_3) -> {
+
+            }
+        }
+        mCurFragment?.let {
+            toFragment(mCurFragment)
+        }
     }
 
     override fun getFragmentContainerRes(): Int {
@@ -98,5 +127,9 @@ class EditInfoActivity : BaseActivity() {
                     }
                 }
             })
+    }
+
+    fun nextStep() {
+
     }
 }

@@ -2,9 +2,9 @@ package com.chocolate.nigerialoanapp.ui.edit
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.OnClickListener
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
 class EditInfoMenuActivity : BaseActivity() {
 
@@ -21,27 +21,27 @@ class EditInfoMenuActivity : BaseActivity() {
         contactView = findViewById<View>(R.id.ll_contact_container)
         receiveView = findViewById<View>(R.id.ll_receive_container)
 
-        basicView?.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                EditInfoActivity.showActivity(this@EditInfoMenuActivity)
+        basicView?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                EditInfoActivity.showActivity(this@EditInfoMenuActivity, EditInfoActivity.STEP_1)
             }
 
         })
-        workView?.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                EditInfoActivity.showActivity(this@EditInfoMenuActivity)
+        workView?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                EditInfoActivity.showActivity(this@EditInfoMenuActivity, EditInfoActivity.STEP_2)
             }
 
         })
-        contactView?.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                EditInfoActivity.showActivity(this@EditInfoMenuActivity)
+        contactView?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                EditInfoActivity.showActivity(this@EditInfoMenuActivity, EditInfoActivity.STEP_3)
             }
 
         })
-        receiveView?.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                EditInfoActivity.showActivity(this@EditInfoMenuActivity)
+        receiveView?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                EditInfoActivity.showActivity(this@EditInfoMenuActivity, EditInfoActivity.STEP_4)
             }
 
         })
