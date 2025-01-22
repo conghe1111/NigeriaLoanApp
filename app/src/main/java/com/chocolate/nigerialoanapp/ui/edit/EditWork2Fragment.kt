@@ -294,6 +294,9 @@ class EditWork2Fragment : BaseEditFragment() {
                         Log.e(TAG, " update base ." + response.body())
                         return
                     }
+                    if (activity is EditInfoActivity) {
+                        (activity as EditInfoActivity).nextStep(editProfileBean)
+                    }
                 }
 
                 override fun onError(response: Response<String>) {

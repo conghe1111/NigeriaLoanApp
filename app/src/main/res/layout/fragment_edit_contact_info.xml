@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:id="@+id/sv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_marginStart="@dimen/dp_18"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/dp_24"
+                    android:src="@drawable/ic_contact"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="@dimen/dp_24"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:text="@string/emergency_contact_1"
+                    android:textColor="#333333"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_relationship_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_18"
+                app:edit_view_title="@string/relationship" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_mobile_1"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_height="wrap_content"
+                app:edit_view_title="@string/mobile_phone_number" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_name_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginStart="@dimen/dp_18"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/dp_24"
+                    android:src="@drawable/ic_contact"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="@dimen/dp_24"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:text="@string/emergency_contact_2"
+                    android:textColor="#333333"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_relationship_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                app:edit_view_title="@string/relationship" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_mobile_2"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_height="wrap_content"
+                app:edit_view_title="@string/mobile_phone_number" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_name_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_edit_contact_next"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/dp_20"
+                android:textSize="@dimen/sp_20"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/dp_13"
+                android:text="@string/next"
+                android:background="@drawable/selector_btn_theme"
+                android:layout_height="@dimen/dp_48"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:text="@string/please_read_all"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/dp_45"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

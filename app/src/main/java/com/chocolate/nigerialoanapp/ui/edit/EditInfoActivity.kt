@@ -11,7 +11,7 @@ import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
-import com.chocolate.nigerialoanapp.base.BaseFragment
+import com.chocolate.nigerialoanapp.bean.response.EditProfileBean
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
@@ -78,7 +78,8 @@ class EditInfoActivity : BaseActivity() {
                 mCurFragment = EditWork2Fragment()
             }
             (STEP_3) -> {
-
+                tvTitle?.text = resources.getString(R.string.contact_information)
+                mCurFragment = EditContact3Fragment()
             }
         }
         mCurFragment?.let {
@@ -146,7 +147,35 @@ class EditInfoActivity : BaseActivity() {
             })
     }
 
-    fun nextStep() {
+    fun nextStep(editProfileBean: EditProfileBean) {
+        if (editProfileBean.current_phase == 111){
+            // TODO 完成
+            return
+        }
+        when (editProfileBean.next_phase) {
+            (101) -> {  //基本信息填写完成（第一页）
+                tvTitle?.text = resources.getString(R.string.basic_information)
+                mCurFragment = EditBasic1Fragment()
+            }
+            (102) -> {  //工作信息填写完成（第二页）
+                tvTitle?.text = resources.getString(R.string.work_information)
+                mCurFragment = EditWork2Fragment()
 
+            }
+            (103) -> {  //联系人信息填写完成（第三页）
+                tvTitle?.text = resources.getString(R.string.contact_information)
+                mCurFragment = EditContact3Fragment()
+            }
+            (104) -> {  //收款信息填写完成（第四页）
+
+            }
+            (105) -> {  //活体信息上传完成（第五页）
+
+            }
+            (111) -> {  //完成首贷KYC流程
+
+            }
+        }
+        toFragment(mCurFragment)
     }
 }
