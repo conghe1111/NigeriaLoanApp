@@ -5,14 +5,9 @@
     android:layout_height="match_parent">
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_login"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:textSize="@dimen/sp_20"
-        android:text="home"
-        android:background="@drawable/bg_green_login_bg"
-        android:layout_height="@dimen/dp_46"/>
+ <FrameLayout
+     android:id="@+id/fl_home_container"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"/>
 
 </FrameLayout>

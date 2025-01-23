@@ -7,6 +7,7 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import com.blankj.utilcode.BuildConfig
+import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -72,6 +73,7 @@ class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BarUtils.setStatusBarVisibility(window, false)
         setContentView(R.layout.activity_splash)
 //        requestLive()
         val accountId = SPUtils.getInstance().getString(LocalConfig.LC_ACCOUNT_ID)

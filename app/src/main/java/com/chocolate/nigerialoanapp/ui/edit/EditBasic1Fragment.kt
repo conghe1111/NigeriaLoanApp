@@ -26,6 +26,7 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.selectdata.SelectDataDialog
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
@@ -57,6 +58,7 @@ class EditBasic1Fragment : BaseEditFragment() {
     private var selectAddress: InfoSelectView? = null
     private var editStreet: InfoEditView? = null
     private var tvNext: AppCompatTextView? = null
+    private var tvNextDesc: AppCompatTextView? = null
     private var scrollView: ScrollView? = null
 
     private var firstName: String? = null
@@ -96,6 +98,7 @@ class EditBasic1Fragment : BaseEditFragment() {
         selectAddress = view.findViewById<InfoSelectView>(R.id.select_address)
         editStreet = view.findViewById<InfoEditView>(R.id.edit_street)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_basic_next)
+        tvNextDesc = view.findViewById<AppCompatTextView>(R.id.tv_basic_next_desc)
 
         selectBirth?.setOnClickListener(object : OnClickListener {
             override fun onClick(v: View?) {
@@ -184,6 +187,8 @@ class EditBasic1Fragment : BaseEditFragment() {
 
         })
         tvNext?.isEnabled = true
+        tvNextDesc = view.findViewById<AppCompatTextView>(R.id.tv_basic_next_desc)
+        SpanUtils.setPrivacyString(tvNextDesc)
     }
 
     private fun checkProfileParams(): Boolean {

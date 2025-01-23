@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import androidx.appcompat.widget.AppCompatImageView
 import com.blankj.utilcode.constant.PermissionConstants
+import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ThreadUtils
 import com.blankj.utilcode.util.ThreadUtils.SimpleTask
@@ -34,6 +35,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BarUtils.setStatusBarVisibility(window, false)
         setContentView(R.layout.activity_main)
         initView()
         requestPermission()

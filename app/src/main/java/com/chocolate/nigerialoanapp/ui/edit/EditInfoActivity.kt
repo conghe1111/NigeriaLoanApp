@@ -178,7 +178,7 @@ class EditInfoActivity : BaseActivity() {
             }
 
             (104) -> {  //收款信息填写完成（第四页）
-                tvTitle?.text = resources.getString(R.string.contact_information)
+                tvTitle?.text = resources.getString(R.string.bank_information)
                 mCurFragment = EditBank4Fragment()
             }
 

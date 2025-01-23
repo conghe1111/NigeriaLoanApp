@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fl_setting_container"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
+    android:layout_height="@dimen/dp_54"
     android:background="?attr/selectableItemBackground">
 
     <LinearLayout

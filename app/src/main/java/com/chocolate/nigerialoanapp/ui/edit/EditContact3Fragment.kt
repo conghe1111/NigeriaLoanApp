@@ -17,6 +17,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
@@ -40,6 +41,7 @@ class EditContact3Fragment : BaseEditFragment() {
     private var mEditName2: InfoEditView? = null
 
     private var tvNext: AppCompatTextView? = null
+    private var tvDesc: AppCompatTextView? = null
     private var scrollView: ScrollView? = null
 
     private var mRelationship1: Pair<String, String>? = null
@@ -69,6 +71,7 @@ class EditContact3Fragment : BaseEditFragment() {
 
         scrollView = view.findViewById<ScrollView>(R.id.sv_content)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_contact_next)
+        tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_contact_next_desc)
 
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
@@ -79,6 +82,7 @@ class EditContact3Fragment : BaseEditFragment() {
             }
 
         })
+        SpanUtils.setPrivacyString(tvDesc)
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
