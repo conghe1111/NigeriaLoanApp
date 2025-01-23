@@ -76,4 +76,5 @@ abstract class BaseEditFragment : BaseFragment() {
         view.setSelectOptions(0, 0, 0)
         view.show()
     }
+
 }

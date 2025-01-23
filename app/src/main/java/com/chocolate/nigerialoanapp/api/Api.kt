@@ -55,5 +55,14 @@ object Api {
     val ORDER_APPLY = "$HOST/app/v1/order/apply"
     //还款
     val ORDER_REPAY = "$HOST/app/v1/order/repay"
+    //静态配置信息
+    val STATIC_CONFIG = "$HOST/app/v1/static_config"
 
+    val BANK_LIST = "$HOST/app/v1/account/bank_list"
+    //营销页配置信息
+    val MARKETING_PAGE = "$HOST/app/v1/product/marketing_page"
+    //订单历史记录
+    val ORDER_HISTORY = "$HOST/app/v1/order/history"
+    //确认银行信息
+    val BANK_INFO = "$HOST/app/v1/account/bank_info"
 }

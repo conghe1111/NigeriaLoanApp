@@ -15,6 +15,7 @@ import com.chocolate.nigerialoanapp.bean.response.EditProfileBean
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.banklist.BankListActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -33,8 +34,8 @@ import org.json.JSONObject
  */
 class EditInfoActivity : BaseActivity() {
 
-    private var ivBack : AppCompatImageView? = null
-    private var tvTitle : AppCompatTextView? = null
+    private var ivBack: AppCompatImageView? = null
+    private var tvTitle: AppCompatTextView? = null
 
     companion object {
 
@@ -63,24 +64,27 @@ class EditInfoActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_info)
-        ivBack =  findViewById<AppCompatImageView>(R.id.iv_edit_info_back)
-        tvTitle =  findViewById<AppCompatTextView>(R.id.tv_edit_info_title)
+        ivBack = findViewById<AppCompatImageView>(R.id.iv_edit_info_back)
+        tvTitle = findViewById<AppCompatTextView>(R.id.tv_edit_info_title)
         getProfileInfo()
         mFrom = intent.getIntExtra(KEY_FROM, FROM_WORK_MENU)
         mStep = intent.getIntExtra(KEY_STEP, STEP_1)
-        when(mStep) {
+        when (mStep) {
             (STEP_1) -> {
                 tvTitle?.text = resources.getString(R.string.basic_information)
                 mCurFragment = EditBasic1Fragment()
             }
+
             (STEP_2) -> {
                 tvTitle?.text = resources.getString(R.string.work_information)
                 mCurFragment = EditWork2Fragment()
             }
+
             (STEP_3) -> {
                 tvTitle?.text = resources.getString(R.string.contact_information)
                 mCurFragment = EditContact3Fragment()
             }
+
             (STEP_4) -> {
                 tvTitle?.text = resources.getString(R.string.bank_information)
                 mCurFragment = EditBank4Fragment()
@@ -152,7 +156,7 @@ class EditInfoActivity : BaseActivity() {
     }
 
     fun nextStep(editProfileBean: EditProfileBean) {
-        if (editProfileBean.current_phase == 111){
+        if (editProfileBean.current_phase == 111) {
             // TODO 完成
             return
         }
@@ -161,25 +165,43 @@ class EditInfoActivity : BaseActivity() {
                 tvTitle?.text = resources.getString(R.string.basic_information)
                 mCurFragment = EditBasic1Fragment()
             }
+
             (102) -> {  //工作信息填写完成（第二页）
                 tvTitle?.text = resources.getString(R.string.work_information)
                 mCurFragment = EditWork2Fragment()
 
             }
+
             (103) -> {  //联系人信息填写完成（第三页）
                 tvTitle?.text = resources.getString(R.string.contact_information)
                 mCurFragment = EditContact3Fragment()
             }
-            (104) -> {  //收款信息填写完成（第四页）
 
+            (104) -> {  //收款信息填写完成（第四页）
+                tvTitle?.text = resources.getString(R.string.contact_information)
+                mCurFragment = EditBank4Fragment()
             }
+
             (105) -> {  //活体信息上传完成（第五页）
 
             }
+
             (111) -> {  //完成首贷KYC流程
 
             }
         }
         toFragment(mCurFragment)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data == null){
+            return
+        }
+        if (resultCode == BankListActivity.START_RESULT_CODE && requestCode == BankListActivity.START_REQUEST_CODE) {
+            val bankName = data.getStringExtra(BankListActivity.KEY_BANK_NAME)
+            val bankCode = data.getStringExtra(BankListActivity.KEY_BANK_CODE)
+            (mCurFragment as? EditBank4Fragment)?.onBankActivityResult(bankName, bankCode)
+        }
     }
 }

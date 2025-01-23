@@ -112,6 +112,7 @@
     <string name="mobile_phone_number">Mobile Phone Number</string>
     <string name="name">Name</string>
     <string name="bank_name">Bank Name</string>
+    <string name="bank_list">Bank List</string>
     <string name="bank_account_number">Bank Account Number</string>
     <string name="confirm_bank_account_number">Confirm Bank Account Number</string>
     <string name="please_fill_correct_bank_account">Please fill in the correct bank account number to ensure that you can receive the funds</string>

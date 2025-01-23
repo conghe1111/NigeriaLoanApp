@@ -3,9 +3,11 @@ package com.chocolate.nigerialoanapp.global
 import android.text.TextUtils
 import android.util.Log
 import android.util.Pair
+import android.view.View
 import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.bean.response.BankBeanResponse
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -19,6 +21,7 @@ object ConfigMgr {
     private val TAG = "ConfigMgr"
 
     private const val KEY_DATA_CONFIG = "key_data_config"
+    private const val KEY_BANK_LIST = "key_bank_list"
 
     val mDebtList = ArrayList<Pair<String, String>>()
     val mGenderList = ArrayList<Pair<String, String>>()
@@ -32,7 +35,7 @@ object ConfigMgr {
     val mHaveOtherDebtList = ArrayList<Pair<String, String>>()
     val mAreaMap = HashMap<String, ArrayList<String>>()
 
-//        val mBankList = ArrayList<BankResponseBean.Bank>()
+    val mBankList = ArrayList<BankBeanResponse.Bank>()
 
     fun getAllConfig() {
         mDebtList.clear()
@@ -54,8 +57,10 @@ object ConfigMgr {
         if (!TextUtils.isEmpty(dataConfig)) {
             handleDataByJson(dataConfig)
         }
-
+        val bankListJson = SPUtils.getInstance().getString(KEY_BANK_LIST)
+        updateBankList(bankListJson)
         getProfileConfig()
+        getBankList()
     }
 
     private fun initPayPeriod() {
@@ -214,5 +219,58 @@ object ConfigMgr {
         return list
     }
 
+   fun getBankList() {
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        try {
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        OkGo.post<String>(Api.BANK_LIST).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    val json = NetworkUtils.checkResponseSuccess(response).toString()
+                    SPUtils.getInstance().put(KEY_BANK_LIST, json)
+                    updateBankList(json)
+                }
 
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    if (BuildConfig.DEBUG) {
+                        Log.e(TAG, " update contact = " + response.body())
+                    }
+                }
+            })
+    }
+
+
+    private fun updateBankList(json : String) {
+        val responseBean: BankBeanResponse? = com.alibaba.fastjson.JSONObject.parseObject(json, BankBeanResponse::class.java)
+        if (responseBean?.bank_list == null) {
+            if (BuildConfig.DEBUG) {
+                Log.e(TAG, " get bank list null .")
+            }
+            return
+        }
+        Collections.sort<BankBeanResponse.Bank>(responseBean.bank_list!!,
+            object : Comparator<BankBeanResponse.Bank> {
+                override fun compare(
+                    bank1: BankBeanResponse.Bank,
+                    bank2: BankBeanResponse.Bank
+                ): Int {
+                    if (TextUtils.isEmpty(bank1.bank_name)) {
+                        return -1
+                    }
+                    if (TextUtils.isEmpty(bank2.bank_name)) {
+                        return 1
+                    }
+                    val c1 : Char = bank1.bank_name!![0]
+                    val c2 : Char = bank2.bank_name!![0]
+                    return c1 - c2
+                }
+            })
+
+        mBankList.clear()
+        mBankList.addAll(responseBean.bank_list!!)
+    }
 }

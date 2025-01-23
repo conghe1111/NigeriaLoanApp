@@ -18,6 +18,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.banklist.BankListActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
@@ -59,13 +60,22 @@ class EditBank4Fragment : BaseEditFragment() {
         mEditAccountNumConfirm = view.findViewById<InfoEditView>(R.id.edit_bank_account_num_confirm)
 
         scrollView = view.findViewById<ScrollView>(R.id.sv_content)
-        tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_contact_next)
+        tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_bank_next)
+
+        mSelectBankName?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                activity?.let {
+                    BankListActivity.startActivityResult(it)
+                }
+            }
+
+        })
 
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 val check = checkProfileParams()
                 if (check) {
-                    uploadContact()
+                    uploadReceive()
                 }
             }
 
@@ -120,7 +130,7 @@ class EditBank4Fragment : BaseEditFragment() {
         return true
     }
 
-    private fun uploadContact() {
+    private fun uploadReceive() {
         //        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
@@ -172,5 +182,18 @@ class EditBank4Fragment : BaseEditFragment() {
                     }
                 }
             })
+    }
+
+    override fun onDestroy() {
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDestroy()
+    }
+
+    fun onBankActivityResult(bankName: String?, bankCode: String?) {
+        if (TextUtils.isEmpty(bankName) || TextUtils.isEmpty(bankCode)) {
+            return
+        }
+        mBankName = Pair(bankName, bankCode)
+        mSelectBankName?.setText(mBankName?.first.toString())
     }
 }

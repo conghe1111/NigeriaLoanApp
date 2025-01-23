@@ -70,6 +70,10 @@
             android:name=".ui.edit.EditInfoMenuActivity">
 
         </activity>
+
+        <activity android:name=".ui.banklist.BankListActivity">
+
+        </activity>
     </application>
 
 </manifest>
