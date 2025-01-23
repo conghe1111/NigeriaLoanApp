@@ -81,6 +81,10 @@ class EditInfoActivity : BaseActivity() {
                 tvTitle?.text = resources.getString(R.string.contact_information)
                 mCurFragment = EditContact3Fragment()
             }
+            (STEP_4) -> {
+                tvTitle?.text = resources.getString(R.string.bank_information)
+                mCurFragment = EditBank4Fragment()
+            }
         }
         mCurFragment?.let {
             toFragment(mCurFragment)

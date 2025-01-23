@@ -63,9 +63,9 @@ class EditContact3Fragment : BaseEditFragment() {
         mEditMobile1 = view.findViewById<InfoEditView>(R.id.edit_mobile_1)
         mEditName1 = view.findViewById<InfoEditView>(R.id.edit_name_1)
 
-        mSelectRelationship2 = view.findViewById<InfoSelectView>(R.id.select_relationship_1)
-        mEditMobile2 = view.findViewById<InfoEditView>(R.id.edit_mobile_1)
-        mEditName2 = view.findViewById<InfoEditView>(R.id.edit_name_1)
+        mSelectRelationship2 = view.findViewById<InfoSelectView>(R.id.select_relationship_2)
+        mEditMobile2 = view.findViewById<InfoEditView>(R.id.edit_mobile_2)
+        mEditName2 = view.findViewById<InfoEditView>(R.id.edit_name_2)
 
         scrollView = view.findViewById<ScrollView>(R.id.sv_content)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_contact_next)

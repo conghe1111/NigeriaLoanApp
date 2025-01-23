@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:id="@+id/sv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.chocolate.nigerialoanapp.widget.InfoSelectView
+                android:id="@+id/select_bank_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_18"
+                app:edit_view_title="@string/bank_name" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_bank_account_num"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_height="wrap_content"
+                app:edit_view_title="@string/bank_account_number" />
+
+            <com.chocolate.nigerialoanapp.widget.InfoEditView
+                android:id="@+id/edit_bank_account_num_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                app:edit_view_title="@string/confirm_bank_account_number" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginHorizontal="@dimen/dp_20"
+                android:textColor="#E78700"
+                android:paddingStart="@dimen/dp_17"
+                android:paddingEnd="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_10"
+                android:includeFontPadding="false"
+                android:text="@string/please_fill_correct_bank_account"
+                android:paddingBottom="@dimen/dp_10"
+                android:background="@drawable/bg_bank_info"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_edit_bank_next"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/dp_20"
+                android:textSize="@dimen/sp_20"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/dp_13"
+                android:text="@string/next"
+                android:background="@drawable/selector_btn_theme"
+                android:layout_height="@dimen/dp_48"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:text="@string/please_read_all"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/dp_45"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
