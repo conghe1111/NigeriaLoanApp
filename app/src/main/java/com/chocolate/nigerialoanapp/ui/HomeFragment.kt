@@ -12,7 +12,9 @@ import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.loan.BaseLoanStatusFragment
 import com.chocolate.nigerialoanapp.ui.loan.LoanDeclineFragment
+import com.chocolate.nigerialoanapp.ui.loan.LoanNewProductFragment
 import com.chocolate.nigerialoanapp.ui.loan.LoanProcessFragment
 import com.chocolate.nigerialoanapp.ui.loan.LoanVerifyFragment
 import com.lzy.okgo.OkGo
@@ -28,9 +30,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private var mOrderDetail : OrderDetailResponse? = null
-//    private var mVerifyFragment : LoanVerifyFragment? = null
-//    private var mProcessFragment : LoanProcessFragment? = null
-//    private var mOrderDetail : LoanDeclineFragment? = null
+    private var mCurFragment : BaseLoanStatusFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,19 +75,39 @@ class HomeFragment : BaseFragment() {
                         return
                     }
                     if (orderDetail.order_id == 0) {
-                        // TODO 前往营销界面
+                        mCurFragment = LoanNewProductFragment()
+                        toFragment(mCurFragment)
                     } else {
-                        //1	提交审核
-                        //2	审核拒绝
-                        //3	等待电核
-                        //4	等待放款
-                        //5	放款中
-                        //6	放款失败
-                        //7	等待还款
+                        when(orderDetail.check_status) {
+                            (1) -> {  //1	提交审核
+
+                            }
+                            (2) -> {  //2	审核拒绝
+
+                            }
+                            (3) -> {  //3	等待电核
+
+                            }
+                            (4) -> {  //4	等待放款
+
+                            }
+                            (5) -> {  //5	放款中
+
+                            }
+                            (6) -> {  //6	放款失败
+
+                            }
+                            (7) -> {  //7	等待还款
+
+                            }
+                            (7) -> {  //7	等待还款
+
+                            }
+                        }
                         //8	已结清
                         //9	逾期
                         //10	还款中
-                        orderDetail.check_status
+
                     }
                 }
 
@@ -99,4 +119,14 @@ class HomeFragment : BaseFragment() {
                 }
             })
     }
+
+   private fun toFragment(fragment: BaseLoanStatusFragment?) {
+        if (fragment != null) {
+            val fragmentManager = childFragmentManager
+            val transaction = fragmentManager.beginTransaction() // 开启一个事务
+            transaction.replace(R.id.fl_home_container, fragment)
+            transaction.commitAllowingStateLoss()
+        }
+    }
+
 }

@@ -18,6 +18,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
@@ -38,6 +39,7 @@ class EditBank4Fragment : BaseEditFragment() {
     private var mEditAccountNumConfirm: InfoEditView? = null
 
     private var tvNext: AppCompatTextView? = null
+    private var tvDesc: AppCompatTextView? = null
     private var scrollView: ScrollView? = null
 
     private var mBankName: Pair<String, String>? = null
@@ -70,6 +72,8 @@ class EditBank4Fragment : BaseEditFragment() {
             }
 
         })
+        tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_contact_next_desc)
+        SpanUtils.setPrivacyString(tvDesc)
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
