@@ -1,6 +1,7 @@
 package com.chocolate.nigerialoanapp.ui.login
 
 import android.os.Bundle
+import com.blankj.utilcode.util.BarUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
 
@@ -14,6 +15,7 @@ class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BarUtils.setStatusBarVisibility(window, false)
         setContentView(R.layout.activity_login)
 
         val loginRegisterFragment = LoginRegisterFragment()
