@@ -131,7 +131,6 @@ class LoanNewProductFragment : BaseLoanStatusFragment() {
                         Log.e(TAG, " marketing product ." + response.body())
                         return
                     }
-
                 }
 
                 override fun onError(response: Response<String>) {
@@ -155,6 +154,6 @@ class LoanNewProductFragment : BaseLoanStatusFragment() {
         }
         tvMaxAmount?.text = mPageResponse?.max_amount.toString()
         tvDesc1?.text = "₦" +mPageResponse?.min_amount.toString() + "\n" + "|" + "\n" + "₦" + mPageResponse?.max_amount
-        tvDesc2?.text = resources.getString(R.string.up_to_day)
+        tvDesc2?.text = resources.getString(R.string.up_to_day, mPageResponse?.max_period.toString())
     }
 }

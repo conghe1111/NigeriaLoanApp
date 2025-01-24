@@ -204,4 +204,9 @@ class EditInfoActivity : BaseActivity() {
             (mCurFragment as? EditBank4Fragment)?.onBankActivityResult(bankName, bankCode)
         }
     }
+
+    override fun onDestroy() {
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDestroy()
+    }
 }

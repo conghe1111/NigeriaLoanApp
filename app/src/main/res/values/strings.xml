@@ -120,6 +120,7 @@
     <string name="max_amount">Maximum Amount</string>
     <string name="apply_now">Apply Now</string>
     <string name="high_loan_amount">High loan amount</string>
-    <string name="up_to_day">Up to \n 365 days</string>
+    <string name="up_to_day">Up to \n %s days</string>
+    <string name="repayment_term">Repayment Term</string>
 
 </resources>

@@ -16,4 +16,9 @@ object Constant {
     var mAccountId: String? = null
 
     var mToken: String? = null
+
+
+    fun isAuditMode() : Boolean {
+        return true
+    }
 }
