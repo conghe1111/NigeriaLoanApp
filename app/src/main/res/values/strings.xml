@@ -116,4 +116,10 @@
     <string name="bank_account_number">Bank Account Number</string>
     <string name="confirm_bank_account_number">Confirm Bank Account Number</string>
     <string name="please_fill_correct_bank_account">Please fill in the correct bank account number to ensure that you can receive the funds</string>
+
+    <string name="max_amount">Maximum Amount</string>
+    <string name="apply_now">Apply Now</string>
+    <string name="high_loan_amount">High loan amount</string>
+    <string name="up_to_day">Up to \n 365 days</string>
+
 </resources>

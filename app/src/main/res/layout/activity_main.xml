@@ -9,46 +9,10 @@
         android:orientation="vertical">
 
         <FrameLayout
+            android:id="@+id/fl_main_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_232"
-                android:background="@drawable/bg_mine_top">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_24">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_20"
-                        android:text="@string/app_name"
-                        android:textColor="#333333"
-                        android:textSize="@dimen/sp_16"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="@dimen/dp_24"
-                        android:src="@drawable/ic_custom_service" />
-
-                </FrameLayout>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/fl_main_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </FrameLayout>
+            android:layout_weight="1" />
 
 
         <LinearLayout

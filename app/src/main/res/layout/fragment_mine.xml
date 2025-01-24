@@ -4,12 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_232">
-
-
-    </FrameLayout>
+    <include layout="@layout/include_main_top" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_content_mine"
