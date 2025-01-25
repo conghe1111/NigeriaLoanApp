@@ -73,6 +73,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/fl_loan_apply_container"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_70"
                 android:layout_marginTop="-18dp"
@@ -123,6 +124,7 @@
             android:layout_height="@dimen/dp_38"/>
 
         <include
+            android:id="@+id/container_disburse_fee"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/dp_27"
             layout="@layout/include_item_disburse_fee"
@@ -130,6 +132,7 @@
             android:layout_height="wrap_content"/>
 
         <include
+            android:id="@+id/container_item_schedule"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/dp_20"
             layout="@layout/include_item_schedule"

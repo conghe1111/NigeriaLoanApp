@@ -47,7 +47,7 @@ class LoadApplyPeriodAdapter(val mList : List<String>) : RecyclerView.Adapter<Lo
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
-
+        mOnItemClickListener = listener
     }
 
     interface OnItemClickListener {

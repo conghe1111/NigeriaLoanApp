@@ -129,5 +129,6 @@
     <string name="processing_fee">Processing Fee</string>
     <string name="repayment_schedule">Repayment Schedule</string>
     <string name="due_day">Due day</string>
+    <string name="confirm">Confirm</string>
 
 </resources>

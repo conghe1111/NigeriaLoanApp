@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +16,9 @@ import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.dialog.SelectAmountDialog
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -40,10 +44,13 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
     private var tvAmount: AppCompatTextView? = null
     private var rvContent: RecyclerView? = null
+    private var loanContainer: View? = null
+    private var viewDisburseFee : View? = null
+    private var viewItemSchedule : View? = null
     private var mAdapter: LoadApplyPeriodAdapter? = null
 
-    private var mAmountIndex : Int = 0
-    private var mPeriodIndex : Int = 0
+    private var mAmountIndex: Int = 0
+    private var mPeriodIndex: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +61,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
     private fun initialView() {
         tvAmount = findViewById<AppCompatTextView>(R.id.tv_loan_apply_amount)
+        loanContainer = findViewById<View>(R.id.fl_loan_apply_container)
         rvContent = findViewById<RecyclerView>(R.id.rv_repayment_term)
 
         rvContent?.layoutManager =
@@ -61,7 +69,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         mAdapter = LoadApplyPeriodAdapter(mPeriodList)
         mAdapter?.setOnItemClickListener(object : LoadApplyPeriodAdapter.OnItemClickListener {
             override fun onItemClick(period: String, pos: Int) {
-                if (TextUtils.isEmpty(mProductType)){
+                if (TextUtils.isEmpty(mProductType)) {
                     return
                 }
                 if (mPeriodList.isEmpty() || mAmountList.isEmpty()) {
@@ -79,7 +87,21 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
         })
         rvContent?.adapter = mAdapter
+        loanContainer?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                val dialog = SelectAmountDialog(this@LoanApplyActivity, mAmountList)
+                dialog.setOnItemClickListener(object : SelectAmountDialog.OnItemClickListener() {
+                    override fun onItemClick(str: String, pos: Int) {
+                        mAmountIndex = pos
+                    }
 
+                })
+                dialog.show()
+            }
+
+        })
+        viewDisburseFee = findViewById<View>(R.id.container_disburse_fee)
+        viewItemSchedule = findViewById<View>(R.id.container_item_schedule)
 
     }
 
@@ -109,7 +131,8 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     if (productTrial == null) {
                         return
                     }
-
+                    bindItem1(productTrial)
+                    bindItem2(productTrial)
                 }
 
                 override fun onError(response: Response<String>) {
@@ -123,10 +146,31 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
     override fun bindData() {
         super.bindData()
-       if (mPeriodList.isNotEmpty()){
-           mAdapter?.notifyDataSetChanged()
-       }
+        if (mPeriodList.isNotEmpty()) {
+            mAdapter?.notifyDataSetChanged()
+        }
+        tvAmount?.text = mAmountList[mAmountIndex].toString()
+    }
 
-        mAmountList
+    private fun bindItem1(productTrial : ProductTrialResponse) {
+        val container = viewDisburseFee
+        val tvDisburalAmount = container?.findViewById<TextView>(R.id.tv_item_1_disbural_amount)
+        val tvInterest = container?.findViewById<TextView>(R.id.tv_item_1_interest)
+        val tvProcessFee = container?.findViewById<TextView>(R.id.tv_item_1_process_fee)
+        val tvLoanAmount = container?.findViewById<TextView>(R.id.tv_item_1_loan_amount)
+
+        tvDisburalAmount?.text = productTrial?.disburse_amount.toString()
+        tvInterest?.text = productTrial?.interest.toString()
+        tvProcessFee?.text = productTrial?.service_fee.toString()
+        tvLoanAmount?.text = productTrial?.amount.toString()
+    }
+
+    private fun bindItem2(productTrial : ProductTrialResponse) {
+        val container = viewItemSchedule
+        val tvDueDay = container?.findViewById<TextView>(R.id.tv_item_1_due_day)
+        val tvDueAmount = container?.findViewById<TextView>(R.id.tv_item_1_due_amount)
+
+        tvDueDay?.text = productTrial?.repay_date.toString()
+        tvDueAmount?.text = productTrial?.amount.toString()
     }
 }

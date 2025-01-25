@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#4440B950"
+    android:layout_height="@dimen/dp_54">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_select_amount"
+        android:layout_width="wrap_content"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textSize="@dimen/sp_14"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>
