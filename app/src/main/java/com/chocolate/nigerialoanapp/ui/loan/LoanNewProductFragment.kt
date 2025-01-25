@@ -14,6 +14,7 @@ import com.chocolate.nigerialoanapp.bean.response.MarketingPageResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -56,7 +57,9 @@ class LoanNewProductFragment : BaseLoanStatusFragment() {
 
         tvApplyNow?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-
+                activity?.let {
+                    LoanApplyActivity.startActivity(it)
+                }
             }
 
         })

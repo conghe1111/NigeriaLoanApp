@@ -123,4 +123,11 @@
     <string name="up_to_day">Up to \n %s days</string>
     <string name="repayment_term">Repayment Term</string>
 
+    <string name="disburse_fees">Disburse&amp; Fees</string>
+    <string name="disbursal_amount">Disbursal Amount</string>
+    <string name="interest">Interest</string>
+    <string name="processing_fee">Processing Fee</string>
+    <string name="repayment_schedule">Repayment Schedule</string>
+    <string name="due_day">Due day</string>
+
 </resources>

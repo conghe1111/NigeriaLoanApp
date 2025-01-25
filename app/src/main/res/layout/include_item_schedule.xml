@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_loan_amount_bg"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_13"
+        android:includeFontPadding="false"
+        android:text="@string/repayment_schedule"
+        android:textColor="#333333"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:includeFontPadding="false"
+            android:text="@string/due_day"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_14" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_1_due_day"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|end"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_14"
+            android:includeFontPadding="false"
+            android:text="17-01-2021"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#EBEBEB" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:includeFontPadding="false"
+            android:text="@string/due_amount"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_14" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_1_due_amount"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|end"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_14"
+            android:includeFontPadding="false"
+            android:text="₦10,000,00"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#EBEBEB" />
+
+</LinearLayout>

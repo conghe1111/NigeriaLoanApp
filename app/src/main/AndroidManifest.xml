@@ -74,6 +74,14 @@
         <activity android:name=".ui.banklist.BankListActivity">
 
         </activity>
+
+        <activity android:name=".ui.loanapply.LoanApplyActivity">
+
+        </activity>
+
+        <activity android:name=".ui.loanapply.LoanApplyMockActivity">
+
+        </activity>
     </application>
 
 </manifest>

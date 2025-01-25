@@ -1,10 +1,7 @@
-package com.chocolate.nigerialoanapp.ui
+package com.chocolate.nigerialoanapp.ui.loanapply
 
-import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.BuildConfig
-import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
@@ -16,29 +13,19 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 
-class LoanApplyActivity : BaseActivity() {
+abstract class BaseLoanApplyActivity : BaseActivity() {
 
     companion object {
 
-        private const val TAG = "LoanApplyActivity"
+        private const val TAG = "BaseLoanApplyActivity"
 
-        fun startActivity() {
-
-        }
-    }
-    private var tvAmount : AppCompatTextView? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_loan_apply)
-        initialView()
     }
 
-    private fun initialView() {
-        tvAmount = findViewById<AppCompatTextView>(R.id.tv_loan_apply_amount)
-    }
+    var mProductType: String? = null
+    var mPeriodList: ArrayList<String> = ArrayList<String>()
+    var mAmountList: ArrayList<String> = ArrayList<String>()
 
-    private fun getProducts(marketingFlag : Boolean) {
+    fun getProducts(marketingFlag: Boolean = false) {
         if (Constant.mAccountId == null) {
             return
         }
@@ -69,7 +56,19 @@ class LoanApplyActivity : BaseActivity() {
                         Log.e(TAG, " marketing product ." + response.body())
                         return
                     }
+                    productBean.product?.let {
 
+                        mProductType = it.product_type.toString()
+                        mAmountList.clear()
+                        for (amountItem in it.amount) {
+                            mAmountList.add(amountItem.toString())
+                        }
+                        mPeriodList.clear()
+                        for (periodItem in it.period) {
+                            mPeriodList.add(periodItem.toString())
+                        }
+                    }
+                    bindData()
                 }
 
                 override fun onError(response: Response<String>) {
@@ -84,5 +83,9 @@ class LoanApplyActivity : BaseActivity() {
                     }
                 }
             })
+    }
+
+   open fun bindData() {
+
     }
 }

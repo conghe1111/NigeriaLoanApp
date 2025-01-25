@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_100"
+    android:layout_height="@dimen/dp_38">
+    
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_loan_term"
+        android:layout_width="@dimen/dp_100"
+        android:text=""
+        android:gravity="center"
+        android:textSize="@dimen/sp_15"
+        android:layout_height="@dimen/dp_38"/>
+
+</FrameLayout>
