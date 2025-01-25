@@ -130,5 +130,6 @@
     <string name="repayment_schedule">Repayment Schedule</string>
     <string name="due_day">Due day</string>
     <string name="confirm">Confirm</string>
+    <string name="x_days">%sdays</string>
 
 </resources>

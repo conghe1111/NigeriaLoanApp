@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dp_100"
+    android:background="@drawable/bg_green_bg"
     android:layout_height="@dimen/dp_38">
     
     <androidx.appcompat.widget.AppCompatTextView
@@ -8,6 +9,8 @@
         android:layout_width="@dimen/dp_100"
         android:text=""
         android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="@dimen/sp_15"
         android:layout_height="@dimen/dp_38"/>
 

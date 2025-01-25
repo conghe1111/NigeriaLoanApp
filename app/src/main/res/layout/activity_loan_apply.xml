@@ -131,13 +131,18 @@
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_height="wrap_content"/>
 
-        <include
-            android:id="@+id/container_item_schedule"
-            android:layout_width="match_parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_container_schedule"
             android:layout_marginTop="@dimen/dp_20"
-            layout="@layout/include_item_schedule"
+            android:layout_width="match_parent"
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_height="wrap_content"/>
+
+<!--        <include-->
+<!--            android:layout_width="match_parent"-->
+<!--            layout="@layout/include_item_schedule"-->
+<!--            android:layout_height="wrap_content"/>-->
+
     </LinearLayout>
 
 </FrameLayout>
