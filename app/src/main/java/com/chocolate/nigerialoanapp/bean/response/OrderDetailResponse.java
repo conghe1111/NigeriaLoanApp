@@ -4,7 +4,7 @@ import java.util.List;
 
 public class OrderDetailResponse {
 
-    private int order_id;   //订单ID
+    private long order_id;   //订单ID
     private int check_status;   //订单状态， 状态内容请查看
     private String reject_message;  //拒绝消息
     private int limit_day;  //拒绝之后，剩余多少天可以申请
@@ -14,11 +14,11 @@ public class OrderDetailResponse {
     private int is_reloan;      //首借，复借， 0 首借 1复借
     private List<Stage> stages; //分期信息
 
-    public int getOrder_id() {
+    public long getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrder_id(long order_id) {
         this.order_id = order_id;
     }
 

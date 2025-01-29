@@ -4,13 +4,14 @@ import androidx.annotation.IntDef
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.CUSTOMER_SERVICE
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.HISTORY_RECORD
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.INFORMATION
+import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.LOGOUT
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.PRIVACY
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.TERM_CONDITION
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.TEST_1
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.VERSION
 
 
-@IntDef(INFORMATION, CUSTOMER_SERVICE, HISTORY_RECORD, PRIVACY, TERM_CONDITION, VERSION, TEST_1)
+@IntDef(INFORMATION, CUSTOMER_SERVICE, HISTORY_RECORD, PRIVACY, TERM_CONDITION, VERSION, TEST_1, LOGOUT)
 @Retention(AnnotationRetention.SOURCE)
 annotation class PageType {
     companion object {

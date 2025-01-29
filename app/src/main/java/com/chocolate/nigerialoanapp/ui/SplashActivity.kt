@@ -6,9 +6,9 @@ import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
-import com.blankj.utilcode.BuildConfig
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.SPUtils
+import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
@@ -97,7 +97,7 @@ class SplashActivity : BaseActivity() {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        if (com.chocolate.nigerialoanapp.BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " orderDetail = " + jsonObject.toString())
         }
         OkGo.post<String>(Api.ORDER_DETAIL).tag(HomeFragment.TAG)

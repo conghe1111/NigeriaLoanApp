@@ -74,7 +74,7 @@ class HomeFragment : BaseFragment() {
                     if (orderDetail == null) {
                         return
                     }
-                    if (orderDetail.order_id == 0) {
+                    if (orderDetail.order_id == null || orderDetail.order_id == 0L) {
                         mCurFragment = LoanNewProductFragment()
                         toFragment(mCurFragment)
                     } else {

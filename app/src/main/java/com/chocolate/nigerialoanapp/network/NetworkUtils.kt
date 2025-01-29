@@ -46,6 +46,21 @@ object NetworkUtils {
         } else com.alibaba.fastjson.JSONObject.parseObject(body, clazz)
     }
 
+    fun checkResponseSuccess2(response: Response<String>): BaseResponseBean? {
+        var responseBean: BaseResponseBean? = null
+        try {
+            responseBean = com.alibaba.fastjson.JSONObject.parseObject(
+                response.body().toString(),
+                BaseResponseBean::class.java
+            )
+        } catch (e: Exception) {
+            if (BuildConfig.DEBUG) {
+                throw e
+            }
+        }
+        return responseBean
+    }
+
     fun checkResponseSuccess(response: Response<String>): String? {
         var responseBean: BaseResponseBean? = null
         try {
