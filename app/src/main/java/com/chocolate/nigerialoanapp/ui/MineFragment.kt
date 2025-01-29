@@ -143,6 +143,10 @@ class MineFragment : BaseFragment() {
     }
 
     private fun logout() {
+        if (BuildConfig.DEBUG) {
+            quitLogout()
+            return
+        }
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         jsonObject.put("account_id", Constant.mAccountId)
         if (BuildConfig.DEBUG) {
@@ -159,15 +163,7 @@ class MineFragment : BaseFragment() {
                     }
                     val baseResponseBean = NetworkUtils.checkResponseSuccess2(response)
                     if (baseResponseBean?.isRequestSuccess() == true) {
-                        Constant.mToken = ""
-                        Constant.mAccountId = ""
-                        Constant.mLaunchOrderInfo = null
-                        SPUtils.getInstance().put(LocalConfig.LC_ACCOUNT_ID, "")
-                        SPUtils.getInstance().put(LocalConfig.LC_ACCOUNT_TOKEN, "")
-                        FirebaseMessaging.getInstance().deleteToken()
-                        val intent = Intent(activity, LoginActivity::class.java)
-                        activity?.startActivity(intent)
-                        activity?.finish()
+                        quitLogout()
                     } else {
                         if (baseResponseBean != null) {
                             ToastUtils.showShort(baseResponseBean.getMsg())
@@ -188,4 +184,17 @@ class MineFragment : BaseFragment() {
                 }
             })
         }
+
+    private fun quitLogout() {
+        Constant.mToken = ""
+        Constant.mAccountId = ""
+        Constant.mLaunchOrderInfo = null
+        SPUtils.getInstance().put(LocalConfig.LC_ACCOUNT_ID, "")
+        SPUtils.getInstance().put(LocalConfig.LC_ACCOUNT_TOKEN, "")
+        // TODO
+//        FirebaseMessaging.getInstance().deleteToken()
+        val intent = Intent(activity, LoginActivity::class.java)
+        activity?.startActivity(intent)
+        activity?.finish()
+    }
 }

@@ -63,7 +63,7 @@ class LoginRegisterFragment : BaseFragment() {
                 if (etMobileNum == null) {
                     return
                 }
-                val phoneNum = etMobileNum!!.text.toString()
+                val phoneNum = etMobileNum!!.text.toString().replace(" ","")
                 if (RegexUtils.isTel(phoneNum)){
                     ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
                     return

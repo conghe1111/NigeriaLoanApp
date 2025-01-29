@@ -76,14 +76,15 @@ class HomeFragment : BaseFragment() {
                     }
                     val orderDetail = checkResponseSuccess(response, OrderDetailResponse::class.java)
                     mOrderDetail = orderDetail
+//                    Log.e("OkHttpClient", " success 2 = " + orderDetail?.order_detail?.order_id)
                     if (orderDetail == null) {
                         return
                     }
-                    if (orderDetail.order_id == null || orderDetail.order_id == 0L) {
+                    if (orderDetail.order_detail == null || orderDetail.order_detail.order_id == 0L) {
                         mCurFragment = Loan0NewProductFragment()
                         toFragment(mCurFragment)
                     } else {
-                        when(orderDetail.check_status) {
+                        when(orderDetail.order_detail.check_status) {
                             (1) -> {  //1	提交审核
                                 mCurFragment = Loan1VerifyFragment()
                                 toFragment(mCurFragment)

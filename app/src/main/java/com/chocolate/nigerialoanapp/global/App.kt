@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.blankj.utilcode.util.LanguageUtils
 import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.collect.LocationMgr
-import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.GooglePlaySdk
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cookie.CookieJarImpl
 import com.lzy.okgo.cookie.store.DBCookieStore
@@ -28,6 +29,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        FirebaseApp.initializeApp(this)
         initializeOkGo()
         LocationMgr.getInstance().init(this)
         LanguageUtils.applyLanguage(Locale.ENGLISH, false)
