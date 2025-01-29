@@ -20,7 +20,7 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.SelectAmountDialog
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyHistoryAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
-import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor
+import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor2
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -87,7 +87,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                 if (mPeriodIndex >= mPeriodList.size) {
                     return
                 }
-                productTrial(mProductType!!, mAmountList[mAmountIndex], mPeriodList[mPeriodIndex])
+                requestProductTrial(mProductType!!, mAmountList[mAmountIndex], mPeriodList[mPeriodIndex])
             }
 
         })
@@ -110,11 +110,11 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         rvContainer?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mHistoryAdapter = LoadApplyHistoryAdapter(mTrialList)
         rvContainer?.adapter = mHistoryAdapter
-        rvContent?.addItemDecoration(NorItemDecor())
+        rvContainer?.addItemDecoration(NorItemDecor2())
 
     }
 
-    private fun productTrial(productType: String, amount: String, period: String) {
+    private fun requestProductTrial(productType: String, amount: String, period: String) {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
@@ -144,6 +144,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     mTrialList.clear()
                     mTrialList.addAll(productTrial.trials)
                     mHistoryAdapter?.notifyDataSetChanged()
+
                 }
 
                 override fun onError(response: Response<String>) {
@@ -161,6 +162,16 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
             mAdapter?.notifyDataSetChanged()
         }
         tvAmount?.text = mAmountList[mAmountIndex].toString()
+        if (mPeriodList.isEmpty() || mAmountList.isEmpty()) {
+            return
+        }
+        if (mAmountIndex >= mAmountList.size) {
+            return
+        }
+        if (mPeriodIndex >= mPeriodList.size) {
+            return
+        }
+        requestProductTrial(mProductType!!, mAmountList[mAmountIndex], mPeriodList[mPeriodIndex])
     }
 
     private fun bindItem1(productTrial : ProductTrialResponse) {
