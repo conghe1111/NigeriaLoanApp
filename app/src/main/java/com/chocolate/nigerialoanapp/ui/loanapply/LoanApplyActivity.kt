@@ -7,17 +7,24 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.SelectAmountDialog
+import com.chocolate.nigerialoanapp.ui.edit.EditBank4Fragment
+import com.chocolate.nigerialoanapp.ui.edit.EditBasic1Fragment
+import com.chocolate.nigerialoanapp.ui.edit.EditContact3Fragment
+import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
+import com.chocolate.nigerialoanapp.ui.edit.EditWork2Fragment
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyHistoryAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor2
@@ -46,10 +53,13 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     }
 
     private var tvAmount: AppCompatTextView? = null
+    private var ivBack: AppCompatImageView? = null
     private var rvContent: RecyclerView? = null
     private var loanContainer: View? = null
     private var viewDisburseFee : View? = null
     private var rvContainer : RecyclerView? = null
+    private var tvNext : AppCompatTextView? = null
+
     private var mAdapter: LoadApplyPeriodAdapter? = null
     private var mHistoryAdapter: LoadApplyHistoryAdapter? = null
 
@@ -66,6 +76,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
     private fun initialView() {
         tvAmount = findViewById<AppCompatTextView>(R.id.tv_loan_apply_amount)
+        ivBack= findViewById<AppCompatImageView>(R.id.iv_apply_info_back)
         loanContainer = findViewById<View>(R.id.fl_loan_apply_container)
         rvContent = findViewById<RecyclerView>(R.id.rv_repayment_term)
 
@@ -107,11 +118,23 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         })
         viewDisburseFee = findViewById<View>(R.id.container_disburse_fee)
         rvContainer = findViewById<RecyclerView>(R.id.rv_container_schedule)
+        tvNext = findViewById<AppCompatTextView>(R.id.tv_loan_apply_next)
         rvContainer?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mHistoryAdapter = LoadApplyHistoryAdapter(mTrialList)
         rvContainer?.adapter = mHistoryAdapter
         rvContainer?.addItemDecoration(NorItemDecor2())
+        ivBack?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                finish()
+            }
 
+        })
+        tvNext?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                orderCheek()
+            }
+
+        })
     }
 
     private fun requestProductTrial(productType: String, amount: String, period: String) {
@@ -191,4 +214,69 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvLoanAmount?.text = trial?.amount.toString()
     }
 
+    private fun orderCheek() {
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        try {
+            jsonObject.put("account_id", Constant.mAccountId)
+            jsonObject.put("access_token", Constant.mToken)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        if (BuildConfig.DEBUG) {
+            Log.i("OkhttpClient orderCheek = ", jsonObject.toString())
+        }
+        OkGo.post<String>(Api.ORDER_CHECK).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    if (isFinishing || isDestroyed) {
+                        return
+                    }
+                    val orderCheekBean =
+                        checkResponseSuccess(response, OrderCheekBean::class.java)
+                    if (orderCheekBean == null) {
+                        return
+                    }
+                    if (orderCheekBean.order_id == 0) {
+                        return
+                    }
+                    when (orderCheekBean.next_phase) {
+                        (101) -> {  //基本信息填写完成（第一页）
+                            EditInfoActivity.showActivity(
+                                this@LoanApplyActivity, EditInfoActivity.STEP_1,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+
+                        (102) -> {  //工作信息填写完成（第二页）
+                            EditInfoActivity.showActivity(
+                                this@LoanApplyActivity, EditInfoActivity.STEP_2,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+
+                        (103) -> {  //联系人信息填写完成（第三页）
+                            EditInfoActivity.showActivity(
+                                this@LoanApplyActivity, EditInfoActivity.STEP_3,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+
+                        (104) -> {  //收款信息填写完成（第四页）
+                            EditInfoActivity.showActivity(
+                                this@LoanApplyActivity, EditInfoActivity.STEP_4,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+                    }
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    if (isFinishing || isDestroyed) {
+                        return
+                    }
+                }
+            })
+    }
 }

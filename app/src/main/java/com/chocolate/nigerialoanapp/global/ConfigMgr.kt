@@ -59,8 +59,17 @@ object ConfigMgr {
         }
         val bankListJson = SPUtils.getInstance().getString(KEY_BANK_LIST)
         updateBankList(bankListJson)
-        getProfileConfig()
-        getBankList()
+
+        if (!TextUtils.isEmpty(dataConfig) && BuildConfig.DEBUG) {
+
+        } else {
+            getProfileConfig()
+        }
+        if (!TextUtils.isEmpty(bankListJson) && BuildConfig.DEBUG) {
+
+        } else {
+            getBankList()
+        }
     }
 
     private fun initPayPeriod() {

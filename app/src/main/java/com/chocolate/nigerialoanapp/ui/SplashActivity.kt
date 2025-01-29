@@ -170,4 +170,9 @@ class SplashActivity : BaseActivity() {
                 }
             })
     }
+
+    override fun onDestroy() {
+        mHandler?.removeCallbacksAndMessages(null)
+        super.onDestroy()
+    }
 }

@@ -49,6 +49,7 @@ class EditInfoActivity : BaseActivity() {
         const val STEP_4 = 1114
 
         const val FROM_WORK_MENU = 111
+        const val FROM_APPLY_LOAD = 112
         fun showActivity(context: Context, step: Int = STEP_1, from: Int = FROM_WORK_MENU) {
             val intent = Intent(context, EditInfoActivity::class.java)
             intent.putExtra(KEY_FROM, from)
@@ -183,7 +184,7 @@ class EditInfoActivity : BaseActivity() {
             }
 
             (105) -> {  //活体信息上传完成（第五页）
-
+                // TODO
             }
 
             (111) -> {  //完成首贷KYC流程
