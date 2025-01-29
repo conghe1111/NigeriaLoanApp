@@ -5,7 +5,10 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
 
-class LoanPendingFragment : BaseRepaymentFragment() {
+/**
+ * 等待还款
+ */
+class Loan7PendingFragment : BaseRepaymentFragment() {
 
     private var tvPending : AppCompatTextView? = null
 

@@ -132,5 +132,7 @@
     <string name="confirm">Confirm</string>
     <string name="x_days">%sdays</string>
     <string name="logout">Logout</string>
+    <string name="your_application_failed">Your application failed</string>
+    <string name="reason_for_rejection"> Reasons for rejection may be: \n-The information you provided is incorrect\n-Your face recognition is unclear\n-Your information requires further review</string>
 
 </resources>

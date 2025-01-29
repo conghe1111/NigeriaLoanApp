@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.chocolate.nigerialoanapp.R
 
-class LoanProcessFragment : BaseLoanStatusFragment() {
+/**
+ * 放款中
+ */
+class Loan5ProcessFragment : BaseLoanStatusFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

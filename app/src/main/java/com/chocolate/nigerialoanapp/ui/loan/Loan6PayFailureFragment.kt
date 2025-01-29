@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.chocolate.nigerialoanapp.R
-import com.chocolate.nigerialoanapp.base.BaseFragment
 
-open class BaseProcessedFragment : BaseLoanStatusFragment() {
+class Loan6PayFailureFragment : BaseLoanStatusFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_process_base, container, false)
+        return inflater.inflate(R.layout.fragment_loan_pay_failure, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

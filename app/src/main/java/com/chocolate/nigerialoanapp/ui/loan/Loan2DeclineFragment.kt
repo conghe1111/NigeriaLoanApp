@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.chocolate.nigerialoanapp.R
 
-class LoanVerifyFragment : BaseLoanStatusFragment() {
+/**
+ * 审核拒绝
+ */
+class Loan2DeclineFragment : BaseLoanStatusFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_verify_loan, container, false)
+        return inflater.inflate(R.layout.fragment_loan_decline, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

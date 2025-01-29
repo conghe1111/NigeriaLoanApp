@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
 
-class LoanPayProcessingFragment : BaseProcessedFragment() {
+class Loan10PayProcessingFragment : BaseProcessedFragment() {
 
     private var tvDesc : AppCompatTextView? = null
     private var tvPayBtn : AppCompatTextView? = null

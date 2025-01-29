@@ -22,7 +22,7 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 
-class LoanNewProductFragment : BaseLoanStatusFragment() {
+class Loan0NewProductFragment : BaseLoanStatusFragment() {
 
     companion object {
         private const val TAG = "LoanNewProductFragment"

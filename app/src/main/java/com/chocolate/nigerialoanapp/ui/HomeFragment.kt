@@ -13,10 +13,15 @@ import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.loan.BaseLoanStatusFragment
-import com.chocolate.nigerialoanapp.ui.loan.LoanDeclineFragment
-import com.chocolate.nigerialoanapp.ui.loan.LoanNewProductFragment
-import com.chocolate.nigerialoanapp.ui.loan.LoanProcessFragment
-import com.chocolate.nigerialoanapp.ui.loan.LoanVerifyFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan0NewProductFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan10PayProcessingFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan1VerifyFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan2DeclineFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan5ProcessFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan6PayFailureFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan7PendingFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan8PaidProcessedFragment
+import com.chocolate.nigerialoanapp.ui.loan.Loan9OverdueFragment
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -75,39 +80,50 @@ class HomeFragment : BaseFragment() {
                         return
                     }
                     if (orderDetail.order_id == null || orderDetail.order_id == 0L) {
-                        mCurFragment = LoanNewProductFragment()
+                        mCurFragment = Loan0NewProductFragment()
                         toFragment(mCurFragment)
                     } else {
                         when(orderDetail.check_status) {
                             (1) -> {  //1	提交审核
-
+                                mCurFragment = Loan1VerifyFragment()
+                                toFragment(mCurFragment)
                             }
                             (2) -> {  //2	审核拒绝
-
+                                mCurFragment = Loan2DeclineFragment()
+                                toFragment(mCurFragment)
                             }
                             (3) -> {  //3	等待电核
 
                             }
                             (4) -> {  //4	等待放款
-
+                                mCurFragment = Loan5ProcessFragment()
+                                toFragment(mCurFragment)
                             }
                             (5) -> {  //5	放款中
-
+                                mCurFragment = Loan5ProcessFragment()
+                                toFragment(mCurFragment)
                             }
                             (6) -> {  //6	放款失败
-
+                                mCurFragment = Loan6PayFailureFragment()
+                                toFragment(mCurFragment)
                             }
                             (7) -> {  //7	等待还款
-
+                                mCurFragment = Loan7PendingFragment()
+                                toFragment(mCurFragment)
                             }
-                            (7) -> {  //7	等待还款
-
+                            (8) -> {  //8	已结清
+                                mCurFragment = Loan8PaidProcessedFragment()
+                                toFragment(mCurFragment)
+                            }
+                            (9) -> {  //9	逾期
+                                mCurFragment = Loan9OverdueFragment()
+                                toFragment(mCurFragment)
+                            }
+                            (10) -> {  //10	还款中
+                                mCurFragment = Loan10PayProcessingFragment()
+                                toFragment(mCurFragment)
                             }
                         }
-                        //8	已结清
-                        //9	逾期
-                        //10	还款中
-
                     }
                 }
 
