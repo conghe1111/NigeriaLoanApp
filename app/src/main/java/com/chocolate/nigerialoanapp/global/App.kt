@@ -5,7 +5,9 @@ import android.text.TextUtils
 import androidx.appcompat.app.AppCompatDelegate
 import com.blankj.utilcode.util.LanguageUtils
 import com.blankj.utilcode.util.SPUtils
+import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.LocationMgr
+import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.utils.GooglePlaySdk
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
@@ -39,6 +41,13 @@ class App : Application() {
         val instanceId = SPUtils.getInstance().getString(LocalConfig.LC_FIREBASE_INSTANCE_ID, "")
         if (TextUtils.isEmpty(s) || TextUtils.isEmpty(s1) || TextUtils.isEmpty(instanceId)) {
             GooglePlaySdk.getInstance(this)?.start()
+        }
+        LogSaver.init(this)
+        if (!Constant.isAabBuild()) {
+            CrashHandler.getInstance().init(this)
+        }
+        if (BuildConfig.DEBUG) {
+            LogSaver.enableDebug()
         }
     }
 

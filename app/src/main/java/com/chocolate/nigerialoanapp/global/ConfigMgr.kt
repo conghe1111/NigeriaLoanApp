@@ -7,6 +7,7 @@ import android.view.View
 import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.bean.data.ConsumerData
 import com.chocolate.nigerialoanapp.bean.response.BankBeanResponse
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.lzy.okgo.OkGo
@@ -15,6 +16,7 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
+import kotlin.collections.ArrayList
 
 object ConfigMgr {
 
@@ -22,6 +24,7 @@ object ConfigMgr {
 
     private const val KEY_DATA_CONFIG = "key_data_config"
     private const val KEY_BANK_LIST = "key_bank_list"
+    private const val KEY_STATIC_DATA_CONFIG = "key_static_data_config"
 
     val mDebtList = ArrayList<Pair<String, String>>()
     val mGenderList = ArrayList<Pair<String, String>>()
@@ -36,6 +39,7 @@ object ConfigMgr {
     val mAreaMap = HashMap<String, ArrayList<String>>()
 
     val mBankList = ArrayList<BankBeanResponse.Bank>()
+    var mConsumerData: ConsumerData? = null
 
     fun getAllConfig() {
         mDebtList.clear()
@@ -58,17 +62,47 @@ object ConfigMgr {
             handleDataByJson(dataConfig)
         }
         val bankListJson = SPUtils.getInstance().getString(KEY_BANK_LIST)
-        updateBankList(bankListJson)
+        if (!TextUtils.isEmpty(bankListJson)) {
+            updateBankList(bankListJson)
+        }
+        val staticDataConfig = SPUtils.getInstance().getString(KEY_STATIC_DATA_CONFIG)
+        if (!TextUtils.isEmpty(staticDataConfig)) {
+            handleStaticConfig(staticDataConfig)
+        } else {
+            mConsumerData = ConsumerData()
+            val list1 = ArrayList<String>()
+            list1.add("support@owocredit.com")
+            list1.add("customer@owocredit.com")
+            mConsumerData!!.email = list1
+
+            val list2 = ArrayList<String>()
+            list2.add("2341234567890")
+            list2.add("2341234567891")
+            list2.add("2341234567892")
+            mConsumerData!!.phone = list2
+
+            val list3 = ArrayList<String>()
+            list3.add("2341234567890")
+            list3.add("2341234567891")
+            mConsumerData!!.whatsapp = list3
+        }
 
         if (!TextUtils.isEmpty(dataConfig) && BuildConfig.DEBUG) {
 
         } else {
             getProfileConfig()
         }
+
         if (!TextUtils.isEmpty(bankListJson) && BuildConfig.DEBUG) {
 
         } else {
             getBankList()
+        }
+
+        if (!TextUtils.isEmpty(staticDataConfig) && BuildConfig.DEBUG) {
+
+        } else {
+            getStaticConfig()
         }
     }
 
@@ -228,7 +262,7 @@ object ConfigMgr {
         return list
     }
 
-   fun getBankList() {
+    fun getBankList() {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
         } catch (e: JSONException) {
@@ -253,8 +287,9 @@ object ConfigMgr {
     }
 
 
-    private fun updateBankList(json : String) {
-        val responseBean: BankBeanResponse? = com.alibaba.fastjson.JSONObject.parseObject(json, BankBeanResponse::class.java)
+    private fun updateBankList(json: String) {
+        val responseBean: BankBeanResponse? =
+            com.alibaba.fastjson.JSONObject.parseObject(json, BankBeanResponse::class.java)
         if (responseBean?.bank_list == null) {
             if (BuildConfig.DEBUG) {
                 Log.e(TAG, " get bank list null .")
@@ -273,13 +308,50 @@ object ConfigMgr {
                     if (TextUtils.isEmpty(bank2.bank_name)) {
                         return 1
                     }
-                    val c1 : Char = bank1.bank_name!![0]
-                    val c2 : Char = bank2.bank_name!![0]
+                    val c1: Char = bank1.bank_name!![0]
+                    val c2: Char = bank2.bank_name!![0]
                     return c1 - c2
                 }
             })
 
         mBankList.clear()
         mBankList.addAll(responseBean.bank_list!!)
+    }
+
+    private fun handleStaticConfig(json: String) {
+        val consumerData: ConsumerData? =
+            com.alibaba.fastjson.JSONObject.parseObject(json, ConsumerData::class.java)
+        if (consumerData == null) {
+            if (BuildConfig.DEBUG) {
+                Log.e(TAG, " handleStaticConfig .")
+            }
+            return
+        }
+        mConsumerData = consumerData
+
+    }
+
+    private fun getStaticConfig() {
+        val jsonObject: JSONObject = JSONObject()
+        try {
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        OkGo.post<String>(Api.STATIC_CONFIG).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    val json = NetworkUtils.checkResponseSuccess(response).toString()
+                    SPUtils.getInstance().put(KEY_STATIC_DATA_CONFIG, json)
+                    handleStaticConfig(json)
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    if (BuildConfig.DEBUG) {
+                        Log.e(TAG, " update contact = " + response.body())
+                    }
+                }
+            })
     }
 }

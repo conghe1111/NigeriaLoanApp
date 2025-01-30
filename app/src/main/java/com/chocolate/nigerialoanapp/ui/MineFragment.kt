@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.SPUtils
@@ -24,6 +25,8 @@ import com.chocolate.nigerialoanapp.ui.mine.MineAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor
 import com.chocolate.nigerialoanapp.ui.mine.PageType
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.INFORMATION
+import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -39,6 +42,7 @@ class MineFragment : BaseFragment() {
     private var mList: ArrayList<SettingMineBean> = ArrayList()
 
     private var rvMine : RecyclerView? = null
+    private var ivConsumer : AppCompatImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,11 +55,21 @@ class MineFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvMine = view.findViewById<RecyclerView>(R.id.rv_content_mine)
+        ivConsumer = view.findViewById<AppCompatImageView>(R.id.iv_main_top_consumer)
         initializeView()
     }
 
     private fun initializeView() {
         buildSettingList()
+        ivConsumer?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                context?.let {
+                    ConsumerHotlineActivity.startActivity(it)
+                }
+            }
+
+        })
+
         val adapter = MineAdapter(mList)
         rvMine?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvMine?.adapter = adapter
@@ -68,11 +82,9 @@ class MineFragment : BaseFragment() {
                         startActivity(intent)
                     }
                     PageType.CUSTOMER_SERVICE -> {
-                        if (checkClickFast()) {
-                            return
+                        context?.let {
+                            ConsumerHotlineActivity.startActivity(it)
                         }
-                        val intent = Intent(context, MainActivity::class.java)
-                        startActivity(intent)
                     }
                     PageType.HISTORY_RECORD -> {
 
