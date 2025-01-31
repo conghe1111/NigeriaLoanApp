@@ -20,6 +20,7 @@ import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
+import com.chocolate.nigerialoanapp.ui.history.HistoryRecordActivity
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
 import com.chocolate.nigerialoanapp.ui.mine.MineAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor
@@ -87,7 +88,9 @@ class MineFragment : BaseFragment() {
                         }
                     }
                     PageType.HISTORY_RECORD -> {
-
+                        context?.let {
+                            HistoryRecordActivity.startActivity(it)
+                        }
                     }
                     PageType.PRIVACY -> {
 

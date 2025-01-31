@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -41,7 +42,6 @@ class ConsumerHotlineActivity : BaseActivity() {
         }
     }
 
-    private var ivBack: AppCompatImageView? = null
     private var rvPhone: RecyclerView? = null
     private var rvWhatApp: RecyclerView? = null
     private var rvEmail: RecyclerView? = null
@@ -57,7 +57,7 @@ class ConsumerHotlineActivity : BaseActivity() {
     }
 
     private fun initialView() {
-        ivBack = findViewById<AppCompatImageView>(R.id.iv_hotline_back)
+        initializeTitle()
         rvPhone = findViewById<RecyclerView>(R.id.rv_phone_content)
         rvWhatApp = findViewById<RecyclerView>(R.id.rv_whatapp_content)
         rvEmail = findViewById<RecyclerView>(R.id.rv_email_content)
@@ -123,6 +123,12 @@ class ConsumerHotlineActivity : BaseActivity() {
 
         })
         rvEmail?.adapter = emailAdapter
+        var ivConsumer : AppCompatImageView? = findViewById<AppCompatImageView>(R.id.iv_consumer)
+        ivConsumer?.visibility = View.GONE
+    }
+
+    override fun getTitleStr(): String {
+        return resources.getString(R.string.consumer_hotline)
     }
 
     private fun executeCallPhone(phoneNum: String) {

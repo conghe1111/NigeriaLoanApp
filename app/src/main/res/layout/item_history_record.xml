@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_history_record_bg"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_history_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:includeFontPadding="false"
+        android:text="100000"
+        android:gravity="center"
+        android:textColor="#40B950"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#F0F0F0"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_height="@dimen/dp_1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:includeFontPadding="false"
+            android:text="@string/loan_amount"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_1_loan_amount"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|end"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14"
+            android:includeFontPadding="false"
+            android:text="₦10,000,000"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="#F0F0F0" />
+
+    <LinearLayout
+        android:id="@+id/ll_date_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:includeFontPadding="false"
+            android:text="@string/date_of_application"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_1_date_of_app"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|end"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14"
+            android:includeFontPadding="false"
+            android:text="30–11-2020"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_date_app"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="#F0F0F0" />
+
+    <LinearLayout
+        android:id="@+id/ll_due_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:includeFontPadding="false"
+            android:text="@string/due_amount"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_1_due_amount"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|end"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14"
+            android:includeFontPadding="false"
+            android:text="₦0,00"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_due_amount"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="#F0F0F0" />
+
+    <LinearLayout
+        android:id="@+id/ll_due_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:includeFontPadding="false"
+            android:text="@string/due_day"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_1_due_day"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|end"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14"
+            android:includeFontPadding="false"
+            android:text="₦100,0,00"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_due_day"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#F7F7F7" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:includeFontPadding="false"
+            android:text="@string/loan_status"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_1_loan_status"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|end"
+            android:textColor="#40B950"
+            android:textSize="@dimen/sp_14"
+            android:includeFontPadding="false"
+            android:text="@string/repayment_successful"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="#F7F7F7" />
+
+</LinearLayout>

@@ -11,14 +11,14 @@ object Constant {
 
     const val IS_COLLECT = !BuildConfig.IS_AAB_BUILD
 
-    var mLaunchOrderInfo : OrderDetailResponse? = null
+    var mLaunchOrderInfo: OrderDetailResponse? = null
 
     var mAccountId: String? = null
 
     var mToken: String? = null
 
 
-    fun isAuditMode() : Boolean {
+    fun isAuditMode(): Boolean {
         return false
     }
 }

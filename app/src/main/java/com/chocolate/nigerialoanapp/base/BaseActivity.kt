@@ -1,8 +1,14 @@
 package com.chocolate.nigerialoanapp.base
 
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
+import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.model.Response
 
 open class BaseActivity : AppCompatActivity() {
@@ -23,5 +29,29 @@ open class BaseActivity : AppCompatActivity() {
     @IdRes
     protected open fun getFragmentContainerRes(): Int {
         return -1
+    }
+
+    protected fun initializeTitle() {
+        var ivBack : AppCompatImageView? = findViewById<AppCompatImageView>(R.id.iv_back)
+        var tvTitle : AppCompatTextView? =  findViewById<AppCompatTextView>(R.id.tv_title)
+        var ivConsumer : AppCompatImageView? = findViewById<AppCompatImageView>(R.id.iv_consumer)
+
+        ivBack?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                finish()
+            }
+
+        })
+        ivConsumer?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                ConsumerHotlineActivity.startActivity(this@BaseActivity)
+            }
+
+        })
+        tvTitle?.text = getTitleStr()
+    }
+
+   open fun getTitleStr() : String {
+        return ""
     }
 }

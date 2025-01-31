@@ -5,33 +5,10 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+    <include
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_54"
-        android:layout_marginTop="@dimen/dp_13"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_hotline_back"
-            android:layout_width="@dimen/dp_19"
-            android:layout_height="@dimen/dp_19"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_20"
-            android:src="@drawable/ic_back" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_hotline_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_weight="1"
-            android:text="@string/consumer_hotline"
-            android:textColor="#333333"
-            android:textSize="@dimen/sp_18"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        layout="@layout/include_top_title"
+        android:layout_height="@dimen/dp_54"/>
 
     <LinearLayout
         android:layout_width="match_parent"

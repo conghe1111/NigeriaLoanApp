@@ -139,5 +139,12 @@
     <string name="whatsapp">Whatsapp</string>
     <string name="email2">Email</string>
     <string name="we_will_get_back">*We will get back to you within 24 hours</string>
-
+    <string name="date_of_application">Date of application</string>
+    <string name="loan_status">Loan Status</string>
+    <string name="repayment_successful">Repayment successful</string>
+    <string name="reject_application">Reject Application</string>
+    <string name="active">Active</string>
+    <string name="finish">Finish</string>
+    <string name="overdue">Overdue</string>
+    <string name="no_related_order_found">No related order found</string>
 </resources>
