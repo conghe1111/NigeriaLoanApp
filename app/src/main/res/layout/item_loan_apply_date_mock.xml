@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_item_container"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp_78"
+    android:layout_height="@dimen/dp_90">
+<!--    android:background="@drawable/bg_green_bg"-->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_loan_apply_date"
+        android:layout_width="match_parent"
+        tools:text="1111111111"
+        android:gravity="center"
+        android:textColor="#A1A1A1"
+        android:textStyle="bold"
+        android:layout_gravity="center_vertical"
+        android:textSize="@dimen/sp_15"
+        android:layout_height="@dimen/dp_38"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tv_item_loan_apply_date_lock"
+            android:layout_width="@dimen/dp_11"
+            android:src="@drawable/ic_lock"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_height="@dimen/dp_14"/>
+
+</FrameLayout>

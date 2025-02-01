@@ -17,8 +17,8 @@ object Constant {
 
     var mToken: String? = null
 
-
+    //是否是审核账号
     fun isAuditMode(): Boolean {
-        return false
+        return true
     }
 }

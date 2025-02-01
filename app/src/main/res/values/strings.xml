@@ -147,4 +147,8 @@
     <string name="finish">Finish</string>
     <string name="overdue">Overdue</string>
     <string name="no_related_order_found">No related order found</string>
+    <string name="stage_x_x">Stage%s/%s</string>
+    <string name="repayment_date">Repayment Date</string>
+    <string name="early_repay_will">Early repayment will unlock longer-term loans and higher credit limits.</string>
+    <string name="repayment_amount">Repayment Amount</string>
 </resources>
