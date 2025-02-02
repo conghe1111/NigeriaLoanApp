@@ -20,6 +20,14 @@ class EditInfoMenuActivity : BaseActivity() {
         workView =  findViewById<View>(R.id.ll_work_container)
         contactView = findViewById<View>(R.id.ll_contact_container)
         receiveView = findViewById<View>(R.id.ll_receive_container)
+        val ivBack = findViewById<View>(R.id.iv_menu_back)
+
+        ivBack?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                finish()
+            }
+
+        })
 
         basicView?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {

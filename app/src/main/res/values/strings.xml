@@ -153,4 +153,14 @@
     <string name="repayment_amount">Repayment Amount</string>
     <string name="bank_info">Bank Info</string>
     <string name="identity_information">Identity Information</string>
+    <string name="the_facial_recognition">The facial recognition feature verifies your identity. Please ensure that you are performing the operation yourself.</string>
+    <string name="face_recognition_to_auth">Face recognition to authenticate</string>
+    <string name="please_face_screen">Please face the screen and keep your face in the frame</string>
+    <string name="please_note">Please note</string>
+    <string name="do_not_wear_a_hat">Do not wear a hat.</string>
+    <string name="ensure_the_screen">Ensure the screen is well-lit.</string>
+    <string name="do_not_wear_sunglasses">Do not wear sunglasses.</string>
+    <string name="confirm_that_you_are">Confirm that you are performing the operation yourself.</string>
+    <string name="start_x_s">Start(%sS)</string>
+
 </resources>
