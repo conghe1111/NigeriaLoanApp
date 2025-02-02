@@ -53,6 +53,7 @@ class EditInfoActivity : BaseActivity() {
         const val STEP_2 = 1112
         const val STEP_3 = 1113
         const val STEP_4 = 1114
+        const val STEP_5 = 1115
 
         const val FROM_WORK_MENU = 111
         const val FROM_APPLY_LOAD = 112
@@ -85,30 +86,8 @@ class EditInfoActivity : BaseActivity() {
         getProfileInfo()
         mFrom = intent.getIntExtra(KEY_FROM, FROM_WORK_MENU)
         mStep = intent.getIntExtra(KEY_STEP, STEP_1)
-        when (mStep) {
-            (STEP_1) -> {
-                tvTitle?.text = resources.getString(R.string.basic_information)
-                mCurFragment = Edit1BasicFragment()
-            }
 
-            (STEP_2) -> {
-                tvTitle?.text = resources.getString(R.string.work_information)
-                mCurFragment = Edit2WorkFragment()
-            }
-
-            (STEP_3) -> {
-                tvTitle?.text = resources.getString(R.string.contact_information)
-                mCurFragment = Edit3ContactFragment()
-            }
-
-            (STEP_4) -> {
-                tvTitle?.text = resources.getString(R.string.receive_account)
-                mCurFragment = Edit4BankFragment()
-            }
-        }
-        mCurFragment?.let {
-            toFragment(mCurFragment)
-        }
+        toNextFragment(mStep)
         ivBack?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 finish()
@@ -169,44 +148,74 @@ class EditInfoActivity : BaseActivity() {
 
     fun nextStep(editProfileBean: EditProfileBean) {
         if (editProfileBean.current_phase == 111) {
-            if (mFrom == FROM_DISBURSE_6) {
-                setResult(RESULT_CODE)
-                finish()
-            }
-            // TODO 完成
+            endNext()
             return
         }
+        var nextStep : Int? = null
         when (editProfileBean.next_phase) {
             (101) -> {  //基本信息填写完成（第一页）
+                nextStep = STEP_1
+            }
+            (102) -> {  //工作信息填写完成（第二页）
+                nextStep = STEP_2
+            }
+            (103) -> {  //联系人信息填写完成（第三页）
+                nextStep = STEP_3
+            }
+            (104) -> {  //收款信息填写完成（第四页）
+                nextStep = STEP_4
+            }
+            (105) -> {  //活体信息上传完成（第五页）
+                nextStep = STEP_5
+            }
+            (111) -> {  //完成首贷KYC流程
+                endNext()
+            }
+        }
+        nextStep?.let {
+            toNextFragment(it)
+        }
+
+    }
+
+    private fun endNext() {
+        if (mFrom == FROM_DISBURSE_6) {
+            setResult(RESULT_CODE)
+            finish()
+        }
+        // TODO 完成
+    }
+
+    private fun toNextFragment(nextStep : Int) {
+        when (nextStep) {
+            (STEP_1) -> {
                 tvTitle?.text = resources.getString(R.string.basic_information)
                 mCurFragment = Edit1BasicFragment()
             }
 
-            (102) -> {  //工作信息填写完成（第二页）
+            (STEP_2) -> {
                 tvTitle?.text = resources.getString(R.string.work_information)
                 mCurFragment = Edit2WorkFragment()
-
             }
 
-            (103) -> {  //联系人信息填写完成（第三页）
+            (STEP_3) -> {
                 tvTitle?.text = resources.getString(R.string.contact_information)
                 mCurFragment = Edit3ContactFragment()
             }
 
-            (104) -> {  //收款信息填写完成（第四页）
-                tvTitle?.text = resources.getString(R.string.bank_information)
+            (STEP_4) -> {
+                tvTitle?.text = resources.getString(R.string.receive_account)
                 mCurFragment = Edit4BankFragment()
             }
-
-            (105) -> {  //活体信息上传完成（第五页）
-                // TODO
+            (STEP_5) -> {
+                tvTitle?.text = resources.getString(R.string.identity_information)
+                mCurFragment = Edit5FaceRecognitionFragment()
             }
 
-            (111) -> {  //完成首贷KYC流程
-
-            }
         }
-        toFragment(mCurFragment)
+        mCurFragment?.let {
+            toFragment(mCurFragment)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

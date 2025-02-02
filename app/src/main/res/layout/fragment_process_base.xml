@@ -19,7 +19,9 @@
         android:textColor="#333333"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/sp_14"
+        android:gravity="center"
         android:textStyle="bold"
+        android:layout_marginHorizontal="@dimen/dp_24"
         android:layout_height="wrap_content"/>
 
     <androidx.appcompat.widget.AppCompatTextView
