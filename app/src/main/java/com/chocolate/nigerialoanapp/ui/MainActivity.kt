@@ -1,6 +1,7 @@
 package com.chocolate.nigerialoanapp.ui
 
 import android.Manifest
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -21,6 +22,7 @@ import com.chocolate.nigerialoanapp.collect.item.CollectSmsMgr
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 
 class MainActivity : BaseActivity() {
 
@@ -170,5 +172,12 @@ class MainActivity : BaseActivity() {
 //        OkGo.getInstance().addCommonHeaders(BuildRequestJsonUtils.buildHeaderImei())
 //        LocationMgr.getInstance().getLocation()
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == LoanApplyActivity.REQUEST_CODE && resultCode == LoanApplyActivity.RESULT_CODE) {
+            mHomeFragment?.onActivityResultInternal()
+        }
     }
 }

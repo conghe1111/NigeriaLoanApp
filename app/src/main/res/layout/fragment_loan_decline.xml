@@ -4,15 +4,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:id="@+id/fl_top"
+    <include
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="@dimen/dp_232">
-
-
-
-    </FrameLayout>
+        android:layout_height="@dimen/dp_232"
+        layout="@layout/include_main_top" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +19,7 @@
             android:layout_width="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_93"
+            android:layout_marginTop="@dimen/dp_60"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -47,7 +43,7 @@
             android:layout_width="match_parent"
             app:layout_constraintTop_toBottomOf="@id/tv_update_account"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_14"
             android:layout_marginHorizontal="@dimen/dp_20"
             android:background="@drawable/bg_decline_desc"
             android:layout_height="wrap_content">

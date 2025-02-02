@@ -20,6 +20,7 @@ gson = "2.8.9"
 eventbus = "3.3.1"
 installreferrer = "2.2"
 pickerview = "4.1.9"
+refresh-version = "3.0.0-alpha"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +51,9 @@ gson = { group = "com.google.code.gson", name = "gson" , version.ref = "gson"}
 eventbus = { group = "org.greenrobot", name = "eventbus" , version.ref = "eventbus"}
 installreferrer = { group = "com.android.installreferrer", name = "installreferrer" , version.ref = "installreferrer" }
 android-pickerview = { group = "com.contrarywind", name = "Android-PickerView" , version.ref = "pickerview" }
+refresh-layout = { group = "io.github.scwang90", name = "refresh-layout-kernel" , version.ref = "refresh-version" }
+refresh-footer = { group = "io.github.scwang90", name = "refresh-footer-classics" , version.ref = "refresh-version" }
+refresh-header = { group = "io.github.scwang90", name = "refresh-header-material" , version.ref = "refresh-version" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

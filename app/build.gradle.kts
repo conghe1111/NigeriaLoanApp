@@ -81,8 +81,9 @@ dependencies {
     implementation(libs.installreferrer) {
 
     }
-
-
+    implementation(libs.refresh.layout)
+    implementation(libs.refresh.footer)
+    implementation(libs.refresh.header)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -4,6 +4,7 @@ import android.util.Log
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
+import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
@@ -85,7 +86,12 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
             })
     }
 
-   open fun bindData() {
+    open fun bindData() {
 
+    }
+
+    override fun onDestroy() {
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDestroy()
     }
 }

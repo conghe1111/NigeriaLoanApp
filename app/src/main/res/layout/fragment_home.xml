@@ -4,11 +4,16 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
- <include layout="@layout/include_main_top" />
-
- <FrameLayout
-     android:id="@+id/fl_home_container"
+ <com.scwang.smart.refresh.layout.SmartRefreshLayout
+     android:id="@+id/refresh_container"
      android:layout_width="match_parent"
-     android:layout_height="match_parent"/>
+     android:layout_height="match_parent">
+
+  <FrameLayout
+      android:id="@+id/fl_home_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+
+ </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </FrameLayout>

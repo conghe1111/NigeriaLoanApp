@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.loanapply
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,9 +12,11 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.bean.response.OrderApplyResponse
 import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
@@ -37,14 +40,17 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
         private const val TAG = "LoanApplyActivity"
 
-        fun startActivity(context: Context) {
+        const val REQUEST_CODE = 1112
+        const val RESULT_CODE = 1117
+
+        fun startActivity(context: Activity) {
             val intent =
                 if (Constant.isAuditMode()) {
                     Intent(context, LoanApplyMockActivity::class.java)
                 } else {
                     Intent(context, LoanApplyActivity::class.java)
                 }
-            context.startActivity(intent)
+            context.startActivityForResult(intent, REQUEST_CODE)
         }
     }
 
@@ -52,9 +58,9 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     private var ivBack: AppCompatImageView? = null
     private var rvContent: RecyclerView? = null
     private var loanContainer: View? = null
-    private var viewDisburseFee : View? = null
-    private var rvContainer : RecyclerView? = null
-    private var tvNext : AppCompatTextView? = null
+    private var viewDisburseFee: View? = null
+    private var rvContainer: RecyclerView? = null
+    private var tvNext: AppCompatTextView? = null
 
     private var mAdapter: LoadApplyPeriodAdapter? = null
     private var mHistoryAdapter: LoadApplyHistoryAdapter? = null
@@ -72,7 +78,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
     private fun initialView() {
         tvAmount = findViewById<AppCompatTextView>(R.id.tv_loan_apply_amount)
-        ivBack= findViewById<AppCompatImageView>(R.id.iv_apply_info_back)
+        ivBack = findViewById<AppCompatImageView>(R.id.iv_apply_info_back)
         loanContainer = findViewById<View>(R.id.fl_loan_apply_container)
         rvContent = findViewById<RecyclerView>(R.id.rv_repayment_term)
 
@@ -94,7 +100,11 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                 if (mPeriodIndex >= mPeriodList.size) {
                     return
                 }
-                requestProductTrial(mProductType!!, mAmountList[mAmountIndex], mPeriodList[mPeriodIndex])
+                requestProductTrial(
+                    mProductType!!,
+                    mAmountList[mAmountIndex],
+                    mPeriodList[mPeriodIndex]
+                )
             }
 
         })
@@ -193,7 +203,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         requestProductTrial(mProductType!!, mAmountList[mAmountIndex], mPeriodList[mPeriodIndex])
     }
 
-    private fun bindItem1(productTrial : ProductTrialResponse) {
+    private fun bindItem1(productTrial: ProductTrialResponse) {
         if (productTrial.trials == null || productTrial.trials.size == 0) {
             return
         }
@@ -233,9 +243,6 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     if (orderCheekBean == null) {
                         return
                     }
-                    if (orderCheekBean.order_id == 0) {
-                        return
-                    }
                     when (orderCheekBean.next_phase) {
                         (101) -> {  //基本信息填写完成（第一页）
                             EditInfoActivity.showActivity(
@@ -264,6 +271,14 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                                 EditInfoActivity.FROM_APPLY_LOAD
                             )
                         }
+
+                        (111) -> {  //全部完成,申请
+                            if (orderCheekBean.order_id == 0) {
+                                // TODO未通过
+                                return
+                            }
+                            orderApply(orderCheekBean.order_id.toString())
+                        }
                     }
                 }
 
@@ -274,5 +289,63 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     }
                 }
             })
+    }
+
+    private fun orderApply(orderId: String) {
+        if (mAmountIndex >= mAmountList.size) {
+            return
+        }
+        if (mPeriodIndex >= mPeriodList.size) {
+            return
+        }
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        try {
+            jsonObject.put("account_id", Constant.mAccountId)
+            jsonObject.put("access_token", Constant.mToken)
+            jsonObject.put("order_id", orderId)
+            jsonObject.put("amount", mAmountList[mAmountIndex])
+            jsonObject.put("product_type", mProductType)
+            jsonObject.put("period", mPeriodList[mPeriodIndex])
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        if (BuildConfig.DEBUG) {
+            Log.i("OkhttpClient orderCheek = ", jsonObject.toString())
+        }
+        OkGo.post<String>(Api.ORDER_APPLY).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    if (isFinishing || isDestroyed) {
+                        return
+                    }
+                    val orderApplyResponse =
+                        checkResponseSuccess(response, OrderApplyResponse::class.java)
+                    if (orderApplyResponse == null) {
+                        return
+                    }
+                    if (orderApplyResponse.order_id == null || orderApplyResponse.order_id!! == 0L) {
+                        return
+                    }
+                    if (orderApplyResponse.order_create == null || orderApplyResponse.order_create!! == 0L) {
+                        return
+                    }
+                    ToastUtils.showShort("apply success")
+                    setResult(RESULT_CODE)
+                    finish()
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    if (isFinishing || isDestroyed) {
+                        return
+                    }
+                }
+            })
+    }
+
+    override fun onDestroy() {
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDestroy()
     }
 }
