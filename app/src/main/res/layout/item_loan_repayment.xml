@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_54"
+    android:layout_height="@dimen/dp_51"
     android:layout_marginHorizontal="@dimen/dp_20"
+    android:background="@drawable/bg_white_bg"
     android:orientation="horizontal">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -13,22 +14,44 @@
         android:src="@drawable/ic_loan_repayment" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_total_price"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/dp_10"
-        android:layout_weight="1"
-        android:text="NGN1000000" />
+        android:includeFontPadding="false"
+        android:text="NGN"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_14" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:drawableEnd="@drawable/ic_edit"
+            android:includeFontPadding="false"
+            android:text="1000000"
+            android:textStyle="bold"
+            android:textColor="#41BA51"
+            android:textSize="@dimen/sp_14" />
+
+    </FrameLayout>
+
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_update_account"
+        android:id="@+id/tv_item_repayment"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_38"
         android:layout_gravity="center_vertical"
         android:background="@drawable/bg_decline_repayment"
         android:gravity="center"
-        android:padding="@dimen/dp_16"
+        android:paddingHorizontal="@dimen/dp_16"
         android:text="@string/repayment"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_17" />

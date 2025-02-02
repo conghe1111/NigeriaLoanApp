@@ -43,9 +43,8 @@ class HomeFragment : BaseFragment() {
         const val TAG = "HomeFragment"
     }
 
-    private var mOrderDetail : OrderDetailResponse? = null
+    var mOrderDetail : OrderDetailResponse? = null
     private var mCurFragment : BaseLoanStatusFragment? = null
-
 
     private var mRefreshLayout : SmartRefreshLayout? = null
 
@@ -145,7 +144,7 @@ class HomeFragment : BaseFragment() {
             return
         }
         if (true) {
-            mCurFragment = Loan6PayFailureFragment()
+            mCurFragment = Loan9OverdueFragment()
             toFragment(mCurFragment)
             return
         }
@@ -209,6 +208,10 @@ class HomeFragment : BaseFragment() {
     }
 
     fun onActivityResultInternal() {
+        refreshData()
+    }
+
+    fun refreshData() {
         mHandler.sendEmptyMessageDelayed(TYPE_DELAY, 100)
     }
 

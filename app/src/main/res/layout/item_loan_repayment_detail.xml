@@ -2,12 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_gray_bg_1"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_repayment_time"
-        style="@style/style_item_repayment_detail"
-        android:text="@string/repayment_time" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/style_item_repayment_detail"
+            android:text="@string/repayment_time" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_repayment_time"
+            style="@style/style_item_repayment_detail_desc" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -15,10 +26,20 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_height="@dimen/dp_1"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_due_amount"
-        style="@style/style_item_repayment_detail"
-        android:text="@string/due_amount" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/style_item_repayment_detail"
+            android:text="@string/due_amount" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_due_amount"
+            style="@style/style_item_repayment_detail_desc" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -26,10 +47,20 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_height="@dimen/dp_1"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_loan_amount"
-        style="@style/style_item_repayment_detail"
-        android:text="@string/loan_amount" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/style_item_repayment_detail"
+            android:text="@string/loan_amount" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_loan_amount"
+            style="@style/style_item_repayment_detail_desc" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -37,10 +68,20 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_height="@dimen/dp_1"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_interest"
-        style="@style/style_item_repayment_detail"
-        android:text="@string/Interest" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/style_item_repayment_detail"
+            android:text="@string/Interest" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_interest"
+            style="@style/style_item_repayment_detail_desc" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -48,10 +89,20 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_height="@dimen/dp_1"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_service_fee"
-        style="@style/style_item_repayment_detail"
-        android:text="@string/service_fee" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/style_item_repayment_detail"
+            android:text="@string/service_fee" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_service_fee"
+            style="@style/style_item_repayment_detail_desc" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -59,10 +110,20 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_height="@dimen/dp_1"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_amount_reduction"
-        style="@style/style_item_repayment_detail"
-        android:text="@string/amount_of_reduction" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/style_item_repayment_detail"
+            android:text="@string/amount_of_reduction" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_amount_reduction"
+            style="@style/style_item_repayment_detail_desc" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

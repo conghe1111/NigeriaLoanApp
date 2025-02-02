@@ -5,6 +5,7 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
+import java.text.DecimalFormat
 
 
 object SpanUtils {
@@ -23,4 +24,10 @@ object SpanUtils {
         tv.text = spannableString
     }
 
+
+    fun getShowText(amount : Long) : String {
+        val decimalFormat: DecimalFormat = DecimalFormat("#,##0.00")
+        val formattedAmount: String = decimalFormat.format(amount)
+        return formattedAmount
+    }
 }

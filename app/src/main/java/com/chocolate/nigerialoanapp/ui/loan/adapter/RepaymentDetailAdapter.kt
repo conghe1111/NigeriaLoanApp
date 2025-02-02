@@ -11,7 +11,7 @@ import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse
 class RepaymentDetailAdapter(val stages : List<OrderDetailResponse.Stage>) : RecyclerView.Adapter<RepaymentDetailAdapter.RepaymentDetailHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepaymentDetailHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_loan_repayment, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_loan_repayment_detail, parent, false)
         return RepaymentDetailHolder(view)
     }
 
@@ -20,7 +20,13 @@ class RepaymentDetailAdapter(val stages : List<OrderDetailResponse.Stage>) : Rec
     }
 
     override fun onBindViewHolder(holder: RepaymentDetailHolder, position: Int) {
-
+        val stage = stages[position]
+        holder.tvRepaymentTime?.text = stage.repay_date
+        holder.tvDueAmount?.text = stage.repay_total.toString()
+        holder.tvLoanAmount?.text = stage.amount.toString()
+        holder.tvInterest?.text = stage.interest.toString()
+        holder.tvServiceFee?.text = stage.service_fee.toString()
+        holder.tvAmountReduction?.text = stage.penalty.toString()
     }
 
     inner class RepaymentDetailHolder : RecyclerView.ViewHolder {

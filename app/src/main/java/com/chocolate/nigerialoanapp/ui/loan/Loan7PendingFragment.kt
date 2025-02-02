@@ -16,5 +16,8 @@ class Loan7PendingFragment : BaseRepaymentFragment() {
         super.onViewCreated(view, savedInstanceState)
         tvPending =  view.findViewById<AppCompatTextView>(R.id.tv_loan_pending)
         tvPending?.visibility = View.VISIBLE
+
     }
+
+
 }
