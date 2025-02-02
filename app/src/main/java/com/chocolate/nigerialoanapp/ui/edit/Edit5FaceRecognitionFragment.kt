@@ -121,7 +121,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
     private fun checkProfileParams(): Boolean {
         if (mBankName == null) {
-            scrollToPos(1, scrollView)
+
             mSelectBankName?.setSelectState(true)
             return false
         }

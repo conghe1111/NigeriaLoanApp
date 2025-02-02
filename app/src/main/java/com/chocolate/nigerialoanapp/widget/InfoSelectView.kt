@@ -19,6 +19,8 @@ class InfoSelectView : LinearLayout {
     private var tvDesc: AppCompatTextView? = null
     private var ivBack: AppCompatImageView? = null
 
+    private var openRedState : Boolean = true
+
     constructor(context: Context) : super(context) {
         initializeAttr(context, null)
     }
@@ -68,6 +70,9 @@ class InfoSelectView : LinearLayout {
     private var isRedSelectState : Boolean = false
 
     fun setSelectState(selectFlag : Boolean) {
+        if (!openRedState) {
+            return
+        }
         if (selectFlag) {
             isRedSelectState = true
             tvDesc?.setTextColor(resources.getColor(R.color.color_dd0000))
@@ -79,5 +84,9 @@ class InfoSelectView : LinearLayout {
             tvDesc?.setTextColor(resources.getColor(R.color.color_c7c7c7))
             tvDesc?.setBackgroundResource(R.drawable.bg_edit_grey)
         }
+    }
+
+    fun setOpenRedState(openRedState : Boolean) {
+        this.openRedState = openRedState
     }
 }

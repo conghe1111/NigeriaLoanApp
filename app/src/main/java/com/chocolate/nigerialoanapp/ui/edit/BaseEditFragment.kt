@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.text.TextUtils
 import android.util.Pair
 import android.widget.ScrollView
+import androidx.core.widget.NestedScrollView
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.blankj.utilcode.util.KeyboardUtils
@@ -37,7 +38,7 @@ abstract class BaseEditFragment : BaseFragment() {
         return null
     }
 
-    protected fun scrollToPos(pos: Int, scrollView: ScrollView?) {
+    protected fun scrollToPos(pos: Int, scrollView: NestedScrollView?) {
         val height = resources.getDimension(com.chocolate.nigerialoanapp.R.dimen.dp_80) * (pos - 1)
         scrollView?.scrollTo(0, height.toInt())
     }

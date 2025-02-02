@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.NestedScrollView
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -44,7 +45,7 @@ class Edit2WorkFragment : BaseEditFragment() {
     private var mEditCompanyAddress : InfoEditView? = null
     private var tvNext: AppCompatTextView? = null
     private var tvNextDesc: AppCompatTextView? = null
-    private var scrollView: ScrollView? = null
+    private var scrollView: NestedScrollView? = null
 
     private var mEmployment: Pair<String, String>? = null
     private var mMonthlyIncome: Pair<String, String>? = null
@@ -75,7 +76,7 @@ class Edit2WorkFragment : BaseEditFragment() {
         mEditCompanyPhoneNumber =  view.findViewById<InfoEditView>(R.id.edit_company_phone_number)
         mEditCompanyAddress =  view.findViewById<InfoEditView>(R.id.edit_company_address)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_basic_next)
-        scrollView = view.findViewById<ScrollView>(R.id.sv_content)
+        scrollView = view.findViewById<NestedScrollView>(R.id.sv_content)
 
         mSelectEmployment?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {

@@ -26,6 +26,8 @@ class InfoEditView : FrameLayout {
     private var etDesc: AppCompatEditText? = null
     private var ivClear: AppCompatImageView? = null
 
+    private var openRedState : Boolean = true
+
     constructor(context: Context) : super(context) {
         initializeAttr(context, null)
     }
@@ -95,11 +97,12 @@ class InfoEditView : FrameLayout {
         }
 
         override fun afterTextChanged(s: Editable?) {
-            if (isRedSelectState) {
+            if (openRedState && isRedSelectState) {
                 isRedSelectState = false
                 etDesc?.setHintTextColor(resources.getColor(R.color.color_c7c7c7))
                 etDesc?.setBackgroundResource(R.drawable.bg_edit_grey)
             }
+            mListener?.onTextChange()
         }
     }
 
@@ -129,5 +132,18 @@ class InfoEditView : FrameLayout {
                 etDesc!!.setSelection(etDesc!!.text!!.length)
             }
         }
+    }
+
+    fun setOpenRedState(openRedState : Boolean) {
+        this.openRedState = openRedState
+    }
+
+    private var mListener : TextChangeListener? = null
+    fun setOnTextChangeListener(listener: TextChangeListener) {
+        mListener = listener
+    }
+
+    interface TextChangeListener {
+        fun onTextChange()
     }
 }

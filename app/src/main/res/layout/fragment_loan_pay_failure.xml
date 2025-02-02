@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
@@ -10,10 +11,16 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_height="@dimen/dp_232">
 
+        <include
+            layout="@layout/include_main_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_232" />
+
       <LinearLayout
           android:layout_width="wrap_content"
           android:orientation="vertical"
           android:layout_gravity="center"
+          android:layout_marginTop="@dimen/dp_14"
           android:layout_height="wrap_content">
 
           <androidx.appcompat.widget.AppCompatImageView
@@ -39,7 +46,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_update_account"
         app:layout_constraintTop_toBottomOf="@id/fl_top"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-20dp"
         android:layout_width="match_parent"
         android:text="@string/update_account"
         android:textSize="@dimen/sp_20"

@@ -11,6 +11,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.NestedScrollView
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
@@ -59,7 +60,7 @@ class Edit1BasicFragment : BaseEditFragment() {
     private var editStreet: InfoEditView? = null
     private var tvNext: AppCompatTextView? = null
     private var tvNextDesc: AppCompatTextView? = null
-    private var scrollView: ScrollView? = null
+    private var scrollView: NestedScrollView? = null
 
     private var firstName: String? = null
     private var middleName: String? = null
@@ -85,7 +86,7 @@ class Edit1BasicFragment : BaseEditFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        scrollView = view.findViewById<ScrollView>(R.id.sv_content)
+        scrollView = view.findViewById<NestedScrollView>(R.id.sv_content)
         editFirstName = view.findViewById<InfoEditView>(R.id.edit_first_name)
         editMiddleName = view.findViewById<InfoEditView>(R.id.edit_middle_name)
         editLastName = view.findViewById<InfoEditView>(R.id.edit_last_name)

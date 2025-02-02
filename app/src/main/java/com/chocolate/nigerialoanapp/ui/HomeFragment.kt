@@ -144,6 +144,11 @@ class HomeFragment : BaseFragment() {
         if (isDestroy()) {
             return
         }
+        if (true) {
+            mCurFragment = Loan6PayFailureFragment()
+            toFragment(mCurFragment)
+            return
+        }
         if (mOrderDetail?.order_detail == null || mOrderDetail!!.order_detail.order_id == 0L
             || mOrderDetail?.order_detail?.isCan_apply == true) {
             mCurFragment = Loan0NewProductFragment()

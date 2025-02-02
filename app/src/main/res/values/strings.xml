@@ -151,4 +151,5 @@
     <string name="repayment_date">Repayment Date</string>
     <string name="early_repay_will">Early repayment will unlock longer-term loans and higher credit limits.</string>
     <string name="repayment_amount">Repayment Amount</string>
+    <string name="bank_info">Bank Info</string>
 </resources>

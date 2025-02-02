@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.compose.ui.graphics.Color
+import com.blankj.utilcode.util.BarUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -64,6 +66,9 @@ class EditInfoActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BarUtils.setStatusBarVisibility(this,true)
+        BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
+        BarUtils.setStatusBarLightMode(this, true)
         setContentView(R.layout.activity_edit_info)
         ivBack = findViewById<AppCompatImageView>(R.id.iv_edit_info_back)
         tvTitle = findViewById<AppCompatTextView>(R.id.tv_edit_info_title)
@@ -87,7 +92,7 @@ class EditInfoActivity : BaseActivity() {
             }
 
             (STEP_4) -> {
-                tvTitle?.text = resources.getString(R.string.bank_information)
+                tvTitle?.text = resources.getString(R.string.receive_account)
                 mCurFragment = Edit4BankFragment()
             }
         }

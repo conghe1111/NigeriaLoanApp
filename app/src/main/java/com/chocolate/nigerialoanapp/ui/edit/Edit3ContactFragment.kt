@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ScrollView
 import android.util.Pair
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.NestedScrollView
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -42,7 +43,7 @@ class Edit3ContactFragment : BaseEditFragment() {
 
     private var tvNext: AppCompatTextView? = null
     private var tvDesc: AppCompatTextView? = null
-    private var scrollView: ScrollView? = null
+    private var scrollView: NestedScrollView? = null
 
     private var mRelationship1: Pair<String, String>? = null
     private var mMobile1: String? = null
@@ -69,7 +70,7 @@ class Edit3ContactFragment : BaseEditFragment() {
         mEditMobile2 = view.findViewById<InfoEditView>(R.id.edit_mobile_2)
         mEditName2 = view.findViewById<InfoEditView>(R.id.edit_name_2)
 
-        scrollView = view.findViewById<ScrollView>(R.id.sv_content)
+        scrollView = view.findViewById<NestedScrollView>(R.id.sv_content)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_contact_next)
         tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_contact_next_desc)
 

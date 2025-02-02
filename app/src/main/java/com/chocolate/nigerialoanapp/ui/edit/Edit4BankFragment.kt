@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ScrollView
 import android.util.Pair
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.NestedScrollView
+import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -39,7 +41,7 @@ class Edit4BankFragment : BaseEditFragment() {
 
     private var tvNext: AppCompatTextView? = null
     private var tvDesc: AppCompatTextView? = null
-    private var scrollView: ScrollView? = null
+    private var scrollView: NestedScrollView? = null
 
     private var mBankName: Pair<String, String>? = null
     private var mAccountNum: String? = null
@@ -59,7 +61,7 @@ class Edit4BankFragment : BaseEditFragment() {
         mEditAccountNum = view.findViewById<InfoEditView>(R.id.edit_bank_account_num)
         mEditAccountNumConfirm = view.findViewById<InfoEditView>(R.id.edit_bank_account_num_confirm)
 
-        scrollView = view.findViewById<ScrollView>(R.id.sv_content)
+        scrollView = view.findViewById<NestedScrollView>(R.id.sv_content)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_bank_next)
 
         mSelectBankName?.setOnClickListener(object : NoDoubleClickListener() {
@@ -73,10 +75,24 @@ class Edit4BankFragment : BaseEditFragment() {
 
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                val check = checkProfileParams()
+                val check = checkProfileParams(true)
                 if (check) {
                     uploadReceive()
                 }
+            }
+
+        })
+        mEditAccountNum?.setOpenRedState(false)
+        mEditAccountNum?.setOnTextChangeListener(object : InfoEditView.TextChangeListener {
+            override fun onTextChange() {
+                updateNextBtnStatus()
+            }
+
+        })
+        mEditAccountNumConfirm?.setOpenRedState(false)
+        mEditAccountNumConfirm?.setOnTextChangeListener(object : InfoEditView.TextChangeListener {
+            override fun onTextChange() {
+                updateNextBtnStatus()
             }
 
         })
@@ -119,15 +135,32 @@ class Edit4BankFragment : BaseEditFragment() {
         }
     }
 
-    private fun checkProfileParams(): Boolean {
+    private fun checkProfileParams(needToast : Boolean = false): Boolean {
         if (mBankName == null) {
             scrollToPos(1, scrollView)
             mSelectBankName?.setSelectState(true)
+            if (needToast) {
+                ToastUtils.showShort("Please select type of receiving accounts")
+            }
             return false
         }
-        if (mEditAccountNum == null || mEditAccountNumConfirm == null) {
-            // TODO
+        if (mEditAccountNum == null || TextUtils.isEmpty(mEditAccountNum!!.getText())) {
+            if (needToast) {
+                ToastUtils.showShort("Please fill in Account Number")
+            }
             return false
+        }
+        if (mEditAccountNumConfirm == null || TextUtils.isEmpty(mEditAccountNumConfirm!!.getText())) {
+            if (needToast) {
+                ToastUtils.showShort("Please confirm the Account Number")
+            }
+            return false
+        }
+        if (needToast) {
+            if (TextUtils.equals(mEditAccountNum?.getText(), mEditAccountNumConfirm?.getText())) {
+                ToastUtils.showShort("Please fill in the same account information")
+                return false
+            }
         }
         return true
     }
@@ -197,5 +230,11 @@ class Edit4BankFragment : BaseEditFragment() {
         }
         mBankName = Pair(bankName, bankCode)
         mSelectBankName?.setText(mBankName?.first.toString())
+        updateNextBtnStatus()
+    }
+
+    private fun updateNextBtnStatus() {
+       val flag = checkProfileParams()
+        tvNext?.isSelected = flag
     }
 }
