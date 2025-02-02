@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import android.widget.ScrollView
 import android.util.Pair
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.get
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.bean.response.EditProfileBean
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
-import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
@@ -29,7 +27,7 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 
-class EditBank4Fragment : BaseEditFragment() {
+class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
     companion object {
         private const val TAG = "EditBank4Fragment"
@@ -52,7 +50,7 @@ class EditBank4Fragment : BaseEditFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_edit_bank_info, container, false)
+        return inflater.inflate(R.layout.fragment_edit_face_recognition, container,  false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

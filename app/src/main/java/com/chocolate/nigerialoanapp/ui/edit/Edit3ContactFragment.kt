@@ -27,7 +27,7 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 
-class EditContact3Fragment : BaseEditFragment() {
+class Edit3ContactFragment : BaseEditFragment() {
 
     companion object {
         private const val TAG = "EditContact3Fragment"

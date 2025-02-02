@@ -37,7 +37,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 
-class EditBasic1Fragment : BaseEditFragment() {
+class Edit1BasicFragment : BaseEditFragment() {
 
     companion object {
         private const val TAG = "EditBasicInfoFragment"

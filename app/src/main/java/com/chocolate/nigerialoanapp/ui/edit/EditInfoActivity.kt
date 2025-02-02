@@ -73,22 +73,22 @@ class EditInfoActivity : BaseActivity() {
         when (mStep) {
             (STEP_1) -> {
                 tvTitle?.text = resources.getString(R.string.basic_information)
-                mCurFragment = EditBasic1Fragment()
+                mCurFragment = Edit1BasicFragment()
             }
 
             (STEP_2) -> {
                 tvTitle?.text = resources.getString(R.string.work_information)
-                mCurFragment = EditWork2Fragment()
+                mCurFragment = Edit2WorkFragment()
             }
 
             (STEP_3) -> {
                 tvTitle?.text = resources.getString(R.string.contact_information)
-                mCurFragment = EditContact3Fragment()
+                mCurFragment = Edit3ContactFragment()
             }
 
             (STEP_4) -> {
                 tvTitle?.text = resources.getString(R.string.bank_information)
-                mCurFragment = EditBank4Fragment()
+                mCurFragment = Edit4BankFragment()
             }
         }
         mCurFragment?.let {
@@ -134,10 +134,10 @@ class EditInfoActivity : BaseActivity() {
                         Log.e(TAG, " profile info error ." + response.body())
                         return
                     }
-                    if (mCurFragment is EditBasic1Fragment) {
-                        (mCurFragment as EditBasic1Fragment).bindData(profileInfo)
-                    } else if (mCurFragment is EditWork2Fragment) {
-                        (mCurFragment as EditWork2Fragment).bindData(profileInfo)
+                    if (mCurFragment is Edit1BasicFragment) {
+                        (mCurFragment as Edit1BasicFragment).bindData(profileInfo)
+                    } else if (mCurFragment is Edit2WorkFragment) {
+                        (mCurFragment as Edit2WorkFragment).bindData(profileInfo)
                     }
 
                 }
@@ -164,23 +164,23 @@ class EditInfoActivity : BaseActivity() {
         when (editProfileBean.next_phase) {
             (101) -> {  //基本信息填写完成（第一页）
                 tvTitle?.text = resources.getString(R.string.basic_information)
-                mCurFragment = EditBasic1Fragment()
+                mCurFragment = Edit1BasicFragment()
             }
 
             (102) -> {  //工作信息填写完成（第二页）
                 tvTitle?.text = resources.getString(R.string.work_information)
-                mCurFragment = EditWork2Fragment()
+                mCurFragment = Edit2WorkFragment()
 
             }
 
             (103) -> {  //联系人信息填写完成（第三页）
                 tvTitle?.text = resources.getString(R.string.contact_information)
-                mCurFragment = EditContact3Fragment()
+                mCurFragment = Edit3ContactFragment()
             }
 
             (104) -> {  //收款信息填写完成（第四页）
                 tvTitle?.text = resources.getString(R.string.bank_information)
-                mCurFragment = EditBank4Fragment()
+                mCurFragment = Edit4BankFragment()
             }
 
             (105) -> {  //活体信息上传完成（第五页）
@@ -202,7 +202,7 @@ class EditInfoActivity : BaseActivity() {
         if (resultCode == BankListActivity.START_RESULT_CODE && requestCode == BankListActivity.START_REQUEST_CODE) {
             val bankName = data.getStringExtra(BankListActivity.KEY_BANK_NAME)
             val bankCode = data.getStringExtra(BankListActivity.KEY_BANK_CODE)
-            (mCurFragment as? EditBank4Fragment)?.onBankActivityResult(bankName, bankCode)
+            (mCurFragment as? Edit4BankFragment)?.onBankActivityResult(bankName, bankCode)
         }
     }
 

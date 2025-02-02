@@ -20,11 +20,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.SelectAmountDialog
-import com.chocolate.nigerialoanapp.ui.edit.EditBank4Fragment
-import com.chocolate.nigerialoanapp.ui.edit.EditBasic1Fragment
-import com.chocolate.nigerialoanapp.ui.edit.EditContact3Fragment
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
-import com.chocolate.nigerialoanapp.ui.edit.EditWork2Fragment
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyHistoryAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor2
