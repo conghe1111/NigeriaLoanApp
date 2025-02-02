@@ -50,7 +50,8 @@ class BankListActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        BarUtils.setStatusBarColor(this, resources.getColor(R.color.theme_color))
+        BarUtils.setStatusBarVisibility(this,true)
+        BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
         BarUtils.setStatusBarLightMode(this, false)
         setContentView(R.layout.activity_bank_list)
         initializeView()

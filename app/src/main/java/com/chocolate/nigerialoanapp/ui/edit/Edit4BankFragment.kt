@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
 import android.util.Pair
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.NestedScrollView
@@ -63,6 +62,7 @@ class Edit4BankFragment : BaseEditFragment() {
 
         scrollView = view.findViewById<NestedScrollView>(R.id.sv_content)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_bank_next)
+        tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_bank_next_desc)
 
         mSelectBankName?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
@@ -96,13 +96,14 @@ class Edit4BankFragment : BaseEditFragment() {
             }
 
         })
-        tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_contact_next_desc)
         SpanUtils.setPrivacyString(tvDesc)
+        tryBindData()
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
         updateData(profile1Bean)
         bindDataInternal()
+        updateNextBtnStatus()
     }
 
     private fun updateData(profile1Bean: ProfileInfoResponse?) {
@@ -117,11 +118,9 @@ class Edit4BankFragment : BaseEditFragment() {
                 profile1Bean.account_receive.bank_code
             )
 
-        if (!TextUtils.isEmpty(profile1Bean.account_receive.account_number)) {
-            mAccountNum = profile1Bean.account_receive.account_number
-        }
-        if (!TextUtils.isEmpty(profile1Bean.account_receive.account_number)) {
-            mAccountNumConfirm = profile1Bean.account_receive.account_number
+        if (!TextUtils.isEmpty(profile1Bean.account_receive.bank_account_num)) {
+            mAccountNum = profile1Bean.account_receive.bank_account_num
+            mAccountNumConfirm = profile1Bean.account_receive.bank_account_num
         }
     }
 
@@ -157,7 +156,7 @@ class Edit4BankFragment : BaseEditFragment() {
             return false
         }
         if (needToast) {
-            if (TextUtils.equals(mEditAccountNum?.getText(), mEditAccountNumConfirm?.getText())) {
+            if (!TextUtils.equals(mEditAccountNum?.getText(), mEditAccountNumConfirm?.getText())) {
                 ToastUtils.showShort("Please fill in the same account information")
                 return false
             }

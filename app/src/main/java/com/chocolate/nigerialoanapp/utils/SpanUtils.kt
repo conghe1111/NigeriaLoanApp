@@ -19,7 +19,7 @@ object SpanUtils {
 
         val startIndex = text.indexOf("<")
         val endIndex = text.indexOf(">")
-        spannableString.setSpan(ForegroundColorSpan(themeColor), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(ForegroundColorSpan(themeColor), startIndex, endIndex + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv.text = spannableString
     }
 

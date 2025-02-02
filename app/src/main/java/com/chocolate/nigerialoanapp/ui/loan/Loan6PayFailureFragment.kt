@@ -27,8 +27,11 @@ class Loan6PayFailureFragment : BaseLoanStatusFragment() {
         tvUpdateAccount = view.findViewById<AppCompatTextView>(R.id.tv_update_account)
         tvUpdateAccount?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                context?.let {
-                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_4)
+                if (isDestroy()) {
+                    return
+                }
+                activity?.let {
+                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_4, EditInfoActivity.FROM_DISBURSE_6, true)
                 }
             }
 

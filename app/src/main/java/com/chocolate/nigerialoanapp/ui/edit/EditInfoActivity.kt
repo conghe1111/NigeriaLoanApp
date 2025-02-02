@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.edit
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -45,6 +46,9 @@ class EditInfoActivity : BaseActivity() {
         private const val KEY_FROM = "key_edit_info_from"
         private const val KEY_STEP = "key_edit_info_step"
 
+        const val REQUEST_CODE = 1112
+        const val RESULT_CODE = 1117
+
         const val STEP_1 = 1111
         const val STEP_2 = 1112
         const val STEP_3 = 1113
@@ -52,15 +56,21 @@ class EditInfoActivity : BaseActivity() {
 
         const val FROM_WORK_MENU = 111
         const val FROM_APPLY_LOAD = 112
-        fun showActivity(context: Context, step: Int = STEP_1, from: Int = FROM_WORK_MENU) {
+        const val FROM_DISBURSE_6 = 113
+        fun showActivity(context: Activity, step: Int = STEP_1, from: Int = FROM_WORK_MENU, needResult : Boolean = false) {
             val intent = Intent(context, EditInfoActivity::class.java)
             intent.putExtra(KEY_FROM, from)
             intent.putExtra(KEY_STEP, step)
-            context.startActivity(intent)
+            if (needResult) {
+                context.startActivityForResult(intent, REQUEST_CODE)
+            } else {
+                context.startActivity(intent)
+            }
         }
     }
 
     private var mCurFragment: BaseEditFragment? = null
+    var mProfileInfo: ProfileInfoResponse? = null
     private var mFrom: Int? = null
     private var mStep: Int = STEP_1
 
@@ -139,12 +149,8 @@ class EditInfoActivity : BaseActivity() {
                         Log.e(TAG, " profile info error ." + response.body())
                         return
                     }
-                    if (mCurFragment is Edit1BasicFragment) {
-                        (mCurFragment as Edit1BasicFragment).bindData(profileInfo)
-                    } else if (mCurFragment is Edit2WorkFragment) {
-                        (mCurFragment as Edit2WorkFragment).bindData(profileInfo)
-                    }
-
+                    mProfileInfo = profileInfo
+                    mCurFragment?.bindData(profileInfo)
                 }
 
                 override fun onError(response: Response<String>) {
@@ -163,6 +169,10 @@ class EditInfoActivity : BaseActivity() {
 
     fun nextStep(editProfileBean: EditProfileBean) {
         if (editProfileBean.current_phase == 111) {
+            if (mFrom == FROM_DISBURSE_6) {
+                setResult(RESULT_CODE)
+                finish()
+            }
             // TODO 完成
             return
         }

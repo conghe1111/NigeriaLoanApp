@@ -1,8 +1,10 @@
 package com.chocolate.nigerialoanapp.ui.edit
 
 import android.graphics.Color
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.Pair
+import android.view.View
 import android.widget.ScrollView
 import androidx.core.widget.NestedScrollView
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
@@ -78,4 +80,12 @@ abstract class BaseEditFragment : BaseFragment() {
         view.show()
     }
 
+    fun tryBindData() {
+        if (activity is EditInfoActivity) {
+           val profile1Bean =  (activity as EditInfoActivity).mProfileInfo
+            profile1Bean?.let {
+                bindData(it)
+            }
+        }
+    }
 }

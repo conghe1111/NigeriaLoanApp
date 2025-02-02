@@ -316,7 +316,7 @@ public class ProfileInfoResponse {
         private String account_id;
         private String bank_code;
         private String bank_name;
-        private String account_number;
+        private String bank_account_num;
         private String status;
 
         public String getAccount_id() {
@@ -343,16 +343,16 @@ public class ProfileInfoResponse {
             this.bank_name = bank_name;
         }
 
-        public String getAccount_number() {
-            return account_number;
-        }
-
-        public void setAccount_number(String account_number) {
-            this.account_number = account_number;
-        }
-
         public String getStatus() {
             return status;
+        }
+
+        public String getBank_account_num() {
+            return bank_account_num;
+        }
+
+        public void setBank_account_num(String bank_account_num) {
+            this.bank_account_num = bank_account_num;
         }
 
         public void setStatus(String status) {

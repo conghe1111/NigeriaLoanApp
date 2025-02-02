@@ -101,12 +101,10 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                 profile1Bean.account_receive.bank_code
             )
 
-        if (!TextUtils.isEmpty(profile1Bean.account_receive.account_number)) {
-            mAccountNum = profile1Bean.account_receive.account_number
-        }
-        if (!TextUtils.isEmpty(profile1Bean.account_receive.account_number)) {
-            mAccountNumConfirm = profile1Bean.account_receive.account_number
-        }
+//        if (!TextUtils.isEmpty(profile1Bean.account_receive.account_number)) {
+//            mAccountNum = profile1Bean.account_receive.account_number
+//        }
+
     }
 
     private fun bindDataInternal() {

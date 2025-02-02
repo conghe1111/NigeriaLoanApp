@@ -88,6 +88,7 @@
                 android:layout_height="@dimen/dp_48"/>
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_bank_next_desc"
                 android:layout_width="match_parent"
                 android:text="@string/please_read_all"
                 android:textSize="@dimen/sp_14"
