@@ -21,6 +21,7 @@ import androidx.core.content.FileProvider
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.bumptech.glide.Glide
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -265,9 +266,14 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
             return
         }
         mStatus = STATUS_WAIT
+        if (BuildConfig.DEBUG) {
+            ivDebugPic?.let {
+                Glide.with(this@Edit5FaceRecognitionFragment).load(curFile).into(it)
+            }
+            Log.e(TAG, " cur path = " + mCurPath + " exists = " + curFile.exists())
+        }
         updateStatus()
         uploadLive()
-        Log.e(TAG, " cur path = " + mCurPath + " exists = " + curFile.exists())
     }
 
     private fun updateStatus() {
