@@ -19,9 +19,9 @@ import com.chocolate.nigerialoanapp.bean.SettingMineBean
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
 import com.chocolate.nigerialoanapp.ui.history.HistoryRecordActivity
-import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
 import com.chocolate.nigerialoanapp.ui.mine.MineAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor
@@ -104,7 +104,7 @@ class MineFragment : BaseFragment() {
                     }
                     PageType.TEST_1 -> {
                         activity?.let {
-                            LoanApplyActivity.startActivity(it)
+                            EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
                         }
                     }
                     PageType.LOGOUT -> {

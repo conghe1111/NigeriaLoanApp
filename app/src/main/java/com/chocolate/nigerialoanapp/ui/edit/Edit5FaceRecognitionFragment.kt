@@ -1,14 +1,20 @@
 package com.chocolate.nigerialoanapp.ui.edit
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
-import android.util.Pair
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.FileProvider
+import com.blankj.utilcode.util.FileUtils
+import com.blankj.utilcode.util.PermissionUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -16,71 +22,49 @@ import com.chocolate.nigerialoanapp.bean.response.EditProfileBean
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.JumpPermissionUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
-import com.chocolate.nigerialoanapp.ui.banklist.BankListActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
-import com.chocolate.nigerialoanapp.widget.InfoEditView
-import com.chocolate.nigerialoanapp.widget.InfoSelectView
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 
 class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
     companion object {
-        private const val TAG = "EditBank4Fragment"
+        private const val TAG = "Edit5FaceRecognitionFragment"
+        const val REQUEST_CAMERA_RECOGNITION = 1112
+//        const val RESULT_CAMERA_RECOGNITION = 1117
     }
-
-    private var mSelectBankName: InfoSelectView? = null
-    private var mEditAccountNum: InfoEditView? = null
-    private var mEditAccountNumConfirm: InfoEditView? = null
 
     private var tvNext: AppCompatTextView? = null
     private var tvDesc: AppCompatTextView? = null
-    private var scrollView: ScrollView? = null
 
-    private var mBankName: Pair<String, String>? = null
-    private var mAccountNum: String? = null
-    private var mAccountNumConfirm: String? = null
+    private var mFile: File? = null
+    private var mCurPath: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_edit_face_recognition, container,  false)
+        return inflater.inflate(R.layout.fragment_edit_face_recognition, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mSelectBankName = view.findViewById<InfoSelectView>(R.id.select_bank_name)
-        mEditAccountNum = view.findViewById<InfoEditView>(R.id.edit_bank_account_num)
-        mEditAccountNumConfirm = view.findViewById<InfoEditView>(R.id.edit_bank_account_num_confirm)
-
-        scrollView = view.findViewById<ScrollView>(R.id.sv_content)
-        tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_bank_next)
-
-        mSelectBankName?.setOnClickListener(object : NoDoubleClickListener() {
-            override fun onNoDoubleClick(v: View?) {
-                activity?.let {
-                    BankListActivity.startActivityResult(it)
-                }
-            }
-
-        })
-
+        tvNext = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_next)
+        tvNext?.text = resources.getString(R.string.start_x_s, "5")
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                val check = checkProfileParams()
-                if (check) {
-                    uploadReceive()
-                }
+                startCamera()
             }
 
         })
-        tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_contact_next_desc)
+        tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_desc)
         SpanUtils.setPrivacyString(tvDesc)
     }
 
@@ -93,65 +77,31 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         if (profile1Bean == null || profile1Bean.account_receive == null) {
             return
         }
-        if (!TextUtils.isEmpty(profile1Bean.account_receive.bank_name) &&
-            !TextUtils.isEmpty(profile1Bean.account_receive.bank_code)
-        )
-            mBankName = Pair(
-                profile1Bean.account_receive.bank_name!!,
-                profile1Bean.account_receive.bank_code
-            )
-
-//        if (!TextUtils.isEmpty(profile1Bean.account_receive.account_number)) {
-//            mAccountNum = profile1Bean.account_receive.account_number
-//        }
 
     }
 
     private fun bindDataInternal() {
-        mSelectBankName?.setText(mBankName?.first.toString())
-        if (!TextUtils.isEmpty(mAccountNum)) {
-            mEditAccountNum?.setText(mAccountNum!!)
-        }
-        if (!TextUtils.isEmpty(mAccountNumConfirm)) {
-            mEditAccountNumConfirm?.setText(mAccountNumConfirm!!)
-        }
+
     }
 
-    private fun checkProfileParams(): Boolean {
-        if (mBankName == null) {
-
-            mSelectBankName?.setSelectState(true)
-            return false
-        }
-        if (mEditAccountNum == null || mEditAccountNumConfirm == null) {
-            // TODO
-            return false
-        }
-        return true
-    }
-
-    private fun uploadReceive() {
+    private fun uploadLive() {
         //        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken)
-
-            jsonObject.put("bank_name", mBankName?.first)     //银行名字
-            jsonObject.put("bank_code", mBankName?.second)  //银行代码
-            jsonObject.put("account_number", mEditAccountNum?.getText())   //客户收款账号
-            jsonObject.put(
-                "account_number_confirm",
-                mEditAccountNumConfirm?.getText()
-            )       //客户收款账号确认           //联系人2电话
+//                    live_photo	file	N	活体照片，如果有就上传，没有就忽略 (与data同级)
+            jsonObject.put("live_verify", "1")     //活体验证 0 未验证 1已验证
         } catch (e: JSONException) {
             e.printStackTrace()
         }
+        val file = File("")
         if (BuildConfig.DEBUG) {
-            Log.i("OkHttpClient", " update receive = " + jsonObject.toString())
+            Log.i("OkHttpClient", " update live = $jsonObject")
         }
-        OkGo.post<String>(Api.UPDATE_RECEIVE).tag(TAG)
+        OkGo.post<String>(Api.UPDATE_LIVE).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .params("file", file)
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
 //                    pbLoading?.visibility = View.GONE
@@ -184,16 +134,71 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
             })
     }
 
+    private fun startCamera() {
+        val isGranted = PermissionUtils.isGranted(Manifest.permission.CAMERA)
+        if (isGranted) {
+            startCameraInternal(REQUEST_CAMERA_RECOGNITION)
+        } else {
+            PermissionUtils.permission(Manifest.permission.CAMERA)
+                .callback(object : PermissionUtils.SimpleCallback {
+                    override fun onGranted() {
+                        startCameraInternal(REQUEST_CAMERA_RECOGNITION)
+                    }
+
+                    override fun onDenied() {
+                        if (isDestroy()) {
+                            return
+                        }
+                        activity?.let {
+                            ToastUtils.showShort("please allow permission.")
+                            JumpPermissionUtils.goToSetting(activity)
+                        }
+                    }
+                }).request()
+        }
+    }
+
+    private fun startCameraInternal(requestCode: Int) {
+        if (context == null || activity == null) {
+            return
+        }
+        val path = (requireActivity().filesDir.path
+                + "/photo/" + System.currentTimeMillis() + ".jpg")
+        val file = File(path)
+        FileUtils.createOrExistsFile(path)
+        if (!file.exists()) {
+            ToastUtils.showShort("can not create file")
+            return
+        }
+        val imageFileUri: Uri
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE) //跳转到相机Activity
+        intent.putExtra("camerasensortype", 2) // 调用前置摄像头
+        intent.putExtra("autofocus", true) // 自动对焦
+        mCurPath = path
+        //判断是否是AndroidN以及更高的版本
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            imageFileUri = FileProvider.getUriForFile(
+                requireContext(),
+                BuildConfig.APPLICATION_ID + ".fileProvider",
+                file
+            )
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri) //告诉相机拍摄完毕输出图片到指定的Uri
+        } else {
+            imageFileUri = Uri.fromFile(file) //获取文件的Uri;
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri) //告诉相机拍摄完毕输出图片到指定的Uri
+        }
+        activity?.startActivityForResult(intent, requestCode)
+    }
+
     override fun onDestroy() {
         OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
     }
 
-    fun onBankActivityResult(bankName: String?, bankCode: String?) {
-        if (TextUtils.isEmpty(bankName) || TextUtils.isEmpty(bankCode)) {
-            return
-        }
-        mBankName = Pair(bankName, bankCode)
-        mSelectBankName?.setText(mBankName?.first.toString())
+    fun onActivityResultInternal(requestCode: Int, data: Intent?) {
+        mCurPath
+        Log.e(TAG, " cur path = " + mCurPath)
     }
 }

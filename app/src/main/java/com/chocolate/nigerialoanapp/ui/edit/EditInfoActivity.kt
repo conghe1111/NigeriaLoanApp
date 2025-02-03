@@ -226,7 +226,13 @@ class EditInfoActivity : BaseActivity() {
         if (resultCode == BankListActivity.START_RESULT_CODE && requestCode == BankListActivity.START_REQUEST_CODE) {
             val bankName = data.getStringExtra(BankListActivity.KEY_BANK_NAME)
             val bankCode = data.getStringExtra(BankListActivity.KEY_BANK_CODE)
-            (mCurFragment as? Edit4BankFragment)?.onBankActivityResult(bankName, bankCode)
+            if (mCurFragment is Edit4BankFragment) {
+                (mCurFragment as? Edit4BankFragment)?.onBankActivityResult(bankName, bankCode)
+            }
+        } else if (requestCode == Edit5FaceRecognitionFragment.REQUEST_CAMERA_RECOGNITION) {
+            if (mCurFragment is Edit5FaceRecognitionFragment) {
+                (mCurFragment as? Edit5FaceRecognitionFragment)?.onActivityResultInternal(requestCode, data)
+            }
         }
     }
 

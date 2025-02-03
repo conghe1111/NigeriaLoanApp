@@ -226,5 +226,5 @@ class ConsumerHotlineActivity : BaseActivity() {
     }
 
     private fun getAuthority(context: Context) =
-        context.applicationInfo.packageName + ".fileprovider"
+        context.applicationInfo.packageName + ".fileProvider"
 }
