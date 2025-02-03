@@ -92,13 +92,14 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_loan_apply_amount"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/dp_10"
                             android:includeFontPadding="false"
-                            android:text="11111111"
+                            android:text="0"
+                            android:gravity="center_vertical"
                             android:textColor="#333333"
-                            android:textSize="@dimen/sp_24"
+                            android:textSize="@dimen/sp_15"
                             android:textStyle="bold" />
 
                         <androidx.appcompat.widget.AppCompatImageView

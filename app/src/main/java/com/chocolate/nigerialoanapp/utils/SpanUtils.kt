@@ -3,6 +3,7 @@ package com.chocolate.nigerialoanapp.utils
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
 import java.text.DecimalFormat
@@ -24,10 +25,29 @@ object SpanUtils {
         tv.text = spannableString
     }
 
+    fun setAmountString(tv : AppCompatTextView?, amount: String?) {
+        if (tv == null || amount == null) {
+            return
+        }
+        val text = "NGN$amount"
+        val spannableString = SpannableString(text)
+        spannableString.setSpan(RelativeSizeSpan(26f / 16), 3, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tv.text = spannableString
+    }
+
 
     fun getShowText(amount : Long) : String {
-        val decimalFormat: DecimalFormat = DecimalFormat("#,##0.00")
+        val decimalFormat: DecimalFormat = DecimalFormat("#,##0")
         val formattedAmount: String = decimalFormat.format(amount)
         return formattedAmount
+    }
+
+    fun getShowText1(amount : Long?) : String {
+        if (amount == null) {
+            return "₦0"
+        }
+        val decimalFormat: DecimalFormat = DecimalFormat("#,##0")
+        val formattedAmount: String = decimalFormat.format(amount)
+        return "₦$formattedAmount"
     }
 }

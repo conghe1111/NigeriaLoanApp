@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter.OnItemClickListener
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
 class LoadApplyHistoryAdapter(val mList : List<Trial>) : RecyclerView.Adapter<LoadApplyHistoryAdapter.LoadApplyHistoryHolder>() {
@@ -29,8 +30,8 @@ class LoadApplyHistoryAdapter(val mList : List<Trial>) : RecyclerView.Adapter<Lo
     override fun onBindViewHolder(holder: LoadApplyHistoryHolder, position: Int) {
         val trial = mList.get(position)
         val period = mList.get(position).toString()
-        holder.tvDueDay?.text = trial.repay_date.toString()
-        holder.tvDueAmount?.text = trial.amount.toString()
+        holder.tvDueDay?.text = trial.repay_date
+        holder.tvDueAmount?.text = SpanUtils.getShowText1(trial.amount.toLong())
         holder.itemView?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 mOnItemClickListener?.onItemClick(period, position)

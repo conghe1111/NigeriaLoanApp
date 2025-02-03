@@ -66,8 +66,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     private var mAdapter: LoadApplyPeriodAdapter? = null
     private var mHistoryAdapter: LoadApplyHistoryAdapter? = null
 
-    private var mAmountIndex: Int = 0
-    private var mPeriodIndex: Int = 0
+
     private var mTrialList: ArrayList<Trial> = ArrayList()
     private var hasRetention: Boolean = false
 
@@ -104,7 +103,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                 }
                 requestProductTrial(
                     mProductType!!,
-                    mAmountList[mAmountIndex],
+                    mAmountList[mAmountIndex].amount!!,
                     mPeriodList[mPeriodIndex]
                 )
             }
@@ -113,8 +112,11 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         rvContent?.adapter = mAdapter
         loanContainer?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                val dialog = SelectAmountDialog(this@LoanApplyActivity, mAmountList)
-                dialog.setOnItemClickListener(object : SelectAmountDialog.OnItemClickListener() {
+                if (mAmountList.size == 0) {
+                    return
+                }
+                val dialog = SelectAmountDialog(this@LoanApplyActivity, mAmountList, mAmountIndex)
+                dialog.setOnItemClickListener(object : SelectAmountDialog.OnItemClickListener {
                     override fun onItemClick(str: String, pos: Int) {
                         mAmountIndex = pos
                     }
@@ -194,7 +196,8 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         if (mPeriodList.isNotEmpty()) {
             mAdapter?.notifyDataSetChanged()
         }
-        tvAmount?.text = mAmountList[mAmountIndex].toString()
+        val amount = mAmountList[mAmountIndex].amount.toString()
+        SpanUtils.setAmountString(tvAmount, SpanUtils.getShowText(amount.toLong()))
         if (mPeriodList.isEmpty() || mAmountList.isEmpty()) {
             return
         }
@@ -204,7 +207,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         if (mPeriodIndex >= mPeriodList.size) {
             return
         }
-        requestProductTrial(mProductType!!, mAmountList[mAmountIndex], mPeriodList[mPeriodIndex])
+        requestProductTrial(mProductType!!, mAmountList[mAmountIndex].amount!!, mPeriodList[mPeriodIndex])
     }
 
     private fun bindItem1(productTrial: ProductTrialResponse) {
@@ -218,10 +221,10 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         val tvProcessFee = container?.findViewById<TextView>(R.id.tv_item_1_process_fee)
         val tvLoanAmount = container?.findViewById<TextView>(R.id.tv_item_1_loan_amount)
 
-        tvDisburalAmount?.text = trial?.disburse_amount.toString()
-        tvInterest?.text = trial?.interest.toString()
-        tvProcessFee?.text = trial?.service_fee.toString()
-        tvLoanAmount?.text = trial?.amount.toString()
+        tvDisburalAmount?.text = SpanUtils.getShowText1(trial?.disburse_amount?.toLong())
+        tvInterest?.text = SpanUtils.getShowText1(trial?.interest?.toLong())
+        tvProcessFee?.text = SpanUtils.getShowText1(trial?.service_fee?.toLong())
+        tvLoanAmount?.text = SpanUtils.getShowText1(trial?.amount?.toLong())
     }
 
     private fun orderCheek() {

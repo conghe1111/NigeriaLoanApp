@@ -4,6 +4,7 @@ import android.util.Log
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
+import com.chocolate.nigerialoanapp.bean.data.LoanData
 import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
 import com.chocolate.nigerialoanapp.global.Constant
@@ -25,7 +26,9 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
 
     var mProductType: String? = null
     var mPeriodList: ArrayList<String> = ArrayList<String>()
-    var mAmountList: ArrayList<String> = ArrayList<String>()
+    var mAmountList: ArrayList<LoanData> = ArrayList<LoanData>()
+    var mAmountIndex: Int = 0
+    var mPeriodIndex: Int = 0
 
     private var dialog : LoanRetentionDialog? = null
 
@@ -64,8 +67,15 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
 
                         mProductType = it.product_type.toString()
                         mAmountList.clear()
+                        if (BuildConfig.DEBUG) {
+                            mAmountList.add(LoanData("10000",true))
+                        }
                         for (amountItem in it.amount) {
-                            mAmountList.add(amountItem.toString())
+                            mAmountList.add(LoanData(amountItem.toString(),false))
+                        }
+                        if (BuildConfig.DEBUG) {
+                            mAmountList.add(LoanData("100000",true))
+                            mAmountIndex = 1
                         }
                         mPeriodList.clear()
                         for (periodItem in it.period) {

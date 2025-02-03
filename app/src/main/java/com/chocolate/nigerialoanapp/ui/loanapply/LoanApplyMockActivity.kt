@@ -144,7 +144,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         mLoanTermList.add(LoanData("" + 91, false))
         mLoanTermList.add(LoanData("" + 120))
         if (mAmountList.size > 0 && mPeriodList.size > 0) {
-            requestProductTrial(mAmountList[0], mPeriodList[0])
+            requestProductTrial(mAmountList[0].amount!!, mPeriodList[0])
         }
     }
 

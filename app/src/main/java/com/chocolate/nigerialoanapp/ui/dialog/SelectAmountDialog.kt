@@ -9,13 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chocolate.nigerialoanapp.R
+import com.chocolate.nigerialoanapp.bean.data.LoanData
 import com.chocolate.nigerialoanapp.ui.dialog.selectamount.SelectAmountAdapter
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
-class SelectAmountDialog (context: Context, val list: List<String>): Dialog(context) {
+class SelectAmountDialog (context: Context, val list: List<LoanData>, amountIndex : Int): Dialog(context) {
 
     private var mCurStr : String? = null
-    private var mCurPos : Int? = null
+    private var mCurPos : Int = amountIndex
+    private var mAdapter  : SelectAmountAdapter? = null
 
     init {
         window?.decorView?.setPadding(0, 0, 0, 0)
@@ -23,7 +25,7 @@ class SelectAmountDialog (context: Context, val list: List<String>): Dialog(cont
         val lp: WindowManager.LayoutParams? = window?.attributes
         if (lp != null) {
             lp.width = WindowManager.LayoutParams.MATCH_PARENT //设置宽度
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT //设置高度
+            lp.height = WindowManager.LayoutParams.MATCH_PARENT //设置高度
             lp.horizontalMargin = 0f
             lp.verticalMargin = 0f
             window?.attributes = lp
@@ -33,14 +35,19 @@ class SelectAmountDialog (context: Context, val list: List<String>): Dialog(cont
         var tvConfirm: TextView  = findViewById<TextView>(R.id.tv_amount_confirm)
 
         rvContent?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapter = SelectAmountAdapter(list, object : OnItemClickListener() {
+        mAdapter = SelectAmountAdapter(list, object : SelectAmountAdapter.OnItemClickListener {
             override fun onItemClick(str: String, pos: Int) {
                 mCurStr = str
                 mCurPos = pos
+                mAdapter?.notifyDataSetChanged()
+            }
+
+            override fun getSelectPos(): Int {
+                return mCurPos
             }
 
         })
-        rvContent?.adapter = adapter
+        rvContent?.adapter = mAdapter
         tvConfirm?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 if (!TextUtils.isEmpty(mCurStr) && mCurPos != null) {
@@ -57,7 +64,8 @@ class SelectAmountDialog (context: Context, val list: List<String>): Dialog(cont
         mListener = listener
     }
 
-    abstract class OnItemClickListener {
-        abstract fun onItemClick(str : String, pos : Int)
+    interface OnItemClickListener {
+        fun onItemClick(str : String, pos : Int)
+
     }
 }
