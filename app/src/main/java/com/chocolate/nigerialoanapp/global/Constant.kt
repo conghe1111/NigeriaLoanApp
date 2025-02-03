@@ -19,6 +19,6 @@ object Constant {
 
     //是否是审核账号
     fun isAuditMode(): Boolean {
-        return true
+        return false
     }
 }

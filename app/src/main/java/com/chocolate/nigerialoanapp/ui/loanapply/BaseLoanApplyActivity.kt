@@ -8,6 +8,7 @@ import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.dialog.LoanRetentionDialog
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -25,6 +26,8 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
     var mProductType: String? = null
     var mPeriodList: ArrayList<String> = ArrayList<String>()
     var mAmountList: ArrayList<String> = ArrayList<String>()
+
+    private var dialog : LoanRetentionDialog? = null
 
     fun getProducts(marketingFlag: Boolean = false) {
         if (Constant.mAccountId == null) {
@@ -93,5 +96,21 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
     override fun onDestroy() {
         OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
+    }
+
+    fun showBackRetentionDialog() {
+        if (dialog?.isShowing == true) {
+            dialog?.dismiss()
+        }
+        if (dialog == null) {
+            dialog = LoanRetentionDialog(this)
+        }
+        dialog?.setOnItemClickListener(object : LoanRetentionDialog.OnItemClickListener() {
+            override fun onClickAgree() {
+
+            }
+
+        })
+        dialog?.show()
     }
 }

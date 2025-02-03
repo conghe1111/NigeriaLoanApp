@@ -27,6 +27,7 @@ import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyHistoryAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor2
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -68,6 +69,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     private var mAmountIndex: Int = 0
     private var mPeriodIndex: Int = 0
     private var mTrialList: ArrayList<Trial> = ArrayList()
+    private var hasRetention: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,6 +127,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         viewDisburseFee = findViewById<View>(R.id.container_disburse_fee)
         rvContainer = findViewById<RecyclerView>(R.id.rv_container_schedule)
         tvNext = findViewById<AppCompatTextView>(R.id.tv_loan_apply_next)
+        val tvDesc = findViewById<AppCompatTextView>(R.id.tv_loan_apply_desc)
         rvContainer?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mHistoryAdapter = LoadApplyHistoryAdapter(mTrialList)
         rvContainer?.adapter = mHistoryAdapter
@@ -141,6 +144,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
             }
 
         })
+        SpanUtils.setPrivacyString(tvDesc)
     }
 
     private fun requestProductTrial(productType: String, amount: String, period: String) {
@@ -347,5 +351,14 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     override fun onDestroy() {
         OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        if (!hasRetention) {
+            hasRetention = true
+            showBackRetentionDialog()
+            return
+        }
+        super.onBackPressed()
     }
 }
