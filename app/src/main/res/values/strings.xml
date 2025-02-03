@@ -162,5 +162,11 @@
     <string name="do_not_wear_sunglasses">.  Do not wear sunglasses.</string>
     <string name="confirm_that_you_are">.  Confirm that you are performing the operation yourself.</string>
     <string name="start_x_s">Start(%sS)</string>
-
+    <string name="start">Start</string>
+    <string name="we_are_evaluating_your_credit_limit">We are evaluating your credit limit</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="pass">pass</string>
+    <string name="fail">Fail</string>
+    <string name="retry">Retry</string>
+    .
 </resources>

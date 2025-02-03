@@ -1,15 +1,21 @@
 package com.chocolate.nigerialoanapp.ui.edit
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.FileProvider
 import com.blankj.utilcode.util.FileUtils
@@ -42,9 +48,31 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
     private var tvNext: AppCompatTextView? = null
     private var tvDesc: AppCompatTextView? = null
+    private var ivStatus: AppCompatImageView? = null
+    private var ivDebugPic: AppCompatImageView? = null
+    private var tvStatus: AppCompatTextView? = null
+    private var tvRetry: AppCompatTextView? = null
 
-    private var mFile: File? = null
+    private var includeStart: View? = null
+    private var includeLoading: View? = null
+
     private var mCurPath: String? = null
+
+    private val STATUS_START: Int = 110
+    private val STATUS_WAIT: Int = 111
+    private val STATUS_PASS: Int = 112
+    private val STATUS_FAIL: Int = 113
+
+    private var mStatus: Int = STATUS_START
+
+    private val mHandler = Handler(
+        Looper.getMainLooper()
+    ) { message ->
+        when (message.what) {
+
+        }
+        false
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,6 +94,30 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         })
         tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_desc)
         SpanUtils.setPrivacyString(tvDesc)
+
+        ivDebugPic = view.findViewById<AppCompatImageView>(R.id.iv_debug_pic)
+        if (BuildConfig.DEBUG) {
+            ivDebugPic?.visibility = View.VISIBLE
+        }
+        includeStart = view.findViewById<View>(R.id.include_start)
+        includeLoading = view.findViewById<View>(R.id.include_loading)
+
+        ivStatus = view.findViewById<AppCompatImageView>(R.id.iv_face_recognition_status)
+        tvStatus = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_status)
+        tvRetry = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_retry)
+        tvRetry?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                mStatus = STATUS_START
+                updateStatus()
+                mCurPath = null
+                tvNext?.text = resources.getString(R.string.start_x_s, "5")
+                tvNext?.isSelected = false
+                startTimer()
+            }
+
+        })
+        updateStatus()
+        startTimer()
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
@@ -85,7 +137,6 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
     }
 
     private fun uploadLive() {
-        //        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
@@ -95,29 +146,36 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        val file = File("")
+        val file = File(mCurPath)
         if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " update live = $jsonObject")
+            Log.i("OkHttpClient", " update live 1 = ${file.exists()}")
         }
         OkGo.post<String>(Api.UPDATE_LIVE).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .params("file", file)
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
                     if (isDestroy()) {
                         return
                     }
                     val editProfileBean: EditProfileBean? =
                         checkResponseSuccess(response, EditProfileBean::class.java)
                     if (editProfileBean == null) {
-                        Log.e(TAG, " update receive ." + response.body())
-                        return
+                        mStatus = STATUS_FAIL
+                        Log.e(TAG, " update live ." + response.body())
+                    } else {
+                        mStatus = STATUS_PASS
+                        mHandler?.postDelayed(Runnable {
+                            if (isDestroy()) {
+                                return@Runnable
+                            }
+                            if (activity is EditInfoActivity) {
+                                (activity as EditInfoActivity).nextStep(editProfileBean)
+                            }
+                        }, 2000)
                     }
-                    if (activity is EditInfoActivity) {
-                        (activity as EditInfoActivity).nextStep(editProfileBean)
-                    }
+                    updateStatus()
                 }
 
                 override fun onError(response: Response<String>) {
@@ -125,10 +183,10 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                     if (isDestroy()) {
                         return
                     }
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
+                    mStatus = STATUS_FAIL
+                    updateStatus()
                     if (BuildConfig.DEBUG) {
-                        Log.e(TAG, " update contact = " + response.body())
+                        Log.e(TAG, " update live = " + response.body())
                     }
                 }
             })
@@ -194,11 +252,80 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
     override fun onDestroy() {
         OkGo.getInstance().cancelTag(TAG)
+        mHandler?.removeCallbacksAndMessages(null)
         super.onDestroy()
     }
 
     fun onActivityResultInternal(requestCode: Int, data: Intent?) {
-        mCurPath
-        Log.e(TAG, " cur path = " + mCurPath)
+        if (TextUtils.isEmpty(mCurPath)) {
+            return
+        }
+        val curFile = File(mCurPath)
+        if (!curFile.exists()) {
+            return
+        }
+        mStatus = STATUS_WAIT
+        updateStatus()
+        uploadLive()
+        Log.e(TAG, " cur path = " + mCurPath + " exists = " + curFile.exists())
     }
+
+    private fun updateStatus() {
+        when (mStatus) {
+            (STATUS_START) -> {
+                includeStart?.visibility = View.VISIBLE
+                includeLoading?.visibility = View.GONE
+                tvNext?.isSelected = false
+                tvNext
+            }
+            (STATUS_WAIT) -> {
+                includeStart?.visibility = View.GONE
+                includeLoading?.visibility = View.VISIBLE
+                ivStatus?.visibility = View.GONE
+                tvStatus?.text = resources.getString(R.string.please_wait)
+                tvRetry?.visibility = View.GONE
+            }
+            (STATUS_PASS) -> {
+                includeStart?.visibility = View.GONE
+                includeLoading?.visibility = View.VISIBLE
+                ivStatus?.visibility = View.VISIBLE
+                ivStatus?.setImageResource(R.drawable.ic_confirm)
+                tvStatus?.text = resources.getString(R.string.pass)
+                tvRetry?.visibility = View.GONE
+            }
+            (STATUS_FAIL) -> {
+                includeStart?.visibility = View.GONE
+                includeLoading?.visibility = View.VISIBLE
+                ivStatus?.visibility = View.VISIBLE
+                ivStatus?.setImageResource(R.drawable.ic_failure)
+                tvStatus?.text = resources.getString(R.string.fail)
+                tvRetry?.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private var mTimeCount: TimeCount? = null
+
+    private fun startTimer() {
+        mTimeCount?.cancel()
+        mTimeCount = TimeCount(5 * 1000, 1000)
+        mTimeCount?.start()
+    }
+
+    inner class TimeCount(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
+        @SuppressLint("StringFormatMatches")
+        override fun onTick(l: Long) {
+            val countDownTime = l / 1000
+            val startXStr = resources.getString(R.string.start_x_s, countDownTime)
+            tvNext?.text = startXStr
+        }
+
+        override fun onFinish() {
+            val startStr = resources.getString(R.string.start)
+            tvNext?.text = startStr
+            tvNext?.isSelected = true
+        }
+    }
+
 }
