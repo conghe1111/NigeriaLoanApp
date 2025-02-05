@@ -173,4 +173,6 @@
     .
     <string name="loan_detail">Loan Details</string>
     <string name="i_agree_to_loan_contact">I agree to the &#60;Loan Contract&#62;</string>
+    <string name="about_terms">Terms of Service</string>
+    <string name="about_privacy">Privacy Policy</string>
 </resources>

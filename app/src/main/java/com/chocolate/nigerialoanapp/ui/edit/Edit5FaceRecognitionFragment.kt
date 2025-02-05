@@ -94,7 +94,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
         })
         tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_desc)
-        SpanUtils.setPrivacyString(tvDesc)
+        SpanUtils.setPrivacyString(tvDesc, activity)
 
         ivDebugPic = view.findViewById<AppCompatImageView>(R.id.iv_debug_pic)
         if (BuildConfig.DEBUG) {

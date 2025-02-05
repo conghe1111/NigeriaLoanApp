@@ -150,7 +150,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
             }
 
         })
-        SpanUtils.setPrivacyString(tvDesc)
+        SpanUtils.setPrivacyString(tvDesc, this@LoanApplyActivity)
     }
 
     private fun requestProductTrial(productType: String, amount: String, period: String) {

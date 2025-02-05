@@ -189,7 +189,7 @@ class Edit1BasicFragment : BaseEditFragment() {
         })
         tvNext?.isEnabled = true
         tvNextDesc = view.findViewById<AppCompatTextView>(R.id.tv_basic_next_desc)
-        SpanUtils.setPrivacyString(tvNextDesc)
+        SpanUtils.setPrivacyString(tvNextDesc, activity)
     }
 
     private fun checkProfileParams(): Boolean {

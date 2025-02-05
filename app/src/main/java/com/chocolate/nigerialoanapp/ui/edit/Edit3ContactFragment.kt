@@ -83,7 +83,7 @@ class Edit3ContactFragment : BaseEditFragment() {
             }
 
         })
-        SpanUtils.setPrivacyString(tvDesc)
+        SpanUtils.setPrivacyString(tvDesc, activity)
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {

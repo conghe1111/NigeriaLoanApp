@@ -96,7 +96,7 @@ class Edit4BankFragment : BaseEditFragment() {
             }
 
         })
-        SpanUtils.setPrivacyString(tvDesc)
+        SpanUtils.setPrivacyString(tvDesc, activity)
         tryBindData()
     }
 

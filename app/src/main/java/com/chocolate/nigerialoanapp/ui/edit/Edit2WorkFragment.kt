@@ -172,7 +172,7 @@ class Edit2WorkFragment : BaseEditFragment() {
 
         })
         tvNextDesc = view.findViewById<AppCompatTextView>(R.id.tv_work_next_desc)
-        SpanUtils.setPrivacyString(tvNextDesc)
+        SpanUtils.setPrivacyString(tvNextDesc, activity)
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
