@@ -30,6 +30,7 @@ import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor
 import com.chocolate.nigerialoanapp.ui.mine.PageType
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.INFORMATION
 import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
+import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.lzy.okgo.OkGo
@@ -96,10 +97,14 @@ class MineFragment : BaseFragment() {
                         }
                     }
                     PageType.PRIVACY -> {
-
+                        activity?.let {
+                            WebViewActivity.launchWebView(it, Api.GET_POLICY, WebViewActivity.TYPE_PRIVACY)
+                        }
                     }
                     PageType.TERM_CONDITION -> {
-
+                        activity?.let {
+                            WebViewActivity.launchWebView(it, Api.GET_POLICY, WebViewActivity.TYPE_PRIVACY)
+                        }
                     }
                     PageType.VERSION -> {
 

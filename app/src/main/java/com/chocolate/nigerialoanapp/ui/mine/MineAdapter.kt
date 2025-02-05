@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.blankj.utilcode.util.AppUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.bean.SettingMineBean
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
@@ -19,17 +20,22 @@ class MineAdapter : RecyclerView.Adapter<ViewHolder> {
     private var mListener: OnClickListener? = null
 
     private val TYPE_1 = 111
-    private val TYPE_2 = 112
+    private val TYPE_LOGOUT = 112
+    private val TYPE_VERSION = 113
 
     constructor(list: List<SettingMineBean>?) {
         this.mList = list
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        if (viewType == TYPE_2) {
+        if (viewType == TYPE_LOGOUT) {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_setting_logout, parent, false)
             return SettingLogoutHolder(view)
+        } else if (viewType == TYPE_VERSION) {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_setting_version, parent, false)
+            return SettingVersionHolder(view)
         } else {
             val view =
                 LayoutInflater.from(parent.context).inflate(R.layout.item_setting, parent, false)
@@ -43,7 +49,22 @@ class MineAdapter : RecyclerView.Adapter<ViewHolder> {
             bindMineSetting(holder, position)
         } else if (holder is SettingLogoutHolder) {
             bindMineLogout(holder, position)
+        } else if (holder is SettingVersionHolder) {
+            bindVersion(holder, position)
         }
+    }
+
+    private fun bindVersion(holder: SettingVersionHolder, position: Int) {
+        var settingBean = mList!!.get(position)
+        holder.ivLeftIcon?.setImageResource(settingBean.leftIconRes)
+        holder.tvTitle?.setText(settingBean.title)
+        holder.tvVersion?.text = AppUtils.getAppVersionName() + ""
+        holder.flContainer?.setOnClickListener(object : NoDoubleClickListener(){
+            override fun onNoDoubleClick(v: View?) {
+
+            }
+
+        })
     }
 
     private fun bindMineLogout(holder: SettingLogoutHolder, position: Int) {
@@ -79,8 +100,10 @@ class MineAdapter : RecyclerView.Adapter<ViewHolder> {
             TYPE_1
         } else {
             if (mList!![position].type == PageType.LOGOUT) {
-                TYPE_2
-            } else {
+                TYPE_LOGOUT
+            } else if (mList!![position].type == PageType.VERSION) {
+                TYPE_VERSION
+            }else {
                 TYPE_1
             }
         }
@@ -105,6 +128,22 @@ class MineAdapter : RecyclerView.Adapter<ViewHolder> {
             ivLeftIcon = itemView.findViewById(R.id.iv_setting_left_icon)
             tvTitle = itemView.findViewById(R.id.tv_setting_left_title)
             flContainer = itemView.findViewById(R.id.fl_setting_container)
+        }
+    }
+
+    inner class SettingVersionHolder : RecyclerView.ViewHolder {
+        var llContainer: LinearLayout? = null
+        var flContainer: FrameLayout? = null
+        var tvVersion: TextView? = null
+        var tvTitle: TextView? = null
+        var ivLeftIcon: ImageView? = null
+
+        constructor(itemView: View) : super(itemView) {
+            llContainer = itemView.findViewById(R.id.ll_setting_container)
+            tvVersion = itemView.findViewById(R.id.tv_setting_version)
+            tvTitle = itemView.findViewById(R.id.tv_setting_left_title)
+            flContainer = itemView.findViewById(R.id.fl_setting_container)
+            ivLeftIcon = itemView.findViewById(R.id.iv_setting_left_icon)
         }
     }
 
