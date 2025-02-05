@@ -1,7 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.loanapply
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -20,8 +19,10 @@ import com.chocolate.nigerialoanapp.bean.response.OrderApplyResponse
 import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
+import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.dialog.LoanDetailDialog
 import com.chocolate.nigerialoanapp.ui.dialog.SelectAmountDialog
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyHistoryAdapter
@@ -69,12 +70,14 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
     private var mTrialList: ArrayList<Trial> = ArrayList()
     private var hasRetention: Boolean = false
+    private var mProductTrial: ProductTrialResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loan_apply)
         initialView()
         getProducts()
+        ConfigMgr.getProfileInfo()
     }
 
     private fun initialView() {
@@ -140,6 +143,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
             }
 
         })
+        tvNext?.isSelected = true
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 orderCheek()
@@ -207,7 +211,11 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         if (mPeriodIndex >= mPeriodList.size) {
             return
         }
-        requestProductTrial(mProductType!!, mAmountList[mAmountIndex].amount!!, mPeriodList[mPeriodIndex])
+        requestProductTrial(
+            mProductType!!,
+            mAmountList[mAmountIndex].amount!!,
+            mPeriodList[mPeriodIndex]
+        )
     }
 
     private fun bindItem1(productTrial: ProductTrialResponse) {
@@ -245,9 +253,21 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
-                    val orderCheekBean =
-                        checkResponseSuccess(response, OrderCheekBean::class.java)
+                    val data = NetworkUtils.checkResponseSuccess2(response)
+                    if (data == null) {
+                        return
+                    }
+                    val orderCheekBean = com.alibaba.fastjson.JSONObject.parseObject(
+                        data?.getBodyStr(),
+                        OrderCheekBean::class.java
+                    )
                     if (orderCheekBean == null) {
+                        return
+                    }
+                    if (orderCheekBean.order_id == 0 && orderCheekBean.has_upload == 0) {
+//                        ToastUtils.showShort(data.getMsg())
+                        showLoanDetail(orderCheekBean)
+                        ToastUtils.showShort("auth expired, pls upload new auth data.")
                         return
                     }
                     when (orderCheekBean.next_phase) {
@@ -284,7 +304,8 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                                 // TODO未通过
                                 return
                             }
-                            orderApply(orderCheekBean.order_id.toString())
+                            showLoanDetail(orderCheekBean)
+
                         }
                     }
                 }
@@ -296,6 +317,26 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     }
                 }
             })
+    }
+
+    private var mDialog: LoanDetailDialog? = null
+    private fun showLoanDetail(orderCheekBean: OrderCheekBean) {
+        if (mDialog?.isShowing == true) {
+            mDialog?.dismiss()
+        }
+        if (mDialog == null) {
+            mDialog = LoanDetailDialog(this@LoanApplyActivity, mProductTrial)
+        }
+        mDialog?.setCallBack(object : LoanDetailDialog.CallBack() {
+            override fun onClickAgree() {
+                if (isFinishing || isDestroyed) {
+                    return
+                }
+                orderApply(orderCheekBean.order_id.toString())
+            }
+
+        })
+        mDialog?.show()
     }
 
     private fun orderApply(orderId: String) {

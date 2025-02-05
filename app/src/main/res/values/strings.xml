@@ -171,4 +171,6 @@
     <string name="cancel">Cancel</string>
     <string name="are_you_high_quality_user">Are you a high quality user. After this loan is successful, the next loan will be higher, the interest rate will be lower, and the term will be longer. Are you sure you want to quit?</string>
     .
+    <string name="loan_detail">Loan Details</string>
+    <string name="i_agree_to_loan_contact">I agree to the &#60;Loan Contract&#62;</string>
 </resources>

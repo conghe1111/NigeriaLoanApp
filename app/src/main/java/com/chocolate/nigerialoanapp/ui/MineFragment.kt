@@ -170,12 +170,13 @@ class MineFragment : BaseFragment() {
     }
 
     private fun logout() {
-        if (BuildConfig.DEBUG) {
-            quitLogout()
-            return
-        }
+//        if (BuildConfig.DEBUG) {
+//            quitLogout()
+//            return
+//        }
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         jsonObject.put("account_id", Constant.mAccountId)
+        jsonObject.put("access_token", Constant.mToken)
         if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " logout = $jsonObject")
         }

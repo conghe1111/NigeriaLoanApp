@@ -101,7 +101,6 @@ class EditInfoActivity : BaseActivity() {
     }
 
     private fun getProfileInfo() {
-//        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
@@ -117,8 +116,6 @@ class EditInfoActivity : BaseActivity() {
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
                     if (isDestroyed()) {
                         return
                     }
@@ -137,8 +134,6 @@ class EditInfoActivity : BaseActivity() {
                     if (isDestroyed()) {
                         return
                     }
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, "order profile failure = " + response.body())
                     }

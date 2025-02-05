@@ -9,7 +9,10 @@ import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.bean.data.ConsumerData
 import com.chocolate.nigerialoanapp.bean.response.BankBeanResponse
+import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
+import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity.Companion
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -25,6 +28,7 @@ object ConfigMgr {
     private const val KEY_DATA_CONFIG = "key_data_config"
     private const val KEY_BANK_LIST = "key_bank_list"
     private const val KEY_STATIC_DATA_CONFIG = "key_static_data_config"
+    private const val KEY_PROFILE_INFO = "key_profile_info"
 
     val mDebtList = ArrayList<Pair<String, String>>()
     val mGenderList = ArrayList<Pair<String, String>>()
@@ -350,6 +354,63 @@ object ConfigMgr {
                     super.onError(response)
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " update contact = " + response.body())
+                    }
+                }
+            })
+    }
+
+    var mProfileInfo: ProfileInfoResponse? = null
+
+    fun getProfileInfo() {
+        val profileInfoJson = SPUtils.getInstance().getString(KEY_PROFILE_INFO)
+        if (!TextUtils.isEmpty(profileInfoJson)) {
+            handleProfileInfo(profileInfoJson)
+        }
+        if (!TextUtils.isEmpty(profileInfoJson) && BuildConfig.DEBUG) {
+
+        } else {
+            getProfileInfoInternal()
+        }
+    }
+
+    private fun handleProfileInfo(json : String) {
+        val profileInfo: ProfileInfoResponse? =
+            com.alibaba.fastjson.JSONObject.parseObject(json, ProfileInfoResponse::class.java)
+        if (profileInfo == null) {
+            if (BuildConfig.DEBUG) {
+                Log.e(TAG, " getProfileInfoInternal .")
+            }
+            return
+        }
+        mProfileInfo = profileInfo
+    }
+
+    private fun getProfileInfoInternal() {
+//        pbLoading?.visibility = View.VISIBLE
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        try {
+            jsonObject.put("account_id", Constant.mAccountId)
+            jsonObject.put("access_token", Constant.mToken) //FCM Token
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        if (BuildConfig.DEBUG) {
+            Log.i("OkHttpClient", " get profile info = $jsonObject")
+        }
+        //        Log.e(TAG, "111 id = " + Constant.mAccountId);
+        OkGo.post<String>(Api.PROFILE_INFO).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    val json = NetworkUtils.checkResponseSuccess(response).toString()
+                    SPUtils.getInstance().put(KEY_PROFILE_INFO, json)
+                    handleProfileInfo(json)
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    if (BuildConfig.DEBUG) {
+                        Log.e(TAG, "order profile failure = " + response.body())
                     }
                 }
             })
