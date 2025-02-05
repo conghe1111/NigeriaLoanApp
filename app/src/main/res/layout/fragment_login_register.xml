@@ -102,4 +102,14 @@
         android:background="@drawable/bg_green_login_bg"
         android:layout_height="@dimen/dp_46"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_login_register_next_desc"
+        android:layout_width="match_parent"
+        android:text="@string/please_read_all"
+        android:textSize="@dimen/sp_14"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dp_45"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

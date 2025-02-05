@@ -20,6 +20,7 @@ import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.CheckPhoneNumResponse
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.widget.BlankTextWatcher
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -35,6 +36,7 @@ class LoginRegisterFragment : BaseFragment() {
     }
 
     private var tvApply : AppCompatTextView? = null
+    private var tvNext : AppCompatTextView? = null
     private var etMobileNum : AppCompatEditText? = null
     private var ivClear : AppCompatImageView? = null
 
@@ -53,8 +55,9 @@ class LoginRegisterFragment : BaseFragment() {
         etMobileNum = view.findViewById<AppCompatEditText>(R.id.et_mobile_num)
         ivClear = view.findViewById<AppCompatImageView>(R.id.iv_signin_phonenum_clear)
         tvApply = view.findViewById<AppCompatTextView>(R.id.tv_apply)
+        tvNext = view.findViewById<AppCompatTextView>(R.id.tv_login_register_next_desc)
         initializeView()
-
+        SpanUtils.setPrivacyString(tvNext, activity)
     }
 
     private fun initializeView() {
