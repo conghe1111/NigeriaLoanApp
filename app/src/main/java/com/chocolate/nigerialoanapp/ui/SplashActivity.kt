@@ -73,7 +73,9 @@ class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        BarUtils.setStatusBarVisibility(window, false)
+        BarUtils.setStatusBarVisibility(this,true)
+        BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
+        BarUtils.setStatusBarLightMode(this, true)
         setContentView(R.layout.activity_splash)
 //        requestLive()
         val accountId = SPUtils.getInstance().getString(LocalConfig.LC_ACCOUNT_ID)

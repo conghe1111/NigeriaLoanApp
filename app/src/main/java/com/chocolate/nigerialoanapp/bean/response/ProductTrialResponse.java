@@ -28,6 +28,7 @@ public class ProductTrialResponse {
         private int stage_total;   //总期数
         private String name;   //产品名字
         private String repay_date;   //还款日期
+        private Long repay_date_time;   //还款日期
         private int total;   //应还款总金额
         private int amount;   //本金
         private int disburse_amount;   //放款金额
@@ -122,6 +123,14 @@ public class ProductTrialResponse {
 
         public void setInterest_prepaid(int interest_prepaid) {
             this.interest_prepaid = interest_prepaid;
+        }
+
+        public Long getRepay_date_time() {
+            return repay_date_time;
+        }
+
+        public void setRepay_date_time(Long repay_date_time) {
+            this.repay_date_time = repay_date_time;
         }
     }
 

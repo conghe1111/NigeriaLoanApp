@@ -52,7 +52,7 @@ class BankListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         BarUtils.setStatusBarVisibility(this,true)
         BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
-        BarUtils.setStatusBarLightMode(this, false)
+        BarUtils.setStatusBarLightMode(this, true)
         setContentView(R.layout.activity_bank_list)
         initializeView()
         if (ConfigMgr.mBankList.size == 0) {

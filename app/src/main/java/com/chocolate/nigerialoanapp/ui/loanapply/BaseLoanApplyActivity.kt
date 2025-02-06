@@ -1,7 +1,10 @@
 package com.chocolate.nigerialoanapp.ui.loanapply
 
+import android.os.Bundle
 import android.util.Log
+import com.blankj.utilcode.util.BarUtils
 import com.chocolate.nigerialoanapp.BuildConfig
+import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.data.LoanData
@@ -32,6 +35,13 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
 
     private var dialog : LoanRetentionDialog? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        BarUtils.setStatusBarVisibility(this,true)
+        BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
+        BarUtils.setStatusBarLightMode(this, true)
+    }
+
     fun getProducts(marketingFlag: Boolean = false) {
         if (Constant.mAccountId == null) {
             return
@@ -39,7 +49,12 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
         //        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
-            jsonObject.put("account_id", Constant.mAccountId!!)
+            if (marketingFlag) {
+//                jsonObject.put("account_id", Constant.mAccountId!!.toLong())
+            } else {
+//                jsonObject.put("account_id", Constant.mAccountId)
+            }
+            jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken)
         } catch (e: JSONException) {
             e.printStackTrace()

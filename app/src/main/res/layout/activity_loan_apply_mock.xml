@@ -120,6 +120,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_loan_apply_mock_next"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="@dimen/dp_38"
+                    android:textSize="@dimen/sp_20"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginBottom="@dimen/dp_100"
+                    android:text="@string/confirm"
+                    android:background="@drawable/bg_btn_enable"
+                    android:layout_height="@dimen/dp_48"/>
+
 
             </LinearLayout>
 

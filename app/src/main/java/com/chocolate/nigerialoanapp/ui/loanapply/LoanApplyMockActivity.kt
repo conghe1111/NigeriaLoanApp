@@ -23,6 +23,7 @@ import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoanAmountDateMockAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor3
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor4
+import com.chocolate.nigerialoanapp.utils.DateUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -51,6 +52,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
     private var tvInterest : AppCompatTextView? = null
     private var tvDisburalAmount : AppCompatTextView? = null
     private var tvFee : AppCompatTextView? = null
+    private var tvMockNext : AppCompatTextView? = null
 
     private var mAmountAdapter : LoanAmountMockAdapter? = null
     private var mTermAdapter : LoanAmountMockAdapter? = null
@@ -80,6 +82,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         rvAmount = findViewById<RecyclerView>(R.id.rv_loan_amount_mock)
         rvLoanTerm = findViewById<RecyclerView>(R.id.rv_loan_term)
         rvStage = findViewById<RecyclerView>(R.id.rv_mock_stage)
+        tvMockNext = findViewById<AppCompatTextView>(R.id.tv_loan_apply_mock_next)
 
         rvAmount?.layoutManager = GridLayoutManager(this@LoanApplyMockActivity,2)
         mAmountAdapter = LoanAmountMockAdapter(mLoanAmountList)
@@ -124,7 +127,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
 
     override fun bindData() {
         super.bindData()
-        initTestData()
+        initData()
         bindDataInternal()
     }
 
@@ -133,27 +136,31 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         mTermAdapter?.notifyDataSetChanged()
     }
 
-    private fun initTestData() {
-        mLoanAmountList.clear()
-        mLoanAmountList.add(LoanData("2000", false))
-        mLoanAmountList.add(LoanData("5000"))
-        mLoanAmountList.add(LoanData("8000"))
-        mLoanAmountList.add(LoanData("10000"))
+    private fun initData() {
+        if (BuildConfig.DEBUG) {
+            mLoanAmountList.clear()
+            mLoanAmountList.add(LoanData("2000", false))
+            mLoanAmountList.add(LoanData("5000"))
+            mLoanAmountList.add(LoanData("8000"))
+            mLoanAmountList.add(LoanData("10000"))
 
-        mLoanTermList.clear()
-        mLoanTermList.add(LoanData("" + 91, false))
-        mLoanTermList.add(LoanData("" + 120))
-        if (mAmountList.size > 0 && mPeriodList.size > 0) {
-            requestProductTrial(mAmountList[0].amount!!, mPeriodList[0])
+            mLoanTermList.clear()
+            mLoanTermList.add(LoanData("" + 91, false))
+            mLoanTermList.add(LoanData("" + 120))
+            requestProductTrial("50000", "30", mProductType!!)
+        } else {
+            if (mAmountList.size > 0 && mPeriodList.size > 0) {
+                requestProductTrial(mAmountList[0].amount!!, mPeriodList[0])
+            }
         }
     }
 
-    private fun requestProductTrial(amount: String, period: String) {
+    private fun requestProductTrial(amount: String, period: String, productType : String = "5") {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken)
-            jsonObject.put("product_type", mProductType) //产品类型：1.首贷  2. 复贷  3. 展期  4. Google合规 5 营销
+            jsonObject.put("product_type", productType) //产品类型：1.首贷  2. 复贷  3. 展期  4. Google合规 5 营销
             jsonObject.put("amount", amount)   //产品金额
             jsonObject.put("period", period)   //产品期限
         } catch (e: JSONException) {
@@ -175,14 +182,10 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
                         return
                     }
                     productTrial?.let {
-                        mLoanDateList.clear()
-                        mLoanDateList.add(LoanData("" + 91, false))
-                        mLoanDateList.add(LoanData("" +120))
                         mLoanTrailList.clear()
                         mLoanTrailList.addAll(productTrial.trials)
                         val firstTrial = mLoanTrailList.removeAt(0)
                         bindFirstItem(firstTrial)
-
                     }
 
 
@@ -201,12 +204,26 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
     private fun bindFirstItem(firstTrail : Trial) {
         tvStage1?.text = resources.getString(R.string.stage_x_x, "1",
             (mLoanTrailList.size + 1).toString())
-        tvRepayment1?.text = "" + firstTrail.amount
+        tvRepayment1?.text = "" + firstTrail.repay_date
+        if (BuildConfig.DEBUG) {
+            mLoanDateList.clear()
+            val array = DateUtils.getDateArray(firstTrail.repay_date_time)
+            for (index in 0 until array.size) {
+                if (index <= 1){
+                    mLoanDateList.add(LoanData(array[index], false))
+                } else {
+                    mLoanDateList.add(LoanData(array[index], true))
+                }
+            }
+        }
+
         mDateAdapter?.notifyDataSetChanged()
         tvRepaymentAmount = findViewById<AppCompatTextView>(R.id.tv_repayment_amount)
         tvAmount = findViewById<AppCompatTextView>(R.id.tv_loan_amount)
         tvInterest = findViewById<AppCompatTextView>(R.id.tv_interest)
         tvDisburalAmount = findViewById<AppCompatTextView>(R.id.tv_disbural_amount)
         tvFee = findViewById<AppCompatTextView>(R.id.tv_service_fee)
+
+
     }
 }
