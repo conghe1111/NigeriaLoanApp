@@ -17,13 +17,14 @@ import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
-import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoanAmountMockAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoanAmountDateMockAdapter
+import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoanStageAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor3
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor4
 import com.chocolate.nigerialoanapp.utils.DateUtils
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -61,7 +62,11 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
     private var mLoanAmountList: ArrayList<LoanData> = ArrayList<LoanData>()
     private var mLoanTermList: ArrayList<LoanData> = ArrayList<LoanData>()
     private var mLoanDateList: ArrayList<LoanData> = ArrayList<LoanData>()
-    private var mLoanTrailList: ArrayList<Trial> = ArrayList<Trial>()
+
+    private var mLoanStageList: ArrayList<Trial> = ArrayList<Trial>()
+
+    private var mSelectDatePos : Int = 0
+    private var mStageAdapter : LoanStageAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,7 +101,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         rvAmount?.addItemDecoration(NorItemDecor3())
 
         rvLoanTerm?.layoutManager = GridLayoutManager(this@LoanApplyMockActivity,2)
-        mTermAdapter = LoanAmountMockAdapter(mLoanTermList)
+        mTermAdapter = LoanAmountMockAdapter(mLoanTermList, true)
         mTermAdapter?.setOnItemClickListener(object : LoadApplyPeriodAdapter.OnItemClickListener{
             override fun onItemClick(period: String, pos: Int) {
 
@@ -107,6 +112,11 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         rvLoanTerm?.addItemDecoration(NorItemDecor3())
 
         initialStage1()
+
+        rvStage?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mStageAdapter = LoanStageAdapter(mLoanStageList)
+        rvStage?.adapter = mStageAdapter
+        rvStage?.addItemDecoration(NorItemDecor4())
     }
 
     private fun initialStage1() {
@@ -120,7 +130,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         tvFee = findViewById<AppCompatTextView>(R.id.tv_service_fee)
 
         rvDate?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        mDateAdapter = LoanAmountDateMockAdapter(mLoanDateList)
+        mDateAdapter = LoanAmountDateMockAdapter(mLoanDateList, mSelectDatePos)
         rvDate?.adapter = mDateAdapter
         rvDate?.addItemDecoration(NorItemDecor4())
     }
@@ -182,10 +192,11 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
                         return
                     }
                     productTrial?.let {
-                        mLoanTrailList.clear()
-                        mLoanTrailList.addAll(productTrial.trials)
-                        val firstTrial = mLoanTrailList.removeAt(0)
-                        bindFirstItem(firstTrial)
+                        if (productTrial.trials.size == 0){
+                            return
+                        }
+                        val firstTrial = productTrial.trials.removeAt(0)
+                        bindFirstItem(firstTrial, productTrial.trials)
                     }
 
 
@@ -201,9 +212,9 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun bindFirstItem(firstTrail : Trial) {
+    private fun bindFirstItem(firstTrail: Trial, trials: List<Trial>) {
         tvStage1?.text = resources.getString(R.string.stage_x_x, "1",
-            (mLoanTrailList.size + 1).toString())
+            (trials.size + 1).toString())
         tvRepayment1?.text = "" + firstTrail.repay_date
         if (BuildConfig.DEBUG) {
             mLoanDateList.clear()
@@ -224,6 +235,14 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         tvDisburalAmount = findViewById<AppCompatTextView>(R.id.tv_disbural_amount)
         tvFee = findViewById<AppCompatTextView>(R.id.tv_service_fee)
 
+        tvRepaymentAmount?.text = SpanUtils.getShowText2(firstTrail.total.toLong())
+        tvAmount?.text = SpanUtils.getShowText2(firstTrail.amount.toLong())
+        tvInterest?.text = SpanUtils.getShowText2(firstTrail.interest.toLong())
+        tvDisburalAmount?.text = SpanUtils.getShowText2(firstTrail.disburse_amount.toLong())
+        tvFee?.text = SpanUtils.getShowText2(firstTrail.service_fee.toLong())
 
+        mLoanStageList.clear()
+        mLoanStageList.addAll(trials)
+        mStageAdapter?.notifyDataSetChanged()
     }
 }

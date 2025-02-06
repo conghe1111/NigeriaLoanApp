@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.bean.data.LoanData
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter.OnItemClickListener
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
-class LoanAmountMockAdapter(val mList : List<LoanData>) : RecyclerView.Adapter<LoanAmountMockAdapter.LoadApplyHistoryHolder>() {
+class LoanAmountMockAdapter(val mList : List<LoanData>, val isTerm : Boolean =  false) : RecyclerView.Adapter<LoanAmountMockAdapter.LoadApplyHistoryHolder>() {
 
     private var mOnItemClickListener : OnItemClickListener? = null
 
@@ -29,7 +30,11 @@ class LoanAmountMockAdapter(val mList : List<LoanData>) : RecyclerView.Adapter<L
 
     override fun onBindViewHolder(holder: LoadApplyHistoryHolder, position: Int) {
         val loanData = mList.get(position)
-        holder.tvLoanApply?.text = loanData.amount
+        if (isTerm) {
+            holder.tvLoanApply?.text = loanData.amount?.toString()
+        } else {
+            holder.tvLoanApply?.text = SpanUtils.getShowText2(loanData.amount?.toLong())
+        }
         if (loanData.lockFlag){
             holder.flContainer?.setBackgroundResource(R.drawable.bg_gray_bg_2)
             holder.ivLock?.visibility = View.VISIBLE

@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.PhoneUtils
@@ -52,6 +53,9 @@ class ConsumerHotlineActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BarUtils.setStatusBarVisibility(this,true)
+        BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
+        BarUtils.setStatusBarLightMode(this, true)
         setContentView(R.layout.activity_consumer_hotline)
         initialView()
     }

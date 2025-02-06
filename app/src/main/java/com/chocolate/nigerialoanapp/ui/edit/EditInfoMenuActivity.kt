@@ -2,6 +2,7 @@ package com.chocolate.nigerialoanapp.ui.edit
 
 import android.os.Bundle
 import android.view.View
+import com.blankj.utilcode.util.BarUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
@@ -15,6 +16,9 @@ class EditInfoMenuActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BarUtils.setStatusBarVisibility(this,true)
+        BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
+        BarUtils.setStatusBarLightMode(this, true)
         setContentView(R.layout.activity_edit_info_menu)
         basicView =  findViewById<View>(R.id.ll_basic_container)
         workView =  findViewById<View>(R.id.ll_work_container)

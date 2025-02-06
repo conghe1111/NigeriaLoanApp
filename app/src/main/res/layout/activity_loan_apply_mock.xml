@@ -118,6 +118,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_mock_stage"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:layout_height="wrap_content"/>
 
                 <androidx.appcompat.widget.AppCompatTextView

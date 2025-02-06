@@ -12,9 +12,10 @@ import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter.
 import com.chocolate.nigerialoanapp.utils.DateUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
-class LoanAmountDateMockAdapter(val mList : List<LoanData>) : RecyclerView.Adapter<LoanAmountDateMockAdapter.LoadApplyHistoryHolder>() {
+class LoanAmountDateMockAdapter(val mList : List<LoanData>, pos : Int) : RecyclerView.Adapter<LoanAmountDateMockAdapter.LoadApplyHistoryHolder>() {
 
     private var mOnItemClickListener : OnItemClickListener? = null
+    private var mPos : Int = pos
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoadApplyHistoryHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_loan_apply_date_mock, parent, false)
@@ -38,20 +39,30 @@ class LoanAmountDateMockAdapter(val mList : List<LoanData>) : RecyclerView.Adapt
         val str = array[2] + "\n" + array[1] + "\n" +array[0]
         holder.tvLoanApply?.text = str
         if (loanData.lockFlag){
-            holder.flContainer?.setBackgroundResource(R.drawable.bg_gray_bg_2)
             holder.ivLock?.visibility = View.VISIBLE
-            holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.color_a1a1a1))
         } else {
-            holder.flContainer?.setBackgroundResource(R.drawable.bg_green_bg)
             holder.ivLock?.visibility = View.GONE
+        }
+        if (mPos == position) {
+            holder.flContainer?.setBackgroundResource(R.drawable.bg_green_bg)
             holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.white))
+        } else {
+            holder.flContainer?.setBackgroundResource(R.drawable.bg_gray_bg_2)
+            holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.color_a1a1a1))
         }
         holder.itemView?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 if (loanData.amount == null) {
                     return
                 }
+                if (loanData.lockFlag) {
+                    return
+                }
+                val lastPos = mPos
+                mPos = position
                 mOnItemClickListener?.onItemClick(loanData.amount!!, position)
+                notifyItemChanged(lastPos)
+                notifyItemChanged(mPos)
             }
 
         })

@@ -17,6 +17,7 @@
             android:layout_height="@dimen/dp_8"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_stage_title"
             android:text="@string/stage_x_x"
             android:layout_width="wrap_content"
             android:textColor="#333333"
@@ -50,7 +51,7 @@
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_loan_amount"
+                android:id="@+id/tv_loan_repay_date"
                 android:layout_width="0dp"
                 android:text="₦5,702.00"
                 android:textColor="#999999"
@@ -79,7 +80,7 @@
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_interest"
+                android:id="@+id/tv_loan_repay_amount"
                 android:layout_width="0dp"
                 android:text="₦5,702.00"
                 android:textColor="#333333"

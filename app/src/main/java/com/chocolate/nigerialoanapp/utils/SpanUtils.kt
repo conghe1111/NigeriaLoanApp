@@ -74,4 +74,13 @@ object SpanUtils {
         val formattedAmount: String = decimalFormat.format(amount)
         return "₦$formattedAmount"
     }
+
+    fun getShowText2(amount : Long?) : String {
+        if (amount == null) {
+            return "₦0"
+        }
+        val decimalFormat: DecimalFormat = DecimalFormat("#,##0.00")
+        val formattedAmount: String = decimalFormat.format(amount)
+        return "₦$formattedAmount"
+    }
 }
