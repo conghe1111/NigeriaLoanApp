@@ -1,14 +1,20 @@
 package com.chocolate.nigerialoanapp.ui.login
 
+import android.R.attr.maxLength
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.FrameLayout.INVISIBLE
+import android.widget.FrameLayout.VISIBLE
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.R
@@ -17,6 +23,8 @@ import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.LoginResponse
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
+import com.chocolate.nigerialoanapp.widget.EditClearContainer
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -33,6 +41,10 @@ class LoginFragment : BaseFragment() {
     private var tvForgetPwd: AppCompatTextView? = null
     private var tvLogin: AppCompatTextView? = null
     private var etPwd: AppCompatEditText? = null
+    private var loadingView: View? = null
+    private var editText: EditClearContainer? = null
+
+    private var loginIsPwdMode: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +60,8 @@ class LoginFragment : BaseFragment() {
         tvForgetPwd = view.findViewById<AppCompatTextView>(R.id.tv_forget_pwd)
         tvLogin = view.findViewById<AppCompatTextView>(R.id.tv_login)
         etPwd = view.findViewById<AppCompatEditText>(R.id.et_pwd)
+        loadingView = view.findViewById<View>(R.id.fl_login_loading)
+        editText = view.findViewById<EditClearContainer>(R.id.edit_clear_login)
         initView()
     }
 
@@ -79,6 +93,7 @@ class LoginFragment : BaseFragment() {
             }
 
         })
+
         var password = SPUtils.getInstance().getString(LocalConfig.LC_PASSWORD, "")
         if (TextUtils.isEmpty(password)) {
 //            password = mPhoneNum
@@ -91,9 +106,18 @@ class LoginFragment : BaseFragment() {
             tvLogin?.isEnabled = false
         }
         etPwd?.addTextChangedListener(textChangeWatcher)
+
+        editText?.setPassWordMode(loginIsPwdMode)
+        editText?.requestFocus2()
+        editText?.setOnEditClearCallBack(object : EditClearContainer.OnEditClearCallBack {
+            override fun onPwdModeChange(pwdMode: Boolean) {
+                loginIsPwdMode = pwdMode
+            }
+
+        })
     }
 
-    private val textChangeWatcher : TextWatcher = object : TextWatcher {
+    private val textChangeWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
         }
@@ -103,16 +127,18 @@ class LoginFragment : BaseFragment() {
         }
 
         override fun afterTextChanged(s: Editable?) {
-            if (TextUtils.isEmpty(s.toString())) {
-                tvLogin?.isEnabled = false
-            } else {
+            if (!TextUtils.isEmpty(s) && s!!.isNotEmpty()) {
                 tvLogin?.isEnabled = true
+
+            } else {
+                tvLogin?.isEnabled = false
             }
         }
 
     }
 
     private fun pwdLogin(password: String) {
+        loadingView?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             var phoneNum: String = ""
@@ -136,6 +162,7 @@ class LoginFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    loadingView?.visibility = View.GONE
                     val loginResponse = checkResponseSuccess(response, LoginResponse::class.java)
                     if (loginResponse == null) {
                         return
@@ -152,12 +179,16 @@ class LoginFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    loadingView?.visibility = View.GONE
                 }
             })
     }
 
     override fun onDestroy() {
         etPwd?.removeTextChangedListener(textChangeWatcher)
+        OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
     }
+
+
 }

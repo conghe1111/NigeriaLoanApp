@@ -2,13 +2,17 @@ package com.chocolate.nigerialoanapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
@@ -16,6 +20,7 @@ import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.SettingMineBean
+import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
@@ -46,8 +51,11 @@ class MineFragment : BaseFragment() {
 
     private var mList: ArrayList<SettingMineBean> = ArrayList()
 
-    private var rvMine : RecyclerView? = null
-    private var ivConsumer : AppCompatImageView? = null
+    private var rvMine: RecyclerView? = null
+    private var ivConsumer: AppCompatImageView? = null
+    private var flContainer: FrameLayout? = null
+    private var tvName: TextView? = null
+    private var tvMobile: TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,11 +68,25 @@ class MineFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvMine = view.findViewById<RecyclerView>(R.id.rv_content_mine)
+        flContainer = view.findViewById<FrameLayout>(R.id.fl_top_icon_container)
+        tvName = view.findViewById<TextView>(R.id.tv_top_name)
+        tvMobile = view.findViewById<TextView>(R.id.tv_top_mobile)
+
         ivConsumer = view.findViewById<AppCompatImageView>(R.id.iv_main_top_consumer)
         initializeView()
     }
 
     private fun initializeView() {
+        flContainer?.visibility = View.VISIBLE
+        tvName?.text = AppUtils.getAppName()
+        val mobileStr = ConfigMgr.mProfileInfo?.account_profile?.mobile
+        if (TextUtils.isEmpty(mobileStr)) {
+            tvMobile?.visibility = View.GONE
+        } else {
+            tvMobile?.visibility = View.VISIBLE
+            tvMobile?.text = mobileStr
+        }
+
         buildSettingList()
         ivConsumer?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
@@ -79,36 +101,50 @@ class MineFragment : BaseFragment() {
         rvMine?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvMine?.adapter = adapter
         rvMine?.addItemDecoration(NorItemDecor())
-        adapter?.setOnClickListener(object :MineAdapter.OnClickListener {
+        adapter?.setOnClickListener(object : MineAdapter.OnClickListener {
             override fun OnClick(pos: Int, settingBean: SettingMineBean) {
                 when (settingBean.type) {
                     INFORMATION -> {
                         val intent = Intent(context, EditInfoMenuActivity::class.java)
                         startActivity(intent)
                     }
+
                     PageType.CUSTOMER_SERVICE -> {
                         context?.let {
                             ConsumerHotlineActivity.startActivity(it)
                         }
                     }
+
                     PageType.HISTORY_RECORD -> {
                         context?.let {
                             HistoryRecordActivity.startActivity(it)
                         }
                     }
+
                     PageType.PRIVACY -> {
                         activity?.let {
-                            WebViewActivity.launchWebView(it, Api.GET_POLICY, WebViewActivity.TYPE_PRIVACY)
+                            WebViewActivity.launchWebView(
+                                it,
+                                Api.GET_POLICY,
+                                WebViewActivity.TYPE_PRIVACY
+                            )
                         }
                     }
+
                     PageType.TERM_CONDITION -> {
                         activity?.let {
-                            WebViewActivity.launchWebView(it, Api.GET_POLICY, WebViewActivity.TYPE_PRIVACY)
+                            WebViewActivity.launchWebView(
+                                it,
+                                Api.GET_POLICY,
+                                WebViewActivity.TYPE_PRIVACY
+                            )
                         }
                     }
+
                     PageType.VERSION -> {
 
                     }
+
                     PageType.TEST_1 -> {
 //                        activity?.let {
 //                            EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
@@ -118,9 +154,10 @@ class MineFragment : BaseFragment() {
 //                            dialog.show()
 //                        }
                         activity?.let {
-                           LoanApplyActivity.startActivity(it)
+                            LoanApplyActivity.startActivity(it)
                         }
                     }
+
                     PageType.LOGOUT -> {
                         logout()
                     }
@@ -149,7 +186,7 @@ class MineFragment : BaseFragment() {
         mList.add(
             SettingMineBean(
                 R.drawable.ic_setting_history_record,
-                R.string.setting_history_record  ,
+                R.string.setting_history_record,
                 PageType.HISTORY_RECORD
             )
         )
@@ -160,18 +197,36 @@ class MineFragment : BaseFragment() {
                 PageType.PRIVACY
             )
         )
-        mList.add(SettingMineBean(R.drawable.ic_setting_term, R.string.setting_term_condition,
-            PageType.TERM_CONDITION))
-        mList.add(SettingMineBean(R.drawable.ic_setting_version, R.string.setting_version,
-            PageType.VERSION))
+        mList.add(
+            SettingMineBean(
+                R.drawable.ic_setting_term, R.string.setting_term_condition,
+                PageType.TERM_CONDITION
+            )
+        )
+        mList.add(
+            SettingMineBean(
+                R.drawable.ic_setting_version, R.string.setting_version,
+                PageType.VERSION
+            )
+        )
 
 //        if (BuildConfig.DEBUG && false) {
         if (BuildConfig.DEBUG) {
-            mList.add(SettingMineBean(R.drawable.ic_setting_version, R.string.setting_debug, PageType.TEST_1))
+            mList.add(
+                SettingMineBean(
+                    R.drawable.ic_setting_version,
+                    R.string.setting_debug,
+                    PageType.TEST_1
+                )
+            )
 
         }
-        mList.add(SettingMineBean(R.drawable.ic_setting_version, R.string.logout,
-            PageType.LOGOUT))
+        mList.add(
+            SettingMineBean(
+                R.drawable.ic_setting_version, R.string.logout,
+                PageType.LOGOUT
+            )
+        )
     }
 
     private fun logout() {
@@ -216,7 +271,7 @@ class MineFragment : BaseFragment() {
                     }
                 }
             })
-        }
+    }
 
     private fun quitLogout() {
         Constant.mToken = ""
