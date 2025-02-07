@@ -1,20 +1,14 @@
 package com.chocolate.nigerialoanapp.ui.login
 
-import android.R.attr.maxLength
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.FrameLayout.INVISIBLE
-import android.widget.FrameLayout.VISIBLE
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.R
@@ -23,7 +17,6 @@ import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.LoginResponse
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
-import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.EditClearContainer
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -82,14 +75,17 @@ class LoginFragment : BaseFragment() {
         })
         tvLogin?.setOnClickListener(object : OnClickListener {
             override fun onClick(v: View?) {
-                if (etPwd == null) {
-                    return
+                if (activity is LoginActivity) {
+                    (activity as LoginActivity).checkNetWork(object : LoginActivity.CallBack {
+                        override fun onSuccess() {
+                            if (isDestroy()) {
+                                return
+                            }
+                            pwdLoginInternal()
+                        }
+
+                    })
                 }
-                val pwd = etPwd!!.text.toString()
-                if (TextUtils.isEmpty(pwd)) {
-                    return
-                }
-                pwdLogin(pwd)
             }
 
         })
@@ -115,6 +111,17 @@ class LoginFragment : BaseFragment() {
             }
 
         })
+    }
+
+    private fun pwdLoginInternal() {
+        if (etPwd == null) {
+            return
+        }
+        val pwd = etPwd!!.text.toString()
+        if (TextUtils.isEmpty(pwd)) {
+            return
+        }
+        pwdLogin(pwd)
     }
 
     private val textChangeWatcher: TextWatcher = object : TextWatcher {

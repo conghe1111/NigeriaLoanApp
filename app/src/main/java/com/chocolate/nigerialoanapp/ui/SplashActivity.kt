@@ -130,49 +130,6 @@ class SplashActivity : BaseActivity() {
             })
     }
 
-    private fun requestLive() {
-        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
-        try {
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        if (BuildConfig.DEBUG) {
-            Log.i(TAG, " launcher activity ... = " + jsonObject.toString())
-        }
-        OkGo.post<String>(Api.LIVE).tag(TAG)
-            .params("data", AESUtil.encrypt(jsonObject.toString()))
-            .execute(object : StringCallback() {
-                override fun onSuccess(response: Response<String>) {
-                    if (isFinishing || isDestroyed) {
-                        return
-                    }
-                    var responseBean: BaseResponseBean? = null
-                    try {
-                        responseBean = com.alibaba.fastjson.JSONObject.parseObject(
-                            response.body().toString(),
-                            BaseResponseBean::class.java
-                        )
-                    } catch (e: Exception) {
-                        if (BuildConfig.DEBUG) {
-                            throw e
-                        }
-                    }
-                    if (responseBean?.isRequestSuccess() == true) {
-
-                    } else {
-
-                    }
-                }
-
-                override fun onError(response: Response<String>) {
-                    super.onError(response)
-                    if (isFinishing || isDestroyed) {
-                        return
-                    }
-                }
-            })
-    }
-
     override fun onDestroy() {
         mHandler?.removeCallbacksAndMessages(null)
         super.onDestroy()

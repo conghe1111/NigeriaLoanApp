@@ -177,4 +177,9 @@ public class JumpPermissionUtils {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
     }
+
+    public static void toWifiSetting(Activity activity) {
+        Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+        activity.startActivity(intent);
+    }
 }

@@ -24,6 +24,7 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.dialog.ErrorStateDialog
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
 import com.chocolate.nigerialoanapp.ui.history.HistoryRecordActivity
@@ -153,16 +154,20 @@ class MineFragment : BaseFragment() {
 //                        activity?.let {
 //                            LoanApplyActivity.startActivity(it)
 //                        }
+//                        context?.let {
+//                            val dialog: RequestPermissionDialog = RequestPermissionDialog(it, activity)
+//                            dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
+//                                override fun onClickAgree() {
+//
+//                                }
+//                            })
+//                            dialog.show()
+//                        }
                         context?.let {
-                            val dialog: RequestPermissionDialog = RequestPermissionDialog(it, activity)
-                            dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
-                                override fun onClickAgree() {
-
-                                }
-                            })
+                            val descStr = it.resources.getString(R.string.network_abnormal_please_try_again)
+                            val dialog: ErrorStateDialog = ErrorStateDialog(it, descStr, activity)
                             dialog.show()
                         }
-
                     }
 
                     PageType.LOGOUT -> {

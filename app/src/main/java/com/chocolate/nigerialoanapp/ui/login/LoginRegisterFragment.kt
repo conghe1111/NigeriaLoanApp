@@ -63,15 +63,16 @@ class LoginRegisterFragment : BaseFragment() {
     private fun initializeView() {
         tvApply?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                if (etMobileNum == null) {
-                    return
+                if (activity is LoginActivity) {
+                    (activity as LoginActivity).checkNetWork(object : LoginActivity.CallBack {
+                        override fun onSuccess() {
+                            if (isDestroy()) {
+                                return
+                            }
+                            schedualMobilePhone()
+                        }
+                    })
                 }
-                val phoneNum = etMobileNum!!.text.toString().replace(" ","")
-                if (RegexUtils.isTel(phoneNum)){
-                    ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
-                    return
-                }
-                checkMobilePhone(phoneNum)
             }
 
         })
@@ -108,6 +109,18 @@ class LoginRegisterFragment : BaseFragment() {
             etMobileNum?.setSelection(0)
         }
         updateState()
+    }
+
+    private fun schedualMobilePhone() {
+        if (etMobileNum == null) {
+            return
+        }
+        val phoneNum = etMobileNum!!.text.toString().replace(" ","")
+        if (RegexUtils.isTel(phoneNum)){
+            ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
+            return
+        }
+        checkMobilePhone(phoneNum)
     }
 
     private fun checkMobilePhone(mobileNum : String) {

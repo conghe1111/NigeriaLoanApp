@@ -12,7 +12,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
-class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse?,): Dialog(context)   {
+class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse?): Dialog(context)   {
 
     private var hasSelect : Boolean = false
     private var ivSelect: ImageView? = null
