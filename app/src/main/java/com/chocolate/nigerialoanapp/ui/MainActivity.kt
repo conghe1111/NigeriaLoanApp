@@ -90,7 +90,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun requestPermissionInternal() {
-        val dialog: RequestPermissionDialog = RequestPermissionDialog(this)
+        val dialog: RequestPermissionDialog = RequestPermissionDialog(this, this@MainActivity)
         dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
             override fun onClickAgree() {
                 val utils = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

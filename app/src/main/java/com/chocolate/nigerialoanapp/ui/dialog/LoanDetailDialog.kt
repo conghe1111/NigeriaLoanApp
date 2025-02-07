@@ -6,6 +6,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
@@ -62,6 +63,8 @@ class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse
         tvConfirm?.setOnClickListener(object :NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 if (!hasSelect) {
+                    val toastStr = context.resources.getString(R.string.please_select_loan_contract)
+                    ToastUtils.showShort(toastStr)
                     return
                 }
                 if (mCallBack != null) {

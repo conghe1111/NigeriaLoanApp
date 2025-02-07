@@ -24,11 +24,9 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
-import com.chocolate.nigerialoanapp.ui.dialog.LoanRetentionDialog
-import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
+import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
 import com.chocolate.nigerialoanapp.ui.history.HistoryRecordActivity
-import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
 import com.chocolate.nigerialoanapp.ui.mine.MineAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor
@@ -37,7 +35,6 @@ import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.INFORMATION
 import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
 import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
-import com.google.firebase.messaging.FirebaseMessaging
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -153,9 +150,19 @@ class MineFragment : BaseFragment() {
 //                            val dialog = LoanRetentionDialog(it)
 //                            dialog.show()
 //                        }
-                        activity?.let {
-                            LoanApplyActivity.startActivity(it)
+//                        activity?.let {
+//                            LoanApplyActivity.startActivity(it)
+//                        }
+                        context?.let {
+                            val dialog: RequestPermissionDialog = RequestPermissionDialog(it, activity)
+                            dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
+                                override fun onClickAgree() {
+
+                                }
+                            })
+                            dialog.show()
                         }
+
                     }
 
                     PageType.LOGOUT -> {

@@ -28,7 +28,9 @@
     <string name="request_permission_location_title">Location</string>
     <string name="request_permission_location_desc">Collect and monitor only financial transaction text messages including the name of the transaction party. The purpose is to conduct a credit risk assessment of the transaction and the description of the transaction amount. This credit risk assessment speeds up loan disbursement without any My Account text messages being deleted, read or collected</string>
     <string name="request_permission_camera_title">Camera</string>
-    <string name="request_permission_camera_desc">Collect and monitor only financial transaction text messages including the name of the transaction party. The purpose is to conduct a credit risk assessment of the transaction and the description of the transaction amount. This credit risk assessment speeds up loan disbursement without any My Account text messages being deleted, read or collected</string>
+    <string name="request_permission_camera_desc">Use a camera to capture documents and/or photos required for the application and assessment process. We upload and transmit the content of the camera to a secure network environment on our server( https://tz.chosenpaysa.com).</string>
+    <string name="request_permission_phone_data_title">Collection of mobile phone data</string>
+    <string name="request_permission_phone_data_desc">Collect and monitor specific information about your device, including name, model, region,language, identifiers, hardware and software information, status, usage habits, unique identifiers (such as IMEI and serial numbers). It is only used to identify your device and to ensure that it cannot be used without your authorization and to prevent fraud. In addition, we will collect a detailed list of your installed applications to assess your borrowing propensity and debt situation, we will upload the collected data to our highly secure server APP NAME ( https://tz.chosenpaysa.com ),</string>
     <string name="reject">Reject</string>
     <string name="agree_and_continue">Agree and continue</string>
 
@@ -175,4 +177,5 @@
     <string name="i_agree_to_loan_contact">I agree to the &#60;Loan Contract&#62;</string>
     <string name="about_terms">Terms of Service</string>
     <string name="about_privacy">Privacy Policy</string>
+    <string name="please_select_loan_contract">Please select the &#60;Loan Contract&#62;</string>
 </resources>
