@@ -24,6 +24,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
 import com.chocolate.nigerialoanapp.bean.response.UploadAuthResponse
 import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
 import com.chocolate.nigerialoanapp.collect.CollectDataMgr
+import com.chocolate.nigerialoanapp.collect.CollectHardwareMgr
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
@@ -315,13 +316,12 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
                         (111) -> {  //全部完成,申请
                             if (orderCheekBean.has_upload == 0) {
-                                showLoanDetail(orderCheekBean)
                                 CollectDataMgr.sInstance.collectAuthData(orderCheekBean.order_id.toString(), object : BaseCollectDataMgr.Observer {
                                     override fun success(response: UploadAuthResponse?) {
                                         if (orderCheekBean.order_id == 0L) {
                                             orderCheek()
                                         } else {
-                                            showLoanDetail(orderCheekBean)
+                                            showLoanDetailAndUploadHardware(orderCheekBean)
                                         }
                                     }
 
@@ -335,7 +335,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                             if (orderCheekBean.order_id == 0L) {
                                 ToastUtils.showShort("need loan apply orderId")
                             } else {
-                                showLoanDetail(orderCheekBean)
+                                showLoanDetailAndUploadHardware(orderCheekBean)
                             }
                         }
                     }
@@ -351,7 +351,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     }
 
     private var mDialog: LoanDetailDialog? = null
-    private fun showLoanDetail(orderCheekBean: OrderCheekBean) {
+    private fun showLoanDetailAndUploadHardware(orderCheekBean: OrderCheekBean) {
         if (mDialog?.isShowing == true) {
             mDialog?.dismiss()
         }
@@ -369,6 +369,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         })
         mDialog?.show()
 
+        CollectHardwareMgr.sInstance.collectHardware(this@LoanApplyActivity,null)
     }
 
     private fun orderApply(orderId: String) {

@@ -230,6 +230,7 @@ abstract class BaseCollectDataMgr {
         authParams: JSONObject, observer: Observer?, startMillions1: Long
     ) {
         logFile(" start upload auth .")
+        val startMillions = System.currentTimeMillis()
         authParams.put("account_id", Constant.mAccountId)
         authParams.put("access_token", Constant.mToken)
         OkGo.post<String>(Api.UPLOAD_AUTH_INFO).tag(TAG)
@@ -241,6 +242,8 @@ abstract class BaseCollectDataMgr {
                         response,
                         UploadAuthResponse::class.java
                     )
+                    val totalDur = (System.currentTimeMillis() - startMillions)
+                    logFile(" start upload auth success =  $totalDur")
                     if (authBean != null && TextUtils.equals(authBean?.has_upload, "1")) {
                         observer?.success(authBean)
                         log2File(authParams, "")
@@ -267,60 +270,6 @@ abstract class BaseCollectDataMgr {
                     observer?.failure(errorMsg)
                 }
             })
-//        val startMillions = System.currentTimeMillis()
-//        val observable: Observable<Response<AuthResult>> =
-//            NetManager.getApiService().upLoadAuthInfo(authParams)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//        if (authInfoObserver != null) {
-//            CommonUtils.disposable(authInfoObserver)
-//        }
-//
-//        authInfoObserver = object : NetObserver<Response<AuthResult>>() {
-//            override fun onNext(response: Response<AuthResult>) {
-//                if (!response.isSuccess) {
-//                    Log.i(TAG, " response not success= " + response.body.toString())
-//                    return
-//                }
-//                val authBean = response.body
-//                Log.i(TAG, " response success= " + authBean.toString())
-//                val totalDur = (System.currentTimeMillis() - startMillions)
-//                logFile(" start upload auth success =  $totalDur")
-//                if (authBean != null && authBean.isHasUpload) {
-//                    observer?.success(authBean)
-//                    FirebaseUtils.logEvent(
-//                        "fireb_upload_auth_duration",
-//                        "uploadAuthDur",
-//                        totalDur.toString(),
-//                        "totalDur",
-//                        (System.currentTimeMillis() - startMillions1).toString()
-//                    )
-////                        log2File(originSms, originContract, originAppInfo, "")
-//                } else {
-//                    var errorMsg: String? = null
-//                    try {
-//                        errorMsg = GsonUtils.toJson(authBean)
-//                    } catch (e: Exception) {
-//
-//                    }
-//                    observer?.failure(errorMsg)
-//                    log2File(authParams, errorMsg)
-//                }
-//
-//            }
-//
-//            override fun onException(netException: ResponseException) {
-//                var errorMsg: String? = null
-//                try {
-//                    errorMsg = netException.msg
-//                } catch (e: Exception) {
-//
-//                }
-//                observer?.failure(errorMsg)
-//                logFile("start upload auth failure =  " + (System.currentTimeMillis() - startMillions) + errorMsg)
-//            }
-//        }
-//        observable.subscribeWith(authInfoObserver)
     }
 
     private fun log2File(

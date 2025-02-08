@@ -16,9 +16,17 @@ import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ThreadUtils
 import com.chocolate.nigerialoanapp.BuildConfig
+import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.bean.response.UploadAuthResponse
+import com.chocolate.nigerialoanapp.bean.response.UploadHardwareResponse
+import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr.Companion
 import com.chocolate.nigerialoanapp.global.App
+import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.log.LogSaver
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.callback.StringCallback
+import com.lzy.okgo.model.Response
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONException
@@ -214,33 +222,50 @@ class CollectHardwareMgr {
         if (myreqbody == null) {
             return
         }
-//        val observable = NetManager.getApiService().hareware(myreqbody).subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//        observable.subscribeWith(object : NetObserver<Response<HardwareResponseBean>>() {
-//            override fun onNext(response: Response<HardwareResponseBean>) {
-//                super.onNext(response)
-//                if (response.isSuccess) {
-//                    observer?.success("")
-//                    if (Constant.IS_COLLECT) {
-//                        logFile(jsonStr)
-//                    }
-//                }
-//            }
-//
-//            override fun onError(exception: Throwable) {
-//                super.onError(exception)
-//                var errorMsg: String? = null
-//                try {
-//                    errorMsg = exception.toString()
-//                } catch (e: Exception) {
-//
-//                }
-//                observer?.failure(errorMsg)
-//                logFile("start upload auth failure =  " + (System.currentTimeMillis() - startMillions) + errorMsg)
-//
-//            }
-//        })
+        val jsonObject = JSONObject()
+        jsonObject.put("account_id", Constant.mAccountId)
+        jsonObject.put("access_token", Constant.mToken)
+        jsonObject.put("client_json", Constant.mToken)
+        OkGo.post<String>(Api.UPLOAD_CLIENT_INFO).tag(TAG)
+            .params("data", com.chocolate.nigerialoanapp.network.NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+//                        Log.i(TAG, " response success= " + response.body());
+                    var authBean: UploadHardwareResponse? = com.chocolate.nigerialoanapp.network.NetworkUtils.checkResponseSuccess(
+                        response,
+                        UploadHardwareResponse::class.java
+                    )
+                    val totalDur = (System.currentTimeMillis() - startMillions)
+                    logFile(" start upload auth success =  $totalDur")
+                    if (authBean != null && TextUtils.equals(authBean?.client_upload, "1")) {
+                        observer?.success("")
+                        if (Constant.IS_COLLECT) {
+                            logFile(jsonStr)
+                        }
+                    } else {
+                        var errorMsg: String? = null
+                        try {
+                            errorMsg = response.body().toString()
+                        } catch (e: Exception) {
 
+                        }
+                        observer?.failure(errorMsg)
+                        logFile("start upload auth failure 2 =  " + (System.currentTimeMillis() - startMillions) + errorMsg)
+                    }
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    var errorMsg: String? = null
+                    try {
+                        errorMsg = response.body().toString()
+                    } catch (e: Exception) {
+
+                    }
+                    observer?.failure(errorMsg)
+                    logFile("start upload auth failure =  " + (System.currentTimeMillis() - startMillions) + errorMsg)
+                }
+            })
     }
 
     interface Observer {
