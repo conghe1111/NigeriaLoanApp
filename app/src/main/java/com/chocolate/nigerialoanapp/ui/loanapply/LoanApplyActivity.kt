@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.loanapply
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
@@ -19,6 +21,9 @@ import com.chocolate.nigerialoanapp.bean.response.OrderApplyResponse
 import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
+import com.chocolate.nigerialoanapp.bean.response.UploadAuthResponse
+import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
+import com.chocolate.nigerialoanapp.collect.CollectDataMgr
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
@@ -146,7 +151,22 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvNext?.isSelected = true
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                orderCheek()
+                PermissionUtils.permission(
+//                    Manifest.permission.READ_CALL_LOG,
+//                    Manifest.permission.READ_CONTACTS,
+                    Manifest.permission.READ_SMS,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION,
+//                    Manifest.permission.ACCESS_FINE_LOCATION,
+//                    Manifest.permission.READ_PHONE_STATE,
+                ).callback(object : PermissionUtils.SimpleCallback {
+                    override fun onGranted() {
+                        orderCheek()
+                    }
+
+                    override fun onDenied() {
+                        ToastUtils.showShort("please allow permission for apply order.")
+                    }
+                }).request()
             }
 
         })
@@ -264,12 +284,6 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     if (orderCheekBean == null) {
                         return
                     }
-                    if (orderCheekBean.order_id == 0 && orderCheekBean.has_upload == 0) {
-//                        ToastUtils.showShort(data.getMsg())
-                        showLoanDetail(orderCheekBean)
-                        ToastUtils.showShort("auth expired, pls upload new auth data.")
-                        return
-                    }
                     when (orderCheekBean.next_phase) {
                         (101) -> {  //基本信息填写完成（第一页）
                             EditInfoActivity.showActivity(
@@ -300,12 +314,29 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                         }
 
                         (111) -> {  //全部完成,申请
-                            if (orderCheekBean.order_id == 0) {
-                                // TODO未通过
+                            if (orderCheekBean.has_upload == 0) {
+                                showLoanDetail(orderCheekBean)
+                                CollectDataMgr.sInstance.collectAuthData(orderCheekBean.order_id.toString(), object : BaseCollectDataMgr.Observer {
+                                    override fun success(response: UploadAuthResponse?) {
+                                        if (orderCheekBean.order_id == 0L) {
+                                            orderCheek()
+                                        } else {
+                                            showLoanDetail(orderCheekBean)
+                                        }
+                                    }
+
+                                    override fun failure(response: String?) {
+                                        ToastUtils.showShort("upload auth fail")
+                                    }
+
+                                })
                                 return
                             }
-                            showLoanDetail(orderCheekBean)
-
+                            if (orderCheekBean.order_id == 0L) {
+                                ToastUtils.showShort("need loan apply orderId")
+                            } else {
+                                showLoanDetail(orderCheekBean)
+                            }
                         }
                     }
                 }
@@ -337,6 +368,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
         })
         mDialog?.show()
+
     }
 
     private fun orderApply(orderId: String) {

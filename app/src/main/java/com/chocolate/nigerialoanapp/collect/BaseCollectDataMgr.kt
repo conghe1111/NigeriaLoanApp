@@ -1,22 +1,23 @@
 package com.chocolate.nigerialoanapp.collect
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.text.TextUtils
 import android.util.Log
 import com.blankj.utilcode.util.*
 import com.chocolate.nigerialoanapp.BuildConfig
-import com.chocolate.nigerialoanapp.bean.request.ClientRequest
-import com.chocolate.nigerialoanapp.bean.response.ClientResponse
+import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.bean.response.UploadAuthResponse
 import com.chocolate.nigerialoanapp.collect.item.CollectAppInfoMgr
 import com.chocolate.nigerialoanapp.collect.item.CollectSmsMgr
-import com.chocolate.nigerialoanapp.collect.utils.DeviceInfo
-import com.chocolate.nigerialoanapp.collect.utils.NetworkUtil
 import com.chocolate.nigerialoanapp.global.App
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.log.LogSaver
+import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.callback.StringCallback
+import com.lzy.okgo.model.Response
+import org.json.JSONObject
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
 import java.text.SimpleDateFormat
@@ -149,35 +150,36 @@ abstract class BaseCollectDataMgr {
         smsStr: String, callRecordStr: String,
         contractStr: String, appListStr: String,
         locationStr: String, orderId: String
-    ): ClientRequest? {
-        val context = App.instance?.applicationContext ?: return null
-        val deviceId = SPUtils.getInstance().getString(LocalConfig.LC_DEVICE_ID, "")
-        val imei = SPUtils.getInstance().getString(LocalConfig.LC_IMEI, "")
+    ): JSONObject {
+        val context = App.instance?.applicationContext ?: return JSONObject()
+        val jsonObject = JSONObject()
+//        val deviceId = SPUtils.getInstance().getString(LocalConfig.LC_DEVICE_ID, "")
+//        val imei = SPUtils.getInstance().getString(LocalConfig.LC_IMEI, "")
         val acconutId =  SPUtils.getInstance().getString(LocalConfig.LC_ACCOUNT_ID, "")
-        val macAddress = DeviceInfo.getInstance(context).macAddress
-        val androidId = DeviceInfo.getInstance(context).androidId
-        val ipAddress = NetworkUtil().getIpAddress(context)
+//        val macAddress = DeviceInfo.getInstance(context).macAddress
+//        val androidId = DeviceInfo.getInstance(context).androidId
+//        val ipAddress = NetworkUtil().getIpAddress(context)
 
-        val params = ClientRequest()
 //        params.appRecognitionVerdict = Constant.appRecognitionVerdict
 //        params.deviceRecognitionVerdict = Constant.deviceRecognitionVerdict
 //        params.appLicensingVerdict = Constant.appLicensingVerdict
-        var appVersion: String? = null
-        var verCode: String? = null
-        try {
-            val pInfo = App.instance!!.packageManager.getPackageInfo(
-                App.instance!!.packageName, 0
-            )
-            appVersion = pInfo.versionName //version name
-            verCode = pInfo.versionCode.toString() //version code
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
+//        var appVersion: String? = null
+//        var verCode: String? = null
+//        try {
+//            val pInfo = App.instance!!.packageManager.getPackageInfo(
+//                App.instance!!.packageName, 0
+//            )
+//            appVersion = pInfo.versionName //version name
+//            verCode = pInfo.versionCode.toString() //version code
+//        } catch (e: PackageManager.NameNotFoundException) {
+//            e.printStackTrace()
+//        }
         var smsAesStr = CollectSmsMgr.sInstance.getSmsAesStr()
         if (TextUtils.isEmpty(smsAesStr)) {
             smsAesStr = ""
         }
-        params.sms = smsAesStr
+        jsonObject.put("sms", smsAesStr)
+
 //        params.setCall(callInfos);
 //        if (contactInfos != null) {
 //            params.setContacts(contactInfos.size() > 0 ? AESUtil.encryptAES(JSON.toJSON(contactInfos).toString()) : "");
@@ -186,47 +188,85 @@ abstract class BaseCollectDataMgr {
         if (TextUtils.isEmpty(appInfoAesStr)) {
             appInfoAesStr = ""
         }
-        params.appList = appInfoAesStr
-        params.androidId = DeviceUtils.getAndroidID()
-        params.brand = DeviceUtils.getManufacturer()
-        params.deviceUniqId = DeviceUtils.getUniqueDeviceId()
-        params.imei = DeviceUtils.getAndroidID()
-        params.innerVersionCode = verCode
-        params.mac = macAddress
-        params.pubIp = NetworkUtils.getIpAddressByWifi()
-        params.userIp = NetworkUtils.getIPAddress(true)
-        params.accountId = acconutId
-        params.orderId = orderId
-        params.isRooted = if (DeviceUtils.isDeviceRooted()) "1" else "0"
-        params.isEmulator = if (DeviceUtils.isEmulator()) "1" else "0"
-        try {
-            //GPS位置json
-            params.gps = locationStr
-            //手机IMEI
-            try {
-                val hasPermissionReadPhoneState =
-                    PermissionUtils.isGranted(Manifest.permission.READ_PHONE_STATE)
-                if (hasPermissionReadPhoneState) {
-                    val imei = PhoneUtils.getIMEI()
-                    params.imei = if (!TextUtils.isEmpty(imei)) imei else DeviceUtils.getAndroidID()
-                }
-            } catch (e: Exception) {
-
-            }
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-            if (BuildConfig.DEBUG) {
-                throw e
-            }
-        }
-        return params
+        jsonObject.put("app_list", appInfoAesStr)
+//        params.appList = appInfoAesStr
+//        params.androidId = DeviceUtils.getAndroidID()
+//        params.brand = DeviceUtils.getManufacturer()
+//        params.deviceUniqId = DeviceUtils.getUniqueDeviceId()
+//        params.imei = DeviceUtils.getAndroidID()
+//        params.innerVersionCode = verCode
+//        params.mac = macAddress
+//        params.pubIp = NetworkUtils.getIpAddressByWifi()
+//        params.userIp = NetworkUtils.getIPAddress(true)
+//        params.accountId = acconutId
+//        params.orderId = orderId
+//        params.isRooted = if (DeviceUtils.isDeviceRooted()) "1" else "0"
+//        params.isEmulator = if (DeviceUtils.isEmulator()) "1" else "0"
+//        try {
+//            //GPS位置json
+//            params.gps = locationStr
+//            //手机IMEI
+//            try {
+//                val hasPermissionReadPhoneState =
+//                    PermissionUtils.isGranted(Manifest.permission.READ_PHONE_STATE)
+//                if (hasPermissionReadPhoneState) {
+//                    val imei = PhoneUtils.getIMEI()
+//                    params.imei = if (!TextUtils.isEmpty(imei)) imei else DeviceUtils.getAndroidID()
+//                }
+//            } catch (e: Exception) {
+//
+//            }
+//        } catch (e: java.lang.Exception) {
+//            e.printStackTrace()
+//            if (BuildConfig.DEBUG) {
+//                throw e
+//            }
+//        }
+        return JSONObject()
     }
 
     @SuppressLint("MissingPermission")
     private fun getAuthData(
-        authParams: ClientRequest?, observer: Observer?, startMillions1: Long
+        authParams: JSONObject, observer: Observer?, startMillions1: Long
     ) {
         logFile(" start upload auth .")
+        authParams.put("account_id", Constant.mAccountId)
+        authParams.put("access_token", Constant.mToken)
+        OkGo.post<String>(Api.UPLOAD_AUTH_INFO).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(authParams))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+//                        Log.i(TAG, " response success= " + response.body());
+                    var authBean: UploadAuthResponse? = NetworkUtils.checkResponseSuccess(
+                        response,
+                        UploadAuthResponse::class.java
+                    )
+                    if (authBean != null && TextUtils.equals(authBean?.has_upload, "1")) {
+                        observer?.success(authBean)
+                        log2File(authParams, "")
+                    } else {
+                        var errorMsg: String? = null
+                        try {
+                            errorMsg = response.body().toString()
+                        } catch (e: Exception) {
+
+                        }
+                        observer?.failure(errorMsg)
+                        log2File(authParams, errorMsg)
+                    }
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    var errorMsg: String? = null
+                    try {
+                        errorMsg = response.body().toString()
+                    } catch (e: Exception) {
+
+                    }
+                    observer?.failure(errorMsg)
+                }
+            })
 //        val startMillions = System.currentTimeMillis()
 //        val observable: Observable<Response<AuthResult>> =
 //            NetManager.getApiService().upLoadAuthInfo(authParams)
@@ -284,7 +324,7 @@ abstract class BaseCollectDataMgr {
     }
 
     private fun log2File(
-        authParams: ClientRequest?,
+        authParams: JSONObject?,
         errorMsg: String?
     ) {
         if (authParams == null) {
@@ -293,11 +333,11 @@ abstract class BaseCollectDataMgr {
         var originSms: String? = ""
         var originAppInfo: String? = ""
 
-        val aesSmsStr = authParams.sms
+        val aesSmsStr = authParams.optString("sms")
         if (!TextUtils.isEmpty(aesSmsStr)) {
             originSms = aesSmsStr
         }
-        val aesAppListStr = authParams.appList
+        val aesAppListStr =  authParams.optString("app_list")
         if (!TextUtils.isEmpty(aesAppListStr)) {
             originAppInfo = aesAppListStr
         }
@@ -332,7 +372,7 @@ abstract class BaseCollectDataMgr {
     }
 
     interface Observer {
-        fun success(response: ClientResponse?)
+        fun success(response: UploadAuthResponse?)
         fun failure(response: String?)
     }
 

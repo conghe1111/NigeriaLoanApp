@@ -2,10 +2,10 @@ package com.chocolate.nigerialoanapp.bean.response;
 
 public class OrderCheekBean extends EditProfileBean{
 
-    private int order_id;
+    private long order_id;
     private int has_upload;
 
-    public int getOrder_id() {
+    public long getOrder_id() {
         return order_id;
     }
 
@@ -17,7 +17,7 @@ public class OrderCheekBean extends EditProfileBean{
         this.has_upload = has_upload;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrder_id(long order_id) {
         this.order_id = order_id;
     }
 }
