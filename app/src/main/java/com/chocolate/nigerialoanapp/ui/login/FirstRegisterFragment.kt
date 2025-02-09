@@ -1,9 +1,12 @@
 package com.chocolate.nigerialoanapp.ui.login
 
+import android.os.Bundle
 import android.text.TextUtils
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.bean.response.LoginResponse
+import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -14,6 +17,11 @@ class FirstRegisterFragment : BaseRegisterFragment() {
 
     companion object {
         const val TAG = "FirstRegisterFragment"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        FirebaseUtils.logEvent("SYSTEM_REGISTER_ENTER_USSD")
     }
 
     override fun verifyCodeLogin(verfiyCode: String, password: String) {
@@ -52,6 +60,7 @@ class FirstRegisterFragment : BaseRegisterFragment() {
                         return
                     }
                     if (TextUtils.equals(loginResponse.login_status, "success")) {
+                        FirebaseUtils.logEvent("SERVICE_LOGIN_REGISTER${Constant.USSD}")
                         toMainPage(loginResponse, password)
                     } else {
 
@@ -65,5 +74,10 @@ class FirstRegisterFragment : BaseRegisterFragment() {
                     }
                 }
             })
+    }
+
+    override fun onSignUp() {
+        super.onSignUp()
+        FirebaseUtils.logEvent("CLICK_REGISTER${Constant.USSD}")
     }
 }

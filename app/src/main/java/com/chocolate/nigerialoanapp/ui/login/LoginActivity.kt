@@ -2,6 +2,8 @@ package com.chocolate.nigerialoanapp.ui.login
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import com.blankj.utilcode.util.BarUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
@@ -13,6 +15,8 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.SplashActivity
 import com.chocolate.nigerialoanapp.ui.SplashActivity.Companion
 import com.chocolate.nigerialoanapp.ui.dialog.ErrorStateDialog
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -27,6 +31,8 @@ class LoginActivity : BaseActivity() {
 
     var mPhoneNum: String? = null
 
+    private var ivBack : AppCompatImageView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BarUtils.setStatusBarVisibility(this, true)
@@ -34,8 +40,20 @@ class LoginActivity : BaseActivity() {
         BarUtils.setStatusBarLightMode(this, true)
         setContentView(R.layout.activity_login)
 
+        ivBack = findViewById<AppCompatImageView>(R.id.iv_login_back)
         val loginRegisterFragment = LoginRegisterFragment()
         toFragment(loginRegisterFragment)
+        setBackVisible(false)
+
+        ivBack?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                val loginRegisterFragment = LoginRegisterFragment()
+                toFragment(loginRegisterFragment)
+                setBackVisible(false)
+                FirebaseUtils.logEvent("SYSTEM_LOGIN_REGISTER_BACK_SMS")
+            }
+
+        })
     }
 
     override fun getFragmentContainerRes(): Int {
@@ -43,6 +61,7 @@ class LoginActivity : BaseActivity() {
     }
 
     fun toLoginFragment() {
+        setBackVisible(true)
         val registerFragment = LoginFragment()
         toFragment(registerFragment)
     }
@@ -50,6 +69,7 @@ class LoginActivity : BaseActivity() {
     fun toRegisterFragment(isFirstRegister: Boolean = false) {
         val registerFragment =
             if (isFirstRegister) FirstRegisterFragment() else ForgetRegisterFragment()
+        setBackVisible(true)
         toFragment(registerFragment)
     }
 
@@ -112,5 +132,17 @@ class LoginActivity : BaseActivity() {
     interface CallBack {
         fun onSuccess()
 
+    }
+
+    fun setBackVisible(visibleFlag : Boolean) {
+        ivBack?.visibility = if (visibleFlag) View.VISIBLE else View.GONE
+    }
+
+    override fun onDestroy() {
+        if (dialog?.isShowing == true) {
+            dialog?.dismiss()
+        }
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDestroy()
     }
 }

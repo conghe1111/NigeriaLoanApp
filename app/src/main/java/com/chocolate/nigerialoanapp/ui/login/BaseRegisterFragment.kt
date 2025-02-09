@@ -11,7 +11,6 @@ import android.os.Message
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -24,12 +23,11 @@ import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseFragment
-import com.chocolate.nigerialoanapp.bean.response.LoginResponse
 import com.chocolate.nigerialoanapp.bean.response.VerifyCodeResponse
 import com.chocolate.nigerialoanapp.global.Constant
-import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
-import com.chocolate.nigerialoanapp.ui.MainActivity
+import com.chocolate.nigerialoanapp.utils.DateUtils
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -41,6 +39,8 @@ abstract class BaseRegisterFragment : BaseFragment() {
     companion object {
         private const val TAG = "RegisterFragment"
     }
+
+    private var sendOtpNum : Int = 0
 
 
     private val mHandler = Handler(Looper.getMainLooper(), object : Handler.Callback {
@@ -93,6 +93,8 @@ abstract class BaseRegisterFragment : BaseFragment() {
         tvSignUp = view.findViewById<AppCompatTextView>(R.id.tv_sign_up)
         tvUserDesc = view.findViewById<AppCompatTextView>(R.id.tv_user_desc)
         tvGetCode = view.findViewById<AppCompatTextView>(R.id.tv_get_code)
+
+        sendOtpNum = SPUtils.getInstance().getInt(DateUtils.getDateStr())
 
         initView(view)
         updateUssdSms()
@@ -156,6 +158,7 @@ abstract class BaseRegisterFragment : BaseFragment() {
                     ToastUtils.showShort(resources.getString(R.string.str_login_password_error))
                     return
                 }
+                onSignUp()
                 verifyCodeLogin(getCodeStr, setPwdStr)
             }
 
@@ -168,7 +171,12 @@ abstract class BaseRegisterFragment : BaseFragment() {
                     if (isCounting) {
 
                     } else {
-                        sendVerifyCode()
+                        if (sendOtpNum > 2) {
+                            FirebaseUtils.logEvent("SERVICE_OTP_OUT_OF_TIMES${Constant.USSD}")
+                        } else {
+                            SPUtils.getInstance().put(DateUtils.getDateStr(), sendOtpNum++)
+                            sendVerifyCode()
+                        }
                     }
                 }
             }
@@ -182,6 +190,10 @@ abstract class BaseRegisterFragment : BaseFragment() {
                 tvUserDesc?.text = resources.getString(R.string.dears_234_x, phoneNum)
             }
         }
+    }
+
+    open fun onSignUp() {
+
     }
 
     private fun updateUssdSms() {
@@ -207,6 +219,7 @@ abstract class BaseRegisterFragment : BaseFragment() {
     }
 
     private fun sendVerifyCode() {
+        FirebaseUtils.logEvent("CLICK_SEND_OTP${Constant.USSD}")
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             var phoneNum: String = ""

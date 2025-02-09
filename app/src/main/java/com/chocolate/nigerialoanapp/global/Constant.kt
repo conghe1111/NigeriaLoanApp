@@ -16,6 +16,8 @@ object Constant {
     var mAccountId: String? = null
 
     var mToken: String? = null
+    val APP_ID: String = "oyo"
+    val USSD: String = "_oyo"
 
     //是否是审核账号
     fun isAuditMode(): Boolean {

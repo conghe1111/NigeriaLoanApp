@@ -7,6 +7,14 @@ import java.util.Date
 
 object DateUtils {
 
+    fun getDateStr(): String {
+        val sf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val date = Date(System.currentTimeMillis())
+        val str: String = sf.format(date)
+
+        return str
+    }
+
     fun buildDateFormat(millions: Long): Array<String> {
         val sf: SimpleDateFormat = SimpleDateFormat("yyyy")
         val date = Date(millions)

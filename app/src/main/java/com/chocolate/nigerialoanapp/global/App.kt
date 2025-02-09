@@ -1,15 +1,19 @@
 package com.chocolate.nigerialoanapp.global
 
 import android.R
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatDelegate
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.LanguageUtils
 import com.blankj.utilcode.util.SPUtils
+import com.blankj.utilcode.util.Utils.OnAppStatusChangedListener
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.LocationMgr
 import com.chocolate.nigerialoanapp.log.LogSaver
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.GooglePlaySdk
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
@@ -67,6 +71,19 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             LogSaver.enableDebug()
         }
+
+        AppUtils.registerAppStatusChangedListener(mListener)
+    }
+
+  private val mListener = object : OnAppStatusChangedListener {
+        override fun onForeground(activity: Activity?) {
+            FirebaseUtils.logEvent("SYSTEM_INIT_OPEN_${Constant.APP_ID}")
+        }
+
+        override fun onBackground(activity: Activity?) {
+            FirebaseUtils.logEvent("SYSTEM_HIDE_${Constant.APP_ID}")
+        }
+
     }
 
     private fun initializeOkGo() {
@@ -95,4 +112,8 @@ class App : Application() {
 //        EncodeUtils.mainTest()
     }
 
+    override fun onTerminate() {
+        AppUtils.unregisterAppStatusChangedListener(mListener)
+        super.onTerminate()
+    }
 }

@@ -19,7 +19,9 @@ import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.CheckPhoneNumResponse
+import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.widget.BlankTextWatcher
 import com.lzy.okgo.OkGo
@@ -69,6 +71,7 @@ class LoginRegisterFragment : BaseFragment() {
                             if (isDestroy()) {
                                 return
                             }
+                            FirebaseUtils.logEvent("CLICK_LOGIN_REGISTER")
                             schedualMobilePhone()
                         }
                     })
@@ -162,6 +165,7 @@ class LoginRegisterFragment : BaseFragment() {
                         } else {
                             if (activity is LoginActivity) {
                                 (activity as LoginActivity).toRegisterFragment(true)
+                                FirebaseUtils.logEvent("SYSTEM_REGISTER_ENTER${Constant.USSD}")
                             }
                         }
                     } catch (e: Exception) {

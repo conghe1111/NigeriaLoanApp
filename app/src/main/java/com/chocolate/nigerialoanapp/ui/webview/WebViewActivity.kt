@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.blankj.utilcode.util.BarUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 
 class WebViewActivity : BaseActivity() {
     private var ivBack: ImageView? = null
@@ -26,6 +27,14 @@ class WebViewActivity : BaseActivity() {
             var intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra(EXTRA_URL, url)
             intent.putExtra(EXTRA_TYPE, type)
+            when(type) {
+                (TYPE_PRIVACY) -> {
+                    FirebaseUtils.logEvent("CLICK_PERMISSIONPAGE_PRIVACYPOLICY")
+                }
+                (TYPE_TERMS) -> {
+                    FirebaseUtils.logEvent("CLICK_PERMISSIONPAGE_TERMSCONDITIONS")
+                }
+            }
             context.startActivity(intent)
         }
     }

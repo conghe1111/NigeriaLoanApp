@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.R
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
@@ -51,12 +52,14 @@ class RequestPermissionDialog constructor(context: Context, activity: Activity?)
             if (mListener != null) {
                 mListener!!.onClickAgree()
             }
+            FirebaseUtils.logEvent("CLICK_PERMISSION_AGREE")
             dismiss()
         }
         tvCancel.setOnClickListener {
             if (mListener != null) {
                 mListener!!.onClickCancel()
             }
+            FirebaseUtils.logEvent("CLICK_PERMISSION_REJECT")
             dismiss()
         }
         updateState()

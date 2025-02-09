@@ -60,6 +60,7 @@ class GooglePlaySdk {
                                 } catch (e: Exception) {
 
                                 }
+                                FirebaseUtils.logEvent("SYSTEN_INSTALL_${Constant.APP_ID}")
                             }
                         } catch (e: RemoteException) {
                             e.printStackTrace()

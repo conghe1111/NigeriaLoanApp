@@ -23,6 +23,7 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 
 class MainActivity : BaseActivity() {
 
@@ -107,6 +108,7 @@ class MainActivity : BaseActivity() {
                 }
                 utils.callback(object : PermissionUtils.SimpleCallback {
                     override fun onGranted() {
+                        FirebaseUtils.logEvent("SYSTEM_PERMISSION_RESULT")
                         executeCache()
                     }
 
@@ -117,6 +119,7 @@ class MainActivity : BaseActivity() {
             }
         })
         dialog.show()
+        FirebaseUtils.logEvent("SYSTEM_PERMISSION_ENTER")
     }
 
     private fun updatePageByTypeInternal() {
