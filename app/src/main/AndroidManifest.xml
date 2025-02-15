@@ -75,7 +75,8 @@
         </activity>
 
         <activity
-            android:name=".ui.edit.EditInfoMenuActivity">
+            android:name=".ui.edit.EditInfoMenuActivity"
+            android:launchMode="singleTop">
 
         </activity>
 
@@ -91,7 +92,8 @@
 
         </activity>
 
-        <activity android:name=".ui.setting.ConsumerHotlineActivity">
+        <activity android:name=".ui.setting.ConsumerHotlineActivity"
+            android:launchMode="singleTop">
 
         </activity>
 
@@ -105,11 +107,13 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <activity android:name=".ui.history.HistoryRecordActivity">
+        <activity android:name=".ui.history.HistoryRecordActivity"
+            android:launchMode="singleTop">
 
         </activity>
 
-        <activity android:name=".ui.webview.WebViewActivity">
+        <activity android:name=".ui.webview.WebViewActivity"
+            android:launchMode="singleTop">
 
         </activity>
 

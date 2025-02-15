@@ -1,178 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_68"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_20"
-            android:text="@string/max_amount"
-            android:textColor="#666666"
-            android:textSize="@dimen/sp_16" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_loan_max_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_20"
-            android:text="100000"
-            android:textColor="#666666"
-            android:layout_marginTop="@dimen/dp_6"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_24" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_loan_apply_now"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/sp_20"
-            android:paddingStart="@dimen/dp_44"
-            android:paddingEnd="@dimen/dp_44"
-            android:includeFontPadding="false"
-            android:textColor="@color/white"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_13"
-            android:text="@string/apply_now"
-            android:background="@drawable/bg_btn_enable"
-            android:layout_height="@dimen/dp_44"/>
-
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="#333333"
-        android:textStyle="bold"
-        android:textSize="@dimen/sp_16"
-        android:includeFontPadding="false"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_60"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="@dimen/dp_17"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="@dimen/dp_17"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:text="@string/high_loan_amount"
-                android:textColor="#333333"
-                android:layout_marginStart="@dimen/dp_10"
-                android:textSize="@dimen/sp_14"
-                android:includeFontPadding="false"
-                android:layout_marginTop="@dimen/dp_18"
-                android:layout_height="wrap_content"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:src="@drawable/ic_home_1"
-                android:layout_marginTop="@dimen/dp_16"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:layout_height="wrap_content"/>
+            <include layout="@layout/include_main_top" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_34"
-                    android:src="@drawable/ic_home_desc_1"
-                    android:layout_marginTop="@dimen/dp_9"
-                    android:layout_marginBottom="@dimen/dp_8"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:layout_height="@dimen/dp_34"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_88"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/max_amount"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/sp_16" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_loan_max_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:text="0"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/sp_20"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_loan_apply_now"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_13"
+                        android:background="@drawable/bg_btn_enable"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingStart="@dimen/dp_44"
+                        android:paddingEnd="@dimen/dp_44"
+                        android:text="@string/apply_now"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_20" />
+
+                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_product_1_desc"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_60"
+                    android:includeFontPadding="false"
+                    android:text="@string/app_name"
                     android:textColor="#333333"
-                    android:textSize="@dimen/sp_12"
-                    android:text=""
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical|end"
-                    tools:text="10000 \n 20000"
-                    android:layout_marginEnd="@dimen/dp_10"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_17"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_17"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_18"
+                            android:includeFontPadding="false"
+                            android:text="@string/high_loan_amount"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/sp_14" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:src="@drawable/ic_home_1" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="@dimen/dp_34"
+                                android:layout_height="@dimen/dp_34"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:layout_marginTop="@dimen/dp_9"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:src="@drawable/ic_home_desc_1" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/dp_14"
+                                android:layout_height="@dimen/dp_60">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_product_left_desc1"
+                                    android:layout_width="wrap_content"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toTopOf="@id/tv_product_left_desc2"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:layout_gravity="center_vertical"
+                                    android:gravity="center_vertical|end"
+                                    android:text=""
+                                    android:includeFontPadding="false"
+                                    app:layout_constraintVertical_chainStyle="packed"
+                                    android:textColor="#333333"
+                                    android:textSize="@dimen/sp_12"
+                                    tools:text="10000" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_product_left_desc2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    app:layout_constraintTop_toBottomOf="@id/tv_product_left_desc1"
+                                    app:layout_constraintBottom_toTopOf="@id/tv_product_left_desc3"
+                                    android:gravity="center_vertical|end"
+                                    android:text="|"
+                                    android:includeFontPadding="false"
+                                    app:layout_constraintStart_toStartOf="@id/tv_product_left_desc1"
+                                    app:layout_constraintEnd_toEndOf="@id/tv_product_left_desc1"
+                                    android:textColor="#333333"
+                                    app:layout_constraintVertical_chainStyle="packed"
+                                    android:textSize="8sp" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_product_left_desc3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="false"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:layout_gravity="center_vertical"
+                                    app:layout_constraintTop_toBottomOf="@id/tv_product_left_desc2"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:gravity="center_vertical|end"
+                                    android:text=""
+                                    app:layout_constraintVertical_chainStyle="packed"
+                                    android:textColor="#333333"
+                                    android:textSize="@dimen/sp_12"
+                                    tools:text="20000" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_17"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_18"
+                            android:includeFontPadding="false"
+                            android:text="@string/high_loan_amount"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/sp_14" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:src="@drawable/ic_home_2" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="@dimen/dp_34"
+                                android:layout_height="@dimen/dp_34"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:layout_marginTop="@dimen/dp_9"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:src="@drawable/ic_home_desc_2" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_product_2_desc"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="@dimen/dp_10"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical|end"
+                                android:text=""
+                                android:textColor="#333333"
+                                android:textSize="@dimen/sp_12"
+                                tools:text="10000 \n 20000" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
-        </LinearLayout>
+        </FrameLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="@dimen/dp_17"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:text="@string/high_loan_amount"
-                android:textColor="#333333"
-                android:layout_marginStart="@dimen/dp_10"
-                android:textSize="@dimen/sp_14"
-                android:includeFontPadding="false"
-                android:layout_marginTop="@dimen/dp_18"
-                android:layout_height="wrap_content"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:src="@drawable/ic_home_2"
-                android:layout_marginTop="@dimen/dp_16"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_34"
-                    android:src="@drawable/ic_home_desc_2"
-                    android:layout_marginTop="@dimen/dp_9"
-                    android:layout_marginBottom="@dimen/dp_8"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:layout_height="@dimen/dp_34"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_product_2_desc"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/sp_12"
-                    android:text=""
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical|end"
-                    tools:text="10000 \n 20000"
-                    android:layout_marginEnd="@dimen/dp_10"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
-</LinearLayout>
+</FrameLayout>

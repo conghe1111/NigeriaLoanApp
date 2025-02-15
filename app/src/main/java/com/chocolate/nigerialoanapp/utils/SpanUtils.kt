@@ -174,14 +174,35 @@ object SpanUtils {
         tv.text = spannableString
     }
 
-    fun setAmountString(tv: AppCompatTextView?, amount: String?) {
+    fun setAmountString(tv: AppCompatTextView?, amount: String?, radio : Float = 26f / 16) {
         if (tv == null || amount == null) {
             return
         }
         val text = "NGN$amount"
         val spannableString = SpannableString(text)
         spannableString.setSpan(
-            RelativeSizeSpan(26f / 16),
+            RelativeSizeSpan(radio),
+            3,
+            text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+        tv.text = spannableString
+    }
+
+    fun setAmountString2(tv: AppCompatTextView?, amount: String?, radio : Float = 2f) {
+        if (tv == null || amount == null) {
+            return
+        }
+        val text = "NGN$amount"
+        val spannableString = SpannableString(text)
+        spannableString.setSpan(
+            RelativeSizeSpan(radio),
+            3,
+            text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableString.setSpan(
+            ForegroundColorSpan(tv.resources.getColor(R.color.black)),
             3,
             text.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

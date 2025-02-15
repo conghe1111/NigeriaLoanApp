@@ -16,6 +16,7 @@ import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -31,7 +32,8 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
 
     private var tvMaxAmount : AppCompatTextView? = null
     private var tvApplyNow : AppCompatTextView? = null
-    private var tvDesc1 : AppCompatTextView? = null
+    private var tvDescLeft1 : AppCompatTextView? = null
+    private var tvDescLeft3 : AppCompatTextView? = null
     private var tvDesc2 : AppCompatTextView? = null
 
     private var mPageResponse : MarketingPageResponse? = null
@@ -48,7 +50,8 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         super.onViewCreated(view, savedInstanceState)
         tvMaxAmount = view.findViewById<AppCompatTextView>(R.id.tv_loan_max_amount)
         tvApplyNow = view.findViewById<AppCompatTextView>(R.id.tv_loan_apply_now)
-        tvDesc1 = view.findViewById<AppCompatTextView>(R.id.tv_product_1_desc)
+        tvDescLeft1 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc1)
+        tvDescLeft3 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc3)
         tvDesc2 = view.findViewById<AppCompatTextView>(R.id.tv_product_2_desc)
         if( mPageResponse == null) {
             getMarketingPage()
@@ -157,8 +160,24 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         if (mPageResponse == null) {
             return
         }
-        tvMaxAmount?.text = mPageResponse?.max_amount.toString()
-        tvDesc1?.text = "₦" +mPageResponse?.min_amount.toString() + "\n" + "|" + "\n" + "₦" + mPageResponse?.max_amount
+        val amount = mPageResponse?.max_amount
+        amount?.let {
+            SpanUtils.setAmountString2(tvMaxAmount,  SpanUtils.getShowText(it.toLong()))
+        }
+        val min = mPageResponse?.min_amount
+        val max = mPageResponse?.max_amount
+        if (min != null && max != null) {
+            try {
+                val minStr = "₦" +SpanUtils.getShowText(min!!.toLong())
+                val maxStr = "₦" +SpanUtils.getShowText(max!!.toLong())
+                tvDescLeft1?.text = minStr
+                tvDescLeft3?.text = maxStr
+            } catch (e : Exception) {
+                if (BuildConfig.DEBUG) {
+                    throw e
+                }
+            }
+        }
         tvDesc2?.text = resources.getString(R.string.up_to_day, mPageResponse?.max_period.toString())
     }
 }
