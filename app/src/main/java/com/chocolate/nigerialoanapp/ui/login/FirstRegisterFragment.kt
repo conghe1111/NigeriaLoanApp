@@ -25,6 +25,7 @@ class FirstRegisterFragment : BaseRegisterFragment() {
     }
 
     override fun verifyCodeLogin(verfiyCode: String, password: String) {
+        showOrHideLoading(true)
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             var phoneNum: String = ""
@@ -55,6 +56,7 @@ class FirstRegisterFragment : BaseRegisterFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    showOrHideLoading(false)
                     val loginResponse = checkResponseSuccess(response, LoginResponse::class.java)
                     if (loginResponse == null) {
                         return

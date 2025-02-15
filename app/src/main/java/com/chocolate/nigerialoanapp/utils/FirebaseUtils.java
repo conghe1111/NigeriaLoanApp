@@ -120,6 +120,10 @@ public class FirebaseUtils {
         if (App.Companion.getInstance() == null) {
             return;
         }
+        // TODO
+        if (true) {
+            return;
+        }
         Context context = App.Companion.getInstance();
         Bundle params = new Bundle();
         if (!Constant.INSTANCE.isAabBuild()) {
@@ -133,6 +137,10 @@ public class FirebaseUtils {
 
     public static void logEvent(String event, String paramsKey, String paramsValue, String pKey2, String pValue2) {
         if (App.Companion.getInstance() == null) {
+            return;
+        }
+        // TODO
+        if (true) {
             return;
         }
         Context context = App.Companion.getInstance();
