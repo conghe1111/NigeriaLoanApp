@@ -100,7 +100,8 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         mAmountAdapter = LoanAmountMockAdapter(mLoanAmountList)
         mAmountAdapter?.setOnItemClickListener(object : LoadApplyPeriodAdapter.OnItemClickListener{
             override fun onItemClick(period: String, pos: Int) {
-
+                mAmountIndex = pos
+                requestProductTrial()
             }
 
         })
@@ -111,7 +112,8 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         mTermAdapter = LoanAmountMockAdapter(mLoanTermList, true)
         mTermAdapter?.setOnItemClickListener(object : LoadApplyPeriodAdapter.OnItemClickListener{
             override fun onItemClick(period: String, pos: Int) {
-
+                mPeriodIndex = pos
+                requestProductTrial()
             }
 
         })
@@ -167,14 +169,19 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
             mLoanTermList.add(LoanData(period, false))
         }
         mLoanTermList.add(LoanData("" + 120))
-        if (mAmountList.size > 0 && mPeriodList.size > 0) {
-            requestProductTrial(mAmountList[0].amount!!, mLoanTermList[0].amount!!,mProductType!!)
+        requestProductTrial()
+    }
+
+    private fun requestProductTrial() {
+        if (mAmountList.size > mAmountIndex && mPeriodList.size > mPeriodIndex) {
+            executeRequestProductTrial(mAmountList[mAmountIndex].amount!!, mLoanTermList[mPeriodIndex].amount!!,mProductType!!)
         } else {
             // TODO error
         }
     }
 
-    private fun requestProductTrial(amount: String, period: String, productType : String = "5") {
+    private fun executeRequestProductTrial(amount: String, period: String, productType : String = "5") {
+        showOrHideLoading(true)
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)

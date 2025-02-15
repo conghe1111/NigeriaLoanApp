@@ -14,6 +14,7 @@ import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
 class LoanAmountMockAdapter(val mList : List<LoanData>, val isTerm : Boolean =  false) : RecyclerView.Adapter<LoanAmountMockAdapter.LoadApplyHistoryHolder>() {
 
+    private var mPos : Int = 0
     private var mOnItemClickListener : OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoadApplyHistoryHolder {
@@ -40,16 +41,28 @@ class LoanAmountMockAdapter(val mList : List<LoanData>, val isTerm : Boolean =  
             holder.ivLock?.visibility = View.VISIBLE
             holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.color_a1a1a1))
         } else {
-            holder.flContainer?.setBackgroundResource(R.drawable.bg_green_bg)
+            if (mPos == position) {
+                holder.flContainer?.setBackgroundResource(R.drawable.bg_green_bg)
+                holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.white))
+            } else {
+                holder.flContainer?.setBackgroundResource(R.drawable.bg_gray_bg_2)
+                holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.color_a1a1a1))
+            }
             holder.ivLock?.visibility = View.GONE
-            holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.white))
         }
         holder.itemView?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 if (loanData.amount == null) {
                     return
                 }
+                if (loanData.lockFlag) {
+                    return
+                }
+                val lastPos = mPos
+                mPos = position
                 mOnItemClickListener?.onItemClick(loanData.amount!!, position)
+                notifyItemChanged(lastPos)
+                notifyItemChanged(mPos)
             }
 
         })
