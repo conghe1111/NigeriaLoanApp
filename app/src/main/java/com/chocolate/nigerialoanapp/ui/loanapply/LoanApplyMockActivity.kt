@@ -56,6 +56,8 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
     private var tvFee : AppCompatTextView? = null
     private var tvMockNext : AppCompatTextView? = null
     private var flLoading: FrameLayout? = null
+    private var stage1View: View? = null
+    private var llStageLoadingError: View? = null
 
     private var mAmountAdapter : LoanAmountMockAdapter? = null
     private var mTermAdapter : LoanAmountMockAdapter? = null
@@ -91,6 +93,8 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         rvStage = findViewById<RecyclerView>(R.id.rv_mock_stage)
         tvMockNext = findViewById<AppCompatTextView>(R.id.tv_loan_apply_mock_next)
         flLoading = findViewById<FrameLayout>(R.id.fl_loading)
+        stage1View = findViewById<View>(R.id.stage_1)
+        llStageLoadingError = findViewById<View>(R.id.ll_loading_error)
 
         rvAmount?.layoutManager = GridLayoutManager(this@LoanApplyMockActivity,2)
         mAmountAdapter = LoanAmountMockAdapter(mLoanAmountList)
@@ -154,21 +158,19 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
     }
 
     private fun initData() {
-        if (BuildConfig.DEBUG) {
-            mLoanAmountList.clear()
-            mLoanAmountList.add(LoanData("2000", false))
-            mLoanAmountList.add(LoanData("5000"))
-            mLoanAmountList.add(LoanData("8000"))
-            mLoanAmountList.add(LoanData("10000"))
+        mLoanAmountList.clear()
+        mLoanAmountList.addAll(mAmountList)
+        mLoanAmountList.add(LoanData("100000"))
 
-            mLoanTermList.clear()
-            mLoanTermList.add(LoanData("" + 91, false))
-            mLoanTermList.add(LoanData("" + 120))
-            requestProductTrial("50000", "30", mProductType!!)
+        mLoanTermList.clear()
+        for (period in mPeriodList) {
+            mLoanTermList.add(LoanData(period, false))
+        }
+        mLoanTermList.add(LoanData("" + 120))
+        if (mAmountList.size > 0 && mPeriodList.size > 0) {
+            requestProductTrial(mAmountList[0].amount!!, mLoanTermList[0].amount!!,mProductType!!)
         } else {
-            if (mAmountList.size > 0 && mPeriodList.size > 0) {
-                requestProductTrial(mAmountList[0].amount!!, mPeriodList[0])
-            }
+            // TODO error
         }
     }
 
@@ -195,18 +197,17 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
                     }
                     val productTrial =
                         checkResponseSuccess(response, ProductTrialResponse::class.java)
-                    if (productTrial == null || productTrial.trials == null) {
+                    showOrHideLoading(false)
+                    if (productTrial == null || productTrial.trials == null || productTrial.trials.size == 0) {
+                        stage1View?.visibility = View.GONE
+                        llStageLoadingError?.visibility = View.VISIBLE
                         return
+                    } else {
+                        stage1View?.visibility = View.VISIBLE
+                        llStageLoadingError?.visibility = View.GONE
                     }
-                    productTrial?.let {
-                        if (productTrial.trials.size == 0){
-                            return
-                        }
-                        val firstTrial = productTrial.trials.removeAt(0)
-                        bindFirstItem(firstTrial, productTrial.trials)
-                    }
-
-
+                    val firstTrial = productTrial.trials.removeAt(0)
+                    bindFirstItem(firstTrial, productTrial.trials)
                 }
 
                 override fun onError(response: Response<String>) {
@@ -214,6 +215,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
+                    showOrHideLoading(false)
                 }
             })
     }

@@ -108,12 +108,39 @@
                         android:layout_marginTop="@dimen/dp_13" />
 
                 </LinearLayout>
+                
+                <LinearLayout
+                    android:id="@+id/ll_loading_error"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/dp_23"
+                    android:layout_marginBottom="@dimen/dp_23"
+                    android:layout_height="wrap_content">
+                    
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="@dimen/dp_80"
+                        android:src="@drawable/ic_load_fail"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/load_fail"
+                        android:layout_height="wrap_content"/>
+                    
+                </LinearLayout>
 
                 <include
+                    android:id="@+id/stage_1"
                     android:layout_width="match_parent"
                     layout="@layout/include_stage_1_mock"
                     android:layout_marginTop="@dimen/dp_17"
+                    android:visibility="invisible"
                     android:layout_height="wrap_content"/>
+                
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_mock_stage"

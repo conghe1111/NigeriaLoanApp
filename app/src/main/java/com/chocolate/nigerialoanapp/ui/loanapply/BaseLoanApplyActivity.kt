@@ -61,7 +61,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
             e.printStackTrace()
         }
         if (BuildConfig.DEBUG) {
-            Log.i("OkHttpClient", " marketing product = $jsonObject")
+            Log.e("okHttpClient", " marketing product = $jsonObject")
         }
         val url = if (marketingFlag) Api.PRODUCT_MARKETING else Api.PRODUCT_LIST
         OkGo.post<String>(url).tag(TAG)
@@ -84,16 +84,10 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
 
                         mProductType = it.product_type.toString()
                         mAmountList.clear()
-                        if (BuildConfig.DEBUG) {
-                            mAmountList.add(LoanData("10000",true))
-                        }
                         for (amountItem in it.amount) {
                             mAmountList.add(LoanData(amountItem.toString(),false))
                         }
-                        if (BuildConfig.DEBUG) {
-                            mAmountList.add(LoanData("100000",true))
-                            mAmountIndex = 1
-                        }
+
                         mPeriodList.clear()
                         for (periodItem in it.period) {
                             mPeriodList.add(periodItem.toString())

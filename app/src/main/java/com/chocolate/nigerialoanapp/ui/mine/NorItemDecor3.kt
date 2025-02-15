@@ -8,8 +8,8 @@ class NorItemDecor3 : ItemDecoration() {
 
    override fun getItemOffsets(outRect: Rect, itemPosition: Int, parent: RecyclerView) {
         super.getItemOffsets(outRect, itemPosition, parent)
-        outRect.left = 5
-        outRect.right = 5
+        outRect.left = 15
+        outRect.right = 15
         outRect.top = 4
         outRect.bottom = 4
 ////        //如果不是第一个，则设置top的值。
