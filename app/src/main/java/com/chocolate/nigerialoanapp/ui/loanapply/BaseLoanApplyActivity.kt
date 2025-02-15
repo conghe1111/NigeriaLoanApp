@@ -46,6 +46,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
         if (Constant.mAccountId == null) {
             return
         }
+        showOrHideLoading(true)
         //        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
@@ -76,6 +77,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
                         checkResponseSuccess(response, ProductBeanResponse::class.java)
                     if (productBean == null) {
                         Log.e(TAG, " marketing product ." + response.body())
+                        showOrHideLoading(false)
                         return
                     }
                     productBean.product?.let {
@@ -105,6 +107,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
+                    showOrHideLoading(false)
 //                    pbLoading?.visibility = View.GONE
 //                    refreshLayout?.finishRefresh()
                     if (BuildConfig.DEBUG) {
@@ -138,4 +141,6 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
         })
         dialog?.show()
     }
+
+    abstract fun showOrHideLoading(showFlag : Boolean)
 }

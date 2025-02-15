@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -54,6 +55,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
     private var tvDisburalAmount : AppCompatTextView? = null
     private var tvFee : AppCompatTextView? = null
     private var tvMockNext : AppCompatTextView? = null
+    private var flLoading: FrameLayout? = null
 
     private var mAmountAdapter : LoanAmountMockAdapter? = null
     private var mTermAdapter : LoanAmountMockAdapter? = null
@@ -88,6 +90,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         rvLoanTerm = findViewById<RecyclerView>(R.id.rv_loan_term)
         rvStage = findViewById<RecyclerView>(R.id.rv_mock_stage)
         tvMockNext = findViewById<AppCompatTextView>(R.id.tv_loan_apply_mock_next)
+        flLoading = findViewById<FrameLayout>(R.id.fl_loading)
 
         rvAmount?.layoutManager = GridLayoutManager(this@LoanApplyMockActivity,2)
         mAmountAdapter = LoanAmountMockAdapter(mLoanAmountList)
@@ -139,6 +142,10 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         super.bindData()
         initData()
         bindDataInternal()
+    }
+
+    override fun showOrHideLoading(showFlag: Boolean) {
+        flLoading?.visibility = if (showFlag) View.VISIBLE else View.GONE
     }
 
     private fun bindDataInternal() {

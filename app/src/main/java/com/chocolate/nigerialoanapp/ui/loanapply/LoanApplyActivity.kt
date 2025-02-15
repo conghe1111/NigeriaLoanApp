@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -70,6 +71,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     private var viewDisburseFee: View? = null
     private var rvContainer: RecyclerView? = null
     private var tvNext: AppCompatTextView? = null
+    private var flLoading: FrameLayout? = null
 
     private var mAdapter: LoadApplyPeriodAdapter? = null
     private var mHistoryAdapter: LoadApplyHistoryAdapter? = null
@@ -92,6 +94,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         ivBack = findViewById<AppCompatImageView>(R.id.iv_apply_info_back)
         loanContainer = findViewById<View>(R.id.fl_loan_apply_container)
         rvContent = findViewById<RecyclerView>(R.id.rv_repayment_term)
+        flLoading = findViewById<FrameLayout>(R.id.fl_loading)
 
         rvContent?.layoutManager =
             LinearLayoutManager(this@LoanApplyActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -430,6 +433,10 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     override fun onDestroy() {
         OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
+    }
+
+    override fun showOrHideLoading(showFlag: Boolean) {
+        flLoading?.visibility = if (showFlag) View.VISIBLE else View.GONE
     }
 
     override fun onBackPressed() {
