@@ -85,6 +85,7 @@ class Edit4BankFragment : BaseEditFragment() {
         mEditAccountNum?.setOpenRedState(false)
         mEditAccountNum?.setOnTextChangeListener(object : InfoEditView.TextChangeListener {
             override fun onTextChange() {
+                onClickSubmit(true)
                 updateNextBtnStatus()
             }
 

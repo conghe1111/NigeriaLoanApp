@@ -41,13 +41,16 @@ public class FirebaseUtils {
      * 	前端	点击返回按钮	SYSTEM_LOGIN_REGISTER_BACK_SMS
      * 	前端	点击注册按钮	CLICK_REGISTER_SMS
      * 	前端	注册并登录成功	SERVICE_LOGIN_REGISTER_SMS
+     *
      * 登录页（填密码页）（仅主产品）	前端	进入登录页	SYSTEM_LOGIN_ENTER
      * 	前端	点击登录按钮	CLICK_LOGIN
      * 	前端	点击返回按钮	SYSTEM_LOGIN_BACK
      * 	前端	密码登录成功	SERVICE_LOGIN_PASSWORD_SUCCESS
+     *
      * 我的页（仅主产品）	前端	点击我的页退出按钮	CLICK_LOGOUT
      * 未登录首页	前端	未登陆首页点击客服按钮	CLICK_HOMEPAGE_CUSTOMERSERVICE
      * 	前端	未登陆首页点击申请按钮	CLICK_HOMEPAGE_APPLY
+     *
      * 首页	前端	进入首贷首页（每次）	SYSTEM_INDEX_ENTER
      * 	前端	单产品首页点击客服按钮（登陆成功）	CLICK_SINGLEPRODUCTHOMEPAGE_CUSTOMERSERVICE
      * 	前端	点击申请按钮	CLICK_INDEX_APPLY
@@ -56,11 +59,13 @@ public class FirebaseUtils {
      * 	前端	点击个人信息页提交按钮	CLICK_BASIC_INF_SUBMIT
      * 	前端	个人信息页返回上一页	SYSTEM_BASIC_INF_BACK
      * 	前端	无个人信息时点击提交	CLICK_BASIC_INF_NP
+     *
      * 工作信息页	前端	进入工作信息页	SYSTEM_WORK_INF_ENTER
      * 	前端	工作信息页数据加载完成	SYSTEM_WORK_INF_LOAD
      * 	前端	点击工作信息页提交按钮	CLICK_WORK_INF_SUBMIT
      * 	前端	工作信息页返回上一页	SYSTEM_WORK_INF_BACK
      * 	前端	无工作信息时点击提交	CLICK_WORK_INF_NP
+     *
      * 联系人信息页	前端	进入联系人信息页	SYSTEM_CONTACT_INF_ENTER
      * 	前端	联系人信息页数据加载完成	SYSTEM_CONTACT_INF_LOAD
      * 	前端	点击联系人页提交按钮	CLICK_CONTACT_INF_SUBMIT
@@ -71,6 +76,7 @@ public class FirebaseUtils {
      * 	前端	开始上传设备数据	SYSTEM_DEVICE_INFO_UPLOAD
      * 	前端	完成上传设备数据	SYSTEM_DEVICE_INFO_SUCCESS
      * 	前端	联系人信息页返回上一页	SYSTEM_CONTACT_INF_BACK
+     *
      * 	前端	无联系人信息时进入页面（与其他信息页合并时改为点击首个输入框） 	CLICK_CONTACT_INF_NP
      * 银行卡信息页	前端	进入银行卡信息页	SYSTEM_BANK_CARD_ENTER
      * 	前端	银行卡信息页数据加载完成	SYSTEM_BANK_CARD_LOAD

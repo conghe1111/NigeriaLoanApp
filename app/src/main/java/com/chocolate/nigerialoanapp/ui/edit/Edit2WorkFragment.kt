@@ -165,7 +165,9 @@ class Edit2WorkFragment : BaseEditFragment() {
         })
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                if (checkProfileParams()) {
+                val check = checkProfileParams()
+                onClickSubmit(check)
+                if (check) {
                     uploadWork()
                 }
             }

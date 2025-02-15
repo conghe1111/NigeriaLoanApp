@@ -17,6 +17,7 @@ import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.LoginResponse
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.widget.EditClearContainer
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -56,6 +57,7 @@ class LoginFragment : BaseFragment() {
         loadingView = view.findViewById<View>(R.id.fl_login_loading)
         editText = view.findViewById<EditClearContainer>(R.id.edit_clear_login)
         initView()
+        FirebaseUtils.logEvent("SYSTEM_LOGIN_ENTER")
     }
 
     private fun initView() {
@@ -75,6 +77,7 @@ class LoginFragment : BaseFragment() {
         })
         tvLogin?.setOnClickListener(object : OnClickListener {
             override fun onClick(v: View?) {
+                FirebaseUtils.logEvent("CLICK_LOGIN")
                 if (activity is LoginActivity) {
                     (activity as LoginActivity).checkNetWork(object : LoginActivity.CallBack {
                         override fun onSuccess() {
@@ -176,6 +179,7 @@ class LoginFragment : BaseFragment() {
                     }
                     if (TextUtils.equals(loginResponse.login_status, "success")) {
                         toMainPage(loginResponse, password)
+                        FirebaseUtils.logEvent("SERVICE_LOGIN_PASSWORD_SUCCESS")
                     } else {
 
                     }

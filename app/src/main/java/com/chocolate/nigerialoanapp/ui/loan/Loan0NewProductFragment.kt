@@ -15,6 +15,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -63,6 +64,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             }
 
         })
+        FirebaseUtils.logEvent("SYSTEM_INDEX_ENTER")
     }
 
     private fun getMarketingPage() {

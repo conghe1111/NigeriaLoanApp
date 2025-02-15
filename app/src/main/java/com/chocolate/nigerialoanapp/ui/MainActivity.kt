@@ -174,9 +174,6 @@ class MainActivity : BaseActivity() {
                 }
             }
         })
-//        OkGo.getInstance().addCommonHeaders(BuildRequestJsonUtils.buildHeaderImei())
-//        LocationMgr.getInstance().getLocation()
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

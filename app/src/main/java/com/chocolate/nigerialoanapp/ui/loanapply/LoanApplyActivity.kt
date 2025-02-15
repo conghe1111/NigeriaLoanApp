@@ -34,6 +34,7 @@ import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyHistoryAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor2
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
@@ -152,6 +153,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvNext?.isSelected = true
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
+                FirebaseUtils.logEvent("CLICK_INDEX_APPLY")
                 PermissionUtils.permission(
 //                    Manifest.permission.READ_CALL_LOG,
 //                    Manifest.permission.READ_CONTACTS,

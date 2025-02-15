@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
 open class BaseLoanStatusFragment : BaseFragment() {
@@ -24,6 +25,7 @@ open class BaseLoanStatusFragment : BaseFragment() {
         ivConsumer?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 context?.let {
+                    FirebaseUtils.logEvent("CLICK_SINGLEPRODUCTHOMEPAGE_CUSTOMERSERVICE")
                     ConsumerHotlineActivity.startActivity(it)
                 }
             }

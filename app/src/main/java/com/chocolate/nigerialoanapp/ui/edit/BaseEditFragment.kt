@@ -4,7 +4,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Pair
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.core.widget.NestedScrollView
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
@@ -13,9 +15,29 @@ import com.blankj.utilcode.util.KeyboardUtils
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.ui.dialog.selectdata.SelectDataDialog
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 
 
 abstract class BaseEditFragment : BaseFragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        if (this is Edit1BasicFragment) {
+            FirebaseUtils.logEvent("SYSTEM_BASIC_INF_ENTER")
+        } else if (this is Edit2WorkFragment) {
+            FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+        } else if (this is Edit3ContactFragment) {
+            FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+        } else if (this is Edit4BankFragment) {
+            FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+        } else if (this is Edit5FaceRecognitionFragment) {
+            FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+        }
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     protected fun showListDialog(
         list: ArrayList<Pair<String, String>>,
@@ -47,14 +69,18 @@ abstract class BaseEditFragment : BaseFragment() {
 
     abstract fun bindData(profile1Bean: ProfileInfoResponse?)
 
-    protected fun showCustomPicker(list : List<Pair<String,String>>, title : String , observer : SelectDataDialog.Observer) { //条件选择器初始化，自定义布局
+    protected fun showCustomPicker(
+        list: List<Pair<String, String>>,
+        title: String,
+        observer: SelectDataDialog.Observer
+    ) { //条件选择器初始化，自定义布局
         if (KeyboardUtils.isSoftInputVisible(requireActivity())) {
             KeyboardUtils.hideSoftInput(requireActivity())
         }
         val pvOptions = OptionsPickerBuilder(context) { options1, options2, options3, v ->
             if (options1 != -1) {
                 val itemPair = list[options1]
-                observer?.onItemClick(itemPair,options1)
+                observer?.onItemClick(itemPair, options1)
             }
         }
 
@@ -82,10 +108,15 @@ abstract class BaseEditFragment : BaseFragment() {
 
     fun tryBindData() {
         if (activity is EditInfoActivity) {
-           val profile1Bean =  (activity as EditInfoActivity).mProfileInfo
+            val profile1Bean = (activity as EditInfoActivity).mProfileInfo
             profile1Bean?.let {
                 bindData(it)
             }
         }
     }
+
+    open fun onClickSubmit(submitFlag: Boolean) {
+
+    }
+
 }

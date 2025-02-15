@@ -19,6 +19,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.banklist.BankListActivity
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -90,6 +91,17 @@ class EditInfoActivity : BaseActivity() {
         toNextFragment(mStep)
         ivBack?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
+                if (mCurFragment is Edit1BasicFragment) {
+                    FirebaseUtils.logEvent("SYSTEM_BASIC_INF_BACK")    //个人信息页返回上一页
+                } else if (mCurFragment is Edit2WorkFragment) {
+                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+                } else if (mCurFragment is Edit3ContactFragment) {
+                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+                } else if (mCurFragment is Edit4BankFragment) {
+                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+                } else if (mCurFragment is Edit5FaceRecognitionFragment) {
+                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+                }
                 finish()
             }
 
@@ -127,6 +139,7 @@ class EditInfoActivity : BaseActivity() {
                     }
                     mProfileInfo = profileInfo
                     mCurFragment?.bindData(profileInfo)
+                    FirebaseUtils.logEvent("SYSTEM_BASIC_INF_LOAD")
                 }
 
                 override fun onError(response: Response<String>) {

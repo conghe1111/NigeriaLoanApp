@@ -27,6 +27,7 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.selectdata.SelectDataDialog
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
@@ -180,8 +181,13 @@ class Edit1BasicFragment : BaseEditFragment() {
 
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                val check = checkProfileParams()
-                if (check) {
+                val submitFlag = checkProfileParams()
+                if (submitFlag) {
+                    FirebaseUtils.logEvent("CLICK_BASIC_INF_SUBMIT")    //点击个人信息页提交按钮
+                } else {
+                    FirebaseUtils.logEvent("CLICK_BASIC_INF_NP")    //无个人信息时点击提交
+                }
+                if (submitFlag) {
                     uploadBase()
                 }
             }

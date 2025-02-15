@@ -77,6 +77,7 @@ class Edit3ContactFragment : BaseEditFragment() {
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 val check = checkProfileParams()
+                onClickSubmit(check)
                 if (check) {
                     uploadContact()
                 }

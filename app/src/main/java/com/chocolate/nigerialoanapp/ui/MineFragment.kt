@@ -35,6 +35,7 @@ import com.chocolate.nigerialoanapp.ui.mine.PageType
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.INFORMATION
 import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
 import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -171,6 +172,7 @@ class MineFragment : BaseFragment() {
                     }
 
                     PageType.LOGOUT -> {
+                        FirebaseUtils.logEvent("CLICK_LOGOUT")
                         logout()
                     }
                 }
