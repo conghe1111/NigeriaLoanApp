@@ -16,14 +16,12 @@ import java.util.Enumeration;
 public class NetworkUtil {
 
 
-    private WifiManager mWifiMan;
-
     /**
      * 获取网络类型
      *
      * @return
      */
-    private String getNetType(ConnectivityManager mConMan) {
+    private static String getNetType(ConnectivityManager mConMan) {
         NetworkInfo netInfo = mConMan.getActiveNetworkInfo();
         if (netInfo == null) {
             return "none";
@@ -43,8 +41,8 @@ public class NetworkUtil {
      * @return
      */
     @SuppressLint("DefaultLocale")
-    public  String getIpAddress(Context mContext) {
-        mWifiMan = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+    public static String getIpAddress(Context mContext) {
+        WifiManager mWifiMan = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
         ConnectivityManager mConMan = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (!"wifi".equals(getNetType(mConMan))) {
@@ -62,7 +60,7 @@ public class NetworkUtil {
                 ip >> 16 & 0xff, ip >> 24 & 0xff);
     }
 
-    public String getLocalIpAddress() {
+    public static String getLocalIpAddress() {
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                 NetworkInterface intf = en.nextElement();

@@ -140,7 +140,7 @@ class LoginRegisterFragment : BaseFragment() {
         }
         var dataStr = jsonObject.toString()
         if (BuildConfig.DEBUG) {
-            Log.i(TAG, " login register ... = $dataStr")
+            Log.e("okhttp", " login register ... = $dataStr")
         }
         flLoading?.visibility = View.VISIBLE
         OkGo.post<String>(Api.CHECK_PHONE_NUMBER).tag(TAG)

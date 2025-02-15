@@ -80,6 +80,9 @@ object LocalConfig {
     const val LC_LATITUDE = "lc_latitude"
     const val LC_UTMSOURCE = "lc_utmsource"
     const val LC_UTMMEDIUM = "lc_utmmedium"
+    const val LC_APPSFLYER_ID = "lc_appsflyer_id"
+    const val LC_GOOGLE_AD_ID = "google_advertising_id"
+    const val LC_CAMPAIGN = "campaign"
     const val LC_FIREBASE_INSTANCE_ID: String = "firebase_instance_id" //firebase_instance_id
     const val LC_FCM_TOKEN: String = "lc_fcm_token"
     const val LC_PUSH: String = "lc_push"

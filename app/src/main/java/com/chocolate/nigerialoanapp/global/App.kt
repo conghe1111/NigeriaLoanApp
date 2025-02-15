@@ -73,9 +73,23 @@ class App : Application() {
         }
 
         AppUtils.registerAppStatusChangedListener(mListener)
+        if (Constant.isAuditMode()) {
+            initTest()
+        } else {
+
+        }
     }
 
-  private val mListener = object : OnAppStatusChangedListener {
+    private fun initTest() {
+        SPUtils.getInstance().put(LocalConfig.LC_FCM_TOKEN, "test111")
+        SPUtils.getInstance().put(LocalConfig.LC_UTMSOURCE, "test222")
+        SPUtils.getInstance().put(LocalConfig.LC_UTMMEDIUM, "test333")
+        SPUtils.getInstance().put(LocalConfig.LC_APPSFLYER_ID, "test44")
+        SPUtils.getInstance().put(LocalConfig.LC_GOOGLE_AD_ID, "test55")
+        SPUtils.getInstance().put(LocalConfig.LC_CAMPAIGN, "test66")
+    }
+
+    private val mListener = object : OnAppStatusChangedListener {
         override fun onForeground(activity: Activity?) {
             FirebaseUtils.logEvent("SYSTEM_INIT_OPEN_${Constant.APP_ID}")
         }

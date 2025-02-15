@@ -6,6 +6,7 @@
 
  <com.scwang.smart.refresh.layout.SmartRefreshLayout
      android:id="@+id/refresh_container"
+     android:fitsSystemWindows="true"
      android:layout_width="match_parent"
      android:layout_height="match_parent">
 
