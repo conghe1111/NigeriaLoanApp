@@ -75,6 +75,7 @@ class ForgetRegisterFragment : BaseRegisterFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    showOrHideLoading(false)
                 }
             })
     }

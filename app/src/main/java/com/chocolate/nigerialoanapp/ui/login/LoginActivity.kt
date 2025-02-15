@@ -47,8 +47,7 @@ class LoginActivity : BaseActivity() {
 
         ivBack?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                val loginRegisterFragment = LoginRegisterFragment()
-                toFragment(loginRegisterFragment)
+                onBackPressed()
                 setBackVisible(false)
                 FirebaseUtils.logEvent("SYSTEM_LOGIN_REGISTER_BACK_SMS")
             }
@@ -63,14 +62,14 @@ class LoginActivity : BaseActivity() {
     fun toLoginFragment() {
         setBackVisible(true)
         val registerFragment = LoginFragment()
-        toFragment(registerFragment)
+        addFragment(registerFragment, LoginFragment.TAG)
     }
 
     fun toRegisterFragment(isFirstRegister: Boolean = false) {
         val registerFragment =
             if (isFirstRegister) FirstRegisterFragment() else ForgetRegisterFragment()
         setBackVisible(true)
-        toFragment(registerFragment)
+        addFragment(registerFragment, if (isFirstRegister) FirstRegisterFragment.TAG else ForgetRegisterFragment.TAG)
     }
 
     private var dialog: ErrorStateDialog? = null
@@ -145,4 +144,13 @@ class LoginActivity : BaseActivity() {
         OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
     }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount >= 1) {
+            supportFragmentManager.popBackStackImmediate()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
 }

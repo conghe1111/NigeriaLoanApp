@@ -29,6 +29,7 @@ import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.DateUtils
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -272,8 +273,9 @@ abstract class BaseRegisterFragment : BaseFragment() {
             isCounting = true
             val countDownTime = l / 1000
 //            Log.e("Test", " on tick  = " + l)
-            val countDownStr = resources.getString(R.string.resend_sms_desc, countDownTime)
-            tvGetCode?.text = countDownStr
+            SpanUtils.getSendTextSpan(activity, countDownTime)?.let {
+                tvGetCode?.text = it
+            }
         }
 
         override fun onFinish() {

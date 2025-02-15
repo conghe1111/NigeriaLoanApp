@@ -26,6 +26,16 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    fun addFragment(fragment: BaseFragment?, tag : String) {
+        if (fragment != null) {
+            val fragmentManager = supportFragmentManager
+            val transaction = fragmentManager.beginTransaction() // 开启一个事务
+            transaction.add(getFragmentContainerRes(), fragment, tag)
+            transaction.addToBackStack(tag)
+            transaction.commitAllowingStateLoss()
+        }
+    }
+
     @IdRes
     protected open fun getFragmentContainerRes(): Int {
         return -1

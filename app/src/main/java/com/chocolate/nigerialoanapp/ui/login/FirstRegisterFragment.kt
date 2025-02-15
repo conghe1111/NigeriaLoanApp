@@ -71,6 +71,7 @@ class FirstRegisterFragment : BaseRegisterFragment() {
 
                 override fun onError(response: Response<String>) {
                     super.onError(response)
+                    showOrHideLoading(false)
                     if (isDestroy()) {
                         return
                     }

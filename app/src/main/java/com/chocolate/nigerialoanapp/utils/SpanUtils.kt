@@ -1,24 +1,45 @@
 package com.chocolate.nigerialoanapp.utils
 
 import android.app.Activity
-import android.app.Dialog
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import android.text.style.ImageSpan
 import android.text.style.RelativeSizeSpan
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
+import com.chocolate.nigerialoanapp.widget.NoUnderlineClickSpan
 import java.text.DecimalFormat
 
 
 object SpanUtils {
+
+    fun getSendTextSpan(activity: Activity?, countDownTime : Long) : SpannableString? {
+        if (activity == null) {
+            return null
+        }
+        val countDownStr = activity.getString(R.string.resend_sms_desc, countDownTime.toString())
+        val spannableString = SpannableString(countDownStr)
+        val color1 = activity.resources.getColor(R.color.send_code_color1)
+        val color2 = activity.resources.getColor(R.color.send_code_color2)
+        val startIndex = spannableString.indexOf("in ") + 3
+        spannableString.setSpan(
+            ForegroundColorSpan(color1),
+            0,
+            startIndex,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableString.setSpan(
+            ForegroundColorSpan(color2),
+            startIndex,
+            countDownStr.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        return spannableString
+    }
 
     fun setPrivacyString(tv: AppCompatTextView?, activity: Activity?) {
         if (tv == null || activity == null) {
@@ -41,7 +62,7 @@ object SpanUtils {
         );
 
         //点击1
-        val serveClickableSpan = object : ClickableSpan() {
+        val serveClickableSpan = object : NoUnderlineClickSpan() {
             override fun onClick(widget: View) {
                 WebViewActivity.launchWebView(
                     activity,
@@ -102,7 +123,7 @@ object SpanUtils {
         )
 
         //点击1
-        val serveClickableSpan1 = object : ClickableSpan() {
+        val serveClickableSpan1 = object : NoUnderlineClickSpan() {
             override fun onClick(widget: View) {
                 WebViewActivity.launchWebView(
                     activity,
@@ -119,7 +140,7 @@ object SpanUtils {
         )
 
         //点击2
-        val serveClickableSpan2 = object : ClickableSpan() {
+        val serveClickableSpan2 = object : NoUnderlineClickSpan() {
             override fun onClick(widget: View) {
                 WebViewActivity.launchWebView(activity, Api.GET_TERMS, WebViewActivity.TYPE_TERMS)
             }

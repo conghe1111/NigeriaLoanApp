@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="theme_color">#40B950</color>
+    <color name="send_code_color1">#5940B950</color>
+    <color name="send_code_color2">#40B950</color>
     <color name="color_dd0000">#DD0000</color>
     <color name="color_c7c7c7">#C7C7C7</color>
     <color name="color_a1a1a1">#A1A1A1</color>

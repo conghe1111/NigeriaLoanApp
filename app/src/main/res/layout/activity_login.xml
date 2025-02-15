@@ -43,7 +43,7 @@
             android:layout_width="@dimen/dp_23"
             android:src="@drawable/ic_back"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_20"
             android:visibility="gone"
             android:layout_height="@dimen/dp_23"/>
 
