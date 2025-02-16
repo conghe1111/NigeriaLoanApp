@@ -18,6 +18,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.dialog.selectdata.SelectDataDialog
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
@@ -84,6 +85,39 @@ class Edit3ContactFragment : BaseEditFragment() {
             }
 
         })
+        mSelectRelationship1?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                showListDialog(ConfigMgr.mRelationShipList, object : SelectDataDialog.Observer {
+                    override fun onItemClick(content: Pair<String, String>?, pos: Int) {
+                        if (content == null) {
+                            return
+                        }
+                        mRelationship1 = content
+                        mSelectRelationship1?.setSelectState(false)
+                        mSelectRelationship1?.setText(content.first)
+                    }
+
+                })
+            }
+
+        })
+        mSelectRelationship2?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                showListDialog(ConfigMgr.mRelationShipList, object : SelectDataDialog.Observer {
+                    override fun onItemClick(content: Pair<String, String>?, pos: Int) {
+                        if (content == null) {
+                            return
+                        }
+                        mRelationship2 = content
+                        mSelectRelationship2?.setSelectState(false)
+                        mSelectRelationship2?.setText(content.first)
+                    }
+
+                })
+            }
+
+        })
+
         SpanUtils.setPrivacyString(tvDesc, activity)
     }
 
@@ -120,15 +154,18 @@ class Edit3ContactFragment : BaseEditFragment() {
     }
 
     private fun bindDataInternal() {
-        mSelectRelationship1?.setText(mRelationship1?.first.toString())
+        if (mRelationship1 != null && !TextUtils.isEmpty(mRelationship1?.first.toString())) {
+            mSelectRelationship1?.setText(mRelationship1?.first.toString())
+        }
         if (!TextUtils.isEmpty(mMobile1)) {
             mEditMobile1?.setText(mMobile1!!)
         }
         if (!TextUtils.isEmpty(mName1)) {
             mEditName1?.setText(mName1!!)
         }
-
-        mSelectRelationship2?.setText(mRelationship2?.first.toString())
+        if (mRelationship2 != null && !TextUtils.isEmpty(mRelationship2?.first.toString())) {
+            mSelectRelationship2?.setText(mRelationship2?.first.toString())
+        }
         if (!TextUtils.isEmpty(mMobile2)) {
             mEditMobile2?.setText(mMobile2!!)
         }

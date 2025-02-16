@@ -116,11 +116,9 @@ class Edit1BasicFragment : BaseEditFragment() {
             }
 
         })
-        selectGender?.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                if (checkClickFast()){
-                    return
-                }
+        selectGender?.setOnClickListener(object : NoDoubleClickListener() {
+
+            override fun onNoDoubleClick(v: View?) {
                 showListDialog(ConfigMgr.mGenderList, object : SelectDataDialog.Observer {
                     override fun onItemClick(content: Pair<String, String>?, pos: Int) {
                         if (content == null) {
