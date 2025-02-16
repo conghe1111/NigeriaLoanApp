@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.core.widget.NestedScrollView
@@ -51,7 +52,7 @@
                         android:layout_height="@dimen/dp_44"
                         android:layout_marginStart="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_13"
-                        android:background="@drawable/bg_btn_enable"
+                        android:background="@drawable/bg_nor_button"
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:paddingStart="@dimen/dp_44"
@@ -242,5 +243,21 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <FrameLayout
+        android:id="@+id/fl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dp_140"
+        android:clickable="true"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/theme_color" />
+
+    </FrameLayout>
 
 </FrameLayout>

@@ -35,6 +35,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
     private var tvDescLeft1 : AppCompatTextView? = null
     private var tvDescLeft3 : AppCompatTextView? = null
     private var tvDesc2 : AppCompatTextView? = null
+    private var flLoading : View? = null
 
     private var mPageResponse : MarketingPageResponse? = null
 
@@ -53,6 +54,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         tvDescLeft1 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc1)
         tvDescLeft3 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc3)
         tvDesc2 = view.findViewById<AppCompatTextView>(R.id.tv_product_2_desc)
+        flLoading = view.findViewById<View>(R.id.fl_loading)
         if( mPageResponse == null) {
             getMarketingPage()
         } else {
@@ -76,6 +78,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " marketing page = $jsonObject")
         }
+        flLoading?.visibility = View.VISIBLE
         OkGo.post<String>(Api.MARKETING_PAGE).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
@@ -85,6 +88,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    flLoading?.visibility = View.GONE
                     mPageResponse =
                         checkResponseSuccess(response, MarketingPageResponse::class.java)
                     if (mPageResponse == null) {
@@ -104,6 +108,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " marketing page= " + response.body())
                     }
+                    flLoading?.visibility = View.GONE
                 }
             })
     }

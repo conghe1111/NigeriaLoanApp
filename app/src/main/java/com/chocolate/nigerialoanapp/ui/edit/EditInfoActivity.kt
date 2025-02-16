@@ -193,6 +193,8 @@ class EditInfoActivity : BaseActivity() {
         if (mFrom == FROM_DISBURSE_6) {
             setResult(RESULT_CODE)
             finish()
+        } else if (mFrom == FROM_WORK_MENU) {
+            finish()
         }
         // TODO 完成
     }
