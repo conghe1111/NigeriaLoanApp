@@ -32,12 +32,15 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.JumpPermissionUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
+import com.chocolate.nigerialoanapp.utils.luban.Luban
+import com.chocolate.nigerialoanapp.utils.luban.OnCompressListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
+import java.util.Locale
 
 class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
@@ -137,7 +140,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
     }
 
-    private fun uploadLive() {
+    private fun uploadLive(file: File) {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
@@ -147,14 +150,13 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        val file = File(mCurPath)
         if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " update live = $jsonObject")
             Log.i("OkHttpClient", " update live 1 = ${file.exists()}")
         }
         OkGo.post<String>(Api.UPDATE_LIVE).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
-            .params("file", file)
+            .params("live_photo", file)
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
                     if (isDestroy()) {
@@ -240,7 +242,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
             intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
             imageFileUri = FileProvider.getUriForFile(
                 requireContext(),
-                BuildConfig.APPLICATION_ID + ".fileProvider",
+                BuildConfig.APPLICATION_ID + ".fileprovider",
                 file
             )
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri) //告诉相机拍摄完毕输出图片到指定的Uri
@@ -273,7 +275,35 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
             Log.e(TAG, " cur path = " + mCurPath + " exists = " + curFile.exists())
         }
         updateStatus()
-        uploadLive()
+        val curFile1 = File(mCurPath)
+        Luban.with(context)
+            .load(curFile1)
+            .ignoreBy(100)
+            .setTargetDir(curFile1.parent)
+            .filter { path ->
+                !(TextUtils.isEmpty(path) || path.lowercase(Locale.getDefault())
+                    .endsWith(".gif"))
+            }
+            .setCompressListener(object : OnCompressListener {
+                override fun onStart() {
+                }
+
+                override fun onSuccess(file: File) {
+                    if (BuildConfig.DEBUG) {
+                        Log.e("Okhttp", " unzip size = " + FileUtils.getSize(file) + " path .  " + file.absolutePath)
+                    }
+                    uploadLive(file)
+                }
+
+                override fun onError(e: Throwable) {
+                    if (BuildConfig.DEBUG) {
+                        Log.e("Okhttp", " error = " + e.message)
+                    }
+                    mStatus = STATUS_FAIL
+                    updateStatus()
+                }
+            }).launch()
+
     }
 
     private fun updateStatus() {

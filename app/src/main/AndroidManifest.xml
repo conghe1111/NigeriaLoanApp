@@ -99,7 +99,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.chocolate.nigerialoanapp.fileProvider"
+            android:authorities="com.chocolate.nigerialoanapp.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

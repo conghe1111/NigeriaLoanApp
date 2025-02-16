@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <files-path
-        name="image_root"
-        path="image_cache/" />
 
     <files-path
         name="file_log"
         path="log" />
 
     <files-path
-        name="files-path"
-        path="." />
+        name="file_photo"
+        path="photo" />
+
+
     <cache-path
         name="cache-path"
         path="." />
+
+
 </paths>

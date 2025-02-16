@@ -228,12 +228,9 @@ class EditInfoActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (data == null){
-            return
-        }
         if (resultCode == BankListActivity.START_RESULT_CODE && requestCode == BankListActivity.START_REQUEST_CODE) {
-            val bankName = data.getStringExtra(BankListActivity.KEY_BANK_NAME)
-            val bankCode = data.getStringExtra(BankListActivity.KEY_BANK_CODE)
+            val bankName = data?.getStringExtra(BankListActivity.KEY_BANK_NAME)
+            val bankCode = data?.getStringExtra(BankListActivity.KEY_BANK_CODE)
             if (mCurFragment is Edit4BankFragment) {
                 (mCurFragment as? Edit4BankFragment)?.onBankActivityResult(bankName, bankCode)
             }

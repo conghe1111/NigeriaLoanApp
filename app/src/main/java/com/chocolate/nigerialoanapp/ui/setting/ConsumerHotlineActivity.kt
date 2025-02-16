@@ -220,15 +220,9 @@ class ConsumerHotlineActivity : BaseActivity() {
 
     private fun getDPContext(context: Context): Context {
         var storageContext: Context = context
-        if (Build.VERSION.SDK_INT >= 24) {
-            if (!context.isDeviceProtectedStorage) {
-                val deviceContext = context.createDeviceProtectedStorageContext()
-                storageContext = deviceContext
-            }
-        }
         return storageContext
     }
 
     private fun getAuthority(context: Context) =
-        context.applicationInfo.packageName + ".fileProvider"
+        context.applicationInfo.packageName + ".fileprovider"
 }
