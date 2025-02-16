@@ -89,6 +89,8 @@ class Edit2WorkFragment : BaseEditFragment() {
                         if (mEmployment != null) {
                             mSelectEmployment?.setText(mEmployment!!.first)
                         }
+                        mSelectEmployment?.setSelectState(false)
+                        updateNextBtnStatus(false)
                     }
 
                 })
@@ -106,6 +108,8 @@ class Edit2WorkFragment : BaseEditFragment() {
                         if (mMonthlyIncome != null) {
                             mSelectMonthlyIncome?.setText(mMonthlyIncome!!.first)
                         }
+                        mSelectMonthlyIncome?.setSelectState(false)
+                        updateNextBtnStatus(false)
                     }
 
                 })
@@ -123,6 +127,8 @@ class Edit2WorkFragment : BaseEditFragment() {
                         if (mPosition != null) {
                             mSelectPosition?.setText(mPosition!!.first)
                         }
+                        mSelectPosition?.setSelectState(false)
+                        updateNextBtnStatus(false)
                     }
 
                 })
@@ -140,6 +146,8 @@ class Edit2WorkFragment : BaseEditFragment() {
                         if (mSelectPayPeriod != null) {
                             mSelectPayPeriod?.setText(mPayPeriod!!.first)
                         }
+                        mSelectPayPeriod?.setSelectState(false)
+                        updateNextBtnStatus(false)
                     }
 
                 })
@@ -157,6 +165,8 @@ class Edit2WorkFragment : BaseEditFragment() {
                         if (mHasOtherDebt != null) {
                             mSelectHasOtherDebt?.setText(mHasOtherDebt!!.first)
                         }
+                        mSelectHasOtherDebt?.setSelectState(false)
+                        updateNextBtnStatus(false)
                     }
 
                 })
@@ -165,7 +175,7 @@ class Edit2WorkFragment : BaseEditFragment() {
         })
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                val check = checkProfileParams()
+                val check = checkProfileParams(true)
                 onClickSubmit(check)
                 if (check) {
                     uploadWork()
@@ -204,11 +214,21 @@ class Edit2WorkFragment : BaseEditFragment() {
     }
 
     private fun bindDataInternal() {
-        mSelectEmployment?.setText(mEmployment?.first.toString())
-        mSelectMonthlyIncome?.setText(mMonthlyIncome?.first.toString())
-        mSelectPosition?.setText(mPosition?.first.toString())
-        mSelectPayPeriod?.setText(mPayPeriod?.first.toString())
-        mSelectHasOtherDebt?.setText(mHasOtherDebt?.first.toString())
+        if (mEmployment != null && !TextUtils.isEmpty(mEmployment?.first.toString())) {
+            mSelectEmployment?.setText(mEmployment?.first.toString())
+        }
+        if (mMonthlyIncome != null && !TextUtils.isEmpty(mMonthlyIncome?.first.toString())) {
+            mSelectMonthlyIncome?.setText(mMonthlyIncome?.first.toString())
+        }
+        if (mPosition != null && !TextUtils.isEmpty(mPosition?.first.toString())) {
+            mSelectPosition?.setText(mPosition?.first.toString())
+        }
+        if (mPayPeriod != null && !TextUtils.isEmpty(mPayPeriod?.first.toString())) {
+            mSelectPayPeriod?.setText(mPayPeriod?.first.toString())
+        }
+        if (mHasOtherDebt != null && !TextUtils.isEmpty(mHasOtherDebt?.first.toString())) {
+            mSelectHasOtherDebt?.setText(mHasOtherDebt?.first.toString())
+        }
 
         if (!TextUtils.isEmpty(mCompanyName)) {
             mEditCompanyName?.setText(mCompanyName!!)
@@ -221,30 +241,40 @@ class Edit2WorkFragment : BaseEditFragment() {
         }
     }
 
-    private fun checkProfileParams(): Boolean {
+    private fun checkProfileParams(needSelect : Boolean = true): Boolean {
         if (mEmployment == null) {
-            scrollToPos(1, scrollView)
-            mSelectEmployment?.setSelectState(true)
+            if (needSelect) {
+                scrollToPos(1, scrollView)
+                mSelectEmployment?.setSelectState(true)
+            }
             return false
         }
         if (mMonthlyIncome == null) {
-            scrollToPos(2, scrollView)
-            mSelectMonthlyIncome?.setSelectState(true)
+            if (needSelect) {
+                scrollToPos(2, scrollView)
+                mSelectMonthlyIncome?.setSelectState(true)
+            }
             return false
         }
         if (mPosition == null) {
-            scrollToPos(3, scrollView)
-            mSelectPosition?.setSelectState(true)
+            if (needSelect) {
+                scrollToPos(3, scrollView)
+                mSelectPosition?.setSelectState(true)
+            }
             return false
         }
         if (mPayPeriod == null) {
-            scrollToPos(4, scrollView)
-            mSelectPayPeriod?.setSelectState(true)
+            if (needSelect) {
+                scrollToPos(4, scrollView)
+                mSelectPayPeriod?.setSelectState(true)
+            }
             return false
         }
         if (mHasOtherDebt == null) {
-            scrollToPos(5, scrollView)
-            mSelectHasOtherDebt?.setSelectState(true)
+            if (needSelect) {
+                scrollToPos(5, scrollView)
+                mSelectHasOtherDebt?.setSelectState(true)
+            }
             return false
         }
 //        if (mEditCompanyName == null || TextUtils.isEmpty(mEditCompanyName!!.getText())) {
@@ -318,5 +348,15 @@ class Edit2WorkFragment : BaseEditFragment() {
                     }
                 }
             })
+    }
+
+    override fun updateNextBtnStatus(needSelect: Boolean) {
+        val flag = checkProfileParams(false)
+        tvNext?.isSelected = flag
+    }
+
+    override fun onDestroy() {
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDestroy()
     }
 }
