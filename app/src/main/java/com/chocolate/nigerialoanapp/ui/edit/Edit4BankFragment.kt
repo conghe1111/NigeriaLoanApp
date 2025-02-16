@@ -75,7 +75,7 @@ class Edit4BankFragment : BaseEditFragment() {
 
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                val check = checkProfileParams(true)
+                val check = checkProfileParams(true, true)
                 if (check) {
                     uploadReceive()
                 }
@@ -86,14 +86,14 @@ class Edit4BankFragment : BaseEditFragment() {
         mEditAccountNum?.setOnTextChangeListener(object : InfoEditView.TextChangeListener {
             override fun onTextChange() {
                 onClickSubmit(true)
-                updateNextBtnStatus()
+                updateNextBtnStatus(false)
             }
 
         })
         mEditAccountNumConfirm?.setOpenRedState(false)
         mEditAccountNumConfirm?.setOnTextChangeListener(object : InfoEditView.TextChangeListener {
             override fun onTextChange() {
-                updateNextBtnStatus()
+                updateNextBtnStatus(false)
             }
 
         })
@@ -104,7 +104,7 @@ class Edit4BankFragment : BaseEditFragment() {
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
         updateData(profile1Bean)
         bindDataInternal()
-        updateNextBtnStatus()
+        updateNextBtnStatus(false)
     }
 
     private fun updateData(profile1Bean: ProfileInfoResponse?) {
@@ -126,7 +126,9 @@ class Edit4BankFragment : BaseEditFragment() {
     }
 
     private fun bindDataInternal() {
-        mSelectBankName?.setText(mBankName?.first.toString())
+        if (mBankName != null && !TextUtils.isEmpty(mBankName?.first)) {
+            mSelectBankName?.setText(mBankName?.first.toString())
+        }
         if (!TextUtils.isEmpty(mAccountNum)) {
             mEditAccountNum?.setText(mAccountNum!!)
         }
@@ -135,12 +137,14 @@ class Edit4BankFragment : BaseEditFragment() {
         }
     }
 
-    private fun checkProfileParams(needToast : Boolean = false): Boolean {
+    private fun checkProfileParams(needToast : Boolean = false, needSelect : Boolean): Boolean {
         if (mBankName == null) {
-            scrollToPos(1, scrollView)
-            mSelectBankName?.setSelectState(true)
-            if (needToast) {
-                ToastUtils.showShort("Please select type of receiving accounts")
+            if (needSelect) {
+                scrollToPos(1, scrollView)
+                mSelectBankName?.setSelectState(true)
+                if (needToast) {
+                    ToastUtils.showShort("Please select type of receiving accounts")
+                }
             }
             return false
         }
@@ -228,13 +232,14 @@ class Edit4BankFragment : BaseEditFragment() {
         if (TextUtils.isEmpty(bankName) || TextUtils.isEmpty(bankCode)) {
             return
         }
+        mSelectBankName?.setSelectState(false)
         mBankName = Pair(bankName, bankCode)
         mSelectBankName?.setText(mBankName?.first.toString())
         updateNextBtnStatus()
     }
 
-    private fun updateNextBtnStatus() {
-       val flag = checkProfileParams()
+    private fun updateNextBtnStatus(needSelect: Boolean = true) {
+       val flag = checkProfileParams(false, needSelect)
         tvNext?.isSelected = flag
     }
 }
