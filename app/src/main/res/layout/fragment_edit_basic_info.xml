@@ -67,10 +67,17 @@
                     android:layout_height="wrap_content"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_know_bvn"
                     android:layout_width="wrap_content"
                     android:text="Dial*565*0#"
                     android:textSize="@dimen/sp_16"
                     android:textColor="#40B950"
+                    android:paddingHorizontal="@dimen/dp_16"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    android:background="@drawable/bg_not_know_bvn"
                     android:layout_gravity="center_vertical|end"
                     android:layout_height="wrap_content"/>
 

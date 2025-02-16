@@ -27,8 +27,10 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.selectdata.SelectDataDialog
+import com.chocolate.nigerialoanapp.ui.edit.Edit2WorkFragment.Companion
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
+import com.chocolate.nigerialoanapp.utils.UssdUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
@@ -61,6 +63,7 @@ class Edit1BasicFragment : BaseEditFragment() {
     private var editStreet: InfoEditView? = null
     private var tvNext: AppCompatTextView? = null
     private var tvNextDesc: AppCompatTextView? = null
+    private var tvKnowBvn: AppCompatTextView? = null
     private var scrollView: NestedScrollView? = null
 
     private var firstName: String? = null
@@ -101,17 +104,25 @@ class Edit1BasicFragment : BaseEditFragment() {
         editStreet = view.findViewById<InfoEditView>(R.id.edit_street)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_basic_next)
         tvNextDesc = view.findViewById<AppCompatTextView>(R.id.tv_basic_next_desc)
+        tvKnowBvn = view.findViewById<AppCompatTextView>(R.id.tv_know_bvn)
 
-        selectBirth?.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                if (checkClickFast()){
-                    return
-                }
+        tvKnowBvn?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                    activity?.let {
+                        UssdUtils.toSendUssdCodeActivity(it, "*565*0#")
+                    }
+            }
+
+        })
+
+        selectBirth?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
                 showTimePicker { date, v ->
                     val sdf = SimpleDateFormat("yyyy-MM-dd")
                     val datef = sdf.format(date)
                     mBirthday = datef
                     selectBirth?.setText(mBirthday)
+                    updateNextBtnStatus(false)
                 }
             }
 
@@ -126,17 +137,15 @@ class Edit1BasicFragment : BaseEditFragment() {
                         }
                         genderPos = content!!.second.toInt()
                         updateDescByGenderPos()
+                        updateNextBtnStatus(false)
                     }
 
                 })
             }
 
         })
-        selectMarital?.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                if (checkClickFast()){
-                    return
-                }
+        selectMarital?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
                 showListDialog(ConfigMgr.mMaritalList, object : SelectDataDialog.Observer {
                     override fun onItemClick(content: Pair<String, String>?, pos: Int) {
                         if (content == null) {
@@ -146,6 +155,7 @@ class Edit1BasicFragment : BaseEditFragment() {
                         if (mMaritalStatus != null) {
                             selectMarital?.setText(mMaritalStatus!!.first)
                         }
+                        updateNextBtnStatus(false)
                     }
 
                 })
@@ -163,6 +173,7 @@ class Edit1BasicFragment : BaseEditFragment() {
                         if (mEducation != null) {
                             selectEducation?.setText(mEducation!!.first)
                         }
+                        updateNextBtnStatus(false)
                     }
 
                 })
@@ -196,47 +207,61 @@ class Edit1BasicFragment : BaseEditFragment() {
         SpanUtils.setPrivacyString(tvNextDesc, activity)
     }
 
-    private fun checkProfileParams(): Boolean {
+    private fun checkProfileParams(needSelect: Boolean = true): Boolean {
         if (editFirstName == null || TextUtils.isEmpty(editFirstName!!.getText())) {
-            scrollToPos(1, scrollView)
-            editFirstName?.setSelectState()
-//            ToastUtils.showShort("Please fill correct fist name")
+            if (needSelect) {
+                scrollToPos(1, scrollView)
+                editFirstName?.setSelectState()
+                ToastUtils.showShort("Please fill correct fist name")
+            }
             return false
         }
         if (editLastName == null || TextUtils.isEmpty(editLastName!!.getText())) {
-           scrollToPos(3, scrollView)
-            editLastName?.setSelectState()
-//            ToastUtils.showShort("Please fill correct last name")
+            if (needSelect) {
+                scrollToPos(3, scrollView)
+                editLastName?.setSelectState()
+                ToastUtils.showShort("Please fill correct last name")
+            }
             return false
         }
         if (editBvn == null || TextUtils.isEmpty(editBvn!!.getText())) {
-            scrollToPos(4, scrollView)
-            editBvn?.setSelectState()
-//            ToastUtils.showShort("Please fill correct bvn")
+            if (needSelect) {
+                scrollToPos(4, scrollView)
+                editBvn?.setSelectState()
+                ToastUtils.showShort("Please fill correct bvn")
+            }
             return false
         }
         if (editEmail == null || TextUtils.isEmpty(editEmail!!.getText())) {
-            scrollToPos(9, scrollView)
-            editBvn?.setSelectState()
-//            ToastUtils.showShort("Please fill correct email")
+            if (needSelect) {
+                scrollToPos(9, scrollView)
+                editBvn?.setSelectState()
+                ToastUtils.showShort("Please fill correct email")
+            }
             return false
         }
         if (editStreet == null || TextUtils.isEmpty(editStreet!!.getText())) {
-            scrollToPos(11, scrollView)
-            editBvn?.setSelectState()
-//            ToastUtils.showShort("Please fill correct street")
+            if (needSelect) {
+                scrollToPos(11, scrollView)
+                editBvn?.setSelectState()
+                ToastUtils.showShort("Please fill correct street")
+            }
             return false
         }
         if (mBirthday == null) {
-            scrollToPos(5, scrollView)
-            selectBirth?.setSelectState(true)
-//            ToastUtils.showShort("Please select birthday")
+            if (needSelect) {
+                scrollToPos(5, scrollView)
+                selectBirth?.setSelectState(true)
+                ToastUtils.showShort("Please select birthday")
+            }
             return false
         }
         if (state == null || area == null) {
-            scrollToPos(12, scrollView)
-            selectAddress?.setSelectState(true)
-//            ToastUtils.showShort("Please fill correct Residential address")
+            if (needSelect) {
+                scrollToPos(12, scrollView)
+                selectAddress?.setSelectState(true)
+                ToastUtils.showShort("Please fill correct Residential address")
+            }
             return false
         }
         return true
@@ -256,7 +281,7 @@ class Edit1BasicFragment : BaseEditFragment() {
             jsonObject.put("birthday", mBirthday)
             jsonObject.put("marital_status", mMaritalStatus?.second.toString())
             jsonObject.put("education", mEducation?.second.toString())
-            jsonObject.put("email", email)
+            jsonObject.put("email", editEmail?.getText())
             jsonObject.put("home_address", "$state-$area") //FCM Token
             jsonObject.put("home_street", editStreet?.getText()) //FCM Token
 
@@ -303,6 +328,12 @@ class Edit1BasicFragment : BaseEditFragment() {
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
         updateData(profile1Bean)
         bindDataInternal()
+        selectAddress?.postDelayed(Runnable {
+            if (isDestroy()) {
+                return@Runnable
+            }
+            updateNextBtnStatus(false)
+        }, 300)
     }
 
     private fun updateData(profile1Bean: ProfileInfoResponse?) {
@@ -336,7 +367,7 @@ class Edit1BasicFragment : BaseEditFragment() {
         }
         if (state == null || area == null) {
             if (!TextUtils.isEmpty(profile1Bean.account_profile.home_address)) {
-                val stateArr = profile1Bean.account_profile.home_address.split(":")
+                val stateArr = profile1Bean.account_profile.home_address.split("-")
                 state = stateArr[0]
                 if (stateArr.size > 1) {
                     area = stateArr[1]
@@ -377,7 +408,7 @@ class Edit1BasicFragment : BaseEditFragment() {
         if (area != null && !TextUtils.isEmpty(area)
             && state != null && !TextUtils.isEmpty(state)
         ) {
-            selectAddress?.setText((state + ":" + area))
+            selectAddress?.setText(("$state-$area"))
         }
         if (!TextUtils.isEmpty(homeAddress)) {
             editStreet?.setEditTextAndSelection(homeAddress!!)
@@ -443,6 +474,7 @@ class Edit1BasicFragment : BaseEditFragment() {
             if (selectAddress != null && state != null && area != null) {
                 selectAddress?.setText("$state-$area")
             }
+            updateNextBtnStatus(false)
             Log.i(TAG, " select province = $state select state = $area")
         }
         val view: OptionsPickerView<*> = pvOptions.setSubmitText("ok") //确定按钮文字
@@ -493,5 +525,13 @@ class Edit1BasicFragment : BaseEditFragment() {
         }
     }
 
+    override fun updateNextBtnStatus(needSelect: Boolean) {
+        val flag = checkProfileParams(false)
+        tvNext?.isSelected = flag
+    }
 
+    override fun onDestroy() {
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDestroy()
+    }
 }

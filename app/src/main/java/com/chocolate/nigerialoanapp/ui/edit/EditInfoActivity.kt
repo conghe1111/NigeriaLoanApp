@@ -179,6 +179,9 @@ class EditInfoActivity : BaseActivity() {
             (111) -> {  //完成首贷KYC流程
                 endNext()
             }
+            (0) -> {  //如果当前流程=111，下一步骤为0.
+                endNext()
+            }
         }
         nextStep?.let {
             toNextFragment(it)

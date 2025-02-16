@@ -190,6 +190,7 @@ class Edit2WorkFragment : BaseEditFragment() {
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
         updateData(profile1Bean)
         bindDataInternal()
+        updateNextBtnStatus(false)
     }
 
     private fun updateData(profile1Bean: ProfileInfoResponse?) {

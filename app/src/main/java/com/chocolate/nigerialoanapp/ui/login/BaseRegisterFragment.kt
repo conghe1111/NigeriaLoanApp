@@ -30,6 +30,7 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.DateUtils
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
+import com.chocolate.nigerialoanapp.utils.UssdUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -285,15 +286,11 @@ abstract class BaseRegisterFragment : BaseFragment() {
     }
 
     private fun toSendUssdCodeActivity() {
-        val intent = Intent()
-        intent.action = Intent.ACTION_DIAL
-        val tel = Uri.encode("*347*8#")
-        intent.data = Uri.parse("tel:$tel")
-        startActivity(intent)
-        startUssdFlag = true
+        activity?.let {
+            UssdUtils.toSendUssdCodeActivity(it, "*347*8#")
+            startUssdFlag = true
+        }
     }
-
-
 
     override fun onDestroy() {
         isCounting = false
