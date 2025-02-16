@@ -104,7 +104,7 @@
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/dp_17"
             android:text="@string/login_register_apply"
-            android:background="@drawable/bg_green_login_bg"
+            android:background="@drawable/bg_nor_button_24"
             android:layout_height="@dimen/dp_46"/>
 
         <androidx.appcompat.widget.AppCompatTextView

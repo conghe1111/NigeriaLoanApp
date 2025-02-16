@@ -37,8 +37,9 @@
             android:layout_height="@dimen/dp_48"
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/bg_gray_bg"
+            android:visibility="gone"
             android:orientation="horizontal">
+<!--            android:background="@drawable/bg_gray_bg"-->
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_ussd"
@@ -174,7 +175,7 @@
             android:layout_height="@dimen/dp_46"
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_17"
-            android:background="@drawable/bg_green_login_bg"
+            android:background="@drawable/bg_nor_button_24"
             android:gravity="center"
             android:text="@string/sign_up"
             android:textColor="@color/white"

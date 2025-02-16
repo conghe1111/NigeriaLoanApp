@@ -68,7 +68,7 @@ abstract class BaseRegisterFragment : BaseFragment() {
     private var tvGetCode: AppCompatTextView? = null
     private var flLoading: FrameLayout? = null
 
-    private var isUssd: Boolean = true
+    private var isUssd: Boolean = false
 
     private var setPwdIsPwdMode: Boolean = true
     private var againPwdIsPwdMode: Boolean = true
@@ -103,6 +103,7 @@ abstract class BaseRegisterFragment : BaseFragment() {
 
         initView(view)
         updateUssdSms()
+        executeSendSmsCode(true)
     }
 
     open fun initView(view: View) {
@@ -173,16 +174,7 @@ abstract class BaseRegisterFragment : BaseFragment() {
                 if (isUssd) {
                     toSendUssdCodeActivity()
                 } else {
-                    if (isCounting) {
-
-                    } else {
-                        if (sendOtpNum > 2) {
-                            FirebaseUtils.logEvent("SERVICE_OTP_OUT_OF_TIMES${Constant.USSD}")
-                        } else {
-                            SPUtils.getInstance().put(DateUtils.getDateStr(), sendOtpNum++)
-                            sendVerifyCode()
-                        }
-                    }
+                    executeSendSmsCode()
                 }
             }
 
@@ -193,6 +185,23 @@ abstract class BaseRegisterFragment : BaseFragment() {
             val phoneNum = (activity as LoginActivity).mPhoneNum
             if (!TextUtils.isEmpty(phoneNum)) {
                 tvUserDesc?.text = resources.getString(R.string.dears_234_x, phoneNum)
+            }
+        }
+    }
+
+    private fun executeSendSmsCode(autoSend : Boolean = false) {
+        if (isCounting) {
+
+        } else {
+            if (sendOtpNum > 2) {
+                val toastStr = resources.getString(R.string.verification_ran_out)
+                ToastUtils.showShort(toastStr)
+                if (!autoSend) {
+                    FirebaseUtils.logEvent("SERVICE_OTP_OUT_OF_TIMES${Constant.USSD}")
+                }
+            } else {
+                SPUtils.getInstance().put(DateUtils.getDateStr(), sendOtpNum++)
+                sendVerifyCode()
             }
         }
     }
