@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.ScrollView
 import android.util.Pair
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.compose.ui.input.key.Key
 import androidx.core.widget.NestedScrollView
+import com.blankj.utilcode.util.KeyboardUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -95,6 +97,7 @@ class Edit3ContactFragment : BaseEditFragment() {
                         mRelationship1 = content
                         mSelectRelationship1?.setSelectState(false)
                         mSelectRelationship1?.setText(content.first)
+                        updateNextBtnStatus()
                     }
 
                 })
@@ -111,6 +114,7 @@ class Edit3ContactFragment : BaseEditFragment() {
                         mRelationship2 = content
                         mSelectRelationship2?.setSelectState(false)
                         mSelectRelationship2?.setText(content.first)
+                        updateNextBtnStatus()
                     }
 
                 })
@@ -174,35 +178,47 @@ class Edit3ContactFragment : BaseEditFragment() {
         }
     }
 
-    private fun checkProfileParams(): Boolean {
+    private fun checkProfileParams(needSelect : Boolean = true): Boolean {
         if (mRelationship1 == null) {
-            scrollToPos(1, scrollView)
-            mSelectRelationship1?.setSelectState(true)
+            if (needSelect) {
+                scrollToPos(1, scrollView)
+                mSelectRelationship1?.setSelectState(true)
+            }
             return false
         }
         if (mRelationship2 == null) {
-            scrollToPos(4, scrollView)
-            mSelectRelationship2?.setSelectState(true)
+            if (needSelect) {
+                scrollToPos(4, scrollView)
+                mSelectRelationship2?.setSelectState(true)
+            }
             return false
         }
         if (mEditMobile1 == null || TextUtils.isEmpty(mEditMobile1!!.getText())) {
-            scrollToPos(2, scrollView)
-            mEditMobile1?.setSelectState()
+            if (needSelect) {
+                scrollToPos(2, scrollView)
+                mEditMobile1?.setSelectState()
+            }
             return false
         }
         if (mEditName1 == null || TextUtils.isEmpty(mEditName1!!.getText())) {
-            scrollToPos(3, scrollView)
-            mEditName1?.setSelectState()
+            if (needSelect) {
+                scrollToPos(3, scrollView)
+                mEditName1?.setSelectState()
+            }
             return false
         }
         if (mEditMobile2 == null || TextUtils.isEmpty(mEditMobile2!!.getText())) {
-            scrollToPos(8, scrollView)
-            mEditMobile2?.setSelectState()
+            if (needSelect) {
+                scrollToPos(8, scrollView)
+                mEditMobile2?.setSelectState()
+            }
             return false
         }
         if (mEditName2 == null || TextUtils.isEmpty(mEditName2!!.getText())) {
-            scrollToPos(8, scrollView)
-            mEditName2?.setSelectState()
+            if (needSelect) {
+                scrollToPos(8, scrollView)
+                mEditName2?.setSelectState()
+            }
             return false
         }
         return true
@@ -258,5 +274,15 @@ class Edit3ContactFragment : BaseEditFragment() {
                     }
                 }
             })
+    }
+
+    override fun updateNextBtnStatus(needSelect: Boolean) {
+        val flag = checkProfileParams(false)
+        tvNext?.isSelected = flag
+    }
+
+    override fun onDestroy() {
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDestroy()
     }
 }

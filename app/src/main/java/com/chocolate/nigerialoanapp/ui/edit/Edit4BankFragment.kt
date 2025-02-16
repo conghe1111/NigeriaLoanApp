@@ -82,21 +82,7 @@ class Edit4BankFragment : BaseEditFragment() {
             }
 
         })
-        mEditAccountNum?.setOpenRedState(false)
-        mEditAccountNum?.setOnTextChangeListener(object : InfoEditView.TextChangeListener {
-            override fun onTextChange() {
-                onClickSubmit(true)
-                updateNextBtnStatus(false)
-            }
 
-        })
-        mEditAccountNumConfirm?.setOpenRedState(false)
-        mEditAccountNumConfirm?.setOnTextChangeListener(object : InfoEditView.TextChangeListener {
-            override fun onTextChange() {
-                updateNextBtnStatus(false)
-            }
-
-        })
         SpanUtils.setPrivacyString(tvDesc, activity)
         tryBindData()
     }
@@ -238,7 +224,7 @@ class Edit4BankFragment : BaseEditFragment() {
         updateNextBtnStatus()
     }
 
-    private fun updateNextBtnStatus(needSelect: Boolean = true) {
+    override fun updateNextBtnStatus(needSelect: Boolean) {
        val flag = checkProfileParams(false, needSelect)
         tvNext?.isSelected = flag
     }

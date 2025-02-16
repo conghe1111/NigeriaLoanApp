@@ -119,4 +119,33 @@ abstract class BaseEditFragment : BaseFragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let {
+            KeyboardUtils.registerSoftInputChangedListener(it, mKeyBoardListener)
+        }
+    }
+
+   private val mKeyBoardListener = object : KeyboardUtils.OnSoftInputChangedListener {
+        override fun onSoftInputChanged(height: Int) {
+            if (activity == null || activity?.isFinishing == true || activity?.isDestroyed == true) {
+                return
+            }
+            if (!KeyboardUtils.isSoftInputVisible(activity!!)) {
+                updateNextBtnStatus()
+            }
+        }
+
+    }
+
+   open fun updateNextBtnStatus(needSelect: Boolean = true) {
+
+   }
+
+    override fun onDestroy() {
+        activity?.let {
+            KeyboardUtils.unregisterSoftInputChangedListener(it.window)
+        }
+        super.onDestroy()
+    }
 }

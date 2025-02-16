@@ -81,7 +81,7 @@ class InfoSelectView : LinearLayout {
             if (isRedSelectState == false) {
                 return
             }
-            tvDesc?.setTextColor(resources.getColor(R.color.color_c7c7c7))
+            tvDesc?.setTextColor(resources.getColor(R.color.color_333333))
             tvDesc?.setBackgroundResource(R.drawable.bg_edit_grey)
         }
     }

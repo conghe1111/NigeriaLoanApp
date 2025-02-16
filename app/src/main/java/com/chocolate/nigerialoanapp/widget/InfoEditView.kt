@@ -134,8 +134,8 @@ class InfoEditView : FrameLayout {
         }
     }
 
-    fun setOpenRedState(openRedState : Boolean) {
-        this.openRedState = openRedState
+    fun setOpenRedState(openRedStateWhenEdit : Boolean) {
+        this.openRedState = openRedStateWhenEdit
     }
 
     private var mListener : TextChangeListener? = null
