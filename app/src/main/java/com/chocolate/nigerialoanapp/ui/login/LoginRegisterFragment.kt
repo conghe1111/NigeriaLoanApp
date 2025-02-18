@@ -79,6 +79,10 @@ class LoginRegisterFragment : BaseFragment() {
                             FirebaseUtils.logEvent("CLICK_LOGIN_REGISTER")
                             schedualMobilePhone()
                         }
+
+                        override fun onFailure() {
+                            flLoading?.visibility = View.GONE
+                        }
                     })
                 }
             }

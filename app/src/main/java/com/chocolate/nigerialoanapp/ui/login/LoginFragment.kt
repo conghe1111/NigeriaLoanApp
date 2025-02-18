@@ -79,12 +79,17 @@ class LoginFragment : BaseFragment() {
             override fun onClick(v: View?) {
                 FirebaseUtils.logEvent("CLICK_LOGIN")
                 if (activity is LoginActivity) {
+                    loadingView?.visibility = View.VISIBLE
                     (activity as LoginActivity).checkNetWork(object : LoginActivity.CallBack {
                         override fun onSuccess() {
                             if (isDestroy()) {
                                 return
                             }
                             pwdLoginInternal()
+                        }
+
+                        override fun onFailure() {
+                            loadingView?.visibility = View.GONE
                         }
 
                     })

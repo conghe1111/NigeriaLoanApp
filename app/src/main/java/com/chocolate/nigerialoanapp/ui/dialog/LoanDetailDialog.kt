@@ -2,20 +2,38 @@ package com.chocolate.nigerialoanapp.ui.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import com.blankj.utilcode.util.ToastUtils
+import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
+import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.bean.response.BankInfoResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
+import com.chocolate.nigerialoanapp.global.Constant
+import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.callback.StringCallback
+import com.lzy.okgo.model.Response
+import org.json.JSONException
+import org.json.JSONObject
 
 class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse?): Dialog(context)   {
 
+    companion object {
+        const val TAG = "LoanDetailDialog"
+    }
+
     private var hasSelect : Boolean = false
     private var ivSelect: ImageView? = null
+
+    private var tvBankName: TextView? = null
+    private var tvBankNum: TextView? = null
 
     init {
         window?.decorView?.setPadding(0, 0, 0, 0)
@@ -33,8 +51,8 @@ class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse
         val tvDisbursalAmount: TextView = findViewById<TextView>(R.id.tv_disbursal_amount)
         val tvDuelAmount: TextView = findViewById<TextView>(R.id.tv_due_amount)
         val tvDueDay: TextView = findViewById<TextView>(R.id.tv_due_day)
-        val tvBankName: TextView = findViewById<TextView>(R.id.tv_bank_name)
-        val tvBankNum: TextView = findViewById<TextView>(R.id.tv_bank_num)
+        tvBankName = findViewById<TextView>(R.id.tv_bank_name)
+        tvBankNum = findViewById<TextView>(R.id.tv_bank_num)
         ivSelect = findViewById<ImageView>(R.id.iv_loan_detail_select)
         val tvConfirm: TextView = findViewById<TextView>(R.id.tv_loan_confirm)
 
@@ -49,8 +67,8 @@ class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse
 
         if (ConfigMgr.mProfileInfo != null && ConfigMgr.mProfileInfo?.account_receive != null) {
             val accountReceive = ConfigMgr.mProfileInfo!!.account_receive
-            tvBankName.text = accountReceive?.bank_name
-            tvBankNum.text = accountReceive?.bank_account_num
+            tvBankName?.text = accountReceive?.bank_name
+            tvBankNum?.text = accountReceive?.bank_account_num
         }
 
         ivSelect?.setOnClickListener(object : NoDoubleClickListener() {
@@ -84,6 +102,7 @@ class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse
 
         })
         updateSelect()
+        getBankInfo()
     }
 
     private var mCallBack: CallBack? = null
@@ -102,5 +121,37 @@ class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse
         } else {
             ivSelect?.setImageResource(R.drawable.ic_unselect)
         }
+    }
+
+    private fun getBankInfo() {
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        try {
+            jsonObject.put("account_id", Constant.mAccountId)
+            jsonObject.put("access_token", Constant.mToken) //FCM Token
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        OkGo.post<String>(Api.BANK_INFO).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    var bankInfo: BankInfoResponse? = NetworkUtils.checkResponseSuccess(
+                        response,
+                        BankInfoResponse::class.java
+                    )
+                    if (bankInfo != null) {
+                        tvBankName?.text = bankInfo?.bank_name.toString()
+                        tvBankNum?.text = bankInfo?.bank_account_num.toString()
+                    }
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    if (BuildConfig.DEBUG) {
+                        Log.e(TAG, " update contact = " + response.body())
+                    }
+                }
+            })
     }
 }

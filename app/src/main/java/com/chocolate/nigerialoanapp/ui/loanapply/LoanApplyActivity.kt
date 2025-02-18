@@ -86,7 +86,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         setContentView(R.layout.activity_loan_apply)
         initialView()
         getProducts()
-        ConfigMgr.getProfileInfo()
+//        ConfigMgr.getProfileInfo()
     }
 
     private fun initialView() {

@@ -104,6 +104,7 @@ class LoginActivity : BaseActivity() {
                     if (responseBean?.isRequestSuccess() == true) {
                         callBack.onSuccess()
                     } else {
+                        callBack?.onFailure()
                         showDialog()
                     }
                 }
@@ -113,6 +114,7 @@ class LoginActivity : BaseActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
+                    callBack?.onFailure()
                     showDialog()
                 }
             })
@@ -131,6 +133,7 @@ class LoginActivity : BaseActivity() {
     interface CallBack {
         fun onSuccess()
 
+        fun onFailure()
     }
 
     fun setBackVisible(visibleFlag : Boolean) {
