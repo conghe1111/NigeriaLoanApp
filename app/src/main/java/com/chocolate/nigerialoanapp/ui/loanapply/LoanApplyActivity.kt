@@ -264,7 +264,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvDisburalAmount?.text = SpanUtils.getShowText1(trial?.disburse_amount?.toLong())
         tvInterest?.text = SpanUtils.getShowText1(trial?.interest?.toLong())
         tvProcessFee?.text = SpanUtils.getShowText1(trial?.service_fee?.toLong())
-        tvLoanAmount?.text = SpanUtils.getShowText1(trial?.amount?.toLong())
+        tvLoanAmount?.text = SpanUtils.getShowText1(trial?.total?.toLong())
     }
 
     private fun orderCheek() {
@@ -296,7 +296,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     if (orderCheekBean == null) {
                         return
                     }
-                    when (orderCheekBean.next_phase) {
+                    when (orderCheekBean.current_phase) {
                         (101) -> {  //基本信息填写完成（第一页）
                             EditInfoActivity.showActivity(
                                 this@LoanApplyActivity, EditInfoActivity.STEP_1,

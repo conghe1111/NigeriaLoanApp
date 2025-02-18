@@ -195,6 +195,8 @@ class EditInfoActivity : BaseActivity() {
             finish()
         } else if (mFrom == FROM_WORK_MENU) {
             finish()
+        } else if (mFrom == FROM_APPLY_LOAD) {
+            finish()
         }
         // TODO 完成
     }
