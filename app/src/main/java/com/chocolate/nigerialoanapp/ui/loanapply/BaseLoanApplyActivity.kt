@@ -73,25 +73,22 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
+                    showOrHideLoading(false)
                     val productBean: ProductBeanResponse? =
                         checkResponseSuccess(response, ProductBeanResponse::class.java)
-                    if (productBean == null) {
+                    if (productBean == null || productBean.product == null) {
                         Log.e(TAG, " marketing product ." + response.body())
-                        showOrHideLoading(false)
                         return
                     }
-                    productBean.product?.let {
+                    mProductType = productBean.product.product_type.toString()
+                    mAmountList.clear()
+                    for (amountItem in productBean.product.amount) {
+                        mAmountList.add(LoanData(amountItem.toString(),false))
+                    }
 
-                        mProductType = it.product_type.toString()
-                        mAmountList.clear()
-                        for (amountItem in it.amount) {
-                            mAmountList.add(LoanData(amountItem.toString(),false))
-                        }
-
-                        mPeriodList.clear()
-                        for (periodItem in it.period) {
-                            mPeriodList.add(periodItem.toString())
-                        }
+                    mPeriodList.clear()
+                    for (periodItem in productBean.product.period) {
+                        mPeriodList.add(periodItem.toString())
                     }
                     bindData()
                 }

@@ -1,5 +1,7 @@
 pluginManagement {
+
     repositories {
+
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -11,10 +13,12 @@ pluginManagement {
         gradlePluginPortal()
         jcenter()
         google()
-        //compile 'com.lzy.net:okgo:3.0.4'
         maven { url = uri("https://jitpack.io") }
         maven { url = uri("https://maven.aliyun.com/repository/jcenter") }
+        maven { url = uri("https://raw.githubusercontent.com/martinloren/AabResGuard/mvn-repo") }
+        mavenLocal()
     }
+
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -24,6 +28,7 @@ dependencyResolutionManagement {
         jcenter()
         maven { url = uri("https://jitpack.io") }
         maven { url = uri("https://maven.aliyun.com/repository/jcenter") }
+        mavenLocal()
     }
 }
 

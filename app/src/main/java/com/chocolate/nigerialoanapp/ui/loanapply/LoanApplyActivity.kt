@@ -132,6 +132,8 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                 dialog.setOnItemClickListener(object : SelectAmountDialog.OnItemClickListener {
                     override fun onItemClick(str: String, pos: Int) {
                         mAmountIndex = pos
+                        updateLoanAmountTitle()
+                        executeRequestProductTrial()
                     }
 
                 })
@@ -177,6 +179,23 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
         })
         SpanUtils.setPrivacyString(tvDesc, this@LoanApplyActivity)
+    }
+
+    private fun executeRequestProductTrial() {
+        if (mPeriodList.isEmpty() || mAmountList.isEmpty()) {
+            return
+        }
+        if (mAmountIndex >= mAmountList.size) {
+            return
+        }
+        if (mPeriodIndex >= mPeriodList.size) {
+            return
+        }
+        requestProductTrial(
+            mProductType!!,
+            mAmountList[mAmountIndex].amount!!,
+            mPeriodList[mPeriodIndex]
+        )
     }
 
     private fun requestProductTrial(productType: String, amount: String, period: String) {
@@ -226,22 +245,9 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         if (mPeriodList.isNotEmpty()) {
             mAdapter?.notifyDataSetChanged()
         }
-        val amount = mAmountList[mAmountIndex].amount.toString()
-        SpanUtils.setAmountString(tvAmount, SpanUtils.getShowText(amount.toLong()))
-        if (mPeriodList.isEmpty() || mAmountList.isEmpty()) {
-            return
-        }
-        if (mAmountIndex >= mAmountList.size) {
-            return
-        }
-        if (mPeriodIndex >= mPeriodList.size) {
-            return
-        }
-        requestProductTrial(
-            mProductType!!,
-            mAmountList[mAmountIndex].amount!!,
-            mPeriodList[mPeriodIndex]
-        )
+        updateLoanAmountTitle()
+
+        executeRequestProductTrial()
     }
 
     private fun bindItem1(productTrial: ProductTrialResponse) {
@@ -315,6 +321,12 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                         (104) -> {  //收款信息填写完成（第四页）
                             EditInfoActivity.showActivity(
                                 this@LoanApplyActivity, EditInfoActivity.STEP_4,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+                        (105) -> {  //收款信息填写完成（第四页）
+                            EditInfoActivity.showActivity(
+                                this@LoanApplyActivity, EditInfoActivity.STEP_5,
                                 EditInfoActivity.FROM_APPLY_LOAD
                             )
                         }
@@ -446,5 +458,10 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
             return
         }
         super.onBackPressed()
+    }
+
+    private fun updateLoanAmountTitle() {
+        val amount = mAmountList[mAmountIndex].amount.toString()
+        SpanUtils.setAmountString(tvAmount, SpanUtils.getShowText(amount.toLong()))
     }
 }
