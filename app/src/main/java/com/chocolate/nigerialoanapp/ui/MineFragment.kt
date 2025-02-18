@@ -30,6 +30,7 @@ import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
 import com.chocolate.nigerialoanapp.ui.history.HistoryRecordActivity
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
+import com.chocolate.nigerialoanapp.ui.login.LoginRegisterFragment.Companion.KEY_PHONE_NUM
 import com.chocolate.nigerialoanapp.ui.mine.MineAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor
 import com.chocolate.nigerialoanapp.ui.mine.PageType
@@ -79,12 +80,13 @@ class MineFragment : BaseFragment() {
     private fun initializeView() {
         flContainer?.visibility = View.VISIBLE
         tvName?.text = AppUtils.getAppName()
-        val mobileStr = ConfigMgr.mProfileInfo?.account_profile?.mobile
+//        val mobileStr = ConfigMgr.mProfileInfo?.account_profile?.mobile
+        val mobileStr = SPUtils.getInstance().getString(KEY_PHONE_NUM, "")
         if (TextUtils.isEmpty(mobileStr)) {
             tvMobile?.visibility = View.GONE
         } else {
             tvMobile?.visibility = View.VISIBLE
-            tvMobile?.text = mobileStr
+            tvMobile?.text = "+234$mobileStr"
         }
 
         buildSettingList()

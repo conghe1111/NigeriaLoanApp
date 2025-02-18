@@ -26,7 +26,7 @@ object Constant {
     //是否是审核账号
     fun isAuditMode(): Boolean {
         if (true) {
-            return false
+            return true
         }
         val phoneNum = SPUtils.getInstance().getString(LoginRegisterFragment.KEY_PHONE_NUM)
         if (phoneNum.startsWith("123456789")) {
