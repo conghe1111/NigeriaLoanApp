@@ -92,7 +92,7 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
                 if (mOrderDetail == null) {
                     return
                 }
-                repaymentLoan(mOrderDetail!!.order_id.toString(), stage.amount.toString(), "123")
+                repaymentLoan(mOrderDetail!!.order_id.toString(), stage.amount.toString())
             }
 
         })
@@ -121,19 +121,19 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
     }
 
 
-    fun repaymentLoan(orderId: String, amount: String, mobile: String) {
+    fun repaymentLoan(orderId: String, amount: String) {
         val jsonObject: JSONObject = JSONObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken)
             jsonObject.put("order_id", orderId) //订单ID
             jsonObject.put("amount", amount) //还款的金额（客户填写，整数）
-            jsonObject.put("mobile", mobile) //还款电话号码（不一定为注册号码）
+            jsonObject.put("deep_link", Constant.DEEP_LINK)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
         if (BuildConfig.DEBUG) {
-            Log.i("OkHttpClient", " repayment Loan = " + jsonObject.toString())
+            Log.i("OkHttpClient", " repayment Loan = $jsonObject")
         }
         OkGo.post<String>(Api.ORDER_REPAY).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))

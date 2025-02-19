@@ -1,6 +1,7 @@
 package com.chocolate.nigerialoanapp.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -151,9 +152,9 @@ class MineFragment : BaseFragment() {
                     }
 
                     PageType.TEST_1 -> {
-                        activity?.let {
-                            EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
-                        }
+//                        activity?.let {
+//                            EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
+//                        }
 //                        activity?.let {
 //                            val dialog = LoanRetentionDialog(it)
 //                            dialog.show()
@@ -175,6 +176,8 @@ class MineFragment : BaseFragment() {
 //                            val dialog: ErrorStateDialog = ErrorStateDialog(it, descStr, activity)
 //                            dialog.show()
 //                        }
+
+                        testDeeplinkIntent()
                     }
 
                     PageType.LOGOUT -> {
@@ -304,5 +307,15 @@ class MineFragment : BaseFragment() {
         val intent = Intent(activity, LoginActivity::class.java)
         activity?.startActivity(intent)
         activity?.finish()
+    }
+
+    private fun testDeeplinkIntent() {
+        val intent = Intent()
+        intent.setAction("android.intent.action.VIEW")
+        intent.setData(Uri.parse( Constant.DEEP_LINK))
+        intent.addCategory("android.intent.category.DEFAULT")
+        intent.addCategory("android.intent.category.BROWSABLE")
+        startActivity(intent)
+
     }
 }

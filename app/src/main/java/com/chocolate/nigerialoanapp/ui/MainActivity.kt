@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import androidx.appcompat.widget.AppCompatImageView
@@ -24,6 +25,7 @@ import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
+
 
 class MainActivity : BaseActivity() {
 
@@ -65,6 +67,17 @@ class MainActivity : BaseActivity() {
 
         })
         updatePageByTypeInternal()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val data = intent?.data
+        if (data != null) {
+            val path = data.path // 获取路径部分进行处理
+            Log.e("Test", " path = $path")
+            mCurPageType = 0
+            updatePageByTypeInternal()
+        }
     }
 
     private fun replaceFragment(fragment: BaseFragment, containRes: Int) {

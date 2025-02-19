@@ -65,7 +65,16 @@
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
+            android:exported="true"
             android:theme="@style/Theme.NigeriaLoanApp">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+<!--               oyocredit://page/main-->
+                <data android:scheme="oyocredit" android:host="page" android:pathPrefix="/main" />
+            </intent-filter>
 
         </activity>
 
@@ -116,7 +125,7 @@
             android:launchMode="singleTop">
 
         </activity>
-
+        
         <receiver
             android:name="com.appsflyer.SingleInstallBroadcastReceiver"
             android:exported="true">

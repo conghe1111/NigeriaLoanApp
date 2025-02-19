@@ -21,7 +21,8 @@ object Constant {
     val APP_ID: String = "oyo"
     val USSD: String = "_oyo"
 
-    var mPhoneNum : Int? = null
+    val DEEP_LINK: String = "oyocredit://page/main"
+
 
     //是否是审核账号
     fun isAuditMode(): Boolean {
