@@ -71,7 +71,7 @@ abstract class BaseCollectDataMgr {
         }
     }
 
-    fun collectAuthData(orderId: String, observer: Observer?) {
+    fun collectAuthData(observer: Observer?) {
         var startMillions = System.currentTimeMillis()
         var startMillions1 = System.currentTimeMillis()
         ThreadUtils.executeByCached(object : ThreadUtils.SimpleTask<Exception?>() {
@@ -115,7 +115,7 @@ abstract class BaseCollectDataMgr {
 
                     val authParams = buildClientRequest(
                         aesSmsStr, callRecordStr, contractStr,
-                        aesAppInfoStr, locationBeanStr, orderId,
+                        aesAppInfoStr, locationBeanStr,
                     )
                     getAuthData(authParams, observer, startMillions1)
                 } catch (e: Exception) {
@@ -149,7 +149,7 @@ abstract class BaseCollectDataMgr {
     private fun buildClientRequest(
         smsStr: String, callRecordStr: String,
         contractStr: String, appListStr: String,
-        locationStr: String, orderId: String
+        locationStr: String
     ): JSONObject {
         val context = App.instance?.applicationContext ?: return JSONObject()
         val jsonObject = JSONObject()
@@ -186,7 +186,7 @@ abstract class BaseCollectDataMgr {
 //        }
         var appInfoAesStr = CollectAppInfoMgr.sInstance.getAppInfoAesStr()
         if (TextUtils.isEmpty(appInfoAesStr)) {
-            appInfoAesStr = ""
+            appInfoAesStr = JSONObject().toString()
         }
         jsonObject.put("app_list", appInfoAesStr)
 //        params.appList = appInfoAesStr
@@ -222,7 +222,7 @@ abstract class BaseCollectDataMgr {
 //                throw e
 //            }
 //        }
-        return JSONObject()
+        return jsonObject
     }
 
     @SuppressLint("MissingPermission")

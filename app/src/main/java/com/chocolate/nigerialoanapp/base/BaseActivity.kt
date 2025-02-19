@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.base
 
+import android.text.TextUtils
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.loading.ProgressDialogFragment
 import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.model.Response
@@ -63,5 +65,24 @@ open class BaseActivity : AppCompatActivity() {
 
    open fun getTitleStr() : String {
         return ""
+    }
+
+   private var progressDialogFragment: ProgressDialogFragment? = null
+
+    fun showProgressDialogFragment(message: String? = null, cancelable: Boolean = false) {
+        var message = message
+        if (TextUtils.isEmpty(message)) {
+            message = getString(R.string.str_loading)
+        }
+        dismissProgressDialogFragment()
+        progressDialogFragment = ProgressDialogFragment(cancelable, message)
+        progressDialogFragment?.showAllowingStateLoss(supportFragmentManager, "ProgressDialogFragment")
+    }
+
+
+    fun dismissProgressDialogFragment() {
+        if (progressDialogFragment != null) {
+            progressDialogFragment?.dismissAllowingStateLoss()
+        }
     }
 }

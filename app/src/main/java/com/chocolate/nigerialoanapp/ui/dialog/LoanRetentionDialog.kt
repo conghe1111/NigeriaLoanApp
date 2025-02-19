@@ -42,6 +42,6 @@ class LoanRetentionDialog(context: Context): Dialog(context) {
 
     abstract class OnItemClickListener {
         abstract fun onClickAgree()
-        fun onClickCancel() {}
+        open fun onClickCancel() {}
     }
 }

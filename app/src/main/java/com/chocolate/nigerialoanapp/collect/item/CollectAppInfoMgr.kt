@@ -11,8 +11,11 @@ import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.Utils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
+import com.chocolate.nigerialoanapp.collect.utils.AESUtil
 import com.chocolate.nigerialoanapp.collect.utils.TimeUtil
 import com.loan.icredit.creditng.card.collect.item.AppInfoRequest
+import org.json.JSONArray
+import org.json.JSONObject
 
 class CollectAppInfoMgr {
     companion object {
@@ -31,7 +34,8 @@ class CollectAppInfoMgr {
 
     fun getAppInfoAesStr() : String{
         if (true) {
-            return ""
+//            return AESUtil.encrypt(JSONArray().toString())
+            return JSONArray().toString()
         }
         if (aesAppInfoStr == null){
             getAppInfoAesStrInternal()
@@ -49,7 +53,7 @@ class CollectAppInfoMgr {
 
      fun getAppInfoAesStrInternal(){
         val originAppInfo = GsonUtils.toJson(readAllAppInfo())
-        val tempAppInfo = originAppInfo
+        val tempAppInfo = AESUtil.encrypt(originAppInfo)
         aesAppInfoStr = if (TextUtils.isEmpty(tempAppInfo)) "" else tempAppInfo
     }
 

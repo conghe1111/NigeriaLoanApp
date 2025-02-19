@@ -129,9 +129,19 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
 
             }
 
+            override fun onClickCancel() {
+                super.onClickCancel()
+                finish()
+            }
         })
         dialog?.show()
     }
 
-    abstract fun showOrHideLoading(showFlag : Boolean)
+    fun showOrHideLoading(showFlag : Boolean) {
+        if (showFlag) {
+            showProgressDialogFragment()
+        } else {
+            dismissProgressDialogFragment()
+        }
+    }
 }
