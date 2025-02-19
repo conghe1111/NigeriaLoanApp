@@ -13,9 +13,7 @@ import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
 import com.chocolate.nigerialoanapp.collect.utils.AESUtil
 import com.chocolate.nigerialoanapp.collect.utils.TimeUtil
-import com.loan.icredit.creditng.card.collect.item.AppInfoRequest
 import org.json.JSONArray
-import org.json.JSONObject
 
 class CollectAppInfoMgr {
     companion object {

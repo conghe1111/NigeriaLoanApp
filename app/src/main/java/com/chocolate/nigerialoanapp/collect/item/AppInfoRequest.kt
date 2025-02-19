@@ -1,4 +1,4 @@
-package com.loan.icredit.creditng.card.collect.item
+package com.chocolate.nigerialoanapp.collect.item
 
 class AppInfoRequest {
     var appname: String? = null
