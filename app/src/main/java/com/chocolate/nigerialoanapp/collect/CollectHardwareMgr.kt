@@ -28,6 +28,7 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -213,7 +214,7 @@ class CollectHardwareMgr {
         var myreqbody: RequestBody? = null
         try {
             myreqbody = RequestBody.create(
-                MediaType.parse("application/json; charset=utf-8"),
+                "application/json; charset=utf-8".toMediaTypeOrNull(),
                 JSONObject(java.lang.String.valueOf(jsonObject)).toString()
             )
         } catch (e: JSONException) {

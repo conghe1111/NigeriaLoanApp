@@ -8,12 +8,10 @@ import com.chocolate.nigerialoanapp.ui.login.LoginRegisterFragment
 object Constant {
 
     fun isAabBuild(): Boolean {
-        // TODO
-        return if (BuildConfig.DEBUG) false else true
+        return if (BuildConfig.DEBUG) false else BuildConfig.IS_AAB_BUILD
     }
 
-//    const val IS_COLLECT = !BuildConfig.IS_AAB_BUILD
-    const val IS_COLLECT = true
+    const val IS_COLLECT = !BuildConfig.IS_AAB_BUILD
 
     var mLaunchOrderInfo: OrderDetailResponse? = null
 

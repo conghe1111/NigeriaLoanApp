@@ -9,9 +9,6 @@ apply plugin: 'kotlin-kapt'
 //apply plugin: "AndResGuard"
 
 
-//    defaultConfig {
-
-//    }
 //
 //    buildTypes {
 //        release {
@@ -29,7 +26,6 @@ apply plugin: 'kotlin-kapt'
 //        }
 //    }
 //}
-//        buildConfigField("boolean", "IS_AAB_BUILD", "true")
 //        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 //        vectorDrawables {
 //            useSupportLibrary = true
@@ -108,7 +104,7 @@ android {
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
 //                    'proguard-rules.pro'
 //            signingConfig signingConfigs.release
-//            buildConfigField "boolean", "IS_AAB_BUILD", "true"
+            buildConfigField "boolean", "IS_AAB_BUILD", "false"
         }
 
         release {
@@ -119,7 +115,7 @@ android {
             debuggable false
             // 开启ZipAlign优化
             zipAlignEnabled true
-//            buildConfigField "boolean", "IS_AAB_BUILD", "true"
+            buildConfigField "boolean", "IS_AAB_BUILD", "true"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro'
 //            signingConfig signingConfigs.release
@@ -186,10 +182,6 @@ static def releaseTime() {
 }
 
 dependencies {
-//    // 正式环境请用 release 包
-////    implementation("com.easeid.opensdk:liveness-sdk-android:0.1.1")
-//    //debug包 请使用 SNAPSHOT版本
-//    implementation("com.easeid.opensdk:liveness-sdk-android:0.0.10-SNAPSHOT")
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation libs.androidx.core.ktx
     implementation libs.androidx.lifecycle.runtime.ktx
@@ -236,15 +228,12 @@ dependencies {
     // OkHttp
     //文字左右对齐库
     implementation 'com.text:alginlib:1.0.1'
-
-
-//    implementation platform('com.google.firebase:firebase-bom:33.2.0')
-//    implementation 'com.google.firebase:firebase-analytics'
-//    implementation 'com.google.firebase:firebase-crashlytics'
-//    implementation 'com.google.firebase:firebase-messaging'
-//    implementation 'com.google.android.play:integrity:1.1.0'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'
-
+    //###################################################
+// 正式环境请用 release 包
+//    implementation "com.easeid.opensdk:liveness-sdk-android:0.1.1"
+    //debug包 请使用 SNAPSHOT版本
+    implementation "com.easeid.opensdk:liveness-sdk-android:0.0.10-SNAPSHOT"
+    //###################################################
 //    implementation group: 'org.bitbucket.b_c', name: 'jose4j', version: '0.5.0'
 }
 
