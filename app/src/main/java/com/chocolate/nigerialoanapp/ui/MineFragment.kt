@@ -39,6 +39,9 @@ import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
 import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
+import com.easeid.opensdk.EaseID
+import com.easeid.opensdk.model.EaseRequest
+import com.easeid.opensdk.model.EaseResponse
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response

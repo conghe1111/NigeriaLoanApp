@@ -65,6 +65,8 @@ object Api {
     val ORDER_HISTORY = "$HOST/app/v1/order/history"
     //确认银行信息
     val BANK_INFO = "$HOST/app/v1/account/bank_info"
+    //FaceId
+    val FACE_ID = "$HOST/app/v1/account/face_id"
 
     // TODO
     val GET_POLICY: String = "https://www.baidu.com"

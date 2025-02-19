@@ -242,9 +242,9 @@ class EditInfoActivity : BaseActivity() {
                 (mCurFragment as? Edit4BankFragment)?.onBankActivityResult(bankName, bankCode)
             }
         } else if (requestCode == Edit5FaceRecognitionFragment.REQUEST_CAMERA_RECOGNITION) {
-            if (mCurFragment is Edit5FaceRecognitionFragment) {
-                (mCurFragment as? Edit5FaceRecognitionFragment)?.onActivityResultInternal(requestCode, data)
-            }
+//            if (mCurFragment is Edit5FaceRecognitionFragment) {
+//                (mCurFragment as? Edit5FaceRecognitionFragment)?.onActivityResultInternal(requestCode, data)
+//            }
         }
     }
 

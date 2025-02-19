@@ -26,14 +26,22 @@ import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.bean.response.EditProfileBean
+import com.chocolate.nigerialoanapp.bean.response.FaceIdResponse
+import com.chocolate.nigerialoanapp.bean.response.OrderApplyResponse
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion.RESULT_CODE
 import com.chocolate.nigerialoanapp.utils.JumpPermissionUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.utils.luban.Luban
 import com.chocolate.nigerialoanapp.utils.luban.OnCompressListener
+import com.easeid.opensdk.EaseID
+import com.easeid.opensdk.model.EaseRequest
+import com.easeid.opensdk.model.EaseResponse
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -45,7 +53,7 @@ import java.util.Locale
 class Edit5FaceRecognitionFragment : BaseEditFragment() {
 
     companion object {
-        private const val TAG = "Edit5FaceRecognitionFragment"
+        private const val TAG = "Edit5FaceRecogFragment"
         const val REQUEST_CAMERA_RECOGNITION = 1112
 //        const val RESULT_CAMERA_RECOGNITION = 1117
     }
@@ -198,12 +206,14 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
     private fun startCamera() {
         val isGranted = PermissionUtils.isGranted(Manifest.permission.CAMERA)
         if (isGranted) {
-            startCameraInternal(REQUEST_CAMERA_RECOGNITION)
+//            startCameraInternal(REQUEST_CAMERA_RECOGNITION)
+            startFaceRecognitionInternal()
         } else {
             PermissionUtils.permission(Manifest.permission.CAMERA)
                 .callback(object : PermissionUtils.SimpleCallback {
                     override fun onGranted() {
-                        startCameraInternal(REQUEST_CAMERA_RECOGNITION)
+//                        startCameraInternal(REQUEST_CAMERA_RECOGNITION)
+                        startFaceRecognitionInternal()
                     }
 
                     override fun onDenied() {
@@ -217,6 +227,70 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                     }
                 }).request()
         }
+    }
+
+    private fun startFaceRecognitionInternal() {
+        if (context == null || activity == null) {
+            return
+        }
+        showProgressDialogFragment()
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        try {
+            jsonObject.put("account_id", Constant.mAccountId)
+            jsonObject.put("access_token", Constant.mToken)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        if (BuildConfig.DEBUG) {
+            Log.i("OkhttpClient", " FaceIdResponse =" + jsonObject.toString())
+        }
+        OkGo.post<String>(Api.FACE_ID).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    if (isDestroy()) {
+                        return
+                    }
+                    dismissProgressDialogFragment()
+                    val faceIdResponse =
+                        checkResponseSuccess(response, FaceIdResponse::class.java)
+                    if (faceIdResponse == null || faceIdResponse.face_id == null) {
+                        mStatus = STATUS_FAIL
+                        updateStatus()
+                        return
+                    }
+                    startFace(faceIdResponse.face_id.toString())
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    dismissProgressDialogFragment()
+                    mStatus = STATUS_FAIL
+                    updateStatus()
+                }
+            })
+    }
+
+    private fun startFace(faceId : String) {
+        EaseID.startFace(requireContext(), EaseRequest(bizId = faceId, userId = Constant.mAccountId), object : EaseID.ILiveIDListener {
+            override fun onCompleted(response: EaseResponse) {
+                if (BuildConfig.DEBUG) {
+                    Log.e(TAG, "onCompleted : ${response.livenessFilePath}")
+                }
+                mCurPath = response.livenessFilePath
+                onActivityResultInternal(0, null)
+                // 活体成功, 后续业务逻辑代码
+            }
+
+            override fun onInterrupted(code: String?, error: String?) {
+                if (BuildConfig.DEBUG) {
+                    Log.w(TAG, "onInterrupted : $code $error")
+                }
+                // 活体失败, 业务处理
+                mStatus = STATUS_FAIL
+                updateStatus()
+            }
+        })
     }
 
     private fun startCameraInternal(requestCode: Int) {

@@ -167,7 +167,7 @@
     <string name="start_x_s">Start(%sS)</string>
     <string name="start">Start</string>
     <string name="we_are_evaluating_your_credit_limit">We are evaluating your credit limit</string>
-    <string name="please_wait">Please Wait</string>
+    <string name="please_wait">Please Wait.</string>
     <string name="pass">pass</string>
     <string name="fail">Fail</string>
     <string name="retry">Retry</string>
