@@ -205,6 +205,8 @@ class Edit1BasicFragment : BaseEditFragment() {
         tvNext?.isEnabled = true
         tvNextDesc = view.findViewById<AppCompatTextView>(R.id.tv_basic_next_desc)
         SpanUtils.setPrivacyString(tvNextDesc, activity)
+
+        editBvn?.setInputNum()
     }
 
     private fun checkProfileParams(needSelect: Boolean = true): Boolean {
@@ -362,7 +364,7 @@ class Edit1BasicFragment : BaseEditFragment() {
                 genderPos = 3
             }
         }
-        if (TextUtils.isEmpty(bvn)) {
+        if (TextUtils.isEmpty(bvn) && !TextUtils.equals(profile1Bean.account_profile.bvn, "0")) {
             bvn = profile1Bean.account_profile.bvn
         }
         if (TextUtils.isEmpty(email)) {

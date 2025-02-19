@@ -123,6 +123,8 @@ class Edit3ContactFragment : BaseEditFragment() {
         })
 
         SpanUtils.setPrivacyString(tvDesc, activity)
+        mEditMobile1?.setInputNum()
+        mEditMobile2?.setInputNum()
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {

@@ -160,7 +160,7 @@ class EditInfoActivity : BaseActivity() {
             return
         }
         var nextStep : Int? = null
-        when (editProfileBean.next_phase) {
+        when (editProfileBean.current_phase) {
             (101) -> {  //基本信息填写完成（第一页）
                 nextStep = STEP_1
             }

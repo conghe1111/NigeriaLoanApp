@@ -122,7 +122,8 @@ abstract class BaseEditFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.let {
-            KeyboardUtils.registerSoftInputChangedListener(it, mKeyBoardListener)
+            KeyboardUtils.unregisterSoftInputChangedListener(it.window)
+            KeyboardUtils.registerSoftInputChangedListener(it.window, mKeyBoardListener)
         }
     }
 
@@ -142,10 +143,12 @@ abstract class BaseEditFragment : BaseFragment() {
 
    }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         activity?.let {
             KeyboardUtils.unregisterSoftInputChangedListener(it.window)
         }
-        super.onDestroy()
+        super.onDestroyView()
+
     }
+
 }

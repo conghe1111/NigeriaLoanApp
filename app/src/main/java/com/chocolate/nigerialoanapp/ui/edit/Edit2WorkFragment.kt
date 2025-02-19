@@ -185,6 +185,7 @@ class Edit2WorkFragment : BaseEditFragment() {
         })
         tvNextDesc = view.findViewById<AppCompatTextView>(R.id.tv_work_next_desc)
         SpanUtils.setPrivacyString(tvNextDesc, activity)
+        mEditCompanyPhoneNumber?.setInputNum()
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {

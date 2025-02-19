@@ -3,6 +3,7 @@ package com.chocolate.nigerialoanapp.widget
 import android.R.attr.maxLength
 import android.content.Context
 import android.text.Editable
+import android.text.InputType
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -145,5 +146,11 @@ class InfoEditView : FrameLayout {
 
     interface TextChangeListener {
         fun onTextChange()
+    }
+
+    fun setInputNum() {
+        if (etDesc != null) {
+            etDesc!!.inputType = InputType.TYPE_CLASS_NUMBER
+        }
     }
 }
