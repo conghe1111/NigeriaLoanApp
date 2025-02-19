@@ -3,33 +3,10 @@ import java.text.SimpleDateFormat
 apply plugin: 'com.android.application'
 //apply plugin: 'com.google.gms.google-services'
 //apply plugin: 'com.google.firebase.crashlytics'
-//apply plugin: "com.bytedance.android.aabResGuard"
+apply plugin: "com.bytedance.android.aabResGuard"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 //apply plugin: "AndResGuard"
-
-
-//
-//    buildTypes {
-//        release {
-//            isMinifyEnabled = false
-//            proguardFiles(
-//                    getDefaultProguardFile("proguard-android-optimize.txt"),
-//                    "proguard-rules.pro"
-//            )
-//        }
-//    }
-
-//    packaging {
-//        resources {
-//            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-//        }
-//    }
-//}
-//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-//        vectorDrawables {
-//            useSupportLibrary = true
-//        }
 
 android {
     namespace "com.chocolate.nigerialoanapp"
@@ -49,6 +26,9 @@ android {
             // 设置支持的SO库架构，第三方给的so库哪几种架构，就配置这几种架构
             abiFilters 'armeabi-v7a', 'arm64-v8a'//,'x86'
 //            abiFilters 'armeabi' , 'armeabi','x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+        vectorDrawables {
+            useSupportLibrary = true
         }
     }
     gradle.taskGraph.whenReady {
@@ -140,28 +120,28 @@ android {
         abortOnError false
     }
 
-//    configurations.all {
-//        resolutionStrategy {
-//            force "com.squareup.okhttp3:okhttp:3.12.0"
-//        }
-//    }
-
     packagingOptions {
         exclude("META-INF/proguard/androidx-annotations.pro")
         exclude("**/kotlin/**")
     }
 
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
     productFlavors {
         apiTest {
             dimension "default"
-//            resValue "string", "app_name_1", "@string/app_name_test"
+            resValue "string", "app_name_1", "@string/app_name_test"
             buildConfigField "boolean", "USE_ONLINE_API", "false"
 //            manifestPlaceholders = [CHANNEL_VALUE: "KudiCredit"]
             buildConfigField "String", "HOST", "\"http://srv.chucard.com/\""
         }
         apiOnline {
             dimension "default"
-//            resValue "string", "app_name_1", "@string/app_name"
+            resValue "string", "app_name_1", "@string/app_name"
             buildConfigField "boolean", "USE_ONLINE_API", "true"
 //            manifestPlaceholders = [CHANNEL_VALUE: "KudiCredit"]
             buildConfigField "String", "HOST", "\"https://srv.kudicredit.com/\""
@@ -237,92 +217,33 @@ dependencies {
 //    implementation group: 'org.bitbucket.b_c', name: 'jose4j', version: '0.5.0'
 }
 
-//aabResGuard {
-////    mappingFile = file("mapping.txt").toPath() // Mapping file used for incremental obfuscation
-//    whiteList = [ // White list rules
-//                  "*.R.raw.*",
-////                  "*.R.mipmap.ic_home_logo",
-////                  "*.R.string.default_web_client_id",
-////                  "*.R.string.firebase_database_url",
-////                  "*.R.string.gcm_defaultSenderId",
-////                  "*.R.string.google_api_key",
-////                  "*.R.string.google_app_id",
-////                  "*.R.string.google_crash_reporting_api_key",
-////                  "*.R.string.google_storage_bucket",
-////                  "*.R.string.project_id",
-////                  "*.R.string.com.crashlytics.android.build_id",
-////                  "*.R.drawable.icon"
-//    ]
-//    obfuscatedBundleFileName = "duplicated-app.aab" // Obfuscated file name, must end with '.aab'
-//    mergeDuplicatedRes = false // Whether to allow the merge of duplicate resources
-//    enableFilterFiles = true // Whether to allow filter files
-//    filterList = [ // file filter rules
-////                   "armeabi-v7a",
-////                   "*/arm64-v8a/*",
-//                   "META-INF/*"
-//    ]
-//
-//    enableFilterStrings = false // switch of filter strings
-//    unusedStringPath = file("unused.txt").toPath() // strings will be filtered in this file
-////    languageWhiteList = ["en", "zh"] // keep en,en-xx,zh,zh-xx etc. remove others.
-//}
-//
-//andResGuard {
-//    // mappingFile = file("./resource_mapping.txt")
-//    mappingFile = null
-//    use7zip = false
-//    useSign = true
-//    // 打开这个开关，会keep住所有资源的原始路径，只混淆资源的名字
-//    keepRoot = false
-//    whiteList = [
-////            "R.raw.*",
-////            "R.mipmap.ic_home_logo",
-////            "R.string.default_web_client_id",
-////            "R.string.firebase_database_url",
-////            "R.string.gcm_defaultSenderId",
-////            "R.string.google_api_key",
-////            "R.string.google_app_id",
-////            "R.string.google_crash_reporting_api_key",
-////            "R.string.google_storage_bucket",
-////            "R.string.project_id",
-////            "R.string.com.crashlytics.android.build_id",
-////            "R.drawable.icon",
-////            "R.drawable.ic_home_logo1",
-////
-////            // for google-services
-////            "R.string.google_app_id",
-////            "R.string.gcm_defaultSenderId",
-////            "R.string.default_web_client_id",
-////            "R.string.ga_trackingId",
-////            "R.string.firebase_database_url",
-////            "R.string.google_api_key",
-////            "R.string.google_crash_reporting_api_key",
-////            "R.string.admob_id",
-////            "R.string.ga_trackingId",
-////            "R.string.google_storage_bucket",
-////            "R.string.project_id",
-//    ]
-//
-//    compressFilePattern = [
-//            "*.png",
-//            "*.jpg",
-//            "*.jpeg",
-//            "*.gif",
-//            "resources.arsc"
-//    ]
-////    sevenzip {
-////        artifact = "com.tencent.mm:SevenZip:1.2.11"
-////        //path = "/usr/local/bin/7za"
-////    }
-//
-//    /**
-//     * 可选： 如果不设置则会默认覆盖assemble输出的apk
-//     **/
-////    finalApkBackupPath = "${project.rootDir}/final.apk"
-//
-//    /**
-//     * 可选: 指定v1签名时生成jar文件的摘要算法
-//     * 默认值为“SHA-1”
-//     **/
-//    // digestalg = "SHA-256"
-//}
+aabResGuard {
+    mappingFile = file("mapping.txt").toPath() // Mapping file used for incremental obfuscation
+    whiteList = [ // White list rules
+                  "*.R.raw.*",
+//                  "*.R.mipmap.ic_home_logo",
+//                  "*.R.string.default_web_client_id",
+//                  "*.R.string.firebase_database_url",
+//                  "*.R.string.gcm_defaultSenderId",
+//                  "*.R.string.google_api_key",
+//                  "*.R.string.google_app_id",
+//                  "*.R.string.google_crash_reporting_api_key",
+//                  "*.R.string.google_storage_bucket",
+//                  "*.R.string.project_id",
+//                  "*.R.string.com.crashlytics.android.build_id",
+//                  "*.R.drawable.icon"
+    ]
+    obfuscatedBundleFileName = "duplicated-app.aab" // Obfuscated file name, must end with '.aab'
+    mergeDuplicatedRes = false // Whether to allow the merge of duplicate resources
+    enableFilterFiles = true // Whether to allow filter files
+    filterList = [ // file filter rules
+//                   "armeabi-v7a",
+//                   "*/arm64-v8a/*",
+                   "META-INF/*"
+    ]
+
+    enableFilterStrings = false // switch of filter strings
+    unusedStringPath = file("unused.txt").toPath() // strings will be filtered in this file
+//    languageWhiteList = ["en", "zh"] // keep en,en-xx,zh,zh-xx etc. remove others.
+}
+
