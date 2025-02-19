@@ -205,6 +205,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     }
 
     private fun requestProductTrial(productType: String, amount: String, period: String) {
+        showProgressDialogFragment()
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
@@ -225,6 +226,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
+                    dismissProgressDialogFragment()
                     mProductTrial =
                         checkResponseSuccess(response, ProductTrialResponse::class.java)
                     if (mProductTrial == null || mProductTrial?.trials == null) {
@@ -242,6 +244,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
+                    dismissProgressDialogFragment()
                 }
             })
     }

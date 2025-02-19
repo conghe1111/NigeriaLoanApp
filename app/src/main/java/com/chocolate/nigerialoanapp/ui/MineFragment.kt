@@ -263,6 +263,7 @@ class MineFragment : BaseFragment() {
         if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " logout = $jsonObject")
         }
+        showProgressDialogFragment()
         OkGo.post<String>(Api.LOGOUT).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
@@ -272,6 +273,7 @@ class MineFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    dismissProgressDialogFragment()
                     val baseResponseBean = NetworkUtils.checkResponseSuccess2(response)
                     if (baseResponseBean?.isRequestSuccess() == true) {
                         quitLogout()
@@ -287,8 +289,7 @@ class MineFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
+                    dismissProgressDialogFragment()
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " marketing page= " + response.body())
                     }
