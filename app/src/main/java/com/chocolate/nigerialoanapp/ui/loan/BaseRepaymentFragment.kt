@@ -19,10 +19,12 @@ import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse.OrderDetai
 import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse.Stage
 import com.chocolate.nigerialoanapp.bean.response.RepayResponse
 import com.chocolate.nigerialoanapp.global.Constant
+import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.HomeFragment
 import com.chocolate.nigerialoanapp.ui.loan.adapter.RepaymentAdapter
 import com.chocolate.nigerialoanapp.ui.loan.adapter.RepaymentDetailAdapter
+import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.decor.NorItemDecor5
 import com.chocolate.nigerialoanapp.widget.decor.NorItemDecor6
@@ -139,23 +141,37 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
+                    if (isDestroy()) {
+                        return
+                    }
                     val repay: RepayResponse? = NetworkUtils.checkResponseSuccess(
                         response,
                         RepayResponse::class.java
                     )
                     if (repay?.status == 1) {
-                        ToastUtils.showShort("repay success")
+                        ToastUtils.showShort("repay processing")
                         if (parentFragment is HomeFragment) {
                             (parentFragment as HomeFragment).refreshData()
+                        }
+                    } else {
+                        if (TextUtils.isEmpty(repay?.checkout_url)) {
+                            ToastUtils.showShort("repay checkout url error")
+                            return
+                        }
+                        context?.let {
+                            WebViewActivity.launchWebView(it, repay!!.checkout_url!!, WebViewActivity.TYPE_REPAY)
                         }
                     }
                 }
 
                 override fun onError(response: Response<String>) {
                     super.onError(response)
+                    val content = response.body()
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " repaymentLoan = " + response.body())
                     }
+                    ToastUtils.showShort("repay error")
+                    LogSaver.logToFile(content)
                 }
             })
     }

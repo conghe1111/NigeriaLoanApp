@@ -39,6 +39,7 @@ import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.INFORMATION
 import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
 import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
+import com.chocolate.nigerialoanapp.utils.RouteUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.easeid.opensdk.EaseID
 import com.easeid.opensdk.model.EaseRequest
@@ -176,8 +177,7 @@ class MineFragment : BaseFragment() {
 //                            val dialog: ErrorStateDialog = ErrorStateDialog(it, descStr, activity)
 //                            dialog.show()
 //                        }
-
-                        testDeeplinkIntent()
+                        RouteUtils.toDeeplinkIntent(context)
                     }
 
                     PageType.LOGOUT -> {
@@ -309,13 +309,4 @@ class MineFragment : BaseFragment() {
         activity?.finish()
     }
 
-    private fun testDeeplinkIntent() {
-        val intent = Intent()
-        intent.setAction("android.intent.action.VIEW")
-        intent.setData(Uri.parse( Constant.DEEP_LINK))
-        intent.addCategory("android.intent.category.DEFAULT")
-        intent.addCategory("android.intent.category.BROWSABLE")
-        startActivity(intent)
-
-    }
 }

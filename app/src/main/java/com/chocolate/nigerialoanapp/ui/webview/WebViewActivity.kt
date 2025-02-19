@@ -11,6 +11,7 @@ import com.blankj.utilcode.util.BarUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
+import com.chocolate.nigerialoanapp.utils.RouteUtils
 
 class WebViewActivity : BaseActivity() {
     private var ivBack: ImageView? = null
@@ -22,6 +23,7 @@ class WebViewActivity : BaseActivity() {
         private const val EXTRA_TYPE = "extra_type"
         const val TYPE_PRIVACY = 111
         const val TYPE_TERMS = 112
+        const val TYPE_REPAY = 113
 
         fun launchWebView(context: Context, url: String, type: Int) {
             var intent = Intent(context, WebViewActivity::class.java)
@@ -39,6 +41,8 @@ class WebViewActivity : BaseActivity() {
         }
     }
 
+    private var mType : Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
@@ -48,13 +52,16 @@ class WebViewActivity : BaseActivity() {
         ivBack = findViewById(R.id.iv_webview_back)
         tvTitle = findViewById(R.id.tv_webview_title)
         ivBack?.setOnClickListener(View.OnClickListener {
+            if (mType ==TYPE_REPAY) {
+                RouteUtils.toDeeplinkIntent(this)
+            }
             finish()
         })
-        val type = intent.getIntExtra(EXTRA_TYPE, 0)
+        mType = intent.getIntExtra(EXTRA_TYPE, 0)
         var titleStr : String? = null
-        if (type == TYPE_TERMS){
+        if (mType == TYPE_TERMS){
             titleStr = getString(R.string.about_terms)
-        } else if (type == TYPE_PRIVACY){
+        } else if (mType == TYPE_PRIVACY){
             titleStr = getString(R.string.about_privacy)
         }
         if (!TextUtils.isEmpty(titleStr)){
