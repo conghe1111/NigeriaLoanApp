@@ -81,6 +81,47 @@ object SpanUtils {
         tv.text = spannableString
     }
 
+
+    fun setLoanContactString(tv: AppCompatTextView?, activity: Activity?) {
+        if (tv == null || activity == null) {
+            return
+        }
+        if (activity?.isFinishing == true || activity?.isDestroyed == true) {
+            return
+        }
+        val text = tv.context.resources.getString(R.string.i_agree_to_loan_contact)
+        val spannableString = SpannableString(text)
+        val themeColor = tv.context.resources.getColor(R.color.theme_color)
+
+        val startIndex = text.indexOf("<")
+        val endIndex = text.indexOf(">")
+        spannableString.setSpan(
+            ForegroundColorSpan(themeColor),
+            startIndex,
+            endIndex + 1,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+
+        //点击1
+        val serveClickableSpan = object : NoUnderlineClickSpan() {
+            override fun onClick(widget: View) {
+                WebViewActivity.launchWebView(
+                    activity,
+                    Api.GET_POLICY,
+                    WebViewActivity.TYPE_PRIVACY
+                )
+            }
+        }
+        spannableString.setSpan(
+            serveClickableSpan,
+            startIndex,
+            endIndex,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tv.movementMethod = LinkMovementMethod.getInstance()
+        tv.text = spannableString
+    }
+
     fun buildPrivacySpanString(tv: AppCompatTextView?, activity: Activity?) {
         if (tv == null || activity == null) {
             return

@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.dialog
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
@@ -16,6 +18,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -23,7 +26,7 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 
-class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse?): Dialog(context)   {
+class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): Dialog(context)   {
 
     companion object {
         const val TAG = "LoanDetailDialog"
@@ -34,6 +37,7 @@ class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse
 
     private var tvBankName: TextView? = null
     private var tvBankNum: TextView? = null
+    private var tvAgree: AppCompatTextView? = null
 
     init {
         window?.decorView?.setPadding(0, 0, 0, 0)
@@ -54,6 +58,7 @@ class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse
         tvBankName = findViewById<TextView>(R.id.tv_bank_name)
         tvBankNum = findViewById<TextView>(R.id.tv_bank_num)
         ivSelect = findViewById<ImageView>(R.id.iv_loan_detail_select)
+        tvAgree = findViewById<AppCompatTextView>(R.id.tv_agree)
         val tvConfirm: TextView = findViewById<TextView>(R.id.tv_loan_confirm)
 
         mProductTrial?.let {
@@ -101,6 +106,9 @@ class LoanDetailDialog(context: Context, val mProductTrial: ProductTrialResponse
             }
 
         })
+        if (tvAgree != null && context is Activity) {
+            SpanUtils.setLoanContactString(tvAgree!!, context)
+        }
         updateSelect()
         getBankInfo()
     }

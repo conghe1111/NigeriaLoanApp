@@ -23,6 +23,7 @@ public class OrderDetailResponse {
         private int info_completed; //个人信息完成 0 未完成 1 完成
         private int auth_upload;    //授信是否上传（过期） 0 未上传 1上传
         private int is_reloan;      //首借，复借， 0 首借 1复借
+        private String checkout_url;      //首借，复借， 0 首借 1复借
         private List<Stage> stages; //分期信息
 
         public long getOrder_id() {
@@ -35,6 +36,14 @@ public class OrderDetailResponse {
 
         public int getCheck_status() {
             return check_status;
+        }
+
+        public String getCheckout_url() {
+            return checkout_url;
+        }
+
+        public void setCheckout_url(String checkout_url) {
+            this.checkout_url = checkout_url;
         }
 
         public void setCheck_status(int check_status) {

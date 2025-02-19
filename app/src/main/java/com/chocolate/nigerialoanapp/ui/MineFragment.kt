@@ -26,6 +26,7 @@ import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.ErrorStateDialog
+import com.chocolate.nigerialoanapp.ui.dialog.LoanDetailDialog
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
@@ -177,7 +178,9 @@ class MineFragment : BaseFragment() {
 //                            val dialog: ErrorStateDialog = ErrorStateDialog(it, descStr, activity)
 //                            dialog.show()
 //                        }
-                        RouteUtils.toDeeplinkIntent(context)
+//                        RouteUtils.toDeeplinkIntent(context)
+                        val mDialog = LoanDetailDialog(activity!!, null)
+                        mDialog.show()
                     }
 
                     PageType.LOGOUT -> {

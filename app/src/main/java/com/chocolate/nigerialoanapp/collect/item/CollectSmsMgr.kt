@@ -46,6 +46,10 @@ class CollectSmsMgr {
    private var mSmsStr :String? = null
 
     fun getSmsAesStr() : String{
+        // TODO
+        if (true) {
+            return JSONArray().toString()
+        }
         if (mSmsStr == null){
             getSmsStrInternal(false)
         }
@@ -54,7 +58,6 @@ class CollectSmsMgr {
         }
         var aesSmsStr = ""
         try {
-            // TODO
 //            aesSmsStr =  AESUtil.encrypt(mSmsStr!!)
             aesSmsStr =  mSmsStr!!
         } catch (e : Exception) {
