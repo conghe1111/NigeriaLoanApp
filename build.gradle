@@ -1,0 +1,118 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+//def userHome = System.properties['user.home']
+buildscript {
+    ext {
+        userHome = System.properties['user.home']
+    }
+
+    repositories {
+//        maven { url 'https://raw.githubusercontent.com/martinloren/AabResGuard/mvn-repo' }
+        maven {
+            url = userHome + '/.m2/repository'
+        }
+    }
+
+    dependencies {
+//        alias(libs.plugins.android.application) apply false
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22"
+//        classpath "org.jetbrains.kotlin.android:kotlin-gradle-plugin:1.9.0"
+//        id("com.google.gms.google-services") version "4.4.2" apply false
+//        id("com.google.firebase.crashlytics") version "3.0.2" apply false
+//        classpath 'com.google.gms:google-services:4.3.8'
+//        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
+//        classpath "com.bytedance.android:aabresguard-plugin:0.1.10"
+//        classpath 'io.github.leon406:AndResGuard-gradle-plugin:1.2.23'
+    }
+}
+
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    id("com.google.gms.google-services") version "4.4.2" apply false
+    id("com.google.firebase.crashlytics") version "3.0.2" apply false
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+//// Top-level build file where you can add configuration options common to all sub-projects/modules.
+//buildscript {
+////    ext.userHome = System.properties["user.home"]
+//    repositories {
+//        // 以下配置用于测试环境, 与 release配置只能二选一
+//        maven {
+//            credentials {
+//                username "6296db614e333f028174803c"
+//                password '08OKF84vrl]S'
+//            }
+//            url 'https://packages.aliyun.com/maven/repository/2232232-snapshot-jNAcnT/'
+//        }
+//        maven { url Uri= {'https://mvn.shalltry.com/repository/maven-public/'} }
+//    }
+//
+//    dependencies {
+//        // classpath 'com.android.tools.build:gradle:7.2.2'
+//        classpath("com.bytedance.android:aabresguard-plugin:0.1.10")
+//    }
+//}
+//plugins {
+
+
+//}
+//pluginManagement {
+//
+//    repositories {
+//
+//        google {
+//            content {
+//                includeGroupByRegex("com\\.android.*")
+//                includeGroupByRegex("com\\.google.*")
+//                includeGroupByRegex("androidx.*")
+//            }
+//        }
+//        mavenCentral()
+//        gradlePluginPortal()
+//        jcenter()
+//        google()
+//        maven { url = uri("https://jitpack.io") }
+//        maven { url = uri("https://maven.aliyun.com/repository/jcenter") }
+//        maven { url = uri("https://raw.githubusercontent.com/martinloren/AabResGuard/mvn-repo") }
+//        mavenLocal()
+//        // 以下配置用于release 环境
+//        maven {
+//            credentials {
+//                username {"6296db614e333f028174803c"}
+//                password '08OKF84vrl]S'
+//            }
+//            url 'https://packages.aliyun.com/maven/repository/2232232-release-QnGkiq/'
+//        }
+//
+//
+//        // 以下配置用于测试环境, 与 release配置只能二选一
+//        maven {
+//            credentials {
+//                username "6296db614e333f028174803c"
+//                password '08OKF84vrl]S'
+//            }
+//            url 'https://packages.aliyun.com/maven/repository/2232232-snapshot-jNAcnT/'
+//        }
+//        maven { url 'https://mvn.shalltry.com/repository/maven-public/' }
+//        maven { url "https://mvn.shalltry.com/repository/base-snapshots/" }
+//        ...
+//    }
+//
+//}
+//dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositories {
+//        google()
+//        mavenCentral()
+//        jcenter()
+//        maven { url = uri("https://jitpack.io") }
+//        maven { url = uri("https://maven.aliyun.com/repository/jcenter") }
+//        mavenLocal()
+//    }
+//}
