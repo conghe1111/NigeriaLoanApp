@@ -1,19 +1,18 @@
 package com.chocolate.nigerialoanapp.ui.loanapply
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
@@ -26,7 +25,6 @@ import com.chocolate.nigerialoanapp.bean.response.UploadAuthResponse
 import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
 import com.chocolate.nigerialoanapp.collect.CollectDataMgr
 import com.chocolate.nigerialoanapp.collect.CollectHardwareMgr
-import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.LoanDetailDialog
@@ -79,6 +77,15 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     private var mTrialList: ArrayList<Trial> = ArrayList()
     private var hasRetention: Boolean = false
     private var mProductTrial: ProductTrialResponse? = null
+
+    private val mHandler = Handler(
+        Looper.getMainLooper()
+    ) { message ->
+        when (message.what) {
+
+        }
+        false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -218,14 +225,14 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     if (isFinishing || isDestroyed) {
                         return
                     }
-                    val productTrial =
+                    mProductTrial =
                         checkResponseSuccess(response, ProductTrialResponse::class.java)
-                    if (productTrial == null || productTrial.trials == null) {
+                    if (mProductTrial == null || mProductTrial?.trials == null) {
                         return
                     }
-                    bindItem1(productTrial)
+                    bindItem1(mProductTrial)
                     mTrialList.clear()
-                    mTrialList.addAll(productTrial.trials)
+                    mTrialList.addAll(mProductTrial!!.trials)
                     mHistoryAdapter?.notifyDataSetChanged()
 
                 }
@@ -249,8 +256,8 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         executeRequestProductTrial()
     }
 
-    private fun bindItem1(productTrial: ProductTrialResponse) {
-        if (productTrial.trials == null || productTrial.trials.size == 0) {
+    private fun bindItem1(productTrial: ProductTrialResponse?) {
+        if (productTrial == null || productTrial.trials == null || productTrial.trials.size == 0) {
             return
         }
         val trial = productTrial.trials[0]
@@ -354,7 +361,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     }
 
     private fun executeNextOrderCheckStep(orderCheekBean : OrderCheekBean) {
-        if (orderCheekBean.has_upload == 0) {
+        if (orderCheekBean.has_upload == 0 && orderCheekBean.order_id == 0L) {
             CollectDataMgr.sInstance.collectAuthData(object : BaseCollectDataMgr.Observer {
                 override fun success(response: UploadAuthResponse?) {
                     if (orderCheekBean.order_id == 0L) {
@@ -417,7 +424,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
             jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken)
             jsonObject.put("order_id", orderId)
-            jsonObject.put("amount", mAmountList[mAmountIndex])
+            jsonObject.put("amount", mAmountList[mAmountIndex].amount)
             jsonObject.put("product_type", mProductType)
             jsonObject.put("period", mPeriodList[mPeriodIndex])
         } catch (e: JSONException) {
@@ -441,8 +448,13 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                         return
                     }
                     ToastUtils.showShort("apply success")
-                    setResult(RESULT_CODE)
-                    finish()
+                    mHandler.postDelayed(Runnable {
+                        if (isFinishing || isDestroyed) {
+                            return@Runnable
+                        }
+                        setResult(RESULT_CODE)
+                        finish()
+                    }, 400)
                 }
 
                 override fun onError(response: Response<String>) {
@@ -456,6 +468,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     }
 
     override fun onDestroy() {
+        mHandler.removeCallbacksAndMessages(null)
         OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
     }
