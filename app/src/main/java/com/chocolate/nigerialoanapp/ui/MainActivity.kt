@@ -88,19 +88,23 @@ class MainActivity : BaseActivity() {
     }
 
     private fun requestPermission() {
-        val hasPermission = PermissionUtils.isGranted(
-            //            PermissionConstants.CAMERA,
-            PermissionConstants.SMS
-        )
-        val hasPermissionCoarseLocation =
-            PermissionUtils.isGranted(Manifest.permission.ACCESS_COARSE_LOCATION)
-        //        val hasPermissionCallLog = PermissionUtils.isGranted(Manifest.permission.READ_CALL_LOG)
-//        val hasPermissionReadPhoneState =
-        if (hasPermissionCoarseLocation && hasPermission) {
-            executeCache()
-        } else {
-            requestPermissionInternal()
-        }
+        PermissionUtils.permission(
+            Manifest.permission.POST_NOTIFICATIONS
+        ).request()
+
+//        val hasPermission = PermissionUtils.isGranted(
+//            //            PermissionConstants.CAMERA,
+//            PermissionConstants.SMS
+//        )
+//        val hasPermissionCoarseLocation =
+//            PermissionUtils.isGranted(Manifest.permission.ACCESS_COARSE_LOCATION)
+//        //        val hasPermissionCallLog = PermissionUtils.isGranted(Manifest.permission.READ_CALL_LOG)
+////        val hasPermissionReadPhoneState =
+//        if (hasPermissionCoarseLocation && hasPermission) {
+//            executeCache()
+//        } else {
+//            requestPermissionInternal()
+//        }
     }
 
     private fun requestPermissionInternal() {
