@@ -157,22 +157,23 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 FirebaseUtils.logEvent("CLICK_INDEX_APPLY")
-                PermissionUtils.permission(
+                orderCheek()
+//                PermissionUtils.permission(
 //                    Manifest.permission.READ_CALL_LOG,
 //                    Manifest.permission.READ_CONTACTS,
-                    Manifest.permission.READ_SMS,
+//                    Manifest.permission.READ_SMS,
 //                    Manifest.permission.ACCESS_COARSE_LOCATION,
 //                    Manifest.permission.ACCESS_FINE_LOCATION,
 //                    Manifest.permission.READ_PHONE_STATE,
-                ).callback(object : PermissionUtils.SimpleCallback {
-                    override fun onGranted() {
-                        orderCheek()
-                    }
-
-                    override fun onDenied() {
-                        ToastUtils.showShort("please allow permission for apply order.")
-                    }
-                }).request()
+//                ).callback(object : PermissionUtils.SimpleCallback {
+//                    override fun onGranted() {
+//                        orderCheek()
+//                    }
+//
+//                    override fun onDenied() {
+//                        ToastUtils.showShort("please allow permission for apply order.")
+//                    }
+//                }).request()
             }
 
         })

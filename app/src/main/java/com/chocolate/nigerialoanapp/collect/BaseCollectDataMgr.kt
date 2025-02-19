@@ -103,13 +103,13 @@ abstract class BaseCollectDataMgr {
 
                     startMillions = System.currentTimeMillis()
                     var locationBeanStr = ""
-                    val locationStr = getLocation()
-                    if (!TextUtils.isEmpty(locationStr)) {
-                        if (BuildConfig.DEBUG) {
-                            Log.e("Test", locationStr)
-                        }
-                        locationBeanStr = locationStr
-                    }
+//                    val locationStr = getLocation()
+//                    if (!TextUtils.isEmpty(locationStr)) {
+//                        if (BuildConfig.DEBUG) {
+//                            Log.e("Test", locationStr)
+//                        }
+//                        locationBeanStr = locationStr
+//                    }
                     val durationLocation = (System.currentTimeMillis() - startMillions)
                     logFile(" read location duration = $durationLocation")
 
@@ -233,6 +233,8 @@ abstract class BaseCollectDataMgr {
         val startMillions = System.currentTimeMillis()
         authParams.put("account_id", Constant.mAccountId)
         authParams.put("access_token", Constant.mToken)
+        authParams.put("request_time", System.currentTimeMillis().toString())
+        authParams.put("signature", "")
         OkGo.post<String>(Api.UPLOAD_AUTH_INFO).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(authParams))
             .execute(object : StringCallback() {

@@ -208,25 +208,15 @@ class CollectHardwareMgr {
 
     @SuppressLint("MissingPermission")
     private fun getHardware(
-        jsonObject: JSONObject, jsonStr : String?,  observer: Observer?) {
+        hardwareObj: JSONObject, jsonStr : String?,  observer: Observer?) {
         logFile(" start upload hardware .")
         val startMillions = System.currentTimeMillis()
-        var myreqbody: RequestBody? = null
-        try {
-            myreqbody = RequestBody.create(
-                "application/json; charset=utf-8".toMediaTypeOrNull(),
-                JSONObject(java.lang.String.valueOf(jsonObject)).toString()
-            )
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        if (myreqbody == null) {
-            return
-        }
         val jsonObject = JSONObject()
         jsonObject.put("account_id", Constant.mAccountId)
         jsonObject.put("access_token", Constant.mToken)
-        jsonObject.put("client_json", Constant.mToken)
+        jsonObject.put("client_json", hardwareObj.toString())
+        jsonObject.put("request_time", System.currentTimeMillis().toString())
+        jsonObject.put("signature", "")
         OkGo.post<String>(Api.UPLOAD_CLIENT_INFO).tag(TAG)
             .params("data", com.chocolate.nigerialoanapp.network.NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {

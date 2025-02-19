@@ -51,6 +51,7 @@
 
                 <LinearLayout
                     style="@style/request_permission_container"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/dp_10">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -63,7 +64,8 @@
 
                 </LinearLayout>
 
-                <LinearLayout style="@style/request_permission_container">
+                <LinearLayout style="@style/request_permission_container"
+                    android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/request_permission_tv_top"
