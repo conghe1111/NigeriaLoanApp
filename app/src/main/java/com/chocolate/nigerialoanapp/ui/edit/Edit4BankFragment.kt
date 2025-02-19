@@ -156,7 +156,7 @@ class Edit4BankFragment : BaseEditFragment() {
     }
 
     private fun uploadReceive() {
-        //        pbLoading?.visibility = View.VISIBLE
+        showProgressDialogFragment()
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
@@ -179,11 +179,10 @@ class Edit4BankFragment : BaseEditFragment() {
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
                     if (isDestroy()) {
                         return
                     }
+                    dismissProgressDialogFragment()
                     val editProfileBean: EditProfileBean? =
                         checkResponseSuccess(response, EditProfileBean::class.java)
                     if (editProfileBean == null) {
@@ -200,8 +199,7 @@ class Edit4BankFragment : BaseEditFragment() {
                     if (isDestroy()) {
                         return
                     }
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
+                    dismissProgressDialogFragment()
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " update contact = " + response.body())
                     }

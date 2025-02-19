@@ -42,7 +42,6 @@ class LoginRegisterFragment : BaseFragment() {
     private var tvNext : AppCompatTextView? = null
     private var etMobileNum : AppCompatEditText? = null
     private var ivClear : AppCompatImageView? = null
-    private var flLoading : FrameLayout? = null
 
     private var mPhoneNum : String?= null
 
@@ -60,7 +59,6 @@ class LoginRegisterFragment : BaseFragment() {
         ivClear = view.findViewById<AppCompatImageView>(R.id.iv_signin_phonenum_clear)
         tvApply = view.findViewById<AppCompatTextView>(R.id.tv_apply)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_login_register_next_desc)
-        flLoading = view.findViewById<FrameLayout>(R.id.fl_login_loading)
         initializeView()
         SpanUtils.setPrivacyString(tvNext, activity)
     }
@@ -69,19 +67,18 @@ class LoginRegisterFragment : BaseFragment() {
         tvApply?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 if (activity is LoginActivity) {
-                    flLoading?.visibility = View.VISIBLE
+                    showProgressDialogFragment()
                     (activity as LoginActivity).checkNetWork(object : LoginActivity.CallBack {
                         override fun onSuccess() {
                             if (isDestroy()) {
                                 return
                             }
-                            flLoading?.visibility = View.GONE
                             FirebaseUtils.logEvent("CLICK_LOGIN_REGISTER")
                             schedualMobilePhone()
                         }
 
                         override fun onFailure() {
-                            flLoading?.visibility = View.GONE
+                            dismissProgressDialogFragment()
                         }
                     })
                 }
@@ -125,10 +122,12 @@ class LoginRegisterFragment : BaseFragment() {
 
     private fun schedualMobilePhone() {
         if (etMobileNum == null) {
+            dismissProgressDialogFragment()
             return
         }
         val phoneNum = etMobileNum!!.text.toString().replace(" ","")
         if (RegexUtils.isTel(phoneNum)){
+            dismissProgressDialogFragment()
             ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
             return
         }
@@ -146,7 +145,6 @@ class LoginRegisterFragment : BaseFragment() {
         if (BuildConfig.DEBUG) {
             Log.e("okhttp", " login register ... = $dataStr")
         }
-        flLoading?.visibility = View.VISIBLE
         OkGo.post<String>(Api.CHECK_PHONE_NUMBER).tag(TAG)
             .params("data",  NetworkUtils.toBuildParams(dataStr))
             .execute(object : StringCallback() {
@@ -154,7 +152,7 @@ class LoginRegisterFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
-                    flLoading?.visibility = View.GONE
+                   dismissProgressDialogFragment()
                     val response = checkResponseSuccess(response, CheckPhoneNumResponse::class.java)
                     if (response == null) {
                         ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
@@ -190,7 +188,7 @@ class LoginRegisterFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
-                    flLoading?.visibility = View.GONE
+                    dismissProgressDialogFragment()
                     ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
                 }
             })

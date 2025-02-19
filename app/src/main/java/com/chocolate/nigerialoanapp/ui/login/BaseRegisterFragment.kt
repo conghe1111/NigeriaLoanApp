@@ -66,7 +66,6 @@ abstract class BaseRegisterFragment : BaseFragment() {
     private var tvSignUp: AppCompatTextView? = null
     private var tvUserDesc: AppCompatTextView? = null
     private var tvGetCode: AppCompatTextView? = null
-    private var flLoading: FrameLayout? = null
 
     private var isUssd: Boolean = false
 
@@ -97,7 +96,6 @@ abstract class BaseRegisterFragment : BaseFragment() {
         tvSignUp = view.findViewById<AppCompatTextView>(R.id.tv_sign_up)
         tvUserDesc = view.findViewById<AppCompatTextView>(R.id.tv_user_desc)
         tvGetCode = view.findViewById<AppCompatTextView>(R.id.tv_get_code)
-        flLoading = view.findViewById<FrameLayout>(R.id.fl_loading)
 
         sendOtpNum = SPUtils.getInstance().getInt(DateUtils.getDateStr())
 
@@ -310,6 +308,10 @@ abstract class BaseRegisterFragment : BaseFragment() {
     abstract fun verifyCodeLogin(verfiyCode: String = "5555", password: String)
 
     fun showOrHideLoading(showFlag : Boolean) {
-        flLoading?.visibility = if (showFlag) View.VISIBLE else View.GONE
+        if (showFlag) {
+            showProgressDialogFragment()
+        } else {
+            dismissProgressDialogFragment()
+        }
     }
 }

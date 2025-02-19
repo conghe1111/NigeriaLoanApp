@@ -181,5 +181,6 @@
     <string name="network_abnormal_please_try_again"> The network is abnormal, please try again</string>
     <string name="open">Open</string>
     <string name="load_fail">Load Fail</string>
+    <string name="str_loading">loading...</string>
     <string name="verification_ran_out">Verification codes ran out today,please try tomorrow</string>
 </resources>

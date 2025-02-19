@@ -268,6 +268,7 @@ class Edit1BasicFragment : BaseEditFragment() {
     }
 
     private fun uploadBase() {
+        showProgressDialogFragment()
         //        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
@@ -300,6 +301,7 @@ class Edit1BasicFragment : BaseEditFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    dismissProgressDialogFragment()
                     val editProfileBean: EditProfileBean? =
                         checkResponseSuccess(response, EditProfileBean::class.java)
                     if (editProfileBean == null) {
@@ -316,6 +318,7 @@ class Edit1BasicFragment : BaseEditFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    dismissProgressDialogFragment()
 //                    pbLoading?.visibility = View.GONE
 //                    refreshLayout?.finishRefresh()
                     if (BuildConfig.DEBUG) {

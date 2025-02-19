@@ -35,7 +35,6 @@ class LoginFragment : BaseFragment() {
     private var tvForgetPwd: AppCompatTextView? = null
     private var tvLogin: AppCompatTextView? = null
     private var etPwd: AppCompatEditText? = null
-    private var loadingView: View? = null
     private var editText: EditClearContainer? = null
 
     private var loginIsPwdMode: Boolean = true
@@ -54,7 +53,6 @@ class LoginFragment : BaseFragment() {
         tvForgetPwd = view.findViewById<AppCompatTextView>(R.id.tv_forget_pwd)
         tvLogin = view.findViewById<AppCompatTextView>(R.id.tv_login)
         etPwd = view.findViewById<AppCompatEditText>(R.id.et_pwd)
-        loadingView = view.findViewById<View>(R.id.fl_login_loading)
         editText = view.findViewById<EditClearContainer>(R.id.edit_clear_login)
         initView()
         FirebaseUtils.logEvent("SYSTEM_LOGIN_ENTER")
@@ -79,7 +77,7 @@ class LoginFragment : BaseFragment() {
             override fun onClick(v: View?) {
                 FirebaseUtils.logEvent("CLICK_LOGIN")
                 if (activity is LoginActivity) {
-                    loadingView?.visibility = View.VISIBLE
+                    showProgressDialogFragment()
                     (activity as LoginActivity).checkNetWork(object : LoginActivity.CallBack {
                         override fun onSuccess() {
                             if (isDestroy()) {
@@ -89,7 +87,7 @@ class LoginFragment : BaseFragment() {
                         }
 
                         override fun onFailure() {
-                            loadingView?.visibility = View.GONE
+                            dismissProgressDialogFragment()
                         }
 
                     })
@@ -153,7 +151,7 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun pwdLogin(password: String) {
-        loadingView?.visibility = View.VISIBLE
+        showProgressDialogFragment()
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             var phoneNum: String = ""
@@ -177,7 +175,7 @@ class LoginFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
-                    loadingView?.visibility = View.GONE
+                    dismissProgressDialogFragment()
                     val loginResponse = checkResponseSuccess(response, LoginResponse::class.java)
                     if (loginResponse == null) {
                         return
@@ -195,7 +193,7 @@ class LoginFragment : BaseFragment() {
                     if (isDestroy()) {
                         return
                     }
-                    loadingView?.visibility = View.GONE
+                    dismissProgressDialogFragment()
                 }
             })
     }
