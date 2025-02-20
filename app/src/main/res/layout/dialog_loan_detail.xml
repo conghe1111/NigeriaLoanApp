@@ -191,7 +191,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_loan_confirm"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_48"
+            android:layout_height="@dimen/dp_40"
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/dp_80"
             android:layout_marginTop="@dimen/dp_11"

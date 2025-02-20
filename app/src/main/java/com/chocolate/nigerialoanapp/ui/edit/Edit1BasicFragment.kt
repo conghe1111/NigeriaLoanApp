@@ -285,7 +285,7 @@ class Edit1BasicFragment : BaseEditFragment() {
             jsonObject.put("marital_status", mMaritalStatus?.second.toString())
             jsonObject.put("education", mEducation?.second.toString())
             jsonObject.put("email", editEmail?.getText())
-            jsonObject.put("home_address", "$state-$area") //FCM Token
+            jsonObject.put("home_address", "$state $area") //FCM Token
             jsonObject.put("home_street", editStreet?.getText()) //FCM Token
 
         } catch (e: JSONException) {
@@ -372,10 +372,19 @@ class Edit1BasicFragment : BaseEditFragment() {
         }
         if (state == null || area == null) {
             if (!TextUtils.isEmpty(profile1Bean.account_profile.home_address)) {
-                val stateArr = profile1Bean.account_profile.home_address.split("-")
+                val stateArr = profile1Bean.account_profile.home_address.split(" ")
                 state = stateArr[0]
+                area = ""
                 if (stateArr.size > 1) {
-                    area = stateArr[1]
+                    for (index in 0 until stateArr.size) {
+                        if (index == 0) {
+
+                        } else if (index == 1) {
+                            area = stateArr[index]
+                        } else {
+                            area = area + " " + stateArr[index]
+                        }
+                    }
                 }
             }
         }
@@ -413,7 +422,7 @@ class Edit1BasicFragment : BaseEditFragment() {
         if (area != null && !TextUtils.isEmpty(area)
             && state != null && !TextUtils.isEmpty(state)
         ) {
-            selectAddress?.setText(("$state-$area"))
+            selectAddress?.setText(("$state $area"))
         }
         if (!TextUtils.isEmpty(homeAddress)) {
             editStreet?.setEditTextAndSelection(homeAddress!!)
@@ -477,7 +486,7 @@ class Edit1BasicFragment : BaseEditFragment() {
                 area = stateList.get(options1).get(options2)
             }
             if (selectAddress != null && state != null && area != null) {
-                selectAddress?.setText("$state-$area")
+                selectAddress?.setText("$state $area")
             }
             updateNextBtnStatus(false)
             Log.i(TAG, " select province = $state select state = $area")
