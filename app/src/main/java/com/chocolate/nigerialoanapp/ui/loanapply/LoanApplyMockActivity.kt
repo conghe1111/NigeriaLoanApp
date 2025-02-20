@@ -160,15 +160,15 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
 
         mLoanTermList.clear()
         for (period in mPeriodList) {
-            mLoanTermList.add(LoanData(period, false))
+            mLoanTermList.add(period)
         }
-        mLoanTermList.add(LoanData("" + 120))
+        mLoanTermList.add(LoanData("180"))
         requestProductTrial()
     }
 
     private fun requestProductTrial() {
         if (mAmountList.size > mAmountIndex && mPeriodList.size > mPeriodIndex) {
-            executeRequestProductTrial(mAmountList[mAmountIndex].amount!!, mLoanTermList[mPeriodIndex].amount!!,mProductType!!)
+            executeRequestProductTrial(mAmountList[mAmountIndex].data!!, mLoanTermList[mPeriodIndex].data!!,mProductType!!)
         } else {
             // TODO error
         }

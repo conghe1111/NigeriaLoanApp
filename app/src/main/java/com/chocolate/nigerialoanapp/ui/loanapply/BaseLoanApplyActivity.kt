@@ -28,7 +28,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
     }
 
     var mProductType: String? = null
-    var mPeriodList: ArrayList<String> = ArrayList<String>()
+    var mPeriodList: ArrayList<LoanData> = ArrayList<LoanData>()
     var mAmountList: ArrayList<LoanData> = ArrayList<LoanData>()
     var mAmountIndex: Int = 0
     var mPeriodIndex: Int = 0
@@ -88,7 +88,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
 
                     mPeriodList.clear()
                     for (periodItem in productBean.product.period) {
-                        mPeriodList.add(periodItem.toString())
+                        mPeriodList.add(LoanData(periodItem.toString(), false))
                     }
                     bindData()
                 }

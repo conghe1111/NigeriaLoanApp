@@ -32,7 +32,7 @@ class LoanAmountDateMockAdapter(val mList : List<LoanData>, pos : Int) : Recycle
     override fun onBindViewHolder(holder: LoadApplyHistoryHolder, position: Int) {
         val loanData = mList.get(position)
 
-        val array = DateUtils.buildDateFormat( loanData.amount!!.toLong())
+        val array = DateUtils.buildDateFormat( loanData.data!!.toLong())
         if (array == null || array.size < 3) {
             return
         }
@@ -52,7 +52,7 @@ class LoanAmountDateMockAdapter(val mList : List<LoanData>, pos : Int) : Recycle
         }
         holder.itemView?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                if (loanData.amount == null) {
+                if (loanData.data == null) {
                     return
                 }
                 if (loanData.lockFlag) {
@@ -60,7 +60,7 @@ class LoanAmountDateMockAdapter(val mList : List<LoanData>, pos : Int) : Recycle
                 }
                 val lastPos = mPos
                 mPos = position
-                mOnItemClickListener?.onItemClick(loanData.amount!!, position)
+                mOnItemClickListener?.onItemClick(loanData.data!!, position)
                 notifyItemChanged(lastPos)
                 notifyItemChanged(mPos)
             }

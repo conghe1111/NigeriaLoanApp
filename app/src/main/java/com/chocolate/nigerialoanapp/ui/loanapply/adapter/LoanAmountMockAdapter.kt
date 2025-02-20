@@ -32,9 +32,9 @@ class LoanAmountMockAdapter(val mList : List<LoanData>, val isTerm : Boolean =  
     override fun onBindViewHolder(holder: LoadApplyHistoryHolder, position: Int) {
         val loanData = mList.get(position)
         if (isTerm) {
-            holder.tvLoanApply?.text = loanData.amount?.toString()
+            holder.tvLoanApply?.text = loanData.data?.toString()
         } else {
-            holder.tvLoanApply?.text = SpanUtils.getShowText2(loanData.amount?.toLong())
+            holder.tvLoanApply?.text = SpanUtils.getShowText2(loanData.data?.toLong())
         }
         if (loanData.lockFlag){
             holder.flContainer?.setBackgroundResource(R.drawable.bg_gray_bg_2)
@@ -52,7 +52,7 @@ class LoanAmountMockAdapter(val mList : List<LoanData>, val isTerm : Boolean =  
         }
         holder.itemView?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                if (loanData.amount == null) {
+                if (loanData.data == null) {
                     return
                 }
                 if (loanData.lockFlag) {
@@ -60,7 +60,7 @@ class LoanAmountMockAdapter(val mList : List<LoanData>, val isTerm : Boolean =  
                 }
                 val lastPos = mPos
                 mPos = position
-                mOnItemClickListener?.onItemClick(loanData.amount!!, position)
+                mOnItemClickListener?.onItemClick(loanData.data!!, position)
                 notifyItemChanged(lastPos)
                 notifyItemChanged(mPos)
             }

@@ -132,7 +132,7 @@
                     android:layout_marginStart="@dimen/dp_20"
                     android:layout_marginEnd="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_13"
-                    android:layout_height="@dimen/dp_38"/>
+                    android:layout_height="wrap_content"/>
 
                 <include
                     android:id="@+id/container_disburse_fee"

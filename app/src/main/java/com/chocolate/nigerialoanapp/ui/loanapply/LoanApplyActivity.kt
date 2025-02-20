@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.bean.data.LoanData
 import com.chocolate.nigerialoanapp.bean.response.OrderApplyResponse
 import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
@@ -33,6 +34,7 @@ import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyHistoryAdapter
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoadApplyPeriodAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor2
+import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor3
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
@@ -103,7 +105,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
         rvContent?.layoutManager =
             LinearLayoutManager(this@LoanApplyActivity, LinearLayoutManager.HORIZONTAL, false)
-        mAdapter = LoadApplyPeriodAdapter(mPeriodList)
+        mAdapter = LoadApplyPeriodAdapter(mPeriodList, mPeriodIndex)
         mAdapter?.setOnItemClickListener(object : LoadApplyPeriodAdapter.OnItemClickListener {
             override fun onItemClick(period: String, pos: Int) {
                 if (TextUtils.isEmpty(mProductType)) {
@@ -112,22 +114,16 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                 if (mPeriodList.isEmpty() || mAmountList.isEmpty()) {
                     return
                 }
-                if (mAmountIndex >= mAmountList.size) {
-                    return
-                }
-                mPeriodIndex = pos
                 if (mPeriodIndex >= mPeriodList.size) {
                     return
                 }
-                requestProductTrial(
-                    mProductType!!,
-                    mAmountList[mAmountIndex].amount!!,
-                    mPeriodList[mPeriodIndex]
-                )
+                mPeriodIndex = pos
+                executeRequestProductTrial()
             }
 
         })
         rvContent?.adapter = mAdapter
+        rvContent?.addItemDecoration(NorItemDecor3())
         loanContainer?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 if (mAmountList.size == 0) {
@@ -199,8 +195,8 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         }
         requestProductTrial(
             mProductType!!,
-            mAmountList[mAmountIndex].amount!!,
-            mPeriodList[mPeriodIndex]
+            mAmountList[mAmountIndex].data!!,
+            mPeriodList[mPeriodIndex].data!!
         )
     }
 
@@ -251,6 +247,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
     override fun bindData() {
         super.bindData()
+        mPeriodList.add(LoanData("180", true))
         if (mPeriodList.isNotEmpty()) {
             mAdapter?.notifyDataSetChanged()
         }
@@ -427,9 +424,9 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
             jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken)
             jsonObject.put("order_id", orderId)
-            jsonObject.put("amount", mAmountList[mAmountIndex].amount)
+            jsonObject.put("amount", mAmountList[mAmountIndex].data)
             jsonObject.put("product_type", mProductType)
-            jsonObject.put("period", mPeriodList[mPeriodIndex])
+            jsonObject.put("period", mPeriodList[mPeriodIndex].data)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -486,7 +483,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     }
 
     private fun updateLoanAmountTitle() {
-        val amount = mAmountList[mAmountIndex].amount.toString()
+        val amount = mAmountList[mAmountIndex].data.toString()
         SpanUtils.setAmountString(tvAmount, SpanUtils.getShowText(amount.toLong()))
     }
 }

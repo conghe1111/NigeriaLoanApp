@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.dialog.selectamount
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ class SelectAmountAdapter(val mList: List<LoanData>, val mListener: OnItemClickL
         return mList!!.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: SelectAmountHolder, position: Int) {
         val data = mList.get(position)
         if (mListener.getSelectPos() == position) {
@@ -33,7 +35,7 @@ class SelectAmountAdapter(val mList: List<LoanData>, val mListener: OnItemClickL
         } else {
             holder.flContainer?.setBackgroundResource(R.color.white)
         }
-        holder.tvAmount?.text = "₦" + SpanUtils.getShowText(data.amount!!.toLong())
+        holder.tvAmount?.text = "₦" + SpanUtils.getShowText(data.data!!.toLong())
         if (data.lockFlag) {
             holder.tvAmount?.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null,
                 holder.itemView.resources.getDrawable(R.drawable.ic_lock), null)
@@ -47,7 +49,7 @@ class SelectAmountAdapter(val mList: List<LoanData>, val mListener: OnItemClickL
                 if (data.lockFlag) {
                     return
                 }
-                mListener?.onItemClick(data.amount!!, position)
+                mListener?.onItemClick(data.data!!, position)
             }
 
         })

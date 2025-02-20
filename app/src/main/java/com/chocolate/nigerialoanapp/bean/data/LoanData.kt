@@ -1,5 +1,5 @@
 package com.chocolate.nigerialoanapp.bean.data
 
-data class LoanData(var amount : String? = null, var lockFlag : Boolean = true) {
+data class LoanData(var data : String? = null, var lockFlag : Boolean = true) {
 
 }
