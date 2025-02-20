@@ -166,10 +166,12 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
 
     private fun showOrHide(showFlag : Boolean) {
         if (activity is MarketActivity) {
-            if (showFlag) {
-                showProgressDialogFragment()
-            } else {
-                dismissProgressDialogFragment()
+            if ((activity as MarketActivity).allowFlag) {
+                if (showFlag) {
+                    showProgressDialogFragment()
+                } else {
+                    dismissProgressDialogFragment()
+                }
             }
         } else {
             flLoading?.visibility = if (showFlag) View.VISIBLE else View.GONE

@@ -45,7 +45,6 @@ class MainActivity : BaseActivity() {
         BarUtils.setStatusBarLightMode(this, true)
         setContentView(R.layout.activity_main)
         initView()
-        requestPermission()
         ConfigMgr.getAllConfig()
     }
 
@@ -85,58 +84,6 @@ class MainActivity : BaseActivity() {
         val transaction = fragmentManager.beginTransaction() // 开启一个事务
         transaction.replace(containRes, fragment)
         transaction.commitAllowingStateLoss()
-    }
-
-    private fun requestPermission() {
-        PermissionUtils.permission(
-            Manifest.permission.POST_NOTIFICATIONS
-        ).request()
-
-//        val hasPermission = PermissionUtils.isGranted(
-//            //            PermissionConstants.CAMERA,
-//            PermissionConstants.SMS
-//        )
-//        val hasPermissionCoarseLocation =
-//            PermissionUtils.isGranted(Manifest.permission.ACCESS_COARSE_LOCATION)
-//        //        val hasPermissionCallLog = PermissionUtils.isGranted(Manifest.permission.READ_CALL_LOG)
-////        val hasPermissionReadPhoneState =
-//        if (hasPermissionCoarseLocation && hasPermission) {
-//            executeCache()
-//        } else {
-//            requestPermissionInternal()
-//        }
-    }
-
-    private fun requestPermissionInternal() {
-        val dialog: RequestPermissionDialog = RequestPermissionDialog(this, this@MainActivity)
-        dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
-            override fun onClickAgree() {
-                val utils = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    PermissionUtils.permission(
-                        Manifest.permission.READ_SMS,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.POST_NOTIFICATIONS
-                    )
-                } else {
-                    PermissionUtils.permission(
-                        Manifest.permission.READ_SMS,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    )
-                }
-                utils.callback(object : PermissionUtils.SimpleCallback {
-                    override fun onGranted() {
-                        FirebaseUtils.logEvent("SYSTEM_PERMISSION_RESULT")
-                        executeCache()
-                    }
-
-                    override fun onDenied() {
-                        ToastUtils.showShort("please allow permission.")
-                    }
-                }).request()
-            }
-        })
-        dialog.show()
-        FirebaseUtils.logEvent("SYSTEM_PERMISSION_ENTER")
     }
 
     private fun updatePageByTypeInternal() {

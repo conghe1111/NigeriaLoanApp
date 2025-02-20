@@ -72,7 +72,7 @@ class RequestPermissionDialog constructor(context: Context, activity: Activity?)
 
     abstract class OnItemClickListener {
         abstract fun onClickAgree()
-        fun onClickCancel() {}
+       open fun onClickCancel() {}
     }
 
     private fun updateState() {

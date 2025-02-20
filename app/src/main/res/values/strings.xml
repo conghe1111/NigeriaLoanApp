@@ -62,6 +62,8 @@
     <string name="str_Illegal_verification_code">Illegal verification code</string>
     <string name="permission">Permission</string>
     <string name="request_permission_desc">Hi there, to access your eligibility and facilitate faster disbursal of your loan, we need these permissions</string>
+    <string name="information_collection_and_use">Information Collection and Use</string>
+    <string name="for_a_better_experience"> For a better experience, when using our services, we may ask you to provide us with certain personally identifiable information. The information requested will remain on your device and we will not collect it in any way.The app does use third-party services that may collect information that can be used to identify you.</string>
 
     <string name="repayment_time">Repayment time</string>
     <string name="due_amount">Due amount</string>
