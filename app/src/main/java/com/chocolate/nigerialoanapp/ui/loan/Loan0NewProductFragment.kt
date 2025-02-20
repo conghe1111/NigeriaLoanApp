@@ -14,7 +14,6 @@ import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.response.MarketingPageResponse
 import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
-import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
 import com.chocolate.nigerialoanapp.bean.response.UploadAuthResponse
 import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
 import com.chocolate.nigerialoanapp.collect.CollectDataMgr
@@ -23,7 +22,6 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.MarketActivity
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
-import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
@@ -63,12 +61,12 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         tvDescLeft1 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc1)
         tvDescLeft3 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc3)
         tvDesc2 = view.findViewById<AppCompatTextView>(R.id.tv_product_2_desc)
-        val view = view.findViewById<View>(R.id.iv_main_top_consumer)
+        val ivConsumer = view.findViewById<View>(R.id.iv_main_top_consumer)
         if (activity is MarketActivity) {
-            view.visibility = View.GONE
+            ivConsumer.visibility = View.GONE
         }
         flLoading = view.findViewById<View>(R.id.fl_loading)
-        if( mPageResponse == null) {
+        if(mPageResponse == null) {
             if (activity is MarketActivity) {
                 (activity as MarketActivity).checkNetWork(object : BaseActivity.CallBack {
                     override fun onSuccess() {
@@ -307,6 +305,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         if (isDestroy()) {
             return
         }
+        dismissProgressDialogFragment()
         activity?.let {
             LoanApplyActivity.startActivity(it, orderId.toString())
         }
