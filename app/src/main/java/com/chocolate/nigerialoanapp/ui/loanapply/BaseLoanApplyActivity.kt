@@ -13,6 +13,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.LoanRetentionDialog
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion.KEY_ORDER_ID
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -32,6 +33,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
     var mAmountList: ArrayList<LoanData> = ArrayList<LoanData>()
     var mAmountIndex: Int = 0
     var mPeriodIndex: Int = 0
+    var mOrderId: String = ""
 
     private var dialog : LoanRetentionDialog? = null
 
@@ -40,6 +42,9 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
         BarUtils.setStatusBarVisibility(this,true)
         BarUtils.setStatusBarColor(this, resources.getColor(R.color.white))
         BarUtils.setStatusBarLightMode(this, true)
+         intent.getStringExtra(KEY_ORDER_ID)?.let {
+            mOrderId = it
+        }
     }
 
     fun getProducts(marketingFlag: Boolean = false) {

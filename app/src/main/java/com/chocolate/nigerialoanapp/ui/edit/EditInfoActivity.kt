@@ -1,15 +1,14 @@
 package com.chocolate.nigerialoanapp.ui.edit
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.compose.ui.graphics.Color
 import com.blankj.utilcode.util.BarUtils
+import com.blankj.utilcode.util.KeyboardUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -106,6 +105,7 @@ class EditInfoActivity : BaseActivity() {
             }
 
         })
+        KeyboardUtils.registerSoftInputChangedListener(window, mKeyBoardListener)
     }
 
     override fun getFragmentContainerRes(): Int {
@@ -248,7 +248,20 @@ class EditInfoActivity : BaseActivity() {
         }
     }
 
+    private val mKeyBoardListener = object : KeyboardUtils.OnSoftInputChangedListener {
+        override fun onSoftInputChanged(height: Int) {
+            if (isDestroyed || isFinishing) {
+                return
+            }
+            mCurFragment?.onSoftInputChanged(KeyboardUtils.isSoftInputVisible(this@EditInfoActivity))
+        }
+
+    }
+
+
     override fun onDestroy() {
+        KeyboardUtils.unregisterSoftInputChangedListener(window)
+
         OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
     }

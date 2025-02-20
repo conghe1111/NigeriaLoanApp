@@ -7,16 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
+import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.response.MarketingPageResponse
+import com.chocolate.nigerialoanapp.bean.response.OrderCheekBean
 import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
+import com.chocolate.nigerialoanapp.bean.response.UploadAuthResponse
+import com.chocolate.nigerialoanapp.collect.BaseCollectDataMgr
+import com.chocolate.nigerialoanapp.collect.CollectDataMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.MarketActivity
+import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
@@ -90,7 +97,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
                     if (it is MarketActivity) {
                         it.toLogin()
                     } else {
-                        LoanApplyActivity.startActivity(it)
+                        orderCheek()
                     }
                 }
             }
@@ -175,6 +182,133 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             }
         } else {
             flLoading?.visibility = if (showFlag) View.VISIBLE else View.GONE
+        }
+    }
+
+    private fun orderCheek() {
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        try {
+            jsonObject.put("account_id", Constant.mAccountId)
+            jsonObject.put("access_token", Constant.mToken)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        if (BuildConfig.DEBUG) {
+            Log.i("OkhttpClient", " orderCheek = $jsonObject")
+        }
+        showProgressDialogFragment()
+        OkGo.post<String>(Api.ORDER_CHECK).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    if (isDestroy() || activity == null) {
+                        return
+                    }
+                    val data = NetworkUtils.checkResponseSuccess2(response)
+                    if (data == null) {
+                        dismissProgressDialogFragment()
+                        return
+                    }
+                    val orderCheekBean = com.alibaba.fastjson.JSONObject.parseObject(
+                        data?.getBodyStr(),
+                        OrderCheekBean::class.java
+                    )
+                    if (orderCheekBean == null) {
+                        dismissProgressDialogFragment()
+                        return
+                    }
+                    when (orderCheekBean.current_phase) {
+                        (101) -> {  //基本信息填写完成（第一页）
+                            dismissProgressDialogFragment()
+                            EditInfoActivity.showActivity(
+                                activity!!, EditInfoActivity.STEP_1,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+
+                        (102) -> {  //工作信息填写完成（第二页）
+                            dismissProgressDialogFragment()
+                            EditInfoActivity.showActivity(
+                                activity!!, EditInfoActivity.STEP_2,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+
+                        (103) -> {  //联系人信息填写完成（第三页）
+                            dismissProgressDialogFragment()
+                            EditInfoActivity.showActivity(
+                                activity!!, EditInfoActivity.STEP_3,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+
+                        (104) -> {  //收款信息填写完成（第四页）
+                            dismissProgressDialogFragment()
+                            EditInfoActivity.showActivity(
+                                activity!!, EditInfoActivity.STEP_4,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+                        (105) -> {  //收款信息填写完成（第五页）
+                            dismissProgressDialogFragment()
+                            EditInfoActivity.showActivity(
+                                activity!!, EditInfoActivity.STEP_5,
+                                EditInfoActivity.FROM_APPLY_LOAD
+                            )
+                        }
+
+                        (0), (111) -> {  //全部完成,申请
+                            executeNextOrderCheckStep(orderCheekBean)
+                        }
+                    }
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+                    if (isDestroy()) {
+                        return
+                    }
+                    dismissProgressDialogFragment()
+                    ToastUtils.showShort("order check error")
+                }
+            })
+    }
+
+    private fun executeNextOrderCheckStep(orderCheekBean : OrderCheekBean) {
+        if (orderCheekBean.has_upload == 0 && orderCheekBean.order_id == 0L) {
+            CollectDataMgr.sInstance.collectAuthData(object : BaseCollectDataMgr.Observer {
+                override fun success(response: UploadAuthResponse?) {
+                    if (orderCheekBean.order_id == 0L) {
+                        orderCheek()
+                    } else {
+                        dismissProgressDialogFragment()
+                        toLoanApplyPage(orderCheekBean.order_id)
+                    }
+                }
+
+                override fun failure(response: String?) {
+                    dismissProgressDialogFragment()
+                    ToastUtils.showShort("upload auth fail")
+                }
+
+            })
+            return
+        } else {
+            if (orderCheekBean.order_id == 0L) {
+                dismissProgressDialogFragment()
+                ToastUtils.showShort("need loan apply orderId")
+            } else {
+                toLoanApplyPage(orderCheekBean.order_id)
+            }
+        }
+    }
+
+    private fun toLoanApplyPage(orderId : Long) {
+        if (isDestroy()) {
+            return
+        }
+        activity?.let {
+            LoanApplyActivity.startActivity(it, orderId.toString())
         }
     }
 }

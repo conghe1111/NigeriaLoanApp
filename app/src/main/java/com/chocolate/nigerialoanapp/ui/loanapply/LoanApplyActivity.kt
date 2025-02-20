@@ -49,17 +49,19 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
     companion object {
 
         private const val TAG = "LoanApplyActivity"
+        const val KEY_ORDER_ID = "key_order_id"
 
         const val REQUEST_CODE = 1112
         const val RESULT_CODE = 1117
 
-        fun startActivity(context: Activity) {
+        fun startActivity(context: Activity, orderId: String) {
             val intent =
                 if (Constant.isAuditMode()) {
                     Intent(context, LoanApplyMockActivity::class.java)
                 } else {
                     Intent(context, LoanApplyActivity::class.java)
                 }
+            intent.putExtra(KEY_ORDER_ID, orderId)
             context.startActivityForResult(intent, REQUEST_CODE)
         }
     }
@@ -160,7 +162,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 FirebaseUtils.logEvent("CLICK_INDEX_APPLY")
-                orderCheek()
+                showLoanDetailAndUploadHardware(mOrderId)
 //                PermissionUtils.permission(
 //                    Manifest.permission.READ_CALL_LOG,
 //                    Manifest.permission.READ_CONTACTS,
@@ -170,7 +172,6 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 //                    Manifest.permission.READ_PHONE_STATE,
 //                ).callback(object : PermissionUtils.SimpleCallback {
 //                    override fun onGranted() {
-//                        orderCheek()
 //                    }
 //
 //                    override fun onDenied() {
@@ -273,124 +274,9 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvLoanAmount?.text = SpanUtils.getShowText1(trial?.amount?.toLong())
     }
 
-    private fun orderCheek() {
-        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
-        try {
-            jsonObject.put("account_id", Constant.mAccountId)
-            jsonObject.put("access_token", Constant.mToken)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        if (BuildConfig.DEBUG) {
-            Log.i("OkhttpClient", " orderCheek = $jsonObject")
-        }
-        showOrHideLoading(true)
-        OkGo.post<String>(Api.ORDER_CHECK).tag(TAG)
-            .params("data", NetworkUtils.toBuildParams(jsonObject))
-            .execute(object : StringCallback() {
-                override fun onSuccess(response: Response<String>) {
-                    if (isFinishing || isDestroyed) {
-                        return
-                    }
-                    val data = NetworkUtils.checkResponseSuccess2(response)
-                    if (data == null) {
-                        showOrHideLoading(false)
-                        return
-                    }
-                    val orderCheekBean = com.alibaba.fastjson.JSONObject.parseObject(
-                        data?.getBodyStr(),
-                        OrderCheekBean::class.java
-                    )
-                    if (orderCheekBean == null) {
-                        showOrHideLoading(false)
-                        return
-                    }
-                    when (orderCheekBean.current_phase) {
-                        (101) -> {  //基本信息填写完成（第一页）
-                            showOrHideLoading(false)
-                            EditInfoActivity.showActivity(
-                                this@LoanApplyActivity, EditInfoActivity.STEP_1,
-                                EditInfoActivity.FROM_APPLY_LOAD
-                            )
-                        }
-
-                        (102) -> {  //工作信息填写完成（第二页）
-                            showOrHideLoading(false)
-                            EditInfoActivity.showActivity(
-                                this@LoanApplyActivity, EditInfoActivity.STEP_2,
-                                EditInfoActivity.FROM_APPLY_LOAD
-                            )
-                        }
-
-                        (103) -> {  //联系人信息填写完成（第三页）
-                            showOrHideLoading(false)
-                            EditInfoActivity.showActivity(
-                                this@LoanApplyActivity, EditInfoActivity.STEP_3,
-                                EditInfoActivity.FROM_APPLY_LOAD
-                            )
-                        }
-
-                        (104) -> {  //收款信息填写完成（第四页）
-                            showOrHideLoading(false)
-                            EditInfoActivity.showActivity(
-                                this@LoanApplyActivity, EditInfoActivity.STEP_4,
-                                EditInfoActivity.FROM_APPLY_LOAD
-                            )
-                        }
-                        (105) -> {  //收款信息填写完成（第五页）
-                            showOrHideLoading(false)
-                            EditInfoActivity.showActivity(
-                                this@LoanApplyActivity, EditInfoActivity.STEP_5,
-                                EditInfoActivity.FROM_APPLY_LOAD
-                            )
-                        }
-
-                        (0), (111) -> {  //全部完成,申请
-                            executeNextOrderCheckStep(orderCheekBean)
-                        }
-                    }
-                }
-
-                override fun onError(response: Response<String>) {
-                    super.onError(response)
-                    if (isFinishing || isDestroyed) {
-                        return
-                    }
-                }
-            })
-    }
-
-    private fun executeNextOrderCheckStep(orderCheekBean : OrderCheekBean) {
-        if (orderCheekBean.has_upload == 0 && orderCheekBean.order_id == 0L) {
-            CollectDataMgr.sInstance.collectAuthData(object : BaseCollectDataMgr.Observer {
-                override fun success(response: UploadAuthResponse?) {
-                    if (orderCheekBean.order_id == 0L) {
-                        orderCheek()
-                    } else {
-                        showOrHideLoading(false)
-                        showLoanDetailAndUploadHardware(orderCheekBean)
-                    }
-                }
-
-                override fun failure(response: String?) {
-                    showOrHideLoading(false)
-                    ToastUtils.showShort("upload auth fail")
-                }
-
-            })
-            return
-        } else {
-            if (orderCheekBean.order_id == 0L) {
-                showOrHideLoading(false)
-                ToastUtils.showShort("need loan apply orderId")
-            } else {
-                showLoanDetailAndUploadHardware(orderCheekBean)
-            }
-        }
-    }
 
     private var mDialog: LoanDetailDialog? = null
-    private fun showLoanDetailAndUploadHardware(orderCheekBean: OrderCheekBean) {
+    private fun showLoanDetailAndUploadHardware(orderId: String) {
         if (mDialog?.isShowing == true) {
             mDialog?.dismiss()
         }
@@ -402,7 +288,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                 if (isFinishing || isDestroyed) {
                     return
                 }
-                orderApply(orderCheekBean.order_id.toString())
+                orderApply(orderId)
             }
 
         })

@@ -223,7 +223,7 @@ class Edit4BankFragment : BaseEditFragment() {
         mSelectBankName?.setSelectState(false)
         mBankName = Pair(bankName, bankCode)
         mSelectBankName?.setText(mBankName?.first.toString())
-        updateNextBtnStatus()
+        updateNextBtnStatus(true)
     }
 
     override fun updateNextBtnStatus(needSelect: Boolean) {
