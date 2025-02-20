@@ -106,7 +106,7 @@ open class BaseActivity : AppCompatActivity() {
         if (BuildConfig.DEBUG) {
             Log.i(TAG, " check NetWork ... = $jsonObject")
         }
-        OkGo.post<String>(Api.LIVE).tag("BaseActivity")
+        OkGo.post<String>(Api.LIVE).tag(localClassName)
             .params("data", AESUtil.encrypt(jsonObject.toString()))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
@@ -164,7 +164,7 @@ open class BaseActivity : AppCompatActivity() {
         if (dialog?.isShowing == true) {
             dialog?.dismiss()
         }
-        OkGo.getInstance().cancelTag("BaseActivity")
+        OkGo.getInstance().cancelTag(localClassName)
         super.onDestroy()
     }
 }

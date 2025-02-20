@@ -41,6 +41,7 @@ import com.chocolate.nigerialoanapp.ui.setting.ConsumerHotlineActivity
 import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.RouteUtils
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.easeid.opensdk.EaseID
 import com.easeid.opensdk.model.EaseRequest
@@ -92,7 +93,7 @@ class MineFragment : BaseFragment() {
             tvMobile?.visibility = View.GONE
         } else {
             tvMobile?.visibility = View.VISIBLE
-            tvMobile?.text = "+234$mobileStr"
+            tvMobile?.text = SpanUtils.getShowMobile("+234$mobileStr")
         }
 
         buildSettingList()

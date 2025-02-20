@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
+import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
@@ -274,5 +275,18 @@ object SpanUtils {
         val decimalFormat: DecimalFormat = DecimalFormat("#,##0.00")
         val formattedAmount: String = decimalFormat.format(amount)
         return "₦$formattedAmount"
+    }
+
+    fun getShowMobile(phoneNumber : String) : String {
+        try {
+            val endnum = phoneNumber.substring(phoneNumber.length - 2, phoneNumber.length)
+            val beginStr = phoneNumber.substring(0, phoneNumber.length - 6)
+            return "$beginStr****$endnum"
+        } catch (e : Exception) {
+            if (BuildConfig.DEBUG) {
+                throw e
+            }
+        }
+        return ""
     }
 }
