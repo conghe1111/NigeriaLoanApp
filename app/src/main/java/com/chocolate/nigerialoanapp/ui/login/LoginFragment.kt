@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.LoginResponse
 import com.chocolate.nigerialoanapp.global.LocalConfig
@@ -78,7 +79,7 @@ class LoginFragment : BaseFragment() {
                 FirebaseUtils.logEvent("CLICK_LOGIN")
                 if (activity is LoginActivity) {
                     showProgressDialogFragment()
-                    (activity as LoginActivity).checkNetWork(object : LoginActivity.CallBack {
+                    (activity as LoginActivity).checkNetWork(object : BaseActivity.CallBack {
                         override fun onSuccess() {
                             if (isDestroy()) {
                                 return

@@ -10,10 +10,12 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.response.MarketingPageResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductBeanResponse
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.MarketActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
@@ -54,9 +56,30 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         tvDescLeft1 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc1)
         tvDescLeft3 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc3)
         tvDesc2 = view.findViewById<AppCompatTextView>(R.id.tv_product_2_desc)
+        val view = view.findViewById<View>(R.id.iv_main_top_consumer)
+        if (activity is MarketActivity) {
+            view.visibility = View.GONE
+        }
         flLoading = view.findViewById<View>(R.id.fl_loading)
         if( mPageResponse == null) {
-            getMarketingPage()
+            if (activity is MarketActivity) {
+                (activity as MarketActivity).checkNetWork(object : BaseActivity.CallBack {
+                    override fun onSuccess() {
+                        if (isDestroy()) {
+                            return
+                        }
+                        getMarketingPage()
+                    }
+
+                    override fun onFailure() {
+
+                    }
+
+                })
+            } else {
+                getMarketingPage()
+            }
+
         } else {
             bindData()
         }
@@ -64,7 +87,11 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         tvApplyNow?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 activity?.let {
-                    LoanApplyActivity.startActivity(it)
+                    if (it is MarketActivity) {
+                        it.toLogin()
+                    } else {
+                        LoanApplyActivity.startActivity(it)
+                    }
                 }
             }
 
@@ -73,22 +100,20 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
     }
 
     private fun getMarketingPage() {
-        //        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " marketing page = $jsonObject")
         }
+        showOrHide(true)
         flLoading?.visibility = View.VISIBLE
         OkGo.post<String>(Api.MARKETING_PAGE).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
                     if (isDestroy()) {
                         return
                     }
-                    flLoading?.visibility = View.GONE
+                    showOrHide(false)
                     mPageResponse =
                         checkResponseSuccess(response, MarketingPageResponse::class.java)
                     if (mPageResponse == null) {
@@ -103,8 +128,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
                     if (isDestroy()) {
                         return
                     }
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
+                    showOrHide(false)
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " marketing page= " + response.body())
                     }
@@ -113,52 +137,6 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             })
     }
 
-    private fun getProducts(marketingFlag : Boolean) {
-        if (Constant.mAccountId == null) {
-            return
-        }
-        //        pbLoading?.visibility = View.VISIBLE
-        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
-        try {
-            jsonObject.put("account_id", Constant.mAccountId!!)
-            jsonObject.put("access_token", Constant.mToken)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        if (BuildConfig.DEBUG) {
-            Log.i("OkHttpClient", " marketing product = $jsonObject")
-        }
-        val url = if (marketingFlag) Api.PRODUCT_MARKETING else Api.PRODUCT_LIST
-        OkGo.post<String>(url).tag(TAG)
-            .params("data", NetworkUtils.toBuildParams(jsonObject))
-            .execute(object : StringCallback() {
-                override fun onSuccess(response: Response<String>) {
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
-                    if (isDestroy()) {
-                        return
-                    }
-                    val productBean: ProductBeanResponse? =
-                        checkResponseSuccess(response, ProductBeanResponse::class.java)
-                    if (productBean == null) {
-                        Log.e(TAG, " marketing product ." + response.body())
-                        return
-                    }
-                }
-
-                override fun onError(response: Response<String>) {
-                    super.onError(response)
-                    if (isDestroy()) {
-                        return
-                    }
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
-                    if (BuildConfig.DEBUG) {
-                        Log.e(TAG, " update contact = " + response.body())
-                    }
-                }
-            })
-    }
 
     @SuppressLint("SetTextI18n")
     private fun bindData() {
@@ -184,5 +162,17 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             }
         }
         tvDesc2?.text = resources.getString(R.string.up_to_day, mPageResponse?.max_period.toString())
+    }
+
+    private fun showOrHide(showFlag : Boolean) {
+        if (activity is MarketActivity) {
+            if (showFlag) {
+                showProgressDialogFragment()
+            } else {
+                dismissProgressDialogFragment()
+            }
+        } else {
+            flLoading?.visibility = if (showFlag) View.VISIBLE else View.GONE
+        }
     }
 }

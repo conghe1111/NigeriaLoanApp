@@ -53,6 +53,10 @@
 
         </activity>
 
+        <activity android:name=".ui.MarketActivity">
+
+        </activity>
+
         <service
             android:name=".message.RemoteMessagingService"
             android:exported="false">

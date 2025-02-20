@@ -50,7 +50,7 @@ class SplashActivity : BaseActivity() {
                     hasEnterFlag = true
                     mHandler?.removeCallbacksAndMessages(null)
                     OkGo.getInstance().cancelTag(TAG)
-                    val welcomeIntent = Intent(this@SplashActivity, LoginActivity::class.java)
+                    val welcomeIntent = Intent(this@SplashActivity, MarketActivity::class.java)
                     startActivity(welcomeIntent)
                     finish()
                 }

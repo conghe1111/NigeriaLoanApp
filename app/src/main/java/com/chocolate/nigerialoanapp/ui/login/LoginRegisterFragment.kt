@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
+import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.response.CheckPhoneNumResponse
 import com.chocolate.nigerialoanapp.global.Constant
@@ -68,7 +69,7 @@ class LoginRegisterFragment : BaseFragment() {
             override fun onClick(v: View?) {
                 if (activity is LoginActivity) {
                     showProgressDialogFragment()
-                    (activity as LoginActivity).checkNetWork(object : LoginActivity.CallBack {
+                    (activity as LoginActivity).checkNetWork(object : BaseActivity.CallBack {
                         override fun onSuccess() {
                             if (isDestroy()) {
                                 return
