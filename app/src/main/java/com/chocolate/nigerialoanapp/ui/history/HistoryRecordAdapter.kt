@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.bean.response.HistoryRecordResponse
 import com.chocolate.nigerialoanapp.global.LocalConfig
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 
 class HistoryRecordAdapter(val historys: List<HistoryRecordResponse.History>) :
     RecyclerView.Adapter<HistoryRecordAdapter.HistoryRecordHolder>() {
@@ -24,22 +25,22 @@ class HistoryRecordAdapter(val historys: List<HistoryRecordResponse.History>) :
 
     override fun onBindViewHolder(holder: HistoryRecordHolder, position: Int) {
         val history = historys.get(position)
-        holder?.tvAmountTitle?.text = history.loan_amount?.toString()
-        holder?.tvLoanAmount?.text = history.loan_amount?.toString()
+        holder?.tvAmountTitle?.text = SpanUtils.getShowText1(history.loan_amount?.toLong())
+        holder?.tvLoanAmount?.text = SpanUtils.getShowText1(history.loan_amount?.toLong())
         holder?.tvDateApp?.text = history.apply_date?.toString()
-        holder?.tvDueAmount?.text = history.repay_amount?.toString()
+        holder?.tvDueAmount?.text = SpanUtils.getShowText1(history.repay_amount?.toLong())
         holder?.tvDueDay?.text = history.overdue_day?.toString()
         //逾期天数；还款日；应还总额；这三个不展示；
         if (LocalConfig.isLoanMoney(history?.status)) {
-            holder?.viewDateApp?.visibility = View.GONE
-            holder?.viewDateAppDiv?.visibility = View.GONE
+//            holder?.viewDateApp?.visibility = View.GONE
+//            holder?.viewDateAppDiv?.visibility = View.GONE
             holder?.viewDueAmount?.visibility = View.GONE
             holder?.viewDueAmountDiv?.visibility = View.GONE
             holder?.viewDueDay?.visibility = View.GONE
             holder?.viewDueDayDiv?.visibility = View.GONE
         } else {
-            holder?.viewDateApp?.visibility = View.VISIBLE
-            holder?.viewDateAppDiv?.visibility = View.VISIBLE
+//            holder?.viewDateApp?.visibility = View.VISIBLE
+//            holder?.viewDateAppDiv?.visibility = View.VISIBLE
             holder?.viewDueAmount?.visibility = View.VISIBLE
             holder?.viewDueAmountDiv?.visibility = View.VISIBLE
             holder?.viewDueDay?.visibility = View.VISIBLE

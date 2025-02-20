@@ -8,10 +8,10 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_history_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="@dimen/dp_38"
         android:includeFontPadding="false"
         android:text="100000"
+        android:background="@drawable/shape_history_record_bg_1"
         android:gravity="center"
         android:textColor="#40B950"
         android:textSize="@dimen/sp_15"

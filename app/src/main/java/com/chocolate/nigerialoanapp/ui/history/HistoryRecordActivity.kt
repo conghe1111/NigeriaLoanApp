@@ -75,10 +75,15 @@ class HistoryRecordActivity : BaseActivity() {
         if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " getOrderHistory = $jsonObject")
         }
+        showProgressDialogFragment()
         OkGo.post<String>(Api.ORDER_HISTORY).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
+                    if (isFinishing || isDestroyed) {
+                        return
+                    }
+                    dismissProgressDialogFragment()
                     val historyResponse: HistoryRecordResponse? = NetworkUtils.checkResponseSuccess(
                         response,
                         HistoryRecordResponse::class.java
@@ -92,6 +97,10 @@ class HistoryRecordActivity : BaseActivity() {
 
                 override fun onError(response: Response<String>) {
                     super.onError(response)
+                    if (isFinishing || isDestroyed) {
+                        return
+                    }
+                    dismissProgressDialogFragment()
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " update contact = " + response.body())
                     }

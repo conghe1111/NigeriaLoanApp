@@ -6,34 +6,10 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <LinearLayout
+    <include
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_54"
-        android:fitsSystemWindows="true"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_edit_info_back"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_20"
-            android:padding="@dimen/dp_5"
-            android:src="@drawable/ic_back" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_edit_info_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_14"
-            android:layout_weight="1"
-            android:text="@string/edit_information"
-            android:textColor="#333333"
-            android:textSize="@dimen/sp_18"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        layout="@layout/include_top_title"
+        android:layout_height="@dimen/dp_54"/>
 
    <FrameLayout
        android:id="@+id/fl_edit_info_container"
