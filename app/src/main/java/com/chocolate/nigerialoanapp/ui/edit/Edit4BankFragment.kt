@@ -135,6 +135,8 @@ class Edit4BankFragment : BaseEditFragment() {
                 }
             }
             return false
+        } else {
+            mSelectBankName?.setSelectState(false)
         }
         if (mEditAccountNum == null || TextUtils.isEmpty(mEditAccountNum!!.getText())) {
             if (needToast) {

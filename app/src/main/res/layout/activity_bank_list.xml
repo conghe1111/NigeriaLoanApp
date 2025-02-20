@@ -57,7 +57,7 @@
                     android:layout_height="match_parent"
                     android:paddingRight="8dp"
                     app:sidebar_lazy_respond="false"
-                    app:sidebar_max_offset="80dp"
+                    app:sidebar_max_offset="30dp"
                     app:sidebar_position="right"
                     app:sidebar_text_alignment="center"
                     app:sidebar_text_color="#8D6E63"

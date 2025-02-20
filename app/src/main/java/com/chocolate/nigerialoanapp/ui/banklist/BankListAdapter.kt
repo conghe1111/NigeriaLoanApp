@@ -1,8 +1,10 @@
 package com.chocolate.nigerialoanapp.ui.banklist
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.bean.response.BankBeanResponse
 
@@ -24,6 +26,9 @@ class BankListAdapter : RecyclerView.Adapter<SelectDataHolder> {
     override fun onBindViewHolder(holder: SelectDataHolder, position: Int) {
         val bankBean = mLists!![position]
         holder.tvSelectData?.text = bankBean.bank_name
+        if (holder.ivIcon != null && !TextUtils.isEmpty(bankBean.bank_url)) {
+            Glide.with(holder.ivIcon!!).load(bankBean.bank_url).into(holder.ivIcon!!)
+        }
         holder.itemView.setOnClickListener {
             mItemClickListener?.onItemClick(bankBean!!, position)
         }
