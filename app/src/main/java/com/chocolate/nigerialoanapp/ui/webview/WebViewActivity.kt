@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import com.blankj.utilcode.util.BarUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
@@ -49,8 +50,11 @@ class WebViewActivity : BaseActivity() {
         BarUtils.setStatusBarLightMode(this, true)
         setContentView(R.layout.activity_webview)
 
-        ivBack = findViewById(R.id.iv_webview_back)
-        tvTitle = findViewById(R.id.tv_webview_title)
+        ivBack = findViewById<ImageView>(R.id.iv_back)
+        tvTitle = findViewById<AppCompatTextView>(R.id.tv_title)
+        val ivConsumer = findViewById<View>(R.id.iv_consumer)
+        ivConsumer?.visibility = View.GONE
+
         ivBack?.setOnClickListener(View.OnClickListener {
             if (mType ==TYPE_REPAY) {
                 RouteUtils.toDeeplinkIntent(this)
@@ -63,6 +67,10 @@ class WebViewActivity : BaseActivity() {
             titleStr = getString(R.string.about_terms)
         } else if (mType == TYPE_PRIVACY){
             titleStr = getString(R.string.about_privacy)
+        } else if (mType == TYPE_REPAY) {
+            titleStr = getString(R.string.repayment)
+        } else {
+            titleStr = getString(R.string.about_terms)
         }
         if (!TextUtils.isEmpty(titleStr)){
             tvTitle?.text = titleStr

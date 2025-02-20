@@ -152,7 +152,6 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun pwdLogin(password: String) {
-        showProgressDialogFragment()
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             var phoneNum: String = ""

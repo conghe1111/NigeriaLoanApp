@@ -67,9 +67,8 @@ object Api {
     val FACE_ID = "$HOST/app/v1/account/face_id"
 
     // TODO
-    val GET_POLICY: String = "https://www.baidu.com"
-
-    val GET_TERMS: String = "https://www.baidu.com"
+    val GET_POLICY: String = "https://www.owocredit.com/privacy.html"
+    val GET_TERMS: String = "https://www.owocredit.com/terms.html"
 
     val GET_ALL: String = "https://www.baidu.com"
 }
