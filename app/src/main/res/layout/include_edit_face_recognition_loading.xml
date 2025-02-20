@@ -7,62 +7,68 @@
     tools:showIn="@layout/fragment_edit_face_recognition">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/dp_50"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/dp_90"
-            android:layout_height="@dimen/dp_90"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_face_recognitaion" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_face_recognition_status"
-            android:layout_width="@dimen/dp_44"
-            android:layout_height="@dimen/dp_44"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp_19"
-            android:src="@drawable/ic_failure" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_face_recognition_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ProgressBar
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_8"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/please_wait"
-            android:textColor="#333333"
-            android:textSize="@dimen/sp_18"
-            android:textStyle="bold" />
+            android:indeterminateDrawable="@drawable/shape_scan_progress_bar" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_face_recognition_retry"
             android:layout_width="wrap_content"
+            android:text="@string/please_wait"
+            android:layout_gravity="center"
+            android:textColor="#333333"
+            android:layout_marginTop="@dimen/dp_20"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/sp_15"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:text="00:00:59"
+            android:layout_gravity="center"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/dp_8"
+            android:textSize="@dimen/sp_30"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:text="@string/we_are_evaluating_your_credit_limit"
+            android:layout_gravity="center"
+            android:textColor="#333333"
+            android:gravity="center"
+            android:background="@drawable/bg_evalute_bg"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:textSize="@dimen/sp_14"
+            android:layout_height="@dimen/dp_53"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_face_recognition_continue"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_19"
-            android:background="@drawable/bg_decline_update_account"
+            android:background="@drawable/request_permission_cancel"
             android:gravity="center"
             android:includeFontPadding="false"
             android:paddingStart="@dimen/dp_85"
             android:paddingEnd="@dimen/dp_85"
-            android:text="@string/retry"
-            android:textColor="@color/white"
+            android:text="@string/continue_str"
+            android:textColor="#40B950"
             android:textSize="@dimen/sp_17"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_debug_pic"
-        android:layout_width="@dimen/dp_100"
-        android:layout_gravity="center_horizontal|bottom"
-        android:visibility="gone"
-        android:layout_marginBottom="@dimen/dp_50"
-        android:layout_height="@dimen/dp_100"/>
 </FrameLayout>

@@ -154,9 +154,9 @@ class MineFragment : BaseFragment() {
                     }
 
                     PageType.TEST_1 -> {
-//                        activity?.let {
-//                            EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
-//                        }
+                        activity?.let {
+                            EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
+                        }
 //                        activity?.let {
 //                            val dialog = LoanRetentionDialog(it)
 //                            dialog.show()
@@ -179,8 +179,8 @@ class MineFragment : BaseFragment() {
 //                            dialog.show()
 //                        }
 //                        RouteUtils.toDeeplinkIntent(context)
-                        val mDialog = LoanDetailDialog(activity!!, null)
-                        mDialog.show()
+//                        val mDialog = LoanDetailDialog(activity!!, null)
+//                        mDialog.show()
                     }
 
                     PageType.LOGOUT -> {

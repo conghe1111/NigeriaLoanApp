@@ -61,12 +61,15 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
     private var tvNext: AppCompatTextView? = null
     private var tvDesc: AppCompatTextView? = null
     private var ivStatus: AppCompatImageView? = null
-    private var ivDebugPic: AppCompatImageView? = null
     private var tvStatus: AppCompatTextView? = null
     private var tvRetry: AppCompatTextView? = null
+    private var tvContinue: AppCompatTextView? = null
+    private var tvTime: AppCompatTextView? = null
+    private var ivPhoto: AppCompatImageView? = null
 
     private var includeStart: View? = null
     private var includeLoading: View? = null
+    private var includeError: View? = null
 
     private var mCurPath: String? = null
 
@@ -97,6 +100,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_next)
+        ivPhoto = view.findViewById<AppCompatImageView>(R.id.iv_photo)
         tvNext?.text = resources.getString(R.string.start_x_s, "5")
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
@@ -107,16 +111,16 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         tvDesc = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_desc)
         SpanUtils.setPrivacyString(tvDesc, activity)
 
-        ivDebugPic = view.findViewById<AppCompatImageView>(R.id.iv_debug_pic)
-        if (BuildConfig.DEBUG) {
-            ivDebugPic?.visibility = View.VISIBLE
-        }
         includeStart = view.findViewById<View>(R.id.include_start)
         includeLoading = view.findViewById<View>(R.id.include_loading)
+        includeError = view.findViewById<View>(R.id.include_error)
 
         ivStatus = view.findViewById<AppCompatImageView>(R.id.iv_face_recognition_status)
         tvStatus = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_status)
         tvRetry = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_retry)
+        tvContinue = view.findViewById<AppCompatTextView>(R.id.tv_face_recognition_continue)
+        tvTime = view.findViewById<AppCompatTextView>(R.id.tv_time)
+
         tvRetry?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 mStatus = STATUS_START
@@ -278,8 +282,13 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                     Log.e(TAG, "onCompleted : ${response.livenessFilePath}")
                 }
                 mCurPath = response.livenessFilePath
-                onActivityResultInternal(0, null)
-                // 活体成功, 后续业务逻辑代码
+                mHandler.postDelayed(Runnable {
+                    if (isDestroy()) {
+                        return@Runnable
+                    }
+                    // 活体成功, 后续业务逻辑代码
+                    onActivityResultInternal(0, null)
+                }, 400)
             }
 
             override fun onInterrupted(code: String?, error: String?) {
@@ -341,13 +350,16 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         if (!curFile.exists()) {
             return
         }
-        mStatus = STATUS_WAIT
-        if (BuildConfig.DEBUG) {
-            ivDebugPic?.let {
-                Glide.with(this@Edit5FaceRecognitionFragment).load(curFile).into(it)
-            }
-            Log.e(TAG, " cur path = " + mCurPath + " exists = " + curFile.exists())
+        ivPhoto?.let {
+            Glide.with(this).load(curFile).into(it)
         }
+        mStatus = STATUS_WAIT
+//        if (BuildConfig.DEBUG) {
+//            ivDebugPic?.let {
+//                Glide.with(this@Edit5FaceRecognitionFragment).load(curFile).into(it)
+//            }
+//            Log.e(TAG, " cur path = " + mCurPath + " exists = " + curFile.exists())
+//        }
         updateStatus()
         val curFile1 = File(mCurPath)
         Luban.with(context)
@@ -385,19 +397,22 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
             (STATUS_START) -> {
                 includeStart?.visibility = View.VISIBLE
                 includeLoading?.visibility = View.GONE
+                includeError?.visibility = View.GONE
                 tvNext?.isSelected = false
-                tvNext
             }
             (STATUS_WAIT) -> {
                 includeStart?.visibility = View.GONE
                 includeLoading?.visibility = View.VISIBLE
+                includeError?.visibility = View.GONE
                 ivStatus?.visibility = View.GONE
                 tvStatus?.text = resources.getString(R.string.please_wait)
                 tvRetry?.visibility = View.GONE
+                startEvaluteTimer()
             }
             (STATUS_PASS) -> {
                 includeStart?.visibility = View.GONE
-                includeLoading?.visibility = View.VISIBLE
+                includeLoading?.visibility = View.GONE
+                includeError?.visibility = View.VISIBLE
                 ivStatus?.visibility = View.VISIBLE
                 ivStatus?.setImageResource(R.drawable.ic_confirm)
                 tvStatus?.text = resources.getString(R.string.pass)
@@ -405,7 +420,8 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
             }
             (STATUS_FAIL) -> {
                 includeStart?.visibility = View.GONE
-                includeLoading?.visibility = View.VISIBLE
+                includeLoading?.visibility = View.GONE
+                includeError?.visibility = View.VISIBLE
                 ivStatus?.visibility = View.VISIBLE
                 ivStatus?.setImageResource(R.drawable.ic_failure)
                 tvStatus?.text = resources.getString(R.string.fail)
@@ -422,11 +438,20 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         mTimeCount?.start()
     }
 
+    private var mEvaluteTimeCount: EvaluteTimeCount? = null
+
+    private fun startEvaluteTimer() {
+        tvTime?.text = "00:00:60"
+        mEvaluteTimeCount?.cancel()
+        mEvaluteTimeCount = EvaluteTimeCount(60 * 1000, 1000)
+        mEvaluteTimeCount?.start()
+    }
+
     inner class TimeCount(millisInFuture: Long, countDownInterval: Long) :
         CountDownTimer(millisInFuture, countDownInterval) {
         @SuppressLint("StringFormatMatches")
         override fun onTick(l: Long) {
-            val countDownTime = l / 1000
+            val countDownTime = l / 1000 + 1
             val startXStr = resources.getString(R.string.start_x_s, countDownTime)
             tvNext?.text = startXStr
         }
@@ -438,4 +463,22 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         }
     }
 
+    inner class EvaluteTimeCount(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
+        @SuppressLint("StringFormatMatches", "SetTextI18n")
+        override fun onTick(l: Long) {
+            val countDownTime = l / 1000
+            if (countDownTime < 10) {
+                tvTime?.text = "00:00:0$countDownTime"
+            } else {
+                tvTime?.text = "00:00:$countDownTime"
+            }
+        }
+
+        override fun onFinish() {
+            val startStr = resources.getString(R.string.start)
+            tvNext?.text = startStr
+            tvTime?.isSelected = true
+        }
+    }
 }
