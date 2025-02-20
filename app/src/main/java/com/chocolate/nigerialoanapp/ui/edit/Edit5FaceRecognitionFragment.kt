@@ -339,6 +339,8 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
     override fun onDestroy() {
         OkGo.getInstance().cancelTag(TAG)
         mHandler?.removeCallbacksAndMessages(null)
+        mTimeCount?.cancel()
+        mEvaluteTimeCount?.cancel()
         super.onDestroy()
     }
 
@@ -451,12 +453,18 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         CountDownTimer(millisInFuture, countDownInterval) {
         @SuppressLint("StringFormatMatches")
         override fun onTick(l: Long) {
+            if (isDestroy()) {
+                return
+            }
             val countDownTime = l / 1000 + 1
             val startXStr = resources.getString(R.string.start_x_s, countDownTime)
             tvNext?.text = startXStr
         }
 
         override fun onFinish() {
+            if (isDestroy()) {
+                return
+            }
             val startStr = resources.getString(R.string.start)
             tvNext?.text = startStr
             tvNext?.isSelected = true
@@ -467,6 +475,9 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         CountDownTimer(millisInFuture, countDownInterval) {
         @SuppressLint("StringFormatMatches", "SetTextI18n")
         override fun onTick(l: Long) {
+            if (isDestroy()) {
+                return
+            }
             val countDownTime = l / 1000
             if (countDownTime < 10) {
                 tvTime?.text = "00:00:0$countDownTime"
@@ -476,6 +487,9 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         }
 
         override fun onFinish() {
+            if (isDestroy()) {
+                return
+            }
             val startStr = resources.getString(R.string.start)
             tvNext?.text = startStr
             tvTime?.isSelected = true
