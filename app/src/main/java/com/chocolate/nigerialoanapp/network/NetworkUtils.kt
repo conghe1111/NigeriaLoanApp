@@ -1,6 +1,7 @@
 package com.chocolate.nigerialoanapp.network
 
 import android.text.TextUtils
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.bean.BaseResponseBean
@@ -14,12 +15,27 @@ import org.json.JSONObject
 
 object NetworkUtils {
 
+    private var appVersion : String? = null
+    private var versionCode : String? = null
+
     fun addCommonWithoutLogin() {
+        if (appVersion == null) {
+            appVersion = AppUtils.getAppVersionName()
+        }
+        if (appVersion == null) {
+            appVersion = "1.0.0"
+        }
+        if (versionCode == null) {
+            versionCode = AppUtils.getAppVersionCode().toString()
+        }
+        if (appVersion == null) {
+            appVersion = "10000"
+        }
         val header = HttpHeaders()
-        header.put("AppId","2")
+        header.put("AppId","1")
         header.put("AppName","oyo")
-        header.put("AppVersion","1.0.1")
-        header.put("VersionCode","101")
+        header.put("AppVersion",appVersion)
+        header.put("VersionCode",versionCode)
 //        AppId	string	Y	客户端APPID	1
 //        AppName	string	Y	客户端APP名字	APPName=owo credit 只要传owo
 //        AppVersion	string	Y	客户端版本号，字符串类型	例如：1.0.1
@@ -94,18 +110,18 @@ object NetworkUtils {
     }
 
     fun toBuildParams(jsonObject : JSONObject) : String {
-        return if (BuildConfig.DEBUG) {
-            jsonObject.toString()
-        } else {
-            AESUtil.decrypt(jsonObject.toString())
-        }
+       return toBuildParams(jsonObject.toString())
     }
 
     fun toBuildParams(content : String) : String {
-        return if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
+//            Log.e("okhttp", content)
+//            Log.e("okhttp", "2  = " + AESUtil.encrypt(content))
+//        }
+        return if (!BuildConfig.USE_ONLINE_API) {
             content
         } else {
-            AESUtil.decrypt(content)
+            AESUtil.encrypt(content)
         }
     }
 }

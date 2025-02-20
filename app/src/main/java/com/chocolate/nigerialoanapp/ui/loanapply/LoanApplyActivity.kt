@@ -273,7 +273,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvDisburalAmount?.text = SpanUtils.getShowText1(trial?.disburse_amount?.toLong())
         tvInterest?.text = SpanUtils.getShowText1(trial?.interest?.toLong())
         tvProcessFee?.text = SpanUtils.getShowText1(trial?.service_fee?.toLong())
-        tvLoanAmount?.text = SpanUtils.getShowText1(trial?.total?.toLong())
+        tvLoanAmount?.text = SpanUtils.getShowText1(trial?.amount?.toLong())
     }
 
     private fun orderCheek() {

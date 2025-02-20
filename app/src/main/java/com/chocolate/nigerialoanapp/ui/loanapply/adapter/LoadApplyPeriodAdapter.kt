@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.loanapply.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,9 +25,10 @@ class LoadApplyPeriodAdapter(val mList : List<String>) : RecyclerView.Adapter<Lo
         return mList!!.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: LoadApplyPeriodHolder, position: Int) {
         val period = mList.get(position).toString()
-        holder.tvTerm?.text =  period
+        holder.tvTerm?.text =  period + "days"
         holder.itemView?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 mOnItemClickListener?.onItemClick(period, position)

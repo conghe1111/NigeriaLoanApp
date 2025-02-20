@@ -31,7 +31,7 @@ class LoadApplyHistoryAdapter(val mList : List<Trial>) : RecyclerView.Adapter<Lo
         val trial = mList.get(position)
         val period = mList.get(position).toString()
         holder.tvDueDay?.text = trial.repay_date
-        holder.tvDueAmount?.text = SpanUtils.getShowText1(trial.amount.toLong())
+        holder.tvDueAmount?.text = SpanUtils.getShowText1(trial.total.toLong())
         holder.itemView?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 mOnItemClickListener?.onItemClick(period, position)

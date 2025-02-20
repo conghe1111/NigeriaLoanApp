@@ -11,6 +11,8 @@ object AESUtil {
 //    AesCBCKey string = "33f24fca6d6298fd1b7ff147559be437"
 //    AesCBCIV  string = "a085a68b22ec1debea760810a4515506"
 
+    const val IS_DEBUG = !BuildConfig.USE_ONLINE_API
+
     private const val AES_CBC_KEY_D = "33f24fca6d6298fd1b7ff147559be437"
     private const val AES_CBC_IV_D = "a085a68b22ec1debea760810a4515506"
     private const val AES_CBC_KEY_R = "33f24fca6d6298fd1b7ff147559be437"
@@ -21,7 +23,7 @@ object AESUtil {
     private val CHARSET = Charsets.UTF_8
 
     private fun aesCBCKey(): String{
-        return if (BuildConfig.DEBUG){
+        return if (IS_DEBUG){
             AES_CBC_KEY_D
         }else{
             AES_CBC_KEY_R
@@ -29,7 +31,7 @@ object AESUtil {
     }
 
     private fun aesCBCIV(): String{
-        return if (BuildConfig.DEBUG){
+        return if (IS_DEBUG){
             AES_CBC_IV_D
         }else{
             AES_CBC_IV_R
