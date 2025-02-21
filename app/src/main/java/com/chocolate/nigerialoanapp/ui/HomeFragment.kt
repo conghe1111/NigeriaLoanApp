@@ -150,59 +150,55 @@ class HomeFragment : BaseFragment() {
 //        }
         if (mOrderDetail?.order_detail == null || mOrderDetail!!.order_detail.order_id == 0L
             || mOrderDetail?.order_detail?.isCan_apply == true) {
-            mCurFragment = Loan1VerifyFragment()
+            mCurFragment = Loan0NewProductFragment()
             toFragment(mCurFragment)
         } else {
             when (mOrderDetail!!.order_detail.check_status) {
+                (0)-> {
+                    mCurFragment = Loan0NewProductFragment()
+                }
                 (1) -> {  //1	提交审核
                     mCurFragment = Loan1VerifyFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (2) -> {  //2	审核拒绝
                     mCurFragment = Loan2DeclineFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (3) -> {  //3	等待电核
                     mCurFragment = Loan1VerifyFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (4) -> {  //4	等待放款
                     mCurFragment = Loan5ProcessFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (5) -> {  //5	放款中
                     mCurFragment = Loan5ProcessFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (6) -> {  //6	放款失败
                     mCurFragment = Loan6PayFailureFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (7) -> {  //7	等待还款
                     mCurFragment = Loan7PendingFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (8) -> {  //8	已结清
                     mCurFragment = Loan8PaidProcessedFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (9) -> {  //9	逾期
                     mCurFragment = Loan9OverdueFragment()
-                    toFragment(mCurFragment)
                 }
 
                 (10) -> {  //10	还款中
                     mCurFragment = Loan10PayProcessingFragment()
-                    toFragment(mCurFragment)
                 }
+            }
+            mCurFragment?.let {
+                toFragment(it)
             }
         }
     }
