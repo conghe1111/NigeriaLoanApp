@@ -8,8 +8,6 @@
         android:topLeftRadius="@dimen/dp_10"
         android:topRightRadius="@dimen/dp_10"
         />
-    <item android:name="android:shadowColor">#a000000</item>
-    <item android:name="android:shadowDx">0dp</item>
-    <item android:name="android:shadowDy">8dp</item>
+
 </shape>
 

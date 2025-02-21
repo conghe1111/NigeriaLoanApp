@@ -143,14 +143,14 @@ class HomeFragment : BaseFragment() {
         if (isDestroy()) {
             return
         }
-//        if (true) {
-//            mCurFragment = Loan10PayProcessingFragment()
-//            toFragment(mCurFragment)
-//            return
-//        }
+        if (true) {
+            mCurFragment = Loan8PaidProcessedFragment()
+            toFragment(mCurFragment)
+            return
+        }
         if (mOrderDetail?.order_detail == null || mOrderDetail!!.order_detail.order_id == 0L
             || mOrderDetail?.order_detail?.isCan_apply == true) {
-            mCurFragment = Loan0NewProductFragment()
+            mCurFragment = Loan1VerifyFragment()
             toFragment(mCurFragment)
         } else {
             when (mOrderDetail!!.order_detail.check_status) {

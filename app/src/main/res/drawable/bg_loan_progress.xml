@@ -15,7 +15,4 @@
         android:type="linear"
         android:useLevel="true" />
 
-    <item name="android:shadowColor">#a000000</item>
-    <item name="android:shadowDx">0</item>
-    <item name="android:shadowDy">8</item>
 </shape>
