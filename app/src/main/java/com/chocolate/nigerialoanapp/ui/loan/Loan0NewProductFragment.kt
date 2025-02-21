@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.compose.ui.graphics.Color
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
@@ -62,10 +63,12 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         tvDescLeft3 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc3)
         tvDesc2 = view.findViewById<AppCompatTextView>(R.id.tv_product_2_desc)
         val ivConsumer = view.findViewById<View>(R.id.iv_main_top_consumer)
+        flLoading = view.findViewById<View>(R.id.fl_loading)
         if (activity is MarketActivity) {
             ivConsumer.visibility = View.GONE
+            flLoading?.setBackgroundColor(resources.getColor(android.R.color.transparent))
+            flLoading?.isClickable = false
         }
-        flLoading = view.findViewById<View>(R.id.fl_loading)
         if(mPageResponse == null) {
             if (activity is MarketActivity) {
                 (activity as MarketActivity).checkNetWork(object : BaseActivity.CallBack {
@@ -110,7 +113,6 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             Log.i("OkHttpClient", " marketing page = $jsonObject")
         }
         showOrHide(true)
-        flLoading?.visibility = View.VISIBLE
         OkGo.post<String>(Api.MARKETING_PAGE).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
@@ -137,7 +139,6 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " marketing page= " + response.body())
                     }
-                    flLoading?.visibility = View.GONE
                 }
             })
     }
@@ -170,17 +171,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
     }
 
     private fun showOrHide(showFlag : Boolean) {
-        if (activity is MarketActivity) {
-            if ((activity as MarketActivity).allowFlag) {
-                if (showFlag) {
-                    showProgressDialogFragment()
-                } else {
-                    dismissProgressDialogFragment()
-                }
-            }
-        } else {
-            flLoading?.visibility = if (showFlag) View.VISIBLE else View.GONE
-        }
+        flLoading?.visibility = if (showFlag) View.VISIBLE else View.GONE
     }
 
     private fun orderCheek() {

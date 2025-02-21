@@ -24,6 +24,7 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.HomeFragment
 import com.chocolate.nigerialoanapp.ui.loan.adapter.RepaymentAdapter
 import com.chocolate.nigerialoanapp.ui.loan.adapter.RepaymentDetailAdapter
+import com.chocolate.nigerialoanapp.ui.loan.dialog.InputLoanNumDialog
 import com.chocolate.nigerialoanapp.ui.webview.WebViewActivity
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.decor.NorItemDecor5
@@ -55,6 +56,8 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
 
     private var mOrderDetail: OrderDetail? = null
 
+    private val mRepayAmountList : ArrayList<Long> = ArrayList<Long>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -76,7 +79,8 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
 
     private fun initializeView() {
         mStages.clear()
-        mRepaymentAdapter = RepaymentAdapter(mStages)
+        mRepayAmountList.clear()
+        mRepaymentAdapter = RepaymentAdapter(mRepayAmountList)
         mRepaymentDetailAdapter = RepaymentDetailAdapter(mStages)
 
         rvRepayment?.layoutManager =
@@ -90,11 +94,32 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
         rvRepaymentDetail?.addItemDecoration(NorItemDecor5())
 
         mRepaymentAdapter?.setOnItemClickListener(object : RepaymentAdapter.OnItemClickListener {
-            override fun onItemClick(stage: Stage) {
+            override fun onItemClickAmount(pos: Int) {
+                if (isDestroy() || context == null) {
+                    return
+                }
+                val total = mStages[pos].repay_total
+                val dialog = InputLoanNumDialog(context!!, activity,total, object : InputLoanNumDialog.Observer {
+                    override fun onInputNum(num: Long) {
+                        if (isDestroy() || context == null) {
+                            return
+                        }
+                        mRepayAmountList.set(pos, num)
+                        mRepaymentAdapter?.notifyDataSetChanged()
+                    }
+
+                })
+                dialog.show()
+            }
+
+            override fun onItemClickRepay(amount: Long, pos: Int) {
+                if (isDestroy() || context == null) {
+                    return
+                }
                 if (mOrderDetail == null) {
                     return
                 }
-                repaymentLoan(mOrderDetail!!.order_id.toString(), stage.amount.toString())
+                repaymentLoan(mOrderDetail!!.order_id.toString(), amount.toString())
             }
 
         })
@@ -117,6 +142,12 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
 
             mStages.clear()
             mStages.addAll(mOrderDetail!!.stages)
+
+            mRepayAmountList.clear()
+            for (stage in mOrderDetail!!.stages) {
+                mRepayAmountList.add(stage.repay_total.toLong())
+            }
+
             mRepaymentAdapter?.notifyDataSetChanged()
             mRepaymentDetailAdapter?.notifyDataSetChanged()
         }
@@ -124,7 +155,7 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
 
 
     fun repaymentLoan(orderId: String, amount: String) {
-        val jsonObject: JSONObject = JSONObject()
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken)

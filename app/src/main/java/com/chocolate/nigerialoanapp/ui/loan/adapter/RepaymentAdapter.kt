@@ -11,7 +11,7 @@ import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse.Stage
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
-class RepaymentAdapter(val stages : List<OrderDetailResponse.Stage>) : RecyclerView.Adapter<RepaymentAdapter.RepaymentHolder>() {
+class RepaymentAdapter(val repayAmountList : List<Long>) : RecyclerView.Adapter<RepaymentAdapter.RepaymentHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepaymentHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_loan_repayment, parent, false)
@@ -19,15 +19,23 @@ class RepaymentAdapter(val stages : List<OrderDetailResponse.Stage>) : RecyclerV
     }
 
     override fun getItemCount(): Int {
-        return stages.size
+        return repayAmountList.size
     }
 
     override fun onBindViewHolder(holder: RepaymentHolder, position: Int) {
-        val stage = stages[position]
-        holder.tvTotalPrice?.text = SpanUtils.getShowText(stage.repay_total.toLong())
+        val amount = repayAmountList[position]
+        holder.tvTotalPrice?.text = SpanUtils.getShowText(amount)
+
+        holder.tvTotalPrice?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                mListener?.onItemClickAmount(position)
+            }
+
+        })
+
         holder.tvRepayment?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                mListener?.onItemClick(stage)
+                mListener?.onItemClickRepay(amount,position)
             }
 
         })
@@ -40,7 +48,8 @@ class RepaymentAdapter(val stages : List<OrderDetailResponse.Stage>) : RecyclerV
     }
 
     interface OnItemClickListener {
-        fun onItemClick(stage : Stage)
+        fun onItemClickAmount(pos : Int)
+        fun onItemClickRepay(amount : Long, pos: Int)
     }
 
     inner class RepaymentHolder : RecyclerView.ViewHolder {
