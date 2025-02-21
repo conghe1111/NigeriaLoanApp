@@ -41,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_22"
-            android:background="@drawable/bg_white_bg"
             app:cardCornerRadius="@dimen/dp_10"
             app:cardElevation="@dimen/dp_10">
 
@@ -50,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_80"
                 android:gravity="center"
+                android:background="@drawable/bg_white_bg"
                 android:includeFontPadding="false"
                 android:paddingStart="@dimen/dp_15"
                 android:paddingEnd="@dimen/dp_15"

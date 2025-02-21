@@ -70,9 +70,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             flLoading?.isClickable = false
         }
         if(mPageResponse == null) {
-            val amount = 0
-            SpanUtils.setAmountString2(tvMaxAmount,  SpanUtils.getShowText(amount.toLong()))
-
+            bindData(0,0, 0)
             if (activity is MarketActivity) {
                 (activity as MarketActivity).checkNetWork(object : BaseActivity.CallBack {
                     override fun onSuccess() {
@@ -92,7 +90,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             }
 
         } else {
-            bindData()
+            bindData(mPageResponse!!.max_amount, mPageResponse!!.min_amount, mPageResponse!!.max_period)
         }
 
         tvApplyNow?.setOnClickListener(object : NoDoubleClickListener() {
@@ -130,7 +128,10 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
                         Log.e(TAG, " marketing page ." + response.body())
                         return
                     }
-                    bindData()
+                    if (mPageResponse == null) {
+                        return
+                    }
+                    bindData(mPageResponse!!.max_amount, mPageResponse!!.min_amount, mPageResponse!!.max_period)
                 }
 
                 override fun onError(response: Response<String>) {
@@ -148,16 +149,10 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
 
 
     @SuppressLint("SetTextI18n")
-    private fun bindData() {
-        if (mPageResponse == null) {
-            return
-        }
-        val amount = mPageResponse?.max_amount
-        amount?.let {
-            SpanUtils.setAmountString2(tvMaxAmount,  SpanUtils.getShowText(it.toLong()))
-        }
-        val min = mPageResponse?.min_amount
-        val max = mPageResponse?.max_amount
+    private fun bindData(maxV : Int, minV : Int, maxPeriod : Int) {
+        SpanUtils.setAmountString2(tvMaxAmount,  SpanUtils.getShowText(maxV.toLong()))
+        val min = minV
+        val max = maxV
         if (min != null && max != null) {
             try {
                 val minStr = "₦" +SpanUtils.getShowText(min!!.toLong())
@@ -170,7 +165,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
                 }
             }
         }
-        tvDesc2?.text = resources.getString(R.string.up_to_day, mPageResponse?.max_period.toString())
+        tvDesc2?.text = resources.getString(R.string.up_to_day,maxPeriod.toString())
     }
 
     private fun showOrHide(showFlag : Boolean) {

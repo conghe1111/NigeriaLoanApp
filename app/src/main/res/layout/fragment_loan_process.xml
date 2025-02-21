@@ -40,13 +40,13 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
-            android:background="@drawable/bg_loan_process_desc"
             app:cardCornerRadius="@dimen/dp_10"
             app:cardElevation="@dimen/dp_10">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_loan_process_desc"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView

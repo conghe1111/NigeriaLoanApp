@@ -143,11 +143,11 @@ class HomeFragment : BaseFragment() {
         if (isDestroy()) {
             return
         }
-        if (true) {
-            mCurFragment = Loan8PaidProcessedFragment()
-            toFragment(mCurFragment)
-            return
-        }
+//        if (BuildConfig.DEBUG) {
+//            mCurFragment = Loan9OverdueFragment()
+//            toFragment(mCurFragment)
+//            return
+//        }
         if (mOrderDetail?.order_detail == null || mOrderDetail!!.order_detail.order_id == 0L
             || mOrderDetail?.order_detail?.isCan_apply == true) {
             mCurFragment = Loan1VerifyFragment()

@@ -27,10 +27,9 @@ class Loan9OverdueFragment : BaseRepaymentFragment() {
             if (orderDetail == null) {
                 return
             }
-            // TODO
-            val dueDay = "3"
-            tvOverdue?.text = resources.getString(R.string.overdue_x_days, dueDay)
-            tvOverdueDay?.text = resources.getString(R.string.your_loan_x_day, dueDay)
+//            val dueDay = "3"
+            tvOverdue?.text = resources.getString(R.string.overdue_x_days)
+            tvOverdueDay?.text = resources.getString(R.string.your_loan_x_day)
         }
     }
 }

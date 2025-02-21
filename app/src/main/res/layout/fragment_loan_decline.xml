@@ -45,12 +45,12 @@
             android:layout_marginTop="@dimen/dp_14"
             app:cardCornerRadius="@dimen/dp_10"
             app:cardElevation="@dimen/dp_10"
-            android:background="@drawable/bg_decline_desc"
             android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_decline_desc"
                 android:orientation="vertical">
 
                 <LinearLayout
