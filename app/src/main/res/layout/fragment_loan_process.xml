@@ -1,85 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/fl_top"
+    <include
+        layout="@layout/include_main_top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_232"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include
-            layout="@layout/include_main_top"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_232" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dp_140"
-                android:layout_height="@dimen/dp_111"
-                android:layout_marginTop="@dimen/dp_20"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_loan_process" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_4"
-                android:includeFontPadding="false"
-                android:text="@string/loan_in_progress"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="#666666"
-                android:textSize="@dimen/sp_16"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-    </FrameLayout>
+        android:layout_height="@dimen/dp_232" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:layout_marginTop="-24dp"
-        android:orientation="horizontal"
-        android:background="@drawable/bg_loan_progress"
-        app:layout_constraintTop_toBottomOf="@id/fl_top">
+        android:layout_marginTop="@dimen/main_margin_top"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/dp_90"
-            android:layout_height="@dimen/dp_60"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="-9dp"
-            android:src="@drawable/ic_loan_process_2" />
-
+            android:layout_width="@dimen/dp_111"
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_loan_process" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_verify_loan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp_9"
+            android:includeFontPadding="false"
+            android:text="@string/loan_in_progress"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_18"
-            android:layout_marginEnd="@dimen/dp_4"
-            android:layout_marginBottom="@dimen/dp_18"
-            android:gravity="start"
-            android:includeFontPadding="false"
-            android:paddingStart="@dimen/dp_15"
-            android:paddingEnd="@dimen/dp_15"
-            android:text="@string/loan_in_progress_desc"
-            android:textColor="#666666"
-            android:textSize="@dimen/sp_14"
-            app:autoSizeMaxTextSize="@dimen/sp_14"
-            app:autoSizeMinTextSize="1sp"
-            app:autoSizeStepGranularity="1sp" />
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:background="@drawable/bg_loan_process_desc"
+            android:layout_marginTop="@dimen/dp_20"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_90"
+                android:layout_height="@dimen/dp_60"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="-9dp"
+                android:src="@drawable/ic_loan_process_2" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_verify_loan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_4"
+                android:layout_marginBottom="@dimen/dp_14"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:paddingStart="@dimen/dp_15"
+                android:paddingEnd="@dimen/dp_15"
+                android:text="@string/loan_in_progress_desc"
+                android:textColor="#666666"
+                android:textSize="@dimen/sp_14"
+                app:autoSizeMaxTextSize="@dimen/sp_14"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeStepGranularity="1sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
