@@ -64,7 +64,8 @@ class InputLoanNumDialog(
                 try {
                     val numStr = etInputNum.text.toString()
                     if (TextUtils.isEmpty(numStr)) {
-                        ToastUtils.showShort("must input num")
+                        KeyboardUtils.hideSoftInput(etInputNum)
+                        dismiss()
                         return
                     }
                     val numV = numStr.toLong()

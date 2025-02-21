@@ -180,8 +180,8 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
                         response,
                         RepayResponse::class.java
                     )
-                    if (repay?.status == 1) {
-                        ToastUtils.showShort("repay processing")
+                    if (repay?.status == 0) {
+                        ToastUtils.showShort("repay process fail")
                         if (parentFragment is HomeFragment) {
                             (parentFragment as HomeFragment).refreshData()
                         }
