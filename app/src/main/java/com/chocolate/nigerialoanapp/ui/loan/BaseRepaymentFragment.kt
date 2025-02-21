@@ -153,7 +153,6 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
         }
     }
 
-
     fun repaymentLoan(orderId: String, amount: String) {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
@@ -168,6 +167,7 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
         if (BuildConfig.DEBUG) {
             Log.i("OkHttpClient", " repayment Loan = $jsonObject")
         }
+        showProgressDialogFragment()
         OkGo.post<String>(Api.ORDER_REPAY).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
@@ -175,6 +175,7 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
                     if (isDestroy()) {
                         return
                     }
+                    dismissProgressDialogFragment()
                     val repay: RepayResponse? = NetworkUtils.checkResponseSuccess(
                         response,
                         RepayResponse::class.java
@@ -197,12 +198,19 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
 
                 override fun onError(response: Response<String>) {
                     super.onError(response)
-                    val content = response.body()
-                    if (BuildConfig.DEBUG) {
-                        Log.e(TAG, " repaymentLoan = " + response.body())
-                    }
+                    dismissProgressDialogFragment()
                     ToastUtils.showShort("repay error")
-                    LogSaver.logToFile(content)
+                    try {
+                        val content = response.body()
+                        if (BuildConfig.DEBUG) {
+                            Log.e(TAG, " repaymentLoan = " + response.body())
+                        }
+                        LogSaver.logToFile(content)
+                    } catch (e : Exception) {
+                        if (BuildConfig.DEBUG) {
+                            throw e
+                        }
+                    }
                 }
             })
     }

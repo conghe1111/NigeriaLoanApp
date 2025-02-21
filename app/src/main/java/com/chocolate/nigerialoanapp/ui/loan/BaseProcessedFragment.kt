@@ -32,5 +32,6 @@ open class BaseProcessedFragment : BaseLoanStatusFragment() {
             }
 
         })
+
     }
 }

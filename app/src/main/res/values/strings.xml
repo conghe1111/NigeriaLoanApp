@@ -75,6 +75,7 @@
     <string name="your_loan_x_day">Your loan is %s days overdue. Please repay it as soon as possible to avoid affecting your credit report. If you deliberately default, you will bear legal responsibility and litigation costs.</string>
     <string name="you_have_success_repaid">You have successfully repaid!</string>
     <string name="loan_again">Loan Again</string>
+    <string name="repayment_again">Repayment Again</string>
     <string name="you_repayment_current_process">Your repayment is currently being processed, please be patient and wait</string>
     <string name="refresh">Refresh</string>
     <string name="basic_information">Basic Information</string>

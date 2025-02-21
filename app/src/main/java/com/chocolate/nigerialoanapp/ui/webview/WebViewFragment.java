@@ -1,5 +1,9 @@
 package com.chocolate.nigerialoanapp.ui.webview;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -7,7 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -15,8 +24,11 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.chocolate.nigerialoanapp.BuildConfig;
 import com.chocolate.nigerialoanapp.R;
 import com.chocolate.nigerialoanapp.base.BaseFragment;
+import com.chocolate.nigerialoanapp.global.Constant;
+import com.chocolate.nigerialoanapp.log.LogSaver;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -66,10 +78,18 @@ public class WebViewFragment extends BaseFragment {
         });
         webView.setWebViewClient(webViewClient);
         webView.getSettings().setJavaScriptEnabled(true);
-
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW); // 允许混合内容
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);//设置是否支持插件
+        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         if (!TextUtils.isEmpty(mUrl)) {
             webView.loadUrl(mUrl);
-//            Log.e("Test", " url 1 = " + mUrl);
+            if (Constant.IS_COLLECT) {
+                LogSaver.logToFile("webview url = " + mUrl);
+            }
+            if (BuildConfig.DEBUG) {
+                Log.e("Test", " url 1 = " + mUrl);
+            }
         }
     }
 
@@ -77,14 +97,83 @@ public class WebViewFragment extends BaseFragment {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+
+            if (Constant.IS_COLLECT) {
+                LogSaver.logToFile("webview url = " + url);
+            }
         }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (interceptUrl(url)) {
+                return true;
+            }
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+
+        private boolean interceptUrl(String url) {
+            if (!TextUtils.isEmpty(url)) {
+                if (url.startsWith("tel:")) {
+                    startCall(url);
+                    return true;
+                } else if (url.startsWith("mailto") || url.startsWith("intent") || url.startsWith("about")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    LogSaver.logToFile("webview onReceivedError = " + error.getDescription() + " getErrorCode = " + error.getErrorCode());
+                } else {
+                    LogSaver.logToFile("webview onReceivedError  22= " );
+                }
+                LogSaver.logToFile("webview onReceivedError  = " + request.getUrl() );
+                Log.e("Test", " onReceivedError = " + request.getUrl()  );
+            } catch (Exception e) {
+
+            }
+
+        }
+
+        @Override
+        public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+            super.onReceivedHttpError(view, request, errorResponse);
+            try {
+                LogSaver.logToFile("webview onReceivedHttpError = " + request.getUrl());
+                LogSaver.logToFile("webview errorResponse = " + errorResponse.getStatusCode());
+            } catch (Exception e) {
+
+            }
+
+        }
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            super.onReceivedSslError(view, handler, error);
+            LogSaver.logToFile("webview onReceivedSslError = " + error.toString());
+        }
+
     };
+
+    private void startCall(String telUrl) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(telUrl));
+        startActivity(intent);
+    }
 
     public void setUrl(String url) {
         mUrl = url;
         if (webView != null) {
             webView.loadUrl(mUrl);
-            Log.e("Test", " url = " + mUrl);
+            if (BuildConfig.DEBUG) {
+                Log.e("Test", " url = " + mUrl);
+            }
         }
     }
 
