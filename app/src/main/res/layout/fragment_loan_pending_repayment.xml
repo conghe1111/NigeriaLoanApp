@@ -26,7 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_36"
                     android:background="#D8D8D8"
-                    android:layout_marginTop="@dimen/dp_60"
+                    android:layout_marginTop="@dimen/dp_90"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
