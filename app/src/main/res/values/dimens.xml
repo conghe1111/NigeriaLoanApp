@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="main_margin_top">@dimen/dp_59</dimen>
+    <dimen name="main_margin_top">@dimen/dp_63</dimen>
     <dimen name="dp_0_33">0.3300dp</dimen>
     <dimen name="dp_1">1.0000dp</dimen>
     <dimen name="dp_2">2.0000dp</dimen>

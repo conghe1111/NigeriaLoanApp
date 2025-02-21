@@ -6,7 +6,7 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="@dimen/dp_111"
-        android:layout_marginTop="@dimen/dp_70"
+        android:layout_marginTop="@dimen/main_margin_top"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_repaid_success"
         android:layout_height="@dimen/dp_111"/>

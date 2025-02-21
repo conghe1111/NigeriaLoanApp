@@ -70,6 +70,9 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             flLoading?.isClickable = false
         }
         if(mPageResponse == null) {
+            val amount = 0
+            SpanUtils.setAmountString2(tvMaxAmount,  SpanUtils.getShowText(amount.toLong()))
+
             if (activity is MarketActivity) {
                 (activity as MarketActivity).checkNetWork(object : BaseActivity.CallBack {
                     override fun onSuccess() {
