@@ -6,7 +6,7 @@
     <solid android:color="@color/white" />
 
     <stroke
-        android:width="@dimen/dp_3"
+        android:width="@dimen/dp_1"
         android:color="#40B950" />
 
     <!-- android:radius 圆角的半径 -->

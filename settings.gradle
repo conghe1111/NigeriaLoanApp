@@ -31,22 +31,22 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
         //####################################################################################
 //        // 以下配置用于release 环境
-//        maven {
-//            credentials {
-//                username "6296db614e333f028174803c"
-//                password '08OKF84vrl]S'
-//            }
-//            url 'https://packages.aliyun.com/maven/repository/2232232-release-QnGkiq/'
-//        }
-//####################################################################################
-        // 以下配置用于测试环境, 与 release配置只能二选一
         maven {
             credentials {
                 username "6296db614e333f028174803c"
                 password '08OKF84vrl]S'
             }
-            url 'https://packages.aliyun.com/maven/repository/2232232-snapshot-jNAcnT/'
+            url 'https://packages.aliyun.com/maven/repository/2232232-release-QnGkiq/'
         }
+//####################################################################################
+        // 以下配置用于测试环境, 与 release配置只能二选一
+//        maven {
+//            credentials {
+//                username "6296db614e333f028174803c"
+//                password '08OKF84vrl]S'
+//            }
+//            url 'https://packages.aliyun.com/maven/repository/2232232-snapshot-jNAcnT/'
+//        }
         maven { url 'https://mvn.shalltry.com/repository/maven-public/' }
         maven { url "https://mvn.shalltry.com/repository/base-snapshots/" }
 //####################################################################################

@@ -62,17 +62,17 @@ android {
         }
     }
 
-//    signingConfigs {
-//        release {
-//            storeFile file('../sign/app_sign')
-//            storePassword 'C6shards'
-//            keyAlias 'PLSKard'
-//            keyPassword 'pal3sk9'
-//            //添加V1V2签名
-//            v1SigningEnabled true
-//            v2SigningEnabled true
-//        }
-//    }
+    signingConfigs {
+        release {
+            storeFile file('../sign/oyocredit')
+            storePassword 'oyo123456'
+            keyAlias 'key0'
+            keyPassword 'oyo123456'
+            //添加V1V2签名
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
 
 
     buildTypes {
@@ -98,7 +98,7 @@ android {
             buildConfigField "boolean", "IS_AAB_BUILD", "true"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro'
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
     }
 
@@ -202,15 +202,14 @@ dependencies {
     implementation libs.refresh.header
 
 //    implementation 'androidx.multidex:multidex:2.0.1'
-//    implementation 'org.greenrobot:eventbus:3.3.1'
     // OkHttp
     //文字左右对齐库
     implementation 'com.text:alginlib:1.0.1'
     //###################################################
 // 正式环境请用 release 包
-//    implementation "com.easeid.opensdk:liveness-sdk-android:0.1.1"
+    implementation "com.easeid.opensdk:liveness-sdk-android:0.1.1"
     //debug包 请使用 SNAPSHOT版本
-    implementation "com.easeid.opensdk:liveness-sdk-android:0.0.10-SNAPSHOT"
+//    implementation "com.easeid.opensdk:liveness-sdk-android:0.0.10-SNAPSHOT"
     //###################################################
 //    implementation group: 'org.bitbucket.b_c', name: 'jose4j', version: '0.5.0'
 }
