@@ -75,7 +75,7 @@ open class BaseFragment : Fragment() {
         return false
     }
 
-    fun toMainPage(loginResponse: LoginResponse, password: String) {
+    fun toMainPage(loginResponse: LoginResponse, password: String, phoneNum : String) {
         if (isDestroy()) {
             return
         }
@@ -83,6 +83,7 @@ open class BaseFragment : Fragment() {
             loginResponse.account_id == null || loginResponse.access_token == null) {
             return
         }
+        SPUtils.getInstance().put(LocalConfig.LC_PHONE_NUM, phoneNum)
         SPUtils.getInstance().put(LocalConfig.LC_PASSWORD, password)
 
         Constant.mAccountId = loginResponse.account_id.toString()

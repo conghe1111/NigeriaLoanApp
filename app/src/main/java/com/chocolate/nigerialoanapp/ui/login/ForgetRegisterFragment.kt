@@ -32,8 +32,9 @@ class ForgetRegisterFragment : BaseRegisterFragment() {
     override fun verifyCodeLogin(verfiyCode: String, password: String) {
         showOrHideLoading(true)
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        var phoneNum: String = ""
         try {
-            var phoneNum: String = ""
+
             if (activity is LoginActivity) {
                 (activity as LoginActivity).mPhoneNum?.let {
                     phoneNum = it.replace(" ", "")
@@ -64,7 +65,7 @@ class ForgetRegisterFragment : BaseRegisterFragment() {
                         return
                     }
                     if (TextUtils.equals(loginResponse.login_status, "success")) {
-                        toMainPage(loginResponse, password)
+                        toMainPage(loginResponse, password, phoneNum)
                     } else {
 
                     }

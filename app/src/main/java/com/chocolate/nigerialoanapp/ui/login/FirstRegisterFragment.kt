@@ -32,8 +32,8 @@ class FirstRegisterFragment : BaseRegisterFragment() {
     override fun verifyCodeLogin(verfiyCode: String, password: String) {
         showOrHideLoading(true)
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        var phoneNum: String = ""
         try {
-            var phoneNum: String = ""
             if (activity is LoginActivity) {
                 (activity as LoginActivity).mPhoneNum?.let {
                     phoneNum = it.replace(" ", "")
@@ -79,7 +79,7 @@ class FirstRegisterFragment : BaseRegisterFragment() {
                     }
                     if (TextUtils.equals(loginResponse.login_status, "success")) {
                         FirebaseUtils.logEvent("SERVICE_LOGIN_REGISTER${Constant.USSD}")
-                        toMainPage(loginResponse, password)
+                        toMainPage(loginResponse, password, phoneNum)
                     } else {
 
                     }

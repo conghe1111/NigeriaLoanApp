@@ -98,14 +98,21 @@ class LoginFragment : BaseFragment() {
 
         })
 
+        val lastPhoneNum = SPUtils.getInstance().getString(LocalConfig.LC_PHONE_NUM, "")
+        val curPhoneNum = getPhoneNum()
         var password = SPUtils.getInstance().getString(LocalConfig.LC_PASSWORD, "")
         if (TextUtils.isEmpty(password)) {
 //            password = mPhoneNum
         }
         if (etPwd != null && !TextUtils.isEmpty(password)) {
-            etPwd?.setText(password)
-            etPwd?.setSelection(password.length - 1)
-            tvLogin?.isEnabled = true
+            if (TextUtils.equals(lastPhoneNum, curPhoneNum)) {
+                etPwd?.setText(password)
+                etPwd?.setSelection(password.length - 1)
+                tvLogin?.isEnabled = true
+            } else {
+                SPUtils.getInstance().put(LocalConfig.LC_PASSWORD, "")
+                SPUtils.getInstance().put(LocalConfig.LC_PHONE_NUM, "")
+            }
         } else {
             tvLogin?.isEnabled = false
         }
@@ -157,13 +164,8 @@ class LoginFragment : BaseFragment() {
 
     private fun pwdLogin(password: String) {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        var phoneNum: String = getPhoneNum()
         try {
-            var phoneNum: String = ""
-            if (activity is LoginActivity) {
-                (activity as LoginActivity).mPhoneNum?.let {
-                    phoneNum = it
-                }
-            }
             jsonObject.put("mobile", "234$phoneNum")
             jsonObject.put("password", password)
             val fcmToken = SPUtils.getInstance().getString(LocalConfig.LC_FCM_TOKEN)
@@ -185,7 +187,7 @@ class LoginFragment : BaseFragment() {
                         return
                     }
                     if (TextUtils.equals(loginResponse.login_status, "success")) {
-                        toMainPage(loginResponse, password)
+                        toMainPage(loginResponse, password, phoneNum)
                         FirebaseUtils.logEvent("SERVICE_LOGIN_PASSWORD_SUCCESS")
                     } else {
 
@@ -208,5 +210,13 @@ class LoginFragment : BaseFragment() {
         super.onDestroy()
     }
 
+    private fun getPhoneNum() : String {
+        if (activity is LoginActivity) {
+            (activity as LoginActivity).mPhoneNum?.let {
+                return it
+            }
+        }
+        return ""
+    }
 
 }
