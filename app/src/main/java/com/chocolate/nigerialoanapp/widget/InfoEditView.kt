@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
@@ -146,6 +147,10 @@ class InfoEditView : FrameLayout {
 
     interface TextChangeListener {
         fun onTextChange()
+    }
+
+    fun getEditText() : EditText? {
+        return etDesc
     }
 
     fun setInputNum() {

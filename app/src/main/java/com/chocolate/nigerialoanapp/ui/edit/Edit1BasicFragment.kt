@@ -2,6 +2,8 @@ package com.chocolate.nigerialoanapp.ui.edit
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.TextUtils
 import android.util.Log
 import android.util.Pair
@@ -204,6 +206,9 @@ class Edit1BasicFragment : BaseEditFragment() {
         tvNextDesc = view.findViewById<AppCompatTextView>(R.id.tv_basic_next_desc)
         SpanUtils.setPrivacyString(tvNextDesc, activity)
 
+        val filters = arrayOfNulls<InputFilter>(1)
+        filters[0] = LengthFilter(11) // 限制最大长度为10
+        editBvn?.getEditText()?.setFilters(filters)
         editBvn?.setInputNum()
     }
 
