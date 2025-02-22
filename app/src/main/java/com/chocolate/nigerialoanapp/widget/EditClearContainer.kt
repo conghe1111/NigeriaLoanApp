@@ -134,7 +134,7 @@ class EditClearContainer : FrameLayout {
         fun onPwdModeChange(pwdMode : Boolean)
     }
 
-    fun requestFocus2() {
-        etPwd?.requestFocus()
+    fun getEditText() : AppCompatEditText? {
+        return etPwd
     }
 }

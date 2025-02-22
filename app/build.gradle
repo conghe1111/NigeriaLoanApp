@@ -83,7 +83,7 @@ android {
             shrinkResources false
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
 //                    'proguard-rules.pro'
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             buildConfigField "boolean", "IS_AAB_BUILD", "false"
         }
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import com.blankj.utilcode.util.SPUtils
@@ -111,7 +112,10 @@ class LoginFragment : BaseFragment() {
         etPwd?.addTextChangedListener(textChangeWatcher)
 
         editText?.setPassWordMode(loginIsPwdMode)
-        editText?.requestFocus2()
+        editText?.getEditText()?.let {
+            it.requestFocus()
+            it.inputType = EditorInfo.TYPE_CLASS_NUMBER
+        }
         editText?.setOnEditClearCallBack(object : EditClearContainer.OnEditClearCallBack {
             override fun onPwdModeChange(pwdMode: Boolean) {
                 loginIsPwdMode = pwdMode
