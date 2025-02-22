@@ -7,9 +7,7 @@ import android.util.Log
 import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.ScrollView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.NestedScrollView
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
@@ -27,7 +25,6 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.selectdata.SelectDataDialog
-import com.chocolate.nigerialoanapp.ui.edit.Edit2WorkFragment.Companion
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.UssdUtils
@@ -40,6 +37,7 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class Edit1BasicFragment : BaseEditFragment() {
 
@@ -460,11 +458,26 @@ class Edit1BasicFragment : BaseEditFragment() {
         if (KeyboardUtils.isSoftInputVisible(requireActivity())) {
             KeyboardUtils.hideSoftInput(requireActivity())
         }
+        val selectedDate: Calendar = Calendar.getInstance()
+        selectedDate.set(2000,0,1)
+        val startDate = Calendar.getInstance()
+        startDate.set(1900,0,1)
+        val endDate = Calendar.getInstance()
+        endDate.set(2020,11,31)
+
         //时间选择器
-        val pvTime = TimePickerBuilder(context, listener).setSubmitText("ok")
+        val pvTime = TimePickerBuilder(context, listener)
+            .setRangDate(startDate, endDate)
+            .setSubmitText("ok")
+            .setTitleText(resources.getString(R.string.date_of_birth)) //标题
+            .setSubCalSize(18) //确定和取消文字大小
+            .setTitleSize(20) //标题文字大小
+            .setTitleColor(Color.BLACK) //标题文字颜色
+            .setSubmitColor(resources.getColor(R.color.theme_color)) //确定按钮文字颜色
+            .setCancelColor(resources.getColor(R.color.theme_color)) //取消按钮文字颜色
+            .setContentTextSize(18) //滚轮文字大小
             .setCancelText("cancel").build()
-        // TODO
-//        pvTime.setDate()
+        pvTime.setDate(selectedDate)
         pvTime.show()
     }
 
@@ -493,7 +506,7 @@ class Edit1BasicFragment : BaseEditFragment() {
         }
         val view: OptionsPickerView<*> = pvOptions.setSubmitText("ok") //确定按钮文字
             .setCancelText("cancel") //取消按钮文字
-            .setTitleText("city picker") //标题
+            .setTitleText(resources.getString(R.string.address)) //标题
             .setSubCalSize(18) //确定和取消文字大小
             .setTitleSize(20) //标题文字大小
             .setTitleColor(Color.BLACK) //标题文字颜色
