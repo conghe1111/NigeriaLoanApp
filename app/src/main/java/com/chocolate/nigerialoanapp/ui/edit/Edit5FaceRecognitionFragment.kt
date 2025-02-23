@@ -34,6 +34,7 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion.RESULT_CODE
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.JumpPermissionUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
@@ -104,6 +105,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         tvNext?.text = resources.getString(R.string.start_x_s, "5")
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
+                onClickSubmit(true)
                 startCamera()
             }
 
@@ -129,6 +131,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                 tvNext?.text = resources.getString(R.string.start_x_s, "5")
                 tvNext?.isSelected = false
                 startTimer()
+                FirebaseUtils.logEvent("SYSTEM_LIVENESSTEST_RETRY")
             }
 
         })
@@ -137,6 +140,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
+        super.bindData(profile1Bean)
         updateData(profile1Bean)
         bindDataInternal()
     }
@@ -281,6 +285,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                 if (BuildConfig.DEBUG) {
                     Log.e(TAG, "onCompleted : ${response.livenessFilePath}")
                 }
+                FirebaseUtils.logEvent("LIVENESSTEST_SUBMIT_1_T")
                 mCurPath = response.livenessFilePath
                 mHandler.postDelayed(Runnable {
                     if (isDestroy()) {
@@ -295,6 +300,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                 if (BuildConfig.DEBUG) {
                     Log.w(TAG, "onInterrupted : $code $error")
                 }
+                FirebaseUtils.logEvent("LIVENESSTEST_SUBMIT_1_F")
                 // 活体失败, 业务处理
                 mStatus = STATUS_FAIL
                 updateStatus()

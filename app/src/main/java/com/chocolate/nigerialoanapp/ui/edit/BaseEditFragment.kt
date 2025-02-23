@@ -25,18 +25,45 @@ abstract class BaseEditFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (this is Edit1BasicFragment) {
-            FirebaseUtils.logEvent("SYSTEM_BASIC_INF_ENTER")
-        } else if (this is Edit2WorkFragment) {
-            FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
-        } else if (this is Edit3ContactFragment) {
-            FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
-        } else if (this is Edit4BankFragment) {
-            FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
-        } else if (this is Edit5FaceRecognitionFragment) {
-            FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+        when (this) {
+            is Edit1BasicFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_BASIC_INF_ENTER")
+            }
+            is Edit2WorkFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+            }
+            is Edit3ContactFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+            }
+            is Edit4BankFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+            }
+            is Edit5FaceRecognitionFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+            }
         }
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        when (this) {
+            is Edit1BasicFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_BASIC_INF_ENTER")
+            }
+            is Edit2WorkFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+            }
+            is Edit3ContactFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_CONTACT_INF_ENTER")
+            }
+            is Edit4BankFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_BANK_CARD_ENTER")
+            }
+            is Edit5FaceRecognitionFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_LIVENESSTEST_ENTER")
+            }
+        }
     }
 
     protected fun showListDialog(
@@ -67,7 +94,25 @@ abstract class BaseEditFragment : BaseFragment() {
         scrollView?.scrollTo(0, height.toInt())
     }
 
-    abstract fun bindData(profile1Bean: ProfileInfoResponse?)
+    open fun bindData(profile1Bean: ProfileInfoResponse?) {
+        when (this) {
+            is Edit1BasicFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_WORK_INF_LOAD")
+            }
+            is Edit2WorkFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_CONTACT_INF_LOAD")
+            }
+            is Edit3ContactFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_BANK_CARD_LOAD")
+            }
+            is Edit4BankFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_BANK_CARD_LOAD")
+            }
+            is Edit5FaceRecognitionFragment -> {
+                FirebaseUtils.logEvent("SYSTEM_ILIVENESSTEST_LOAD")
+            }
+        }
+    }
 
     protected fun showCustomPicker(
         list: List<Pair<String, String>>,
@@ -116,7 +161,44 @@ abstract class BaseEditFragment : BaseFragment() {
     }
 
     open fun onClickSubmit(submitFlag: Boolean) {
-
+        when (this) {
+            is Edit1BasicFragment -> {
+                if (submitFlag) {
+                    FirebaseUtils.logEvent("CLICK_BASIC_INF_SUBMIT")    //点击个人信息页提交按钮
+                } else {
+                    FirebaseUtils.logEvent("CLICK_BASIC_INF_NP")    //无个人信息时点击提交
+                }
+            }
+            is Edit2WorkFragment -> {
+                if (submitFlag) {
+                    FirebaseUtils.logEvent("CLICK_WORK_INF_SUBMIT")
+                } else {
+                    FirebaseUtils.logEvent("CLICK_WORK_INF_NP")
+                }
+            }
+            is Edit3ContactFragment -> {
+                if (submitFlag) {
+                    FirebaseUtils.logEvent("CLICK_CONTACT_INF_SUBMIT")
+                } else {
+                    FirebaseUtils.logEvent("CLICK_CONTACT_INF_NP")
+                }
+            }
+            is Edit4BankFragment -> {
+                if (submitFlag) {
+                    if (activity is EditInfoActivity && (activity as EditInfoActivity).mFrom == EditInfoActivity.FROM_DISBURSE_6) {
+                        FirebaseUtils.logEvent("CLICK_BANK_UPDATE_SUBMIT")
+                    } else {
+                        FirebaseUtils.logEvent("CLICK_BANK_CARD_SUBMIT")
+                    }
+                } else {
+                    FirebaseUtils.logEvent("CLICK_BANK_CARD_NP")
+                }
+                FirebaseUtils.logEvent("SYSTEM_BANK_CARD_LOAD")
+            }
+            is Edit5FaceRecognitionFragment -> {
+                FirebaseUtils.logEvent("CLICK_START_SUBMIT")
+            }
+        }
     }
 
     open fun updateNextBtnStatus(needSelect: Boolean = true) {

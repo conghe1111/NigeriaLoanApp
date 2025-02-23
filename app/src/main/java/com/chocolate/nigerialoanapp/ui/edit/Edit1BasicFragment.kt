@@ -80,11 +80,6 @@ class Edit1BasicFragment : BaseEditFragment() {
     private var mMaritalStatus: Pair<String, String>? = null
     private var mEducation: Pair<String, String>? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        FirebaseUtils.logEvent("SYSTEM_BASIC_INF_ENTER")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -196,11 +191,7 @@ class Edit1BasicFragment : BaseEditFragment() {
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 val submitFlag = checkProfileParams()
-                if (submitFlag) {
-                    FirebaseUtils.logEvent("CLICK_BASIC_INF_SUBMIT")    //点击个人信息页提交按钮
-                } else {
-                    FirebaseUtils.logEvent("CLICK_BASIC_INF_NP")    //无个人信息时点击提交
-                }
+                onClickSubmit(submitFlag)
                 if (submitFlag) {
                     uploadBase()
                 }
@@ -339,7 +330,7 @@ class Edit1BasicFragment : BaseEditFragment() {
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
-        FirebaseUtils.logEvent("SYSTEM_BASIC_INF_LOAD")
+        super.bindData(profile1Bean)
         updateData(profile1Bean)
         bindDataInternal()
         selectAddress?.postDelayed(Runnable {

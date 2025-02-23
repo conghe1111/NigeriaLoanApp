@@ -72,7 +72,7 @@ class EditInfoActivity : BaseActivity() {
 
     private var mCurFragment: BaseEditFragment? = null
     var mProfileInfo: ProfileInfoResponse? = null
-    private var mFrom: Int? = null
+    var mFrom: Int? = null
     private var mStep: Int = STEP_1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,13 +93,13 @@ class EditInfoActivity : BaseActivity() {
                 if (mCurFragment is Edit1BasicFragment) {
                     FirebaseUtils.logEvent("SYSTEM_BASIC_INF_BACK")    //个人信息页返回上一页
                 } else if (mCurFragment is Edit2WorkFragment) {
-                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_BACK")
                 } else if (mCurFragment is Edit3ContactFragment) {
-                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+                    FirebaseUtils.logEvent("SYSTEM_CONTACT_INF_BACK")
                 } else if (mCurFragment is Edit4BankFragment) {
-                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+                    FirebaseUtils.logEvent("SYSTEM_BANK_CARD_BACK")
                 } else if (mCurFragment is Edit5FaceRecognitionFragment) {
-                    FirebaseUtils.logEvent("SYSTEM_WORK_INF_ENTER")
+                    FirebaseUtils.logEvent("SYSTEM_LIVENESSTEST_BACK")
                 }
                 finish()
             }

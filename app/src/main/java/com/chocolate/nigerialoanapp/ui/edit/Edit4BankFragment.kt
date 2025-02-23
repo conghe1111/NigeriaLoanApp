@@ -19,6 +19,7 @@ import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.ui.banklist.BankListActivity
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
@@ -67,6 +68,7 @@ class Edit4BankFragment : BaseEditFragment() {
         mSelectBankName?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 activity?.let {
+                    FirebaseUtils.logEvent("SERVICE_GET_BANK_CARD_INFO")
                     BankListActivity.startActivityResult(it)
                 }
             }
@@ -90,6 +92,7 @@ class Edit4BankFragment : BaseEditFragment() {
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
+        super.bindData(profile1Bean)
         updateData(profile1Bean)
         bindDataInternal()
         updateNextBtnStatus(false)
