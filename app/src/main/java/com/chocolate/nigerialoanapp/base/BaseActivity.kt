@@ -1,5 +1,7 @@
 package com.chocolate.nigerialoanapp.base
 
+import android.content.Intent
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -7,12 +9,17 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.bean.BaseResponseBean
 import com.chocolate.nigerialoanapp.collect.utils.AESUtil
+import com.chocolate.nigerialoanapp.event.LoginTimeOut
+import com.chocolate.nigerialoanapp.global.AppManager
+import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.MarketActivity
 import com.chocolate.nigerialoanapp.ui.dialog.ErrorStateDialog
 import com.chocolate.nigerialoanapp.ui.loading.ProgressDialogFragment
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity.Companion.TAG
@@ -21,10 +28,22 @@ import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.json.JSONException
 import org.json.JSONObject
 
 open class BaseActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (useLogout()) {
+            if (!EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().register(this)
+            }
+        }
+    }
 
     protected fun <T> checkResponseSuccess(response: Response<String>, clazz: Class<T>): T? {
         return NetworkUtils.checkResponseSuccess(response, clazz)
@@ -160,11 +179,34 @@ open class BaseActivity : AppCompatActivity() {
         fun onFailure()
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = false)
+    fun onEvent(event: LoginTimeOut) {
+        ToastUtils.showShort("need login.")
+        Constant.mToken = null
+        Constant.mAccountId = null
+        Constant.mLaunchOrderInfo = null
+        val header = NetworkUtils.clearHeaderToken()
+        OkGo.getInstance().addCommonHeaders(header)
+
+        AppManager.sInstance.finishAllActivity()
+        val intent = Intent(this, MarketActivity::class.java)
+        startActivity(intent)
+    }
+
     override fun onDestroy() {
         if (dialog?.isShowing == true) {
             dialog?.dismiss()
         }
+        if (useLogout()) {
+            if (EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().unregister(this)
+            }
+        }
         OkGo.getInstance().cancelTag(localClassName)
         super.onDestroy()
+    }
+
+    open fun useLogout(): Boolean {
+        return false
     }
 }

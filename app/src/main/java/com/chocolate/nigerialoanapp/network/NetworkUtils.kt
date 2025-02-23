@@ -124,4 +124,10 @@ object NetworkUtils {
             AESUtil.encrypt(content)
         }
     }
+
+    fun clearHeaderToken(): HttpHeaders {
+        val httpHeaders = HttpHeaders()
+        httpHeaders.put("token", "")
+        return httpHeaders
+    }
 }

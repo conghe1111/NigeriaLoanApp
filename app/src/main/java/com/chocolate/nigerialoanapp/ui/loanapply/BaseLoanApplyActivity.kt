@@ -138,4 +138,8 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
             dismissProgressDialogFragment()
         }
     }
+
+    override fun useLogout(): Boolean {
+        return true
+    }
 }

@@ -265,4 +265,8 @@ class EditInfoActivity : BaseActivity() {
         OkGo.getInstance().cancelTag(TAG)
         super.onDestroy()
     }
+
+    override fun useLogout(): Boolean {
+        return true
+    }
 }

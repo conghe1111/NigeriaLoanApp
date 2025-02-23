@@ -146,4 +146,8 @@ class MainActivity : BaseActivity() {
             mHomeFragment?.onActivityResultInternal()
         }
     }
+
+    override fun useLogout(): Boolean {
+        return true
+    }
 }

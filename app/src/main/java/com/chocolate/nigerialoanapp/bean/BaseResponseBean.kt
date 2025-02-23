@@ -16,12 +16,10 @@ class BaseResponseBean {
     }
 
     fun isLogout() : Boolean {
-//        if (head != null){
-//           if (head!!.code == "401" || head!!.code == "405"){
-//               return true
-//           }
-//        }
-        return false;
+       if (code == 40004 ){
+           return true
+       }
+        return false
     }
 
     fun getMsg(): String? {
