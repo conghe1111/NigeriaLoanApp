@@ -3,6 +3,7 @@ package com.chocolate.nigerialoanapp.ui.dialog
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -18,6 +19,7 @@ import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.lzy.okgo.OkGo
@@ -79,6 +81,9 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
         ivSelect?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 hasSelect = !hasSelect
+                if (!hasSelect) {
+                    FirebaseUtils.logEvent("CLICK_CONTRACT_CANCEL")
+                }
                 updateSelect()
             }
 
@@ -93,6 +98,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
                 if (mCallBack != null) {
                     mCallBack!!.onClickAgree()
                 }
+                FirebaseUtils.logEvent("CLICK_LOAN_SUBMIT")
                 dismiss()
             }
 
@@ -102,6 +108,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
                 if (mCallBack != null) {
                     mCallBack!!.onClickCancel()
                 }
+                FirebaseUtils.logEvent("CLICK_CONFIRM_BACK")
                 dismiss()
             }
 
@@ -111,6 +118,11 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
         }
         updateSelect()
         getBankInfo()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        FirebaseUtils.logEvent("SYSTEM_CONFIRM_ENTER")
     }
 
     private var mCallBack: CallBack? = null

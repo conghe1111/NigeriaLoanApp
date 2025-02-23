@@ -14,6 +14,7 @@ import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.LoanRetentionDialog
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion.KEY_ORDER_ID
+import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -45,6 +46,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
          intent.getStringExtra(KEY_ORDER_ID)?.let {
             mOrderId = it
         }
+        FirebaseUtils.logEvent("SYSTEM_LOAN_ENTER")
     }
 
     fun getProducts() {
@@ -103,7 +105,7 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
     }
 
     open fun bindData() {
-
+        FirebaseUtils.logEvent("SYSTEM_LOAN_LOAD")
     }
 
     override fun onDestroy() {

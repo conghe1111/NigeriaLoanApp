@@ -115,6 +115,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     return
                 }
                 mPeriodIndex = pos
+                FirebaseUtils.logEvent("CLICK_LOAN_TERM")
                 executeRequestProductTrial()
             }
 
@@ -131,6 +132,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                     override fun onItemClick(str: String, pos: Int) {
                         mAmountIndex = pos
                         updateLoanAmountTitle()
+                        FirebaseUtils.logEvent("CLICK_LOAN_AMOUNT")
                         executeRequestProductTrial()
                     }
 
@@ -152,7 +154,8 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         rvContainer?.addItemDecoration(NorItemDecor2())
         ivBack?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
-                finish()
+                FirebaseUtils.logEvent("SYSTEM_LOAN_BACK")
+                onBackPressed()
             }
 
         })
@@ -160,6 +163,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 FirebaseUtils.logEvent("CLICK_INDEX_APPLY")
+                FirebaseUtils.logEvent("CLICK_LOAN_CONFIRM")
                 showLoanDetailAndUploadHardware(mOrderId)
 //                PermissionUtils.permission(
 //                    Manifest.permission.READ_CALL_LOG,
@@ -250,6 +254,8 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         if (mPeriodList.isNotEmpty()) {
             mAdapter?.notifyDataSetChanged()
         }
+        FirebaseUtils.logEvent("CLICK_LOAN_AMOUNT")
+        FirebaseUtils.logEvent("CLICK_LOAN_TERM")
         updateLoanAmountTitle()
 
         executeRequestProductTrial()
