@@ -47,19 +47,13 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
         }
     }
 
-    fun getProducts(marketingFlag: Boolean = false) {
+    fun getProducts() {
         if (Constant.mAccountId == null) {
             return
         }
         showOrHideLoading(true)
-        //        pbLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
-            if (marketingFlag) {
-//                jsonObject.put("account_id", Constant.mAccountId!!.toLong())
-            } else {
-//                jsonObject.put("account_id", Constant.mAccountId)
-            }
             jsonObject.put("account_id", Constant.mAccountId)
             jsonObject.put("access_token", Constant.mToken)
         } catch (e: JSONException) {
@@ -68,13 +62,10 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
         if (BuildConfig.DEBUG) {
             Log.e("okHttpClient", " marketing product = $jsonObject")
         }
-        val url = if (marketingFlag) Api.PRODUCT_MARKETING else Api.PRODUCT_LIST
-        OkGo.post<String>(url).tag(TAG)
+        OkGo.post<String>(Api.PRODUCT_LIST).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
                     if (isFinishing || isDestroyed) {
                         return
                     }
@@ -104,8 +95,6 @@ abstract class BaseLoanApplyActivity : BaseActivity() {
                         return
                     }
                     showOrHideLoading(false)
-//                    pbLoading?.visibility = View.GONE
-//                    refreshLayout?.finishRefresh()
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " update contact = " + response.body())
                     }

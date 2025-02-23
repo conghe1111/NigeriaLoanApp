@@ -24,6 +24,7 @@ import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoanAmountDateMockAdapt
 import com.chocolate.nigerialoanapp.ui.loanapply.adapter.LoanStageAdapter
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor3
 import com.chocolate.nigerialoanapp.ui.mine.NorItemDecor4
+import com.chocolate.nigerialoanapp.ui.mine.NorMockItemDecor3
 import com.chocolate.nigerialoanapp.utils.DateUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
@@ -75,11 +76,11 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loan_apply_mock)
         initialView()
-        getProducts(false)
+        getProducts()
     }
 
     private fun initialView() {
-        ivBack = findViewById<AppCompatImageView>(R.id.iv_apply_info_back)
+        ivBack = findViewById<AppCompatImageView>(R.id.iv_back)
         ivBack?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 finish()
@@ -93,6 +94,8 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         tvMockNext = findViewById<AppCompatTextView>(R.id.tv_loan_apply_mock_next)
         stage1View = findViewById<View>(R.id.stage_1)
         llStageLoadingError = findViewById<View>(R.id.ll_loading_error)
+        val ivConsumer = findViewById<View>(R.id.iv_consumer)
+        ivConsumer?.visibility = View.GONE
 
         rvAmount?.layoutManager = GridLayoutManager(this@LoanApplyMockActivity,2)
         mAmountAdapter = LoanAmountMockAdapter(mLoanAmountList)
@@ -104,7 +107,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
 
         })
         rvAmount?.adapter = mAmountAdapter
-        rvAmount?.addItemDecoration(NorItemDecor3())
+        rvAmount?.addItemDecoration(NorMockItemDecor3())
 
         rvLoanTerm?.layoutManager = GridLayoutManager(this@LoanApplyMockActivity,2)
         mTermAdapter = LoanAmountMockAdapter(mLoanTermList, true)
@@ -116,7 +119,7 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
 
         })
         rvLoanTerm?.adapter = mTermAdapter
-        rvLoanTerm?.addItemDecoration(NorItemDecor3())
+        rvLoanTerm?.addItemDecoration(NorMockItemDecor3())
 
         initialStage1()
 
@@ -124,6 +127,12 @@ class LoanApplyMockActivity : BaseLoanApplyActivity() {
         mStageAdapter = LoanStageAdapter(mLoanStageList)
         rvStage?.adapter = mStageAdapter
         rvStage?.addItemDecoration(NorItemDecor4())
+        tvMockNext?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                finish()
+            }
+
+        })
     }
 
     private fun initialStage1() {

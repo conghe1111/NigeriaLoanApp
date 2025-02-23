@@ -39,8 +39,6 @@ object Api {
     //上传授信信息
     val UPLOAD_AUTH_INFO = "$HOST/app/v1/account/upload_auth_info"
 
-    //营销产品
-    val PRODUCT_MARKETING = "$HOST/app/v1/product/marketing"
     //产品列表
     val PRODUCT_LIST = "$HOST/app/v1/product/list"
     //产品试算

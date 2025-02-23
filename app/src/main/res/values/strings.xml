@@ -68,6 +68,7 @@
     <string name="repayment_time">Repayment time</string>
     <string name="due_amount">Due amount</string>
     <string name="loan_amount">Loan amount</string>
+    <string name="loan_amount_cap">Loan Amount</string>
     <string name="Interest">Interest</string>
     <string name="service_fee">Service Fee</string>
     <string name="amount_of_reduction">Amount of reduction</string>
@@ -128,6 +129,7 @@
     <string name="high_loan_amount">High loan amount</string>
     <string name="up_to_day">Up to \n %s days</string>
     <string name="repayment_term">Repayment Term</string>
+    <string name="loan_term">Loan Term</string>
 
     <string name="disburse_fees">Disburse&amp; Fees</string>
     <string name="disbursal_amount">Disbursal Amount</string>

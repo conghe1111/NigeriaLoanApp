@@ -64,11 +64,13 @@
         android:textSize="@dimen/sp_14"
         android:text="@string/early_repay_will"
         android:layout_marginHorizontal="@dimen/dp_20"
+        android:visibility="gone"
         android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_repayment_date"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginHorizontal="@dimen/dp_20"
         android:layout_height="@dimen/dp_90"/>

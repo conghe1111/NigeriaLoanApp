@@ -96,7 +96,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
 
     private fun initialView() {
         tvAmount = findViewById<AppCompatTextView>(R.id.tv_loan_apply_amount)
-        ivBack = findViewById<AppCompatImageView>(R.id.iv_apply_info_back)
+        ivBack = findViewById<AppCompatImageView>(R.id.iv_back)
         loanContainer = findViewById<View>(R.id.fl_loan_apply_container)
         rvContent = findViewById<RecyclerView>(R.id.rv_repayment_term)
 
@@ -143,6 +143,9 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         rvContainer = findViewById<RecyclerView>(R.id.rv_container_schedule)
         tvNext = findViewById<AppCompatTextView>(R.id.tv_loan_apply_next)
         val tvDesc = findViewById<AppCompatTextView>(R.id.tv_loan_apply_desc)
+        val ivConsumer = findViewById<View>(R.id.iv_consumer)
+        ivConsumer?.visibility = View.GONE
+
         rvContainer?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mHistoryAdapter = LoadApplyHistoryAdapter(mTrialList)
         rvContainer?.adapter = mHistoryAdapter
