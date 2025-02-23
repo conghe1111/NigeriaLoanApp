@@ -25,12 +25,17 @@ open class BaseLoanStatusFragment : BaseFragment() {
         ivConsumer?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 context?.let {
-                    FirebaseUtils.logEvent("CLICK_SINGLEPRODUCTHOMEPAGE_CUSTOMERSERVICE")
+                    onClickConsumer()
+
                     ConsumerHotlineActivity.startActivity(it)
                 }
             }
 
         })
+    }
+
+    open fun onClickConsumer() {
+        FirebaseUtils.logEvent("CLICK_SINGLEPRODUCTHOMEPAGE_CUSTOMERSERVICE")
     }
 
     open fun needInitConsumer() : Boolean {

@@ -10,6 +10,7 @@ import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
+import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 import com.chocolate.nigerialoanapp.ui.loan.Loan0NewProductFragment
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
@@ -30,6 +31,7 @@ class MarketActivity : BaseActivity() {
         setContentView(R.layout.acticity_market)
         val frament = Loan0NewProductFragment()
         toFragment(frament)
+        ConfigMgr.getStaticConfig()
         allowFlag = SPUtils.getInstance().getBoolean(KEY_ALLOW_CONTACT, false)
         if (!allowFlag) {
             requestPermissionInternal()

@@ -80,6 +80,11 @@ class Edit1BasicFragment : BaseEditFragment() {
     private var mMaritalStatus: Pair<String, String>? = null
     private var mEducation: Pair<String, String>? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        FirebaseUtils.logEvent("SYSTEM_BASIC_INF_ENTER")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -334,6 +339,7 @@ class Edit1BasicFragment : BaseEditFragment() {
     }
 
     override fun bindData(profile1Bean: ProfileInfoResponse?) {
+        FirebaseUtils.logEvent("SYSTEM_BASIC_INF_LOAD")
         updateData(profile1Bean)
         bindDataInternal()
         selectAddress?.postDelayed(Runnable {

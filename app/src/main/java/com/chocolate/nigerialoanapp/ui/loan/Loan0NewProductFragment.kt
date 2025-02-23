@@ -62,10 +62,8 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         tvDescLeft1 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc1)
         tvDescLeft3 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc3)
         tvDesc2 = view.findViewById<AppCompatTextView>(R.id.tv_product_2_desc)
-        val ivConsumer = view.findViewById<View>(R.id.iv_main_top_consumer)
         flLoading = view.findViewById<View>(R.id.fl_loading)
         if (activity is MarketActivity) {
-            ivConsumer.visibility = View.GONE
             flLoading?.setBackgroundColor(resources.getColor(android.R.color.transparent))
             flLoading?.isClickable = false
         }
@@ -97,8 +95,10 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             override fun onNoDoubleClick(v: View?) {
                 activity?.let {
                     if (it is MarketActivity) {
+                        FirebaseUtils.logEvent("CLICK_HOMEPAGE_APPLY")
                         it.toLogin()
                     } else {
+                        FirebaseUtils.logEvent("CLICK_INDEX_APPLY")
                         orderCheek()
                     }
                 }
@@ -299,4 +299,13 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             LoanApplyActivity.startActivity(it, orderId.toString())
         }
     }
+
+    override fun onClickConsumer() {
+        if (activity is MarketActivity) {
+            FirebaseUtils.logEvent("CLICK_HOMEPAGE_CUSTOMERSERVICE")
+        } else {
+            super.onClickConsumer()
+        }
+    }
+
 }

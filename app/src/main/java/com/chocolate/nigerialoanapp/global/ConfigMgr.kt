@@ -69,6 +69,22 @@ object ConfigMgr {
         if (!TextUtils.isEmpty(bankListJson)) {
             updateBankList(bankListJson)
         }
+
+
+        if (!TextUtils.isEmpty(dataConfig) && BuildConfig.DEBUG) {
+
+        } else {
+            getProfileConfig()
+        }
+
+        if (!TextUtils.isEmpty(bankListJson) && BuildConfig.DEBUG) {
+
+        } else {
+            getBankList()
+        }
+    }
+
+    fun getStaticConfig() {
         val staticDataConfig = SPUtils.getInstance().getString(KEY_STATIC_DATA_CONFIG)
         if (!TextUtils.isEmpty(staticDataConfig)) {
             handleStaticConfig(staticDataConfig)
@@ -90,23 +106,10 @@ object ConfigMgr {
             list3.add("2341234567891")
             mConsumerData!!.whatsapp = list3
         }
-
-        if (!TextUtils.isEmpty(dataConfig) && BuildConfig.DEBUG) {
-
-        } else {
-            getProfileConfig()
-        }
-
-        if (!TextUtils.isEmpty(bankListJson) && BuildConfig.DEBUG) {
-
-        } else {
-            getBankList()
-        }
-
         if (!TextUtils.isEmpty(staticDataConfig) && BuildConfig.DEBUG) {
 
         } else {
-            getStaticConfig()
+            getStaticConfigInternal()
         }
     }
 
@@ -335,7 +338,7 @@ object ConfigMgr {
 
     }
 
-    private fun getStaticConfig() {
+    private fun getStaticConfigInternal() {
         val jsonObject: JSONObject = JSONObject()
         try {
         } catch (e: JSONException) {
