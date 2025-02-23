@@ -37,6 +37,7 @@ import org.json.JSONObject
 open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppManager.sInstance.addActivity(this)
         super.onCreate(savedInstanceState)
         if (useLogout()) {
             if (!EventBus.getDefault().isRegistered(this)) {
@@ -191,9 +192,11 @@ open class BaseActivity : AppCompatActivity() {
         AppManager.sInstance.finishAllActivity()
         val intent = Intent(this, MarketActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun onDestroy() {
+        AppManager.sInstance.finishActivity(this)
         if (dialog?.isShowing == true) {
             dialog?.dismiss()
         }
