@@ -5,9 +5,9 @@ buildscript {
 
     repositories {
         maven { url 'https://raw.githubusercontent.com/martinloren/AabResGuard/mvn-repo' }
-        maven {
-            url = userHome + '/.m2/repository'
-        }
+//        maven {
+//            url = userHome + '/.m2/repository'
+//        }
     }
 
     dependencies {
