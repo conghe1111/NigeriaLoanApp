@@ -41,8 +41,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
     private var tvMaxAmount : AppCompatTextView? = null
     private var tvApplyNow : AppCompatTextView? = null
     private var tvDescLeft1 : AppCompatTextView? = null
-    private var tvDescLeft3 : AppCompatTextView? = null
-    private var tvDesc2 : AppCompatTextView? = null
+    private var tvDescRight1 : AppCompatTextView? = null
     private var flLoading : View? = null
 
     private var mPageResponse : MarketingPageResponse? = null
@@ -60,8 +59,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
         tvMaxAmount = view.findViewById<AppCompatTextView>(R.id.tv_loan_max_amount)
         tvApplyNow = view.findViewById<AppCompatTextView>(R.id.tv_loan_apply_now)
         tvDescLeft1 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc1)
-        tvDescLeft3 = view.findViewById<AppCompatTextView>(R.id.tv_product_left_desc3)
-        tvDesc2 = view.findViewById<AppCompatTextView>(R.id.tv_product_2_desc)
+        tvDescRight1 = view.findViewById<AppCompatTextView>(R.id.tv_product_right_desc1)
         flLoading = view.findViewById<View>(R.id.fl_loading)
         if (activity is MarketActivity) {
             flLoading?.setBackgroundColor(resources.getColor(android.R.color.transparent))
@@ -157,15 +155,14 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             try {
                 val minStr = "₦" +SpanUtils.getShowText(min!!.toLong())
                 val maxStr = "₦" +SpanUtils.getShowText(max!!.toLong())
-                tvDescLeft1?.text = minStr
-                tvDescLeft3?.text = maxStr
+                tvDescLeft1?.text = "$minStr-$maxStr"
             } catch (e : Exception) {
                 if (BuildConfig.DEBUG) {
                     throw e
                 }
             }
         }
-        tvDesc2?.text = resources.getString(R.string.up_to_day,maxPeriod.toString())
+        tvDescRight1?.text = resources.getString(R.string.up_to_day,maxPeriod.toString())
     }
 
     private fun showOrHide(showFlag : Boolean) {

@@ -127,7 +127,8 @@
     <string name="max_amount">Maximum Amount</string>
     <string name="apply_now">Apply Now</string>
     <string name="high_loan_amount">High loan amount</string>
-    <string name="up_to_day">Up to \n %s days</string>
+    <string name="multi_term_loan">Multi-term loans</string>
+    <string name="up_to_day">Up to %s days</string>
     <string name="repayment_term">Repayment Term</string>
     <string name="loan_term">Loan Term</string>
 
@@ -190,4 +191,8 @@
     <string name="str_loading">loading...</string>
     <string name="verification_ran_out">Verification codes ran out today,please try tomorrow</string>
     <string name="continue_str">continue</string>
+    <string name="loan_characteristics">Loan characteristics</string>
+    <string name="quick_approval">Quick approval, disbursement within 1 hour at the fastest</string>
+    <string name="unsecured_pure_credit">Unsecured, pure credit loan</string>
+    <string name="protect_your_privacy">Protect your privacy, be safe and assured</string>
 </resources>
