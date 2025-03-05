@@ -51,7 +51,7 @@ object SpanUtils {
         }
         val text = tv.context.resources.getString(R.string.please_read_all)
         val spannableString = SpannableString(text)
-        val themeColor = tv.context.resources.getColor(R.color.theme_color)
+        val themeColor = tv.context.resources.getColor(R.color.privacy_text_color)
 
         val startIndex = text.indexOf("<")
         val endIndex = text.indexOf(">")

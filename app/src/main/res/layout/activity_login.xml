@@ -6,33 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <!--    app:layout_constraintDimensionRatio="w:375:253"-->
-    <View
-        android:id="@+id/fl_top"
+    <include
         android:layout_width="match_parent"
-        app:layout_constraintDimensionRatio="w,253:375"
+        layout="@layout/include_login_top"
+        app:layout_constraintDimensionRatio="w,263:375"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fl_container"
-        android:background="@drawable/login_bg"
-        android:layout_height="0dp">
+        android:layout_height="0dp" />
 
 
-    </View>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:text="@string/app_name"
-        app:layout_constraintTop_toTopOf="@id/fl_top"
-        app:layout_constraintBottom_toBottomOf="@id/fl_top"
-        android:layout_marginStart="@dimen/dp_20"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="@dimen/sp_30"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:includeFontPadding="false"
-        android:layout_height="wrap_content"/>
 
     <FrameLayout
+        android:id="@+id/fl_top"
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         android:fitsSystemWindows="true"
@@ -48,19 +33,6 @@
             android:layout_height="@dimen/dp_23"/>
 
     </FrameLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:text="@string/login_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_14"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="@dimen/sp_14"
-        android:textColor="#666666"
-        android:includeFontPadding="false"
-        android:layout_height="wrap_content"/>
 
 
     <FrameLayout

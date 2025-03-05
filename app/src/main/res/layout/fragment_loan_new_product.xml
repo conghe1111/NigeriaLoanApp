@@ -65,6 +65,7 @@
                             android:layout_marginTop="@dimen/dp_13"
                             android:background="@drawable/bg_loan_apply_loan"
                             android:gravity="center"
+                            android:textStyle="bold"
                             android:includeFontPadding="false"
                             android:paddingStart="@dimen/dp_44"
                             android:paddingEnd="@dimen/dp_44"
