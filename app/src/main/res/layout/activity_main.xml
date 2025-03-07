@@ -18,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60"
+            android:layout_height="@dimen/dp_54"
             android:orientation="horizontal">
 
             <FrameLayout

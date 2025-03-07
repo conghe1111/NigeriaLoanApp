@@ -37,6 +37,7 @@
         android:id="@+id/fl_top_icon_container"
         android:layout_width="match_parent"
         android:visibility="gone"
+        tools:visibility="visible"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -46,7 +47,6 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
-
                 android:layout_width="@dimen/dp_90"
                 android:layout_gravity="center_horizontal"
                 android:src="@mipmap/ic_launcher"
