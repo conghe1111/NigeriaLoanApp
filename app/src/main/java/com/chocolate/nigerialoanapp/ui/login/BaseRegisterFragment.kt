@@ -185,6 +185,9 @@ abstract class BaseRegisterFragment : BaseFragment() {
                 tvUserDesc?.text = resources.getString(R.string.dears_234_x, phoneNum)
             }
         }
+
+        tvSignUp?.text = context?.resources?.getString(if (this@BaseRegisterFragment is FirstRegisterFragment)
+            R.string.sign_up  else (R.string.reset))
     }
 
     private fun executeSendSmsCode(autoSend : Boolean = false) {

@@ -195,4 +195,10 @@
     <string name="quick_approval">Quick approval, disbursement within 1 hour at the fastest</string>
     <string name="unsecured_pure_credit">Unsecured, pure credit loan</string>
     <string name="protect_your_privacy">Protect your privacy, be safe and assured</string>
+
+    <string name="setting_information_2">Edit \nInformation</string>
+    <string name="setting_customer_service_2">Customer \nService</string>
+    <string name="setting_history_record_2">Historical \nRecord</string>
+    <string name="setting_privacy_2">Notice of \nPrivacy</string>
+
 </resources>

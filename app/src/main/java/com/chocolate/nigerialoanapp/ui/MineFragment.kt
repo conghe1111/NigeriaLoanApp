@@ -64,6 +64,10 @@ class MineFragment : BaseFragment() {
     private var flContainer: FrameLayout? = null
     private var tvName: TextView? = null
     private var tvMobile: TextView? = null
+    private var llInformation: View? = null
+    private var llCustomer: View? = null
+    private var llHistory: View? = null
+    private var llPrivacy: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,6 +85,11 @@ class MineFragment : BaseFragment() {
         tvMobile = view.findViewById<TextView>(R.id.tv_top_mobile)
 
         ivConsumer = view.findViewById<AppCompatImageView>(R.id.iv_main_top_consumer)
+
+        llInformation = view.findViewById<View>(R.id.ll_setting_information)
+        llCustomer = view.findViewById<View>(R.id.ll_setting_customer)
+        llHistory = view.findViewById<View>(R.id.ll_setting_history)
+        llPrivacy = view.findViewById<View>(R.id.ll_setting_privacy)
         initializeView()
     }
 
@@ -95,6 +104,30 @@ class MineFragment : BaseFragment() {
             tvMobile?.visibility = View.VISIBLE
             tvMobile?.text = SpanUtils.getShowMobile("+234$mobileStr")
         }
+        llInformation?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+               onClickInternal(PageType.INFORMATION)
+            }
+
+        })
+        llCustomer?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                onClickInternal(PageType.CUSTOMER_SERVICE)
+            }
+
+        })
+        llHistory?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                onClickInternal(PageType.HISTORY_RECORD)
+            }
+
+        })
+        llPrivacy?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                onClickInternal(PageType.PRIVACY)
+            }
+
+        })
 
         buildSettingList()
         ivConsumer?.setOnClickListener(object : NoDoubleClickListener() {
@@ -112,83 +145,7 @@ class MineFragment : BaseFragment() {
         rvMine?.addItemDecoration(NorItemDecor())
         adapter?.setOnClickListener(object : MineAdapter.OnClickListener {
             override fun OnClick(pos: Int, settingBean: SettingMineBean) {
-                when (settingBean.type) {
-                    INFORMATION -> {
-                        val intent = Intent(context, EditInfoMenuActivity::class.java)
-                        startActivity(intent)
-                    }
-
-                    PageType.CUSTOMER_SERVICE -> {
-                        context?.let {
-                            ConsumerHotlineActivity.startActivity(it)
-                        }
-                    }
-
-                    PageType.HISTORY_RECORD -> {
-                        context?.let {
-                            HistoryRecordActivity.startActivity(it)
-                        }
-                    }
-
-                    PageType.PRIVACY -> {
-                        activity?.let {
-                            WebViewActivity.launchWebView(
-                                it,
-                                Api.GET_POLICY,
-                                WebViewActivity.TYPE_PRIVACY
-                            )
-                        }
-                    }
-
-                    PageType.TERM_CONDITION -> {
-                        activity?.let {
-                            WebViewActivity.launchWebView(
-                                it,
-                                Api.GET_POLICY,
-                                WebViewActivity.TYPE_PRIVACY
-                            )
-                        }
-                    }
-
-                    PageType.VERSION -> {
-
-                    }
-
-                    PageType.TEST_1 -> {
-                        activity?.let {
-                            EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
-                        }
-//                        activity?.let {
-//                            val dialog = LoanRetentionDialog(it)
-//                            dialog.show()
-//                        }
-//                        activity?.let {
-//                            LoanApplyActivity.startActivity(it)
-//                        }
-//                        context?.let {
-//                            val dialog: RequestPermissionDialog = RequestPermissionDialog(it, activity)
-//                            dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
-//                                override fun onClickAgree() {
-//
-//                                }
-//                            })
-//                            dialog.show()
-//                        }
-//                        context?.let {
-//                            val descStr = it.resources.getString(R.string.network_abnormal_please_try_again)
-//                            val dialog: ErrorStateDialog = ErrorStateDialog(it, descStr, activity)
-//                            dialog.show()
-//                        }
-//                        RouteUtils.toDeeplinkIntent(context)
-//                        val mDialog = LoanDetailDialog(activity!!, null)
-//                        mDialog.show()
-                    }
-
-                    PageType.LOGOUT -> {
-                        FirebaseUtils.logEvent("CLICK_LOGOUT")
-                        logout()
-                    }
-                }
+                onClickInternal(settingBean.type)
             }
 
         })
@@ -314,4 +271,84 @@ class MineFragment : BaseFragment() {
         activity?.finish()
     }
 
+
+    private fun onClickInternal(type : Int) {
+        when (type) {
+            INFORMATION -> {
+                val intent = Intent(context, EditInfoMenuActivity::class.java)
+                startActivity(intent)
+            }
+
+            PageType.CUSTOMER_SERVICE -> {
+                context?.let {
+                    ConsumerHotlineActivity.startActivity(it)
+                }
+            }
+
+            PageType.HISTORY_RECORD -> {
+                context?.let {
+                    HistoryRecordActivity.startActivity(it)
+                }
+            }
+
+            PageType.PRIVACY -> {
+                activity?.let {
+                    WebViewActivity.launchWebView(
+                        it,
+                        Api.GET_POLICY,
+                        WebViewActivity.TYPE_PRIVACY
+                    )
+                }
+            }
+
+            PageType.TERM_CONDITION -> {
+                activity?.let {
+                    WebViewActivity.launchWebView(
+                        it,
+                        Api.GET_POLICY,
+                        WebViewActivity.TYPE_PRIVACY
+                    )
+                }
+            }
+
+            PageType.VERSION -> {
+
+            }
+
+            PageType.TEST_1 -> {
+                activity?.let {
+                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
+                }
+//                        activity?.let {
+//                            val dialog = LoanRetentionDialog(it)
+//                            dialog.show()
+//                        }
+//                        activity?.let {
+//                            LoanApplyActivity.startActivity(it)
+//                        }
+//                        context?.let {
+//                            val dialog: RequestPermissionDialog = RequestPermissionDialog(it, activity)
+//                            dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
+//                                override fun onClickAgree() {
+//
+//                                }
+//                            })
+//                            dialog.show()
+//                        }
+//                        context?.let {
+//                            val descStr = it.resources.getString(R.string.network_abnormal_please_try_again)
+//                            val dialog: ErrorStateDialog = ErrorStateDialog(it, descStr, activity)
+//                            dialog.show()
+//                        }
+//                        RouteUtils.toDeeplinkIntent(context)
+//                        val mDialog = LoanDetailDialog(activity!!, null)
+//                        mDialog.show()
+            }
+
+            PageType.LOGOUT -> {
+                FirebaseUtils.logEvent("CLICK_LOGOUT")
+                logout()
+            }
+        }
+    }
 }

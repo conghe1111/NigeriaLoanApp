@@ -73,7 +73,7 @@
                 android:includeFontPadding="false"
                 android:drawableStart="@drawable/ic_mobile"
                 android:layout_gravity="center_horizontal"
-                android:drawablePadding="@dimen/dp_4"
+                android:drawablePadding="@dimen/dp_1"
                 android:layout_marginTop="@dimen/dp_6"
                 android:layout_height="wrap_content"/>
 
