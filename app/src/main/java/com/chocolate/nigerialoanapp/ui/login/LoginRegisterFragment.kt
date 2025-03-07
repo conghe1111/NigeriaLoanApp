@@ -167,7 +167,7 @@ class LoginRegisterFragment : BaseFragment() {
                             }
                             SPUtils.getInstance().put(KEY_PHONE_NUM, mobileStr)
                         }
-                        if (response.is_registered == 1 || true) {
+                        if (response.is_registered == 1) {
                             if (activity is LoginActivity) {
                                 (activity as LoginActivity).toLoginFragment()
                             }
