@@ -75,7 +75,7 @@ object SpanUtils {
         spannableString.setSpan(
             serveClickableSpan,
             startIndex,
-            endIndex,
+            endIndex+1,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         tv.movementMethod = LinkMovementMethod.getInstance()
