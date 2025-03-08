@@ -51,7 +51,7 @@
     <string name="update_account">Update Account</string>
     <string name="the_system_detect_that">The system detects that your  bank account information is incorrect, please check and modify it.</string>
     <string name="sorry">Sorry</string>
-    <string name="order_number_x">Order Number: %s</string>
+    <string name="order_number">Order Number:</string>
     <string name="pending_repayment">Pending Repayment</string>
     <string name="repayment">Repayment</string>
     <string name="repayment_detail">Repayment Details</string>

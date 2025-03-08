@@ -128,7 +128,7 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
             if (mOrderDetail == null) {
                 return
             }
-            tvOrderNum?.text =  resources.getString(R.string.order_number_x,  mOrderDetail!!.order_id.toString())
+            tvOrderNum?.text =  mOrderDetail!!.order_id.toString()
             ivPaste?.setOnClickListener(object : NoDoubleClickListener() {
                 override fun onNoDoubleClick(v: View?) {
                     val text = mOrderDetail!!.order_id.toString()

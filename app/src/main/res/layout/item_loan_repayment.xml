@@ -34,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dp_6"
             android:layout_weight="1">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -41,11 +42,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:drawableEnd="@drawable/ic_edit"
                 android:includeFontPadding="false"
                 android:text="1000000"
                 android:textStyle="bold"
-                android:textColor="#41BA51"
+                android:textColor="#216EE9"
                 android:textSize="@dimen/sp_14" />
 
         </FrameLayout>
@@ -61,8 +61,8 @@
             android:layout_marginEnd="@dimen/dp_10"
             android:paddingHorizontal="@dimen/dp_14"
             android:text="@string/repayment"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_16" />
+            android:textColor="#242424"
+            android:textSize="@dimen/sp_13" />
 
     </LinearLayout>
 

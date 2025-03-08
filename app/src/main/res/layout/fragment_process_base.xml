@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg_loan_2"
     android:layout_height="match_parent">
 
     <View
@@ -9,52 +10,66 @@
         android:layout_marginTop="@dimen/main_margin_top"
         android:layout_height="1dp"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="@dimen/dp_111"
-        android:layout_marginTop="@dimen/dp_30"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_repaid_success"
-        android:layout_height="@dimen/dp_111"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_pay_desc"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/dp_3"
-        android:text="@string/you_have_success_repaid"
-        android:textColor="#333333"
-        android:layout_gravity="center_horizontal"
-        android:textSize="@dimen/sp_14"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_marginHorizontal="@dimen/dp_24"
-        android:layout_height="wrap_content"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_pay_button"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_40"
-        android:text="@string/loan_again"
-        android:textColor="@color/white"
-        android:background="@drawable/bg_process_repayment"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="@dimen/dp_40"
-        android:textSize="@dimen/sp_17"
-        android:layout_height="@dimen/dp_48"/>
+        android:orientation="vertical"
+        android:background="@drawable/bg_status_desc_2"
+        android:layout_marginHorizontal="@dimen/dp_21"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_repay_again_button"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_40"
-        android:text="@string/repayment_again"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        android:background="@drawable/bg_process_repayment"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="@dimen/dp_40"
-        android:textSize="@dimen/sp_17"
-        android:layout_height="@dimen/dp_48"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/dp_111"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_repaid_success"
+            android:layout_height="@dimen/dp_111"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_pay_desc"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/you_have_success_repaid"
+            android:textColor="#242424"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/dp_24"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_pay_button"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/loan_again"
+            android:textColor="#242424"
+            android:background="@drawable/bg_process_repayment"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="@dimen/dp_40"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold"
+            android:layout_height="@dimen/dp_48"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_repay_again_button"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/repayment_again"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:background="@drawable/bg_process_repayment"
+            android:gravity="center"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="@dimen/dp_40"
+            android:layout_height="@dimen/dp_48"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"/>
+    </LinearLayout>
+
 
 </LinearLayout>

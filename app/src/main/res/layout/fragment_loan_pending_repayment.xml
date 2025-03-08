@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_loan_2"
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
@@ -27,20 +27,26 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_36"
-                    android:background="#D8D8D8"
                     android:layout_marginTop="@dimen/dp_30"
                     android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/order_number"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/sp_14" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_order_num"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/dp_20"
                         android:layout_weight="1"
-                        android:text="@string/order_number_x"
-                        android:textColor="#666666"
-                        android:textSize="@dimen/sp_12" />
+                        android:textColor="#333333"
+                        android:textSize="@dimen/sp_14" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_repayment_paste"
@@ -53,19 +59,32 @@
 
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_loan_pending"
+                <LinearLayout
+                    android:id="@+id/ll_loan_pending"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
+                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:drawableStart="@drawable/ic_loan_pending_repayment"
-                    android:drawablePadding="@dimen/dp_3"
-                    android:text="@string/pending_repayment"
-                    android:textColor="#41BA51"
-                    android:textSize="@dimen/sp_16"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_loan_pending_repayment"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_loan_pending"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_3"
+                        android:text="@string/pending_repayment"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/sp_18"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_loan_overdue"
@@ -84,7 +103,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_repayment"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginTop="-3dp"
                     android:layout_height="wrap_content" />
 
                 <androidx.appcompat.widget.AppCompatTextView
