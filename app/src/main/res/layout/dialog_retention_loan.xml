@@ -2,13 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     >
 <!--    android:background="@color/black"-->
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="258dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_80"
         android:layout_marginHorizontal="@dimen/dp_21">
 
@@ -16,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="61dp"
-            android:background="@drawable/bg_white_bg" />
+            android:background="@drawable/bg_retention_top" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,12 +26,12 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
-                android:layout_height="86dp"
+                android:layout_height="@dimen/dp_130"
                 android:src="@drawable/ic_retention" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
-                android:layout_height="112dp"
+                android:layout_height="@dimen/dp_113"
                 android:layout_gravity="center_vertical"
                 android:layout_marginHorizontal="@dimen/dp_21"
                 android:gravity="center_vertical"
@@ -59,7 +60,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/confirm"
-                    android:textColor="#40B950"
+                    android:textColor="#34473D"
                     android:textSize="@dimen/sp_16"
                     android:background="@drawable/bg_confirm_bg_18"
                     android:textStyle="bold" />
@@ -74,7 +75,7 @@
                     android:background="@drawable/bg_rention_loan"
                     android:gravity="center"
                     android:text="@string/cancel"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#34473D"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
 

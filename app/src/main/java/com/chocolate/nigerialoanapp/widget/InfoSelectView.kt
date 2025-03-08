@@ -14,6 +14,7 @@ class InfoSelectView : LinearLayout {
 
     private var titleStr: String? = null
     private var hintStr: String? = null
+    private var defLine: Int = 1
 
     private var tvTitle: AppCompatTextView? = null
     private var tvDesc: AppCompatTextView? = null
@@ -40,6 +41,7 @@ class InfoSelectView : LinearLayout {
             if (typedArray != null) {
                 titleStr = typedArray.getString(R.styleable.edit_view_edit_view_title)
                 hintStr = typedArray.getString(R.styleable.edit_view_edit_view_hint)
+                defLine = typedArray.getInteger(R.styleable.edit_view_edit_view_title_line, 1)
             }
         }
         val view: View =
@@ -52,12 +54,19 @@ class InfoSelectView : LinearLayout {
         tvTitle = findViewById<AppCompatTextView>(R.id.tv_edit_title)
         tvDesc = findViewById<AppCompatTextView>(R.id.tv_edit_desc)
         ivBack = findViewById<AppCompatImageView>(R.id.iv_edit_back)
+        val topView = findViewById<View>(R.id.view_top)
 
         tvTitle?.text = titleStr
         if (!TextUtils.isEmpty(hintStr)) {
             tvDesc?.text = hintStr
         }
-
+        val layoutParams = topView.layoutParams
+        if (defLine == 2) {
+            layoutParams.height = resources.getDimension(R.dimen.dp_27).toInt()
+        } else {
+            layoutParams.height = resources.getDimension(R.dimen.dp_11).toInt()
+        }
+        topView.layoutParams = layoutParams
     }
 
     fun setText(str : String?) {

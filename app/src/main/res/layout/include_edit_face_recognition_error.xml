@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:showIn="@layout/fragment_edit_face_recognition">
 
     <LinearLayout
@@ -46,13 +45,13 @@
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp_19"
-            android:background="@drawable/bg_decline_update_account"
+            android:background="@drawable/bg_recongnition_continue"
             android:gravity="center"
             android:includeFontPadding="false"
             android:paddingStart="@dimen/dp_85"
             android:paddingEnd="@dimen/dp_85"
             android:text="@string/retry"
-            android:textColor="@color/white"
+            android:textColor="#40B950"
             android:textSize="@dimen/sp_17"
             android:textStyle="bold" />
 

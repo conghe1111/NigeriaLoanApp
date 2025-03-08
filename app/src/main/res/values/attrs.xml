@@ -3,6 +3,7 @@
     <declare-styleable name="edit_view">
         <attr name="edit_view_hint" format="string" />
         <attr name="edit_view_title" format="string" />
+        <attr name="edit_view_title_line" format="integer" />
         <attr name="edit_view_optional" format="boolean" />
     </declare-styleable>
 

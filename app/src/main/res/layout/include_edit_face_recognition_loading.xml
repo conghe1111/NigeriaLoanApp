@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:showIn="@layout/fragment_edit_face_recognition">
 
     <LinearLayout
@@ -26,7 +25,7 @@
             android:textColor="#333333"
             android:layout_marginTop="@dimen/dp_20"
             android:includeFontPadding="false"
-            android:textSize="@dimen/sp_15"
+            android:textSize="@dimen/sp_14"
             android:layout_height="wrap_content"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -37,7 +36,7 @@
             android:textColor="#333333"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dp_8"
-            android:textSize="@dimen/sp_30"
+            android:textSize="@dimen/sp_24"
             android:layout_height="wrap_content"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -46,10 +45,10 @@
             android:layout_gravity="center"
             android:textColor="#333333"
             android:gravity="center"
-            android:background="@drawable/bg_evalute_bg"
+            android:background="@drawable/bg_green_bg_2"
             android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginHorizontal="@dimen/dp_20"
-            android:textSize="@dimen/sp_14"
+            android:layout_marginHorizontal="@dimen/dp_40"
+            android:textSize="@dimen/sp_12"
             android:layout_height="@dimen/dp_53"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -59,7 +58,7 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_19"
-            android:background="@drawable/request_permission_cancel"
+            android:background="@drawable/bg_recongnition_continue"
             android:gravity="center"
             android:includeFontPadding="false"
             android:paddingStart="@dimen/dp_85"
