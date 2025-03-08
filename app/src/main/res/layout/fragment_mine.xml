@@ -26,6 +26,8 @@
                 android:id="@+id/rv_content_mine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_mine_setting_center"
                 android:visibility="gone" />
 
         </LinearLayout>

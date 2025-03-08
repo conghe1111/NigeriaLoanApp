@@ -128,6 +128,7 @@ class MineFragment : BaseFragment() {
             }
 
         })
+        rvMine?.visibility = View.VISIBLE
 
         buildSettingList()
         ivConsumer?.setOnClickListener(object : NoDoubleClickListener() {
@@ -152,41 +153,41 @@ class MineFragment : BaseFragment() {
     }
 
     private fun buildSettingList() {
-        mList.clear()
-        mList.add(
-            SettingMineBean(
-                R.drawable.ic_setting_info,
-                R.string.setting_information,
-                PageType.INFORMATION
-            )
-        )
-        mList.add(
-            SettingMineBean(
-                R.drawable.ic_setting_custom_service,
-                R.string.setting_customer_service,
-                PageType.CUSTOMER_SERVICE
-            )
-        )
-        mList.add(
-            SettingMineBean(
-                R.drawable.ic_setting_history_record,
-                R.string.setting_history_record,
-                PageType.HISTORY_RECORD
-            )
-        )
-        mList.add(
-            SettingMineBean(
-                R.drawable.ic_setting_privacy,
-                R.string.setting_privacy,
-                PageType.PRIVACY
-            )
-        )
-        mList.add(
-            SettingMineBean(
-                R.drawable.ic_setting_term, R.string.setting_term_condition,
-                PageType.TERM_CONDITION
-            )
-        )
+//        mList.clear()
+//        mList.add(
+//            SettingMineBean(
+//                R.drawable.ic_setting_info,
+//                R.string.setting_information,
+//                PageType.INFORMATION
+//            )
+//        )
+//        mList.add(
+//            SettingMineBean(
+//                R.drawable.ic_setting_custom_service,
+//                R.string.setting_customer_service,
+//                PageType.CUSTOMER_SERVICE
+//            )
+//        )
+//        mList.add(
+//            SettingMineBean(
+//                R.drawable.ic_setting_history_record,
+//                R.string.setting_history_record,
+//                PageType.HISTORY_RECORD
+//            )
+//        )
+//        mList.add(
+//            SettingMineBean(
+//                R.drawable.ic_setting_privacy,
+//                R.string.setting_privacy,
+//                PageType.PRIVACY
+//            )
+//        )
+//        mList.add(
+//            SettingMineBean(
+//                R.drawable.ic_setting_term, R.string.setting_term_condition,
+//                PageType.TERM_CONDITION
+//            )
+//        )
         mList.add(
             SettingMineBean(
                 R.drawable.ic_setting_version, R.string.setting_version,

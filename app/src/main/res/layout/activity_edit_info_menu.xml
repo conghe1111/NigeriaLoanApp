@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_loan_2"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -14,10 +14,10 @@
     <FrameLayout
         android:id="@+id/ll_basic_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_14"
+        android:layout_height="@dimen/dp_66"
+        android:layout_marginTop="@dimen/dp_18"
         android:layout_marginHorizontal="@dimen/dp_20"
-        android:background="#FAFAFA">
+        android:background="@drawable/bg_mine_setting_center">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -25,8 +25,12 @@
             android:layout_gravity="center_vertical"
             android:text="@string/basic_information"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:textStyle="bold"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center"
+            android:drawableStart="@drawable/ic_edit_basic_1"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textSize="@dimen/sp_15" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_basic_edit"
@@ -39,18 +43,19 @@
             android:paddingStart="@dimen/dp_32"
             android:paddingEnd="@dimen/dp_32"
             android:text="@string/edit"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_17" />
+            android:textStyle="bold"
+            android:textColor="#242424"
+            android:textSize="@dimen/sp_14" />
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/ll_work_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_66"
         android:layout_marginTop="@dimen/dp_19"
         android:layout_marginHorizontal="@dimen/dp_20"
-        android:background="#FAFAFA">
+        android:background="@drawable/bg_mine_setting_center">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -58,8 +63,13 @@
             android:layout_gravity="center_vertical"
             android:text="@string/work_information"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:textStyle="bold"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center"
+            android:drawableStart="@drawable/ic_edit_work_1"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:textSize="@dimen/sp_15" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_work_edit"
@@ -72,18 +82,19 @@
             android:paddingStart="@dimen/dp_32"
             android:paddingEnd="@dimen/dp_32"
             android:text="@string/edit"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_17" />
+            android:textStyle="bold"
+            android:textColor="#242424"
+            android:textSize="@dimen/sp_14" />
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/ll_contact_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_66"
         android:layout_marginTop="@dimen/dp_19"
         android:layout_marginHorizontal="@dimen/dp_20"
-        android:background="#FAFAFA">
+        android:background="@drawable/bg_mine_setting_center">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -91,8 +102,12 @@
             android:layout_gravity="center_vertical"
             android:text="@string/contact_information"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:textStyle="bold"
+            android:gravity="center"
+            android:drawableStart="@drawable/ic_edit_contact_1"
+            android:layout_marginStart="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:textSize="@dimen/sp_15" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_contact_edit"
@@ -105,18 +120,19 @@
             android:paddingStart="@dimen/dp_32"
             android:paddingEnd="@dimen/dp_32"
             android:text="@string/edit"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_17" />
+            android:textStyle="bold"
+            android:textColor="#242424"
+            android:textSize="@dimen/sp_14" />
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/ll_receive_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_66"
         android:layout_marginHorizontal="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_19"
-        android:background="#FAFAFA">
+        android:background="@drawable/bg_mine_setting_center">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -124,8 +140,12 @@
             android:layout_gravity="center_vertical"
             android:text="@string/receive_account"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:textStyle="bold"
+            android:gravity="center"
+            android:drawableStart="@drawable/ic_edit_receive_1"
+            android:layout_marginStart="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:textSize="@dimen/sp_15" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_receive_edit"
@@ -138,8 +158,9 @@
             android:paddingStart="@dimen/dp_32"
             android:paddingEnd="@dimen/dp_32"
             android:text="@string/edit"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_17" />
+            android:textStyle="bold"
+            android:textColor="#242424"
+            android:textSize="@dimen/sp_14" />
 
     </FrameLayout>
 
