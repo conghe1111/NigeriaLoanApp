@@ -37,8 +37,8 @@
         android:id="@+id/fl_top_icon_container"
         android:layout_width="match_parent"
         android:visibility="gone"
-        tools:visibility="visible"
         android:layout_height="match_parent">
+<!--        tools:visibility="visible"-->
 
         <LinearLayout
             android:layout_width="wrap_content"
