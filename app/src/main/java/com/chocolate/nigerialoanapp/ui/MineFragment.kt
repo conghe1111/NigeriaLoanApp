@@ -31,6 +31,7 @@ import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
 import com.chocolate.nigerialoanapp.ui.history.HistoryRecordActivity
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
 import com.chocolate.nigerialoanapp.ui.login.LoginRegisterFragment.Companion.KEY_PHONE_NUM
 import com.chocolate.nigerialoanapp.ui.mine.MineAdapter
@@ -153,7 +154,7 @@ class MineFragment : BaseFragment() {
     }
 
     private fun buildSettingList() {
-//        mList.clear()
+        mList.clear()
 //        mList.add(
 //            SettingMineBean(
 //                R.drawable.ic_setting_info,
@@ -317,16 +318,16 @@ class MineFragment : BaseFragment() {
             }
 
             PageType.TEST_1 -> {
-                activity?.let {
-                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
-                }
+//                activity?.let {
+//                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
+//                }
 //                        activity?.let {
 //                            val dialog = LoanRetentionDialog(it)
 //                            dialog.show()
 //                        }
-//                        activity?.let {
-//                            LoanApplyActivity.startActivity(it)
-//                        }
+                        activity?.let {
+                            LoanApplyActivity.startActivity(it, "")
+                        }
 //                        context?.let {
 //                            val dialog: RequestPermissionDialog = RequestPermissionDialog(it, activity)
 //                            dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {

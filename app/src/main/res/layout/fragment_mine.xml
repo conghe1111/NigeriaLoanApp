@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/bg_mine_setting_center"
+                android:layout_marginHorizontal="@dimen/dp_10"
                 android:visibility="gone" />
 
         </LinearLayout>

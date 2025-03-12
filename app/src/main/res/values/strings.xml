@@ -200,5 +200,6 @@
     <string name="setting_customer_service_2">Customer \nService</string>
     <string name="setting_history_record_2">Historical \nRecord</string>
     <string name="setting_privacy_2">Notice of \nPrivacy</string>
-
+    <string name="unlock_the_next_loan">Unlock the next loan</string>
+    <string name="apply_1">Apply</string>
 </resources>

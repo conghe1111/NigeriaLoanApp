@@ -19,7 +19,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/tv_item_loan_apply_date_lock"
             android:layout_width="@dimen/dp_11"
-            android:src="@drawable/ic_lock"
+            android:src="@drawable/ic_apply_lock"
             android:layout_gravity="end"
             android:layout_marginEnd="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_4"

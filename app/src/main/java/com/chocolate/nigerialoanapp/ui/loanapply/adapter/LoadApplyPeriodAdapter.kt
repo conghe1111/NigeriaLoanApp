@@ -34,16 +34,16 @@ class LoadApplyPeriodAdapter(val mList : List<LoanData>, pos : Int) : RecyclerVi
         holder.tvLoanApply?.text = loanData.data?.toString()+ "days"
 
         if (loanData.lockFlag){
-            holder.flContainer?.setBackgroundResource(R.drawable.bg_gray_bg_2)
+            holder.flContainer?.setBackgroundResource(R.drawable.bg_green_bg_21)
             holder.ivLock?.visibility = View.VISIBLE
             holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.color_a1a1a1))
         } else {
             if (mPos == position) {
                 holder.flContainer?.setBackgroundResource(R.drawable.bg_green_bg)
-                holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.white))
+                holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.color_333333))
             } else {
-                holder.flContainer?.setBackgroundResource(R.drawable.bg_gray_bg_2)
-                holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.color_a1a1a1))
+                holder.flContainer?.setBackgroundResource(R.drawable.bg_green_bg_21)
+                holder.tvLoanApply?.setTextColor(holder.itemView.resources.getColor(R.color.color_A8BFB3))
             }
             holder.ivLock?.visibility = View.GONE
         }

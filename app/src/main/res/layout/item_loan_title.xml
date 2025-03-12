@@ -5,31 +5,22 @@
     android:layout_width="@dimen/dp_100"
     android:layout_height="@dimen/dp_38">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_loan_term"
+        android:layout_width="match_parent"
+        tools:text="1111111111"
+        android:gravity="center"
+        android:textColor="#333333"
+        android:layout_gravity="center_vertical"
+        android:textSize="@dimen/sp_14"
+        android:layout_height="match_parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_item_lock"
+        android:layout_width="@dimen/dp_16"
+        android:src="@drawable/ic_loan_amount_lock"
         android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/dp_20"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_item_loan_term"
-            android:layout_width="match_parent"
-            tools:text="1111111111"
-            android:gravity="center"
-            android:textColor="#A1A1A1"
-            android:textStyle="bold"
-            android:layout_gravity="center_vertical"
-            android:textSize="@dimen/sp_15"
-            android:layout_height="@dimen/dp_38"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_item_lock"
-            android:layout_width="@dimen/dp_11"
-            android:src="@drawable/ic_lock"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_height="@dimen/dp_14"/>
-
-    </LinearLayout>
 
 </FrameLayout>

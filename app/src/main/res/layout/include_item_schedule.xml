@@ -14,6 +14,8 @@
         android:text="@string/repayment_schedule"
         android:textColor="#333333"
         android:textSize="@dimen/sp_14"
+        android:drawableStart="@drawable/ic_loan_repay_icon"
+        android:drawablePadding="@dimen/dp_6"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -48,10 +50,10 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
+        android:layout_height="@dimen/dp_2"
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
-        android:background="#EBEBEB" />
+        android:background="@drawable/hor_grey_hash_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,9 +87,9 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
+        android:layout_height="@dimen/dp_2"
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
-        android:background="#EBEBEB" />
+        android:background="@drawable/hor_grey_hash_line" />
 
 </LinearLayout>

@@ -38,7 +38,7 @@ class SelectAmountAdapter(val mList: List<LoanData>, val mListener: OnItemClickL
         holder.tvAmount?.text = "₦" + SpanUtils.getShowText(data.data!!.toLong())
         if (data.lockFlag) {
             holder.tvAmount?.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null,
-                holder.itemView.resources.getDrawable(R.drawable.ic_lock), null)
+                holder.itemView.resources.getDrawable(R.drawable.ic_apply_lock), null)
             holder.tvAmount?.setTextColor(holder.itemView.resources.getColor(R.color.color_999999))
         } else {
             holder.tvAmount?.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
