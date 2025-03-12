@@ -11,7 +11,7 @@ class NorItemDecor : ItemDecoration() {
         outRect.left = 20
         outRect.right = 20
         outRect.top = 5
-        outRect.bottom = 5
+        outRect.bottom = 30
 ////        //如果不是第一个，则设置top的值。
 //        if (parent.getChildAdapterPosition(view) != 0){
 //            //这里直接硬编码为1px
