@@ -13,6 +13,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.FileUtils
@@ -70,7 +71,7 @@ class ConsumerHotlineActivity : BaseActivity() {
             mPhoneList.clear()
             mPhoneList.addAll(it)
         }
-        rvPhone?.layoutManager = GridLayoutManager(this, 2)
+        rvPhone?.layoutManager = LinearLayoutManager(this@ConsumerHotlineActivity, LinearLayoutManager.VERTICAL, false)
         val phoneAdapter = ConsumerHotlineAdapter(mPhoneList)
         phoneAdapter.setOnItemClickListener(object : ConsumerHotlineAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int, str: String) {
@@ -84,7 +85,7 @@ class ConsumerHotlineActivity : BaseActivity() {
             mWhatappList.clear()
             mWhatappList.addAll(it)
         }
-        rvWhatApp?.layoutManager = GridLayoutManager(this, 2)
+        rvWhatApp?.layoutManager = LinearLayoutManager(this@ConsumerHotlineActivity, LinearLayoutManager.VERTICAL, false)
         val whatappAdapter = ConsumerHotlineAdapter(mWhatappList)
         whatappAdapter.setOnItemClickListener(object : ConsumerHotlineAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int, str: String) {
@@ -98,7 +99,7 @@ class ConsumerHotlineActivity : BaseActivity() {
             mEmailList.clear()
             mEmailList.addAll(it)
         }
-        rvEmail?.layoutManager = GridLayoutManager(this, 2)
+        rvEmail?.layoutManager = LinearLayoutManager(this@ConsumerHotlineActivity, LinearLayoutManager.VERTICAL, false)
         val emailAdapter = ConsumerHotlineAdapter(mEmailList)
         emailAdapter.setOnItemClickListener(object : ConsumerHotlineAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int, email: String) {

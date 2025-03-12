@@ -15,6 +15,7 @@ import com.chocolate.nigerialoanapp.base.BaseActivity
 import com.chocolate.nigerialoanapp.bean.BaseResponseBean
 import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse
 import com.chocolate.nigerialoanapp.collect.utils.AESUtil
+import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
@@ -50,6 +51,7 @@ class SplashActivity : BaseActivity() {
                     hasEnterFlag = true
                     mHandler?.removeCallbacksAndMessages(null)
                     OkGo.getInstance().cancelTag(TAG)
+                    ConfigMgr.getStaticConfig()
                     val welcomeIntent = Intent(this@SplashActivity, MarketActivity::class.java)
                     startActivity(welcomeIntent)
                     finish()
@@ -62,6 +64,7 @@ class SplashActivity : BaseActivity() {
                     hasEnterFlag = true
                     mHandler?.removeCallbacksAndMessages(null)
                     OkGo.getInstance().cancelTag(TAG)
+                    ConfigMgr.getStaticConfig()
                     val mainIntent = Intent(this@SplashActivity, MainActivity::class.java)
                     startActivity(mainIntent)
                     finish()

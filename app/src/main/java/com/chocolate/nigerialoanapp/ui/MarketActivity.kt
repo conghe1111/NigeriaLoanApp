@@ -31,7 +31,6 @@ class MarketActivity : BaseActivity() {
         setContentView(R.layout.acticity_market)
         val frament = Loan0NewProductFragment()
         toFragment(frament)
-        ConfigMgr.getStaticConfig()
         allowFlag = SPUtils.getInstance().getBoolean(KEY_ALLOW_CONTACT, false)
         if (!allowFlag) {
             requestPermissionInternal()

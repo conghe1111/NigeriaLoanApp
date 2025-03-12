@@ -27,6 +27,7 @@ class InfoEditView : FrameLayout {
     private var tvOptional: AppCompatTextView? = null
     private var etDesc: AppCompatEditText? = null
     private var ivClear: AppCompatImageView? = null
+    private var llContainer: View? = null
 
     private var openRedState : Boolean = true
 
@@ -63,6 +64,7 @@ class InfoEditView : FrameLayout {
         etDesc = findViewById<AppCompatEditText>(R.id.et_edit_desc)
         tvOptional = findViewById<AppCompatTextView>(R.id.tv_edit_optional)
         ivClear = findViewById<AppCompatImageView>(R.id.iv_edit_clear)
+        llContainer = findViewById<View>(R.id.ll_title_container)
         etDesc?.addTextChangedListener(mTextWatcher)
         tvTitle?.text = titleStr
         if (!TextUtils.isEmpty(hintStr)) {
@@ -89,11 +91,11 @@ class InfoEditView : FrameLayout {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             if (!TextUtils.isEmpty(s) && s.length > 0) {
                 if (ivClear != null) {
-                    ivClear!!.visibility = INVISIBLE
+                    ivClear!!.visibility = VISIBLE
                 }
             } else {
                 if (ivClear != null) {
-                    ivClear!!.visibility = VISIBLE
+                    ivClear!!.visibility = INVISIBLE
                 }
             }
         }
@@ -103,6 +105,7 @@ class InfoEditView : FrameLayout {
                 isRedSelectState = false
                 etDesc?.setHintTextColor(resources.getColor(R.color.color_c7c7c7))
                 etDesc?.setBackgroundResource(R.drawable.bg_edit_grey)
+                llContainer?.setBackgroundResource(R.color.white)
             }
             mListener?.onTextChange()
         }
@@ -118,6 +121,7 @@ class InfoEditView : FrameLayout {
         isRedSelectState = true
         etDesc?.setHintTextColor(resources.getColor(R.color.color_dd0000))
         etDesc?.setBackgroundResource(R.drawable.bg_edit_red)
+        llContainer?.setBackgroundResource(android.R.color.transparent)
     }
 
     fun getText() : String {

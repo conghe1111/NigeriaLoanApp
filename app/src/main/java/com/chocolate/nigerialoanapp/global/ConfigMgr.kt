@@ -85,7 +85,8 @@ object ConfigMgr {
     }
 
     fun getStaticConfig() {
-        val staticDataConfig = SPUtils.getInstance().getString(KEY_STATIC_DATA_CONFIG)
+        var staticDataConfig = SPUtils.getInstance().getString(KEY_STATIC_DATA_CONFIG)
+        staticDataConfig = ""
         if (!TextUtils.isEmpty(staticDataConfig)) {
             handleStaticConfig(staticDataConfig)
         } else {
