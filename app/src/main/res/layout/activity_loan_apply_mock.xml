@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_loan_2"
     android:layout_height="match_parent">
 
     <View
@@ -39,33 +40,73 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:background="@drawable/bg_white_bg_10"
+                        android:orientation="vertical">
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/dp_19"
-                            android:layout_height="@dimen/dp_14"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dp_8"
-                            android:src="@drawable/ic_loan_amount_black" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_42">
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dp_6"
-                            android:text="@string/loan_amount_cap"
-                            android:textColor="#333333"
-                            android:textSize="@dimen/sp_16"
-                            android:textStyle="bold" />
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:drawableStart="@drawable/ic_bankcard"
+                                android:drawablePadding="@dimen/dp_6"
+                                android:text="@string/loan_amount"
+                                android:textColor="#333333"
+                                android:textSize="@dimen/sp_14"
+                                android:textStyle="bold" />
+
+                        </FrameLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_loan_amount_mock"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_loan_amount_mock"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bg_white_bg_10"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_42">
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:drawableStart="@drawable/ic_bankcard"
+                                android:drawablePadding="@dimen/dp_6"
+                                android:text="@string/loan_term"
+                                android:textColor="#333333"
+                                android:textSize="@dimen/sp_14"
+                                android:textStyle="bold" />
+
+                        </FrameLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_loan_term"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
@@ -81,11 +122,6 @@
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_loan_term"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_13" />
 
                 </LinearLayout>
                 
@@ -128,18 +164,20 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_height="wrap_content"/>
 
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_loan_apply_mock_next"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:layout_marginBottom="@dimen/dp_45"
+                    android:background="@drawable/selector_btn_orange_theme"
                     android:gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_38"
-                    android:textSize="@dimen/sp_20"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="@dimen/dp_17"
-                    android:layout_marginBottom="@dimen/dp_100"
-                    android:text="@string/confirm"
-                    android:background="@drawable/bg_nor_button"
-                    android:layout_height="@dimen/dp_48"/>
+                    android:text="@string/apply_1"
+                    android:textColor="#242424"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_14" />
 
 
             </LinearLayout>

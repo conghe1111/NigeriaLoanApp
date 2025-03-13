@@ -21,13 +21,13 @@ object Constant {
     val APP_ID: String = "oyo"
     val USSD: String = "_oyo"
 
-    val DEEP_LINK: String = "oyocredit://page/main"
+    val DEEP_LINK: String = "afrokash://page/main"
 
 
     //是否是审核账号
     fun isAuditMode(): Boolean {
         if (BuildConfig.DEBUG) {
-            return false
+            return true
         }
         val phoneNum = SPUtils.getInstance().getString(LoginRegisterFragment.KEY_PHONE_NUM)
         if (phoneNum.startsWith(" 666777890")) {
