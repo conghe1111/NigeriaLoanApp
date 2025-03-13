@@ -13,12 +13,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/include_main_top" />
+            <include layout="@layout/include_mine_top"
+                android:layout_marginTop="@dimen/dp_50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
 
             <include
                 layout="@layout/include_mine_setting"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_36"
+                android:layout_marginTop="@dimen/dp_18"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10" />
 
