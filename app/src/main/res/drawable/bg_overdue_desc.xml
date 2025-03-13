@@ -10,9 +10,13 @@
 	<!-- 变化率 定义从左到右的颜色不变 -->
 
 	<gradient
-		android:centerColor="#FFF3F8"
-		android:endColor="#EFE7FF"
-		android:startColor="#FFF7E8" />
+		android:type="linear"
+		android:useLevel="true"
+		android:startColor="#fff6fffa"
+		android:endColor="#a6f2fff6"
+		android:angle="270" />
 
+		<gradient   />
+		<corners android:radius="10dp" />
 </shape>
 

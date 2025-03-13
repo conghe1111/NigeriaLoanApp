@@ -141,11 +141,20 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
             })
 
             mStages.clear()
-            mStages.addAll(mOrderDetail!!.stages)
+//            if (BuildConfig.DEBUG) {
+//                if (mOrderDetail!!.stages == null) {
+//                    mOrderDetail!!.stages = ArrayList<Stage>()
+//                    mOrderDetail!!.stages.add(Stage())
+//                    mOrderDetail!!.stages.add(Stage())
+//                }
+//            }
+            if (mOrderDetail!!.stages != null) {
+                mStages.addAll(mOrderDetail!!.stages)
 
-            mRepayAmountList.clear()
-            for (stage in mOrderDetail!!.stages) {
-                mRepayAmountList.add(stage.repay_total.toLong())
+                mRepayAmountList.clear()
+                for (stage in mOrderDetail!!.stages) {
+                    mRepayAmountList.add(stage.repay_total.toLong())
+                }
             }
 
             mRepaymentAdapter?.notifyDataSetChanged()

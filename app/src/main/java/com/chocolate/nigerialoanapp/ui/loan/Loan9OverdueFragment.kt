@@ -13,15 +13,22 @@ class Loan9OverdueFragment : BaseRepaymentFragment() {
 
     private var tvOverdue : AppCompatTextView? = null
     private var tvOverdueDay : AppCompatTextView? = null
+
     private var llOverdue : View? = null
+    private var llPending : View? = null
+    private var llOverdueDesc : View? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tvOverdue =  view.findViewById<AppCompatTextView>(R.id.tv_loan_overdue)
-        llOverdue =  view.findViewById<View>(R.id.ll_overdue_desc)
+        llOverdue =  view.findViewById<View>(R.id.ll_loan_overdue)
+        llPending =  view.findViewById<View>(R.id.ll_loan_pending)
+        llOverdueDesc =  view.findViewById<View>(R.id.ll_overdue_desc)
         tvOverdueDay =  view.findViewById<AppCompatTextView>(R.id.tv_due_day)
+        llPending?.visibility = View.GONE
         tvOverdue?.visibility = View.VISIBLE
         llOverdue?.visibility = View.VISIBLE
+        llOverdueDesc?.visibility = View.VISIBLE
         if (parentFragment is HomeFragment) {
             val orderDetail = (parentFragment as HomeFragment).mOrderDetail?.order_detail
             if (orderDetail == null) {
