@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp_21"
-        android:layout_marginBottom="@dimen/dp_6"
-        android:src="@drawable/ic_close"
-        app:layout_constraintBottom_toTopOf="@id/ll_bottom_container"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
         android:id="@+id/ll_bottom_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="@dimen/dp_21"
         android:layout_marginBottom="@dimen/dp_16"
         android:background="@drawable/bg_white_bg"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -34,7 +25,7 @@
             android:includeFontPadding="false"
             android:text="@string/loan_detail"
             android:textColor="#333333"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_15"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -42,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_14"
-            android:background="@drawable/bg_gray_bg_1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -62,9 +52,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_1"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:background="#F7F7F7" />
+                android:background="@drawable/hor_grey_hash_line"
+                android:layout_height="@dimen/dp_2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,9 +72,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_1"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:background="#F7F7F7" />
+                android:background="@drawable/hor_grey_hash_line"
+                android:layout_height="@dimen/dp_2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,9 +92,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_1"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:background="#F7F7F7" />
+                android:background="@drawable/hor_grey_hash_line"
+                android:layout_height="@dimen/dp_2"/>
 
         </LinearLayout>
 
@@ -115,7 +102,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_14"
-            android:background="@drawable/bg_gray_bg_1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -135,9 +121,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_1"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:background="#F7F7F7" />
+                android:background="@drawable/hor_grey_hash_line"
+                android:layout_height="@dimen/dp_2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,9 +141,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_1"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:background="#F7F7F7" />
+                android:background="@drawable/hor_grey_hash_line"
+                android:layout_height="@dimen/dp_2"/>
 
         </LinearLayout>
 
@@ -183,6 +167,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_12"
                 android:layout_marginStart="@dimen/dp_6"
                 android:text="@string/i_agree_to_loan_contact" />
 
@@ -193,17 +179,26 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dp_80"
             android:layout_marginTop="@dimen/dp_11"
             android:layout_marginBottom="@dimen/dp_10"
-            android:background="@drawable/bg_nor_button_24"
+            android:background="@drawable/bg_select_amount_10"
             android:gravity="center"
             android:text="@string/confirm"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/sp_17"
+            android:textColor="#242424"
+            android:textSize="@dimen/sp_14"
             android:textStyle="bold" />
 
     </LinearLayout>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_21"
+        android:layout_marginBottom="-13dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_close_2"
+        android:layout_above="@id/ll_bottom_container"
+        tools:background="@color/teal_200" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

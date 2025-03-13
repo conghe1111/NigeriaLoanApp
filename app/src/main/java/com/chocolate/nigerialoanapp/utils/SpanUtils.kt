@@ -51,7 +51,7 @@ object SpanUtils {
         }
         val text = tv.context.resources.getString(R.string.please_read_all)
         val spannableString = SpannableString(text)
-        val themeColor = tv.context.resources.getColor(R.color.privacy_text_color)
+        val themeColor = activity.resources.getColor(R.color.privacy_text_color)
 
         val startIndex = text.indexOf("<")
         val endIndex = text.indexOf(">")
@@ -92,7 +92,7 @@ object SpanUtils {
         }
         val text = tv.context.resources.getString(R.string.i_agree_to_loan_contact)
         val spannableString = SpannableString(text)
-        val themeColor = tv.context.resources.getColor(R.color.theme_color)
+        val themeColor = activity.resources.getColor(R.color.privacy_text_color)
 
         val startIndex = text.indexOf("<")
         val endIndex = text.indexOf(">")
@@ -116,7 +116,7 @@ object SpanUtils {
         spannableString.setSpan(
             serveClickableSpan,
             startIndex,
-            endIndex,
+            endIndex + 1,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         tv.movementMethod = LinkMovementMethod.getInstance()
@@ -132,7 +132,7 @@ object SpanUtils {
         }
         val agreeStr = tv.context.resources.getString(R.string.i_agree_to)
         val spannableString = SpannableString(agreeStr)
-        val themeColor = tv.context.resources.getColor(R.color.theme_color)
+        val themeColor = activity.resources.getColor(R.color.privacy_text_color)
 
         val startIndex1 = agreeStr.indexOf("<")
         val endIndex1 = agreeStr.indexOf(">")
