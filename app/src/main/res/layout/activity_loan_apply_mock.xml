@@ -68,7 +68,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_loan_amount_mock"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_marginBottom="@dimen/dp_13"
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
@@ -102,25 +102,10 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_loan_term"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_marginBottom="@dimen/dp_13"
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/dp_8"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:drawableStart="@drawable/ic_candlar"
-                        android:drawablePadding="@dimen/dp_5"
-                        android:gravity="center_vertical"
-                        android:text="@string/loan_term"
-                        android:textColor="#333333"
-                        android:textSize="@dimen/sp_16"
-                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -149,20 +134,32 @@
                     
                 </LinearLayout>
 
-                <include
-                    android:id="@+id/stage_1"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    layout="@layout/include_stage_1_mock"
-                    android:layout_marginTop="@dimen/dp_17"
-                    android:visibility="invisible"
-                    android:layout_height="wrap_content"/>
-                
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_mock_stage"
-                    android:layout_width="match_parent"
+                    android:orientation="vertical"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:background="@drawable/bg_white_bg_10"
+                    android:layout_height="wrap_content">
+
+                    <include
+                        android:id="@+id/stage_1"
+                        android:layout_width="match_parent"
+                        layout="@layout/include_stage_1_mock"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content"/>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_mock_stage"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -174,7 +171,7 @@
                     android:layout_marginBottom="@dimen/dp_45"
                     android:background="@drawable/selector_btn_orange_theme"
                     android:gravity="center"
-                    android:text="@string/apply_1"
+                    android:text="@string/confirm"
                     android:textColor="#242424"
                     android:textStyle="bold"
                     android:textSize="@dimen/sp_14" />
