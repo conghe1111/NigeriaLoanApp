@@ -43,7 +43,7 @@ abstract class BaseRegisterFragment : BaseFragment() {
         private const val TAG = "RegisterFragment"
     }
 
-    private var sendOtpNum : Int = 0
+//    private var sendOtpNum : Int = 0
 
 
     private val mHandler = Handler(Looper.getMainLooper(), object : Handler.Callback {
@@ -97,7 +97,7 @@ abstract class BaseRegisterFragment : BaseFragment() {
         tvUserDesc = view.findViewById<AppCompatTextView>(R.id.tv_user_desc)
         tvGetCode = view.findViewById<AppCompatTextView>(R.id.tv_get_code)
 
-        sendOtpNum = SPUtils.getInstance().getInt(DateUtils.getDateStr())
+//        sendOtpNum = SPUtils.getInstance().getInt(DateUtils.getDateStr())
 
         initView(view)
         updateUssdSms()
@@ -194,16 +194,16 @@ abstract class BaseRegisterFragment : BaseFragment() {
         if (isCounting) {
 
         } else {
-            if (sendOtpNum > 2) {
-                val toastStr = resources.getString(R.string.verification_ran_out)
-                ToastUtils.showShort(toastStr)
-                if (!autoSend) {
-                    FirebaseUtils.logEvent("SERVICE_OTP_OUT_OF_TIMES${Constant.USSD}")
-                }
-            } else {
-                SPUtils.getInstance().put(DateUtils.getDateStr(), sendOtpNum++)
+//            if (sendOtpNum > 2) {
+//                val toastStr = resources.getString(R.string.verification_ran_out)
+//                ToastUtils.showShort(toastStr)
+//                if (!autoSend) {
+//                    FirebaseUtils.logEvent("SERVICE_OTP_OUT_OF_TIMES${Constant.USSD}")
+//                }
+//            } else {
+//                SPUtils.getInstance().put(DateUtils.getDateStr(), sendOtpNum++)
                 sendVerifyCode()
-            }
+//            }
         }
     }
 
