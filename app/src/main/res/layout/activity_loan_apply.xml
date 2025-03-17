@@ -191,7 +191,7 @@
                     android:layout_marginHorizontal="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_13"
                     android:layout_marginBottom="@dimen/dp_45"
-                    android:background="@drawable/selector_btn_orange_theme"
+                    android:background="@drawable/bg_btn_enable_orange"
                     android:gravity="center"
                     android:text="@string/apply_1"
                     android:textColor="#242424"
