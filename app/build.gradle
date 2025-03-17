@@ -148,7 +148,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            outputFileName = "eyocredit_" + variant.productFlavors[0].name + "_" + releaseTime() + ".apk"
+            outputFileName = "Afrokash_" + variant.productFlavors[0].name + "_" + releaseTime() + ".apk"
             outputFileName = outputFileName
         }
     }

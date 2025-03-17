@@ -162,12 +162,12 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_20"
-            android:gravity="center"
+            android:gravity="center_vertical|start"
+            android:layout_marginStart="@dimen/dp_13"
             android:text="@string/we_will_get_back"
-            android:textColor="#666666"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="#26634D"
+            android:textSize="@dimen/sp_13" />
 
     </LinearLayout>
 

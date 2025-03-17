@@ -32,6 +32,7 @@ import com.chocolate.nigerialoanapp.ui.edit.EditInfoActivity
 import com.chocolate.nigerialoanapp.ui.edit.EditInfoMenuActivity
 import com.chocolate.nigerialoanapp.ui.history.HistoryRecordActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
+import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyMockActivity
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
 import com.chocolate.nigerialoanapp.ui.login.LoginRegisterFragment.Companion.KEY_PHONE_NUM
 import com.chocolate.nigerialoanapp.ui.mine.MineAdapter
