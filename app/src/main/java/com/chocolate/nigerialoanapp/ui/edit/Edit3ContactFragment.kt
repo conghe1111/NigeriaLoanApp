@@ -1,6 +1,8 @@
 package com.chocolate.nigerialoanapp.ui.edit
 
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -123,6 +125,13 @@ class Edit3ContactFragment : BaseEditFragment() {
         })
 
         SpanUtils.setPrivacyString(tvDesc, activity)
+        val filters1 = arrayOfNulls<InputFilter>(1)
+        filters1[0] = LengthFilter(15) // 限制最大长度为10
+        mEditMobile1?.getEditText()?.setFilters(filters1)
+        val filters2 = arrayOfNulls<InputFilter>(1)
+        filters2[0] = LengthFilter(15) // 限制最大长度为10
+        mEditMobile2?.getEditText()?.setFilters(filters2)
+
         mEditMobile1?.setInputNum()
         mEditMobile2?.setInputNum()
     }
