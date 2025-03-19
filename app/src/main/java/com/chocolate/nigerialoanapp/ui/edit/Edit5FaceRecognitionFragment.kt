@@ -30,6 +30,7 @@ import com.chocolate.nigerialoanapp.bean.response.FaceIdResponse
 import com.chocolate.nigerialoanapp.bean.response.OrderApplyResponse
 import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.Constant
+import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity
 import com.chocolate.nigerialoanapp.ui.loanapply.LoanApplyActivity.Companion
@@ -265,6 +266,9 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                     if (faceIdResponse == null || faceIdResponse.face_id == null) {
                         mStatus = STATUS_FAIL
                         updateStatus()
+                        if (Constant.IS_COLLECT) {
+                            LogSaver.logToFile("faceIdResponse == null " + response.body().toString())
+                        }
                         return
                     }
                     startFace(faceIdResponse.face_id.toString())
@@ -275,6 +279,9 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                     dismissProgressDialogFragment()
                     mStatus = STATUS_FAIL
                     updateStatus()
+                    if (Constant.IS_COLLECT) {
+                        LogSaver.logToFile("" + response.exception)
+                    }
                 }
             })
     }
@@ -304,6 +311,9 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                 // 活体失败, 业务处理
                 mStatus = STATUS_FAIL
                 updateStatus()
+                if (Constant.IS_COLLECT) {
+                    LogSaver.logToFile("face recoginition onInterrupted  $code error = $error")
+                }
             }
         })
     }
