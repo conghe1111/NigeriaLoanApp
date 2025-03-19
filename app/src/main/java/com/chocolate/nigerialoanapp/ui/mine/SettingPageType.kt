@@ -6,12 +6,13 @@ import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.HISTORY_RECORD
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.INFORMATION
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.LOGOUT
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.PRIVACY
+import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.SHARE
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.TERM_CONDITION
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.TEST_1
 import com.chocolate.nigerialoanapp.ui.mine.PageType.Companion.VERSION
 
 
-@IntDef(INFORMATION, CUSTOMER_SERVICE, HISTORY_RECORD, PRIVACY, TERM_CONDITION, VERSION, TEST_1, LOGOUT)
+@IntDef(INFORMATION, CUSTOMER_SERVICE, HISTORY_RECORD, PRIVACY, TERM_CONDITION, VERSION, TEST_1, LOGOUT, SHARE)
 @Retention(AnnotationRetention.SOURCE)
 annotation class PageType {
     companion object {
@@ -22,6 +23,7 @@ annotation class PageType {
         const val TERM_CONDITION = 4
         const val VERSION = 5
         const val TEST_1 = 6
+        const val SHARE = 7
 
         const val LOGOUT = 111
 

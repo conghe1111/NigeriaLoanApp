@@ -42,6 +42,7 @@
     <string name="setting_term_condition">Terms and Conditions</string>
     <string name="setting_version">Version</string>
     <string name="setting_debug">Debug</string>
+    <string name="setting_share">share</string>
 
     <string name="under_review">Under Review</string>
     <string name="we_are_currently_verifying">We are currently verifying your loan details. The results will be available soon.</string>

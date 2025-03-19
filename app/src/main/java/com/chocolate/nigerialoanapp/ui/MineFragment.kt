@@ -197,6 +197,13 @@ class MineFragment : BaseFragment() {
             )
         )
 
+//        mList.add(
+//            SettingMineBean(
+//                R.drawable.ic_setting_version, R.string.setting_share,
+//                PageType.SHARE
+//            )
+//        )
+
 //        if (BuildConfig.DEBUG && false) {
         if (BuildConfig.DEBUG) {
             mList.add(
@@ -317,18 +324,21 @@ class MineFragment : BaseFragment() {
             PageType.VERSION -> {
 
             }
+            PageType.SHARE -> {
+
+            }
 
             PageType.TEST_1 -> {
-//                activity?.let {
-//                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
-//                }
+                activity?.let {
+                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
+                }
 //                        activity?.let {
 //                            val dialog = LoanRetentionDialog(it)
 //                            dialog.show()
 //                        }
-                        activity?.let {
-                            LoanApplyActivity.startActivity(it, "")
-                        }
+//                        activity?.let {
+//                            LoanApplyActivity.startActivity(it, "")
+//                        }
 //                        context?.let {
 //                            val dialog: RequestPermissionDialog = RequestPermissionDialog(it, activity)
 //                            dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {

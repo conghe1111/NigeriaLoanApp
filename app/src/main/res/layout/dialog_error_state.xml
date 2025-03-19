@@ -30,6 +30,7 @@ android:layout_height="match_parent">
             android:src="@drawable/ic_error_state" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_state_desc"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_113"
             android:layout_gravity="center_horizontal"
@@ -53,7 +54,7 @@ android:layout_height="match_parent">
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_loan_confirm"
+                android:id="@+id/tv_state_cancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -68,7 +69,7 @@ android:layout_height="match_parent">
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_loan_cancel"
+                android:id="@+id/tv_state_open"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
