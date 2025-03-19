@@ -2,7 +2,7 @@ package com.chocolate.nigerialoanapp.ui.edit
 
 import android.os.Bundle
 import android.text.InputFilter
-import android.text.InputFilter.LengthFilter
+
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,6 +27,7 @@ import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
+import com.chocolate.nigerialoanapp.widget.LengthTextWatcher
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -125,13 +126,9 @@ class Edit3ContactFragment : BaseEditFragment() {
         })
 
         SpanUtils.setPrivacyString(tvDesc, activity)
-        val filters1 = arrayOfNulls<InputFilter>(1)
-        filters1[0] = LengthFilter(15) // 限制最大长度为10
-        mEditMobile1?.getEditText()?.setFilters(filters1)
-        val filters2 = arrayOfNulls<InputFilter>(1)
-        filters2[0] = LengthFilter(15) // 限制最大长度为10
-        mEditMobile2?.getEditText()?.setFilters(filters2)
 
+        mEditMobile1?.getEditText()?.addTextChangedListener(LengthTextWatcher(mEditMobile1?.getEditText()))
+        mEditMobile2?.getEditText()?.addTextChangedListener(LengthTextWatcher(mEditMobile2?.getEditText()))
         mEditMobile1?.setInputNum()
         mEditMobile2?.setInputNum()
     }
