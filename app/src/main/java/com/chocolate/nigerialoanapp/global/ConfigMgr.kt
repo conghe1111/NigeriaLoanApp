@@ -51,8 +51,8 @@ object ConfigMgr {
         mDebtList.add(Pair("no", "1"))
 
         mHaveOtherDebtList.clear()
-        mHaveOtherDebtList.add(Pair("not have", "1"))
-        mHaveOtherDebtList.add(Pair("have", "2"))
+        mHaveOtherDebtList.add(Pair("no", "1"))
+        mHaveOtherDebtList.add(Pair("yes", "2"))
 
         initPayPeriod()
 
