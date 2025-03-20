@@ -26,6 +26,7 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.widget.BlankTextWatcher
+import com.chocolate.nigerialoanapp.widget.LengthTextWatcher2
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -45,6 +46,8 @@ class LoginRegisterFragment : BaseFragment() {
     private var ivClear : AppCompatImageView? = null
 
     private var mPhoneNum : String?= null
+
+    private var mTextWatcher2 : LengthTextWatcher2? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -97,7 +100,7 @@ class LoginRegisterFragment : BaseFragment() {
                 val text: String = editable.toString()
                 if (!TextUtils.isEmpty(text)) {
                     ivClear?.visibility = View.VISIBLE
-                    tvApply?.isEnabled = text.length >= 12
+                    tvApply?.isEnabled = text.length >= if (text.startsWith("0")) 13 else 12
                 } else {
                     ivClear?.visibility = View.GONE
                 }
@@ -118,6 +121,11 @@ class LoginRegisterFragment : BaseFragment() {
             etMobileNum?.setText("")
             etMobileNum?.setSelection(0)
         }
+        mTextWatcher2 = LengthTextWatcher2(etMobileNum)
+        mTextWatcher2?.let {
+            etMobileNum?.addTextChangedListener(mTextWatcher2)
+        }
+
         updateState()
     }
 
@@ -127,7 +135,7 @@ class LoginRegisterFragment : BaseFragment() {
             return
         }
         val phoneNum = etMobileNum!!.text.toString().replace(" ","")
-        if (RegexUtils.isTel(phoneNum)){
+        if (TextUtils.isEmpty(phoneNum)){
             dismissProgressDialogFragment()
             ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
             return
@@ -156,7 +164,7 @@ class LoginRegisterFragment : BaseFragment() {
                    dismissProgressDialogFragment()
                     val response = checkResponseSuccess(response, CheckPhoneNumResponse::class.java)
                     if (response == null) {
-                        ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
+//                        ToastUtils.showShort(resources.getString(R.string.str_login_phone_error))
                         return
                     }
                     try {
@@ -202,5 +210,12 @@ class LoginRegisterFragment : BaseFragment() {
     override fun onDestroy() {
         super.onDestroy()
         OkGo.getInstance().cancelTag(TAG)
+    }
+
+    override fun onDestroyView() {
+        mTextWatcher2?.let {
+            etMobileNum?.removeTextChangedListener(mTextWatcher2)
+        }
+        super.onDestroyView()
     }
 }

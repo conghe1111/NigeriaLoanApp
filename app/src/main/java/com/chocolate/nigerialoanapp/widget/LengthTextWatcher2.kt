@@ -7,14 +7,13 @@ import android.text.TextWatcher
 import android.text.InputFilter.LengthFilter
 import android.widget.EditText
 
-class LengthTextWatcher : TextWatcher {
+class LengthTextWatcher2 : TextWatcher {
     private var mEditText: EditText? = null
 
     private val filters = arrayOfNulls<InputFilter>(1)
 
-    val length13 = LengthFilter(13)
-    val length10 = LengthFilter(10)
-    val length11 = LengthFilter(11)
+    val length10 = LengthFilter(12)
+    val length11 = LengthFilter(13)
 
 
     constructor(editText: EditText?) {
@@ -44,8 +43,6 @@ class LengthTextWatcher : TextWatcher {
         if (!TextUtils.isEmpty(s)) {
             if (s!!.trim().startsWith("0")) {
                 filters[0] = length11
-            } else if (s!!.trim().startsWith("234")) {
-                filters[0] = length13
             } else {
                 filters[0] = length10
             }

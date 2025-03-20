@@ -84,7 +84,6 @@
                             android:hint="@string/please_enter_phone_number"
                             android:background="@null"
                             android:lines="1"
-                            android:maxLength="12"
                             android:maxLines="1"
                             android:inputType="number"
                             android:singleLine="true"
