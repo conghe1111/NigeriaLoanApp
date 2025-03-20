@@ -32,8 +32,8 @@ object NetworkUtils {
             appVersion = "10000"
         }
         val header = HttpHeaders()
-        header.put("AppId","1")
-        header.put("AppName","oyo")
+        header.put("AppId","2")
+        header.put("AppName","Afrokash")
         header.put("AppVersion",appVersion)
         header.put("VersionCode",versionCode)
 //        AppId	string	Y	客户端APPID	1
