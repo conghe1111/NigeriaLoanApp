@@ -330,7 +330,7 @@ class MineFragment : BaseFragment() {
 
             PageType.TEST_1 -> {
                 activity?.let {
-                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_3)
+                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
                 }
 //                        activity?.let {
 //                            val dialog = LoanRetentionDialog(it)

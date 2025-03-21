@@ -213,6 +213,9 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
     }
 
     private fun startCamera() {
+        if (Constant.IS_COLLECT) {
+            LogSaver.logToFile("startCamera . " )
+        }
         val isGranted = PermissionUtils.isGranted(Manifest.permission.CAMERA)
         if (isGranted) {
 //            startCameraInternal(REQUEST_CAMERA_RECOGNITION)
@@ -223,6 +226,9 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                     override fun onGranted() {
 //                        startCameraInternal(REQUEST_CAMERA_RECOGNITION)
                         startFaceRecognitionInternal()
+                        if (Constant.IS_COLLECT) {
+                            LogSaver.logToFile("startFaceRecognitionInternal . " )
+                        }
                     }
 
                     override fun onDenied() {
@@ -253,6 +259,9 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         if (BuildConfig.DEBUG) {
             Log.i("OkhttpClient", " FaceIdResponse =" + jsonObject.toString())
         }
+        if (Constant.IS_COLLECT) {
+            LogSaver.logToFile("FaceIdResponse = " + jsonObject.toString())
+        }
         OkGo.post<String>(Api.FACE_ID).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
@@ -280,17 +289,23 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                     mStatus = STATUS_FAIL
                     updateStatus()
                     if (Constant.IS_COLLECT) {
-                        LogSaver.logToFile("" + response.exception)
+                        LogSaver.logToFile("1111111111" + response.exception)
                     }
                 }
             })
     }
 
     private fun startFace(faceId : String) {
+        if (Constant.IS_COLLECT) {
+            LogSaver.logToFile("start face id  = $faceId")
+        }
         EaseID.startFace(requireContext(), EaseRequest(bizId = faceId, userId = Constant.mAccountId), object : EaseID.ILiveIDListener {
             override fun onCompleted(response: EaseResponse) {
                 if (BuildConfig.DEBUG) {
                     Log.e(TAG, "onCompleted : ${response.livenessFilePath}")
+                }
+                if (Constant.IS_COLLECT) {
+                    LogSaver.logToFile("onCompleted : ${response.livenessFilePath}")
                 }
                 FirebaseUtils.logEvent("LIVENESSTEST_SUBMIT_1_T")
                 mCurPath = response.livenessFilePath
