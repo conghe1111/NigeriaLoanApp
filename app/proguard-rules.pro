@@ -287,3 +287,16 @@ public static java.lang.String TABLENAME;
 -keep class com.google.gson.** {*;}
 -keep class com.chocolate.nigerialoanapp.bean.** {*; }
 -dontwarn com.google.firebase.messaging.TopicOperation$TopicOperations
+
+-keep class  com.easeid.opensdk.** {*;}
+-keep class  break.** {*;}
+-keep class  case.** {*;}
+-keep class  catch.** {*;}
+-keep class  do.** {*;}
+-keep class  else.** {*;}
+-keep class  for.** {*;}
+-keep class  goto.** {*;}
+-keep class  if.** {*;}
+-keep class  new.** {*;}
+-keep class  this.** {*;}
+-keep class  try.** {*;}

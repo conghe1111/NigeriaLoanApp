@@ -33,8 +33,8 @@ dependencyResolutionManagement {
 //        // 以下配置用于release 环境
         maven {
             credentials {
-                username "6296db614e333f028174803c"
-                password '08OKF84vrl]S'
+                username "6333e88b0bdb33a273aac64a"
+                password 'MDJ41uVgeQ[X'
             }
             url 'https://packages.aliyun.com/maven/repository/2232232-release-QnGkiq/'
         }
