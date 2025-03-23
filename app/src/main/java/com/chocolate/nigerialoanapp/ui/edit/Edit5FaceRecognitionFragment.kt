@@ -256,10 +256,8 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        if (BuildConfig.DEBUG) {
-            Log.i("OkhttpClient", " FaceIdResponse =" + jsonObject.toString())
-        }
         if (Constant.IS_COLLECT) {
+            Log.i("OkhttpClient", " FaceIdResponse =" + jsonObject.toString())
             LogSaver.logToFile("FaceIdResponse = " + jsonObject.toString())
         }
         OkGo.post<String>(Api.FACE_ID).tag(TAG)
@@ -276,6 +274,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                         mStatus = STATUS_FAIL
                         updateStatus()
                         if (Constant.IS_COLLECT) {
+                            Log.e(TAG, "faceIdResponse == null " + response.body().toString())
                             LogSaver.logToFile("faceIdResponse == null " + response.body().toString())
                         }
                         return
@@ -289,6 +288,7 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
                     mStatus = STATUS_FAIL
                     updateStatus()
                     if (Constant.IS_COLLECT) {
+                        Log.e(TAG, "1111111111" + response.exception)
                         LogSaver.logToFile("1111111111" + response.exception)
                     }
                 }
@@ -298,13 +298,12 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
     private fun startFace(faceId : String) {
         if (Constant.IS_COLLECT) {
             LogSaver.logToFile("start face id  = $faceId")
+            Log.e(TAG, "start face id  = $faceId")
         }
-        EaseID.startFace(requireContext(), EaseRequest(bizId = faceId, userId = Constant.mAccountId), object : EaseID.ILiveIDListener {
+        EaseID.startFace(requireContext(), EaseRequest(bizId = faceId), object : EaseID.ILiveIDListener {
             override fun onCompleted(response: EaseResponse) {
-                if (BuildConfig.DEBUG) {
-                    Log.e(TAG, "onCompleted : ${response.livenessFilePath}")
-                }
                 if (Constant.IS_COLLECT) {
+                    Log.e(TAG, "onCompleted : ${response.livenessFilePath}")
                     LogSaver.logToFile("onCompleted : ${response.livenessFilePath}")
                 }
                 FirebaseUtils.logEvent("LIVENESSTEST_SUBMIT_1_T")
@@ -319,14 +318,12 @@ class Edit5FaceRecognitionFragment : BaseEditFragment() {
             }
 
             override fun onInterrupted(code: String?, error: String?) {
-                if (BuildConfig.DEBUG) {
-                    Log.w(TAG, "onInterrupted : $code $error")
-                }
                 FirebaseUtils.logEvent("LIVENESSTEST_SUBMIT_1_F")
                 // 活体失败, 业务处理
                 mStatus = STATUS_FAIL
                 updateStatus()
                 if (Constant.IS_COLLECT) {
+                    Log.e(TAG, "onInterrupted : $code $error")
                     LogSaver.logToFile("face recoginition onInterrupted  $code error = $error")
                 }
             }

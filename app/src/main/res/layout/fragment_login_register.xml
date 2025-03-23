@@ -137,7 +137,7 @@
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/dp_17"
                 android:text="@string/login_register_apply"
-                android:background="@drawable/bg_nor_button_24"
+                android:background="@drawable/selector_btn_theme_2"
                 android:layout_height="@dimen/dp_46"/>
 
             <androidx.appcompat.widget.AppCompatTextView
