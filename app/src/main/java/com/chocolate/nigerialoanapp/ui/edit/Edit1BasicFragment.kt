@@ -543,7 +543,7 @@ class Edit1BasicFragment : BaseEditFragment() {
     private fun initAreaPickerData() {
         provinceList.clear()
         stateList.clear()
-        val areaData: HashMap<String, ArrayList<String>> = ConfigMgr.mAreaMap
+        val areaData: LinkedHashMap<String, ArrayList<String>> = ConfigMgr.mAreaMap
         val iterator: Iterator<Map.Entry<String, ArrayList<String>>> = areaData.entries.iterator()
         while (iterator.hasNext()) {
             val (key, value) = iterator.next()

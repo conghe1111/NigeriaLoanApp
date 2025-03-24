@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 
 class InfoSelectView : LinearLayout {
 
@@ -56,7 +57,7 @@ class InfoSelectView : LinearLayout {
         ivBack = findViewById<AppCompatImageView>(R.id.iv_edit_back)
         val topView = findViewById<View>(R.id.view_top)
 
-        tvTitle?.text = titleStr
+        SpanUtils.setInfoTitleString2(tvTitle, titleStr)
         if (!TextUtils.isEmpty(hintStr)) {
             tvDesc?.text = hintStr
         }

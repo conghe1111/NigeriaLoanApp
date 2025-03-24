@@ -16,6 +16,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.chocolate.nigerialoanapp.R
+import com.chocolate.nigerialoanapp.utils.SpanUtils
 
 class InfoEditView : FrameLayout {
 
@@ -24,10 +25,8 @@ class InfoEditView : FrameLayout {
     private var optionalFlag: Boolean = false
 
     private var tvTitle: AppCompatTextView? = null
-    private var tvOptional: AppCompatTextView? = null
     private var etDesc: AppCompatEditText? = null
     private var ivClear: AppCompatImageView? = null
-    private var llContainer: View? = null
 
     private var openRedState : Boolean = true
 
@@ -62,11 +61,9 @@ class InfoEditView : FrameLayout {
     private fun initializeView() {
         tvTitle = findViewById<AppCompatTextView>(R.id.tv_edit_title)
         etDesc = findViewById<AppCompatEditText>(R.id.et_edit_desc)
-        tvOptional = findViewById<AppCompatTextView>(R.id.tv_edit_optional)
         ivClear = findViewById<AppCompatImageView>(R.id.iv_edit_clear)
-        llContainer = findViewById<View>(R.id.ll_title_container)
         etDesc?.addTextChangedListener(mTextWatcher)
-        tvTitle?.text = titleStr
+
         if (!TextUtils.isEmpty(hintStr)) {
             etDesc?.setHint(hintStr)
             var endLength = Math.min(etDesc!!.text!!.length, maxLength)
@@ -78,11 +75,9 @@ class InfoEditView : FrameLayout {
             }
         })
         if (optionalFlag) {
-            tvOptional?.visibility = View.VISIBLE
+            SpanUtils.setInfoTitleString(tvTitle,titleStr)
         } else {
-            if (tvOptional?.visibility != View.GONE) {
-                tvOptional?.visibility = View.GONE
-            }
+            SpanUtils.setInfoTitleString2(tvTitle,titleStr)
         }
     }
 
@@ -105,7 +100,7 @@ class InfoEditView : FrameLayout {
                 isRedSelectState = false
                 etDesc?.setHintTextColor(resources.getColor(R.color.color_c7c7c7))
                 etDesc?.setBackgroundResource(R.drawable.bg_edit_grey)
-                llContainer?.setBackgroundResource(R.color.white)
+//                tv?.setBackgroundResource(R.color.white)
             }
             mListener?.onTextChange()
         }
@@ -121,7 +116,7 @@ class InfoEditView : FrameLayout {
         isRedSelectState = true
         etDesc?.setHintTextColor(resources.getColor(R.color.color_dd0000))
         etDesc?.setBackgroundResource(R.drawable.bg_edit_red)
-        llContainer?.setBackgroundResource(android.R.color.transparent)
+//        llContainer?.setBackgroundResource(android.R.color.transparent)
     }
 
     fun getText() : String {

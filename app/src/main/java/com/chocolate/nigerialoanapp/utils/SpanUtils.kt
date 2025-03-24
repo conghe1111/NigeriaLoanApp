@@ -4,10 +4,12 @@ import android.app.Activity
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
+import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.compose.ui.graphics.Color
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
@@ -289,4 +291,50 @@ object SpanUtils {
         }
         return ""
     }
+
+    fun setInfoTitleString(tv: AppCompatTextView?, title: String?)  {
+        if (tv == null || title == null) {
+            return
+        }
+        val optional = tv.context.getString(R.string.optional)
+        val resultStr = "$title $optional"
+        val spannableString = SpannableString(resultStr)
+        val color1 = tv.context.resources.getColor(R.color.color_333333)
+        val color2 = tv.context.resources.getColor(R.color.color_F67A2C)
+        spannableString.setSpan(
+            ForegroundColorSpan(color1),
+            0,
+            title.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableString.setSpan(
+            ForegroundColorSpan(color2),
+            title.length + 1,
+            resultStr.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableString.setSpan(
+            BackgroundColorSpan( tv.context.resources.getColor(R.color.white)),
+            0,
+            resultStr.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tv.setText(spannableString)
+    }
+
+    fun setInfoTitleString2(tv: AppCompatTextView?, title: String?)  {
+        if (tv == null || title == null) {
+            return
+        }
+        val resultStr = "$title"
+        val spannableString = SpannableString(resultStr)
+        spannableString.setSpan(
+            BackgroundColorSpan( tv.context.resources.getColor(R.color.white)),
+            0,
+            resultStr.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tv.setText(spannableString)
+    }
+
 }

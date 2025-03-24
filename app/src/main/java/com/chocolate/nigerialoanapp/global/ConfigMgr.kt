@@ -20,6 +20,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.LinkedHashMap
 
 object ConfigMgr {
 
@@ -40,7 +41,7 @@ object ConfigMgr {
     val mPositionList = ArrayList<Pair<String, String>>()
     val mPayPeriodList = ArrayList<Pair<String, String>>()
     val mHaveOtherDebtList = ArrayList<Pair<String, String>>()
-    val mAreaMap = HashMap<String, ArrayList<String>>()
+    val mAreaMap = LinkedHashMap<String, ArrayList<String>>()
 
     val mBankList = ArrayList<BankBeanResponse.Bank>()
     var mConsumerData: ConsumerData? = null
@@ -204,9 +205,9 @@ object ConfigMgr {
     }
 
 
-    private fun parseCityItem(cityJSONObject: JSONObject?): HashMap<String, ArrayList<String>> {
-        val map: HashMap<String, ArrayList<String>> =
-            HashMap<String, ArrayList<String>>()
+    private fun parseCityItem(cityJSONObject: JSONObject?): LinkedHashMap<String, ArrayList<String>> {
+        val map: LinkedHashMap<String, ArrayList<String>> =
+            LinkedHashMap<String, ArrayList<String>>()
         try {
             if (cityJSONObject == null) {
                 return map
