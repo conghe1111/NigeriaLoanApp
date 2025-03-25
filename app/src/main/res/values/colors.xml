@@ -12,7 +12,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="theme_color">#75D7A1</color>
+    <color name="theme_color">#40B950</color>
     <color name="privacy_text_color">#0FB4FF</color>
     <color name="send_code_color1">#5940B950</color>
     <color name="send_code_color2">#40B950</color>

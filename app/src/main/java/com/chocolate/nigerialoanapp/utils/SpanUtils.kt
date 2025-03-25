@@ -57,15 +57,15 @@ object SpanUtils {
 
         val startIndex = text.indexOf("<")
         val endIndex = text.indexOf(">")
-        spannableString.setSpan(
-            ForegroundColorSpan(themeColor),
-            startIndex,
-            endIndex + 1,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
+//        spannableString.setSpan(
+//            ForegroundColorSpan(themeColor),
+//            startIndex,
+//            endIndex + 1,
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        );
 
         //点击1
-        val serveClickableSpan = object : NoUnderlineClickSpan() {
+        val serveClickableSpan = object : NoUnderlineClickSpan(themeColor) {
             override fun onClick(widget: View) {
                 WebViewActivity.launchWebView(
                     activity,
@@ -134,40 +134,39 @@ object SpanUtils {
         }
         val agreeStr = tv.context.resources.getString(R.string.i_agree_to)
         val spannableString = SpannableString(agreeStr)
-        val themeColor = activity.resources.getColor(R.color.privacy_text_color)
-
+        val themeColor = activity.resources.getColor(R.color.theme_color)
         val startIndex1 = agreeStr.indexOf("<")
         val endIndex1 = agreeStr.indexOf(">")
-        spannableString.setSpan(
-            ForegroundColorSpan(themeColor),
-            startIndex1,
-            endIndex1 + 1,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+//        spannableString.setSpan(
+//            ForegroundColorSpan(themeColor),
+//            startIndex1,
+//            endIndex1,
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
         spannableString.setSpan(
             RelativeSizeSpan(15f / 14),
             startIndex1,
-            endIndex1 + 1,
+            endIndex1,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
         val startIndex2 = agreeStr.lastIndexOf("<")
         val endIndex2 = agreeStr.lastIndexOf(">")
-        spannableString.setSpan(
-            ForegroundColorSpan(themeColor),
-            startIndex2,
-            endIndex2 + 1,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+//        spannableString.setSpan(
+//            ForegroundColorSpan(themeColor),
+//            startIndex2 + 1,
+//            endIndex2 + 1,
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
         spannableString.setSpan(
             RelativeSizeSpan(15f / 14),
             startIndex2,
-            endIndex2 + 1,
+            endIndex2,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
         //点击1
-        val serveClickableSpan1 = object : NoUnderlineClickSpan() {
+        val serveClickableSpan1 = object : NoUnderlineClickSpan(themeColor) {
             override fun onClick(widget: View) {
                 WebViewActivity.launchWebView(
                     activity,
@@ -179,12 +178,12 @@ object SpanUtils {
         spannableString.setSpan(
             serveClickableSpan1,
             startIndex1,
-            endIndex1,
+            endIndex1 + 1,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
         //点击2
-        val serveClickableSpan2 = object : NoUnderlineClickSpan() {
+        val serveClickableSpan2 = object : NoUnderlineClickSpan(themeColor) {
             override fun onClick(widget: View) {
                 WebViewActivity.launchWebView(activity, Api.GET_TERMS, WebViewActivity.TYPE_TERMS)
             }
@@ -192,7 +191,7 @@ object SpanUtils {
         spannableString.setSpan(
             serveClickableSpan2,
             startIndex2,
-            endIndex2,
+            endIndex2 + 1,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 //        val imageSpan = ImageSpan(activity, if (mHasAgree) R.drawable.ic_select else R.drawable.ic_unselect)
