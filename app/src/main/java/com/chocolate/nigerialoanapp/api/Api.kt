@@ -3,7 +3,7 @@ package com.chocolate.nigerialoanapp.api
 import com.chocolate.nigerialoanapp.BuildConfig
 
 object Api {
-    private val ONLINE_HOST = "https://srv.owocredit.com"
+    private val ONLINE_HOST = "https://api.afrokash.com"
     private val TEST_HOST = "http://srvtest.owocredit.com"
     private val HOST = if (BuildConfig.USE_ONLINE_API) ONLINE_HOST else TEST_HOST
 
@@ -64,9 +64,9 @@ object Api {
     //FaceId
     val FACE_ID = "$HOST/app/v1/account/face_id"
 
-    // TODO
-    val GET_POLICY: String = "https://www.owocredit.com/privacy.html"
-    val GET_TERMS: String = "https://www.owocredit.com/terms.html"
+    val GET_POLICY: String = " https://www.afrokash.com/privacy-policy.html"
+    val GET_TERMS: String = "https://www.afrokash.com/user-terms.html"
+    val PERMISSION: String = "https://www.afroksah.com/user-permission.html"
 
     val GET_ALL: String = "https://www.baidu.com"
 }
