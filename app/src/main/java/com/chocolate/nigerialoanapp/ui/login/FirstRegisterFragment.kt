@@ -78,7 +78,6 @@ class FirstRegisterFragment : BaseRegisterFragment() {
                         return
                     }
                     if (TextUtils.equals(loginResponse.login_status, "success")) {
-                        FirebaseUtils.logEvent("SERVICE_LOGIN_REGISTER${Constant.USSD}")
                         toMainPage(loginResponse, password, phoneNum)
                     } else {
 

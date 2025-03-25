@@ -164,7 +164,7 @@ class LoginFragment : BaseFragment() {
 
     private fun pwdLogin(password: String) {
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
-        var phoneNum: String = getPhoneNum()
+        var phoneNum: String =getPhoneNum()
         try {
             jsonObject.put("mobile", "234$phoneNum")
             jsonObject.put("password", password)
@@ -188,7 +188,6 @@ class LoginFragment : BaseFragment() {
                     }
                     if (TextUtils.equals(loginResponse.login_status, "success")) {
                         toMainPage(loginResponse, password, phoneNum)
-                        FirebaseUtils.logEvent("SERVICE_LOGIN_PASSWORD_SUCCESS")
                     } else {
 
                     }

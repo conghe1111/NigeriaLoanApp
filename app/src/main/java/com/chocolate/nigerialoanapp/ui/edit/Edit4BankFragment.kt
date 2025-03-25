@@ -68,7 +68,6 @@ class Edit4BankFragment : BaseEditFragment() {
         mSelectBankName?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 activity?.let {
-                    FirebaseUtils.logEvent("SERVICE_GET_BANK_CARD_INFO")
                     BankListActivity.startActivityResult(it)
                 }
             }
