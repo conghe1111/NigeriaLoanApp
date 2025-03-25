@@ -88,6 +88,9 @@
                             android:inputType="number"
                             android:singleLine="true"
                             android:textColorHint="#AFAFAF"
+                            app:autoSizeMaxTextSize="@dimen/sp_12"
+                            app:autoSizeMinTextSize="1sp"
+                            app:autoSizeStepGranularity="1sp"
                             android:textSize="@dimen/sp_12"
                             android:textCursorDrawable="@drawable/et_cursor_color"
                             android:layout_height="match_parent"/>
