@@ -4,10 +4,10 @@
     android:shape="rectangle">
     <solid android:color="#E6FFF0" />
     <corners
-        android:bottomLeftRadius="@dimen/dp_10"
-        android:bottomRightRadius="@dimen/dp_10"
-        android:topLeftRadius="@dimen/dp_10"
-        android:topRightRadius="@dimen/dp_10" />
+        android:bottomLeftRadius="@dimen/dp10"
+        android:bottomRightRadius="@dimen/dp10"
+        android:topLeftRadius="@dimen/dp10"
+        android:topRightRadius="@dimen/dp10" />
 
     <gradient
         android:angle="90"

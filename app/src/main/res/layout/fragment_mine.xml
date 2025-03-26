@@ -14,7 +14,7 @@
             android:orientation="vertical">
 
             <include layout="@layout/include_mine_top"
-                android:layout_marginTop="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -22,17 +22,17 @@
             <include
                 layout="@layout/include_mine_setting"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp18"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_10" />
+                android:layout_marginHorizontal="@dimen/dp10" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_content_mine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp10"
                 android:background="@drawable/bg_mine_setting_center"
-                android:layout_marginHorizontal="@dimen/dp_10"
+                android:layout_marginHorizontal="@dimen/dp10"
                 android:visibility="gone" />
 
         </LinearLayout>

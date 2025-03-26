@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="@dimen/dp_21"
-        android:layout_marginBottom="@dimen/dp_16"
+        android:layout_marginHorizontal="@dimen/dp21"
+        android:layout_marginBottom="@dimen/dp16"
         android:background="@drawable/bg_white_bg"
         android:orientation="vertical">
 
@@ -20,19 +20,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp14"
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/loan_detail"
             android:textColor="#333333"
-            android:textSize="@dimen/sp_15"
+            android:textSize="@dimen/sp15"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_14"
+            android:layout_marginHorizontal="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp14"
             android:orientation="vertical">
 
             <LinearLayout
@@ -53,7 +53,7 @@
             <View
                 android:layout_width="match_parent"
                 android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp_2"/>
+                android:layout_height="@dimen/dp2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,7 +73,7 @@
             <View
                 android:layout_width="match_parent"
                 android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp_2"/>
+                android:layout_height="@dimen/dp2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,15 +93,15 @@
             <View
                 android:layout_width="match_parent"
                 android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp_2"/>
+                android:layout_height="@dimen/dp2"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_14"
+            android:layout_marginHorizontal="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp14"
             android:orientation="vertical">
 
             <LinearLayout
@@ -122,7 +122,7 @@
             <View
                 android:layout_width="match_parent"
                 android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp_2"/>
+                android:layout_height="@dimen/dp2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,7 +142,7 @@
             <View
                 android:layout_width="match_parent"
                 android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp_2"/>
+                android:layout_height="@dimen/dp2"/>
 
         </LinearLayout>
 
@@ -151,7 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_13"
+            android:layout_marginTop="@dimen/dp13"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -168,8 +168,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginStart="@dimen/dp_6"
+                android:textSize="@dimen/sp12"
+                android:layout_marginStart="@dimen/dp6"
                 android:text="@string/i_agree_to_loan_contact" />
 
         </LinearLayout>
@@ -177,15 +177,15 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_loan_confirm"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp40"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_11"
-            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp11"
+            android:layout_marginBottom="@dimen/dp10"
             android:background="@drawable/bg_select_amount_10"
             android:gravity="center"
             android:text="@string/confirm"
             android:textColor="#242424"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp14"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -194,7 +194,7 @@
         android:id="@+id/iv_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp_21"
+        android:layout_marginEnd="@dimen/dp21"
         android:layout_marginBottom="-13dp"
         android:layout_alignParentEnd="true"
         android:src="@drawable/ic_close_2"

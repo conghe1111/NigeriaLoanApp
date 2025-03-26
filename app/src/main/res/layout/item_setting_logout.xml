@@ -2,15 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fl_setting_container"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_50"
+    android:layout_height="@dimen/dp50"
    >
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_setting_logout"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="@dimen/dp_80"
+        android:layout_marginHorizontal="@dimen/dp80"
         android:layout_height="match_parent"
-        android:textSize="@dimen/sp_17"
+        android:textSize="@dimen/sp17"
         android:textColor="#40B950"
         android:gravity="center"
         android:background="@drawable/bg_login"

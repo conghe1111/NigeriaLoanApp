@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_111"
+        android:layout_height="@dimen/dp111"
         android:layout_gravity="bottom"
         android:background="@color/white"
         android:clickable="true"
@@ -15,10 +15,10 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_32"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_11"
-            android:layout_marginEnd="@dimen/dp_10">
+            android:layout_height="@dimen/dp32"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp11"
+            android:layout_marginEnd="@dimen/dp10">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/repayment_amount"
                 android:textColor="#666666"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp14" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_input_confirm"
@@ -37,19 +37,19 @@
                 android:layout_gravity="center_vertical|end"
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
-                android:paddingHorizontal="@dimen/dp_8"
-                android:paddingVertical="@dimen/dp_4"
+                android:paddingHorizontal="@dimen/dp8"
+                android:paddingVertical="@dimen/dp4"
                 android:text="@string/confirm"
                 android:textColor="@color/theme_color"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp14" />
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_38"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_11"
-            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_height="@dimen/dp38"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp11"
+            android:layout_marginEnd="@dimen/dp10"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -59,19 +59,19 @@
                 android:gravity="center_vertical"
                 android:text="₦"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_24" />
+                android:textSize="@dimen/sp24" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_input_num"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dp_14"
+                android:layout_marginStart="@dimen/dp14"
                 android:layout_weight="1"
                 android:background="@null"
                 android:hint="Please input more than 100"
                 android:inputType="number"
                 android:maxLines="1"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/sp16"
                 android:textColorHint="#333333"
                 android:minLines="3"
                 android:textCursorDrawable="@drawable/et_cursor_color" />
@@ -84,9 +84,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:layout_marginHorizontal="@dimen/dp_10"
+            android:layout_height="@dimen/dp1"
+            android:layout_marginBottom="@dimen/dp10"
+            android:layout_marginHorizontal="@dimen/dp10"
             android:background="#F7F7F7" />
 
     </LinearLayout>

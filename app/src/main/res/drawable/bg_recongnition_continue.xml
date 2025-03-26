@@ -6,10 +6,10 @@
     <solid android:color="@color/white" />
 
     <stroke
-        android:width="@dimen/dp_1"
+        android:width="@dimen/dp1"
         android:color="#40B950" />
 
     <!-- android:radius 圆角的半径 -->
-    <corners android:radius="@dimen/dp_10" />
+    <corners android:radius="@dimen/dp10" />
 
 </shape>

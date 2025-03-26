@@ -3,7 +3,7 @@
     android:id="@+id/fl_select_container"
     android:layout_width="match_parent"
     android:background="@color/white"
-    android:layout_height="@dimen/dp_54">
+    android:layout_height="@dimen/dp54">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_item_select_amount"
@@ -11,8 +11,8 @@
 
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:textSize="@dimen/sp_14"
-        android:drawablePadding="@dimen/dp_3"
+        android:textSize="@dimen/sp14"
+        android:drawablePadding="@dimen/dp3"
         android:layout_height="wrap_content"/>
 <!--    android:textColor="#999999"-->
 <!--    android:drawableEnd="@drawable/ic_lock"-->
@@ -23,7 +23,7 @@
 <!--        android:textStyle="bold"-->
 <!--        android:layout_gravity="center"-->
 <!--        android:visibility="gone"-->
-<!--        android:textSize="@dimen/sp_14"-->
+<!--        android:textSize="@dimen/sp14"-->
 <!--        android:layout_height="wrap_content"/>-->
 
 </FrameLayout>

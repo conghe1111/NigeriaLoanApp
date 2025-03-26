@@ -8,100 +8,100 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp20"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="@string/loan_amount"
             android:gravity="start|center_vertical"
             android:textColor="#8A8A8A"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_12" />
+            android:layout_marginStart="@dimen/dp11"
+            android:textSize="@dimen/sp12" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="@string/date_of_application"
             android:gravity="end|center_vertical"
             android:textColor="#8A8A8A"
-            android:layout_marginEnd="@dimen/dp_11"
-            android:textSize="@dimen/sp_12" />
+            android:layout_marginEnd="@dimen/dp11"
+            android:textSize="@dimen/sp12" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp8"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_loan_amount_1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="0"
             android:gravity="start|center_vertical"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:layout_marginStart="@dimen/dp11"
+            android:textSize="@dimen/sp14" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_date_app_1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="0"
             android:gravity="end|center_vertical"
             android:textColor="#333333"
-            android:layout_marginEnd="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:layout_marginEnd="@dimen/dp11"
+            android:textSize="@dimen/sp14" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_6"
-        android:layout_marginHorizontal="@dimen/dp_11"
+        android:layout_marginTop="@dimen/dp6"
+        android:layout_marginHorizontal="@dimen/dp11"
         android:background="@drawable/hor_green_hash_line"
-        android:layout_height="@dimen/dp_2"/>
+        android:layout_height="@dimen/dp2"/>
 
     <LinearLayout
         android:id="@+id/ll_due_day_container"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp14"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="@string/due_amount"
             android:gravity="start|center_vertical"
             android:textColor="#8A8A8A"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_12" />
+            android:layout_marginStart="@dimen/dp11"
+            android:textSize="@dimen/sp12" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="@string/date_of_application"
             android:gravity="end|center_vertical"
             android:textColor="#8A8A8A"
-            android:layout_marginEnd="@dimen/dp_11"
-            android:textSize="@dimen/sp_12" />
+            android:layout_marginEnd="@dimen/dp11"
+            android:textSize="@dimen/sp12" />
 
     </LinearLayout>
 
@@ -109,105 +109,105 @@
         android:id="@+id/ll_due_day_container_desc"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp8"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_loan_amount_2"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="0"
             android:gravity="start|center_vertical"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:layout_marginStart="@dimen/dp11"
+            android:textSize="@dimen/sp14" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_date_app_2"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="0"
             android:gravity="end|center_vertical"
             android:textColor="#333333"
-            android:layout_marginEnd="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:layout_marginEnd="@dimen/dp11"
+            android:textSize="@dimen/sp14" />
 
     </LinearLayout>
 
     <View
         android:id="@+id/view_line2"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_6"
-        android:layout_marginHorizontal="@dimen/dp_11"
+        android:layout_marginTop="@dimen/dp6"
+        android:layout_marginHorizontal="@dimen/dp11"
         android:background="@drawable/hor_green_hash_line"
-        android:layout_height="@dimen/dp_2"/>
+        android:layout_height="@dimen/dp2"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp14"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="@string/loan_status"
             android:gravity="start|center_vertical"
             android:textColor="#8A8A8A"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_12" />
+            android:layout_marginStart="@dimen/dp11"
+            android:textSize="@dimen/sp12" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="@string/loan_amount"
             android:gravity="end|center_vertical"
             android:textColor="#8A8A8A"
-            android:layout_marginEnd="@dimen/dp_11"
-            android:textSize="@dimen/sp_12" />
+            android:layout_marginEnd="@dimen/dp11"
+            android:textSize="@dimen/sp12" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dp_8"
-        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp8"
+        android:layout_marginBottom="@dimen/dp20"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_loan_status"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="0"
             android:gravity="start|center_vertical"
             android:textColor="#10974C"
             android:textStyle="bold"
-            android:layout_marginStart="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:layout_marginStart="@dimen/dp11"
+            android:textSize="@dimen/sp14" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_loan_amount"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_20"
+            android:layout_height="@dimen/dp20"
             android:includeFontPadding="false"
             android:text="0"
             android:gravity="end|center_vertical"
             android:textColor="#10974C"
             android:textStyle="bold"
-            android:layout_marginEnd="@dimen/dp_11"
-            android:textSize="@dimen/sp_14" />
+            android:layout_marginEnd="@dimen/dp11"
+            android:textSize="@dimen/sp14" />
 
     </LinearLayout>
 

@@ -10,8 +10,8 @@
         android:id="@+id/sv_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/dp_10"
-        android:layout_marginVertical="@dimen/dp_10"
+        android:layout_marginHorizontal="@dimen/dp10"
+        android:layout_marginVertical="@dimen/dp10"
         android:background="@drawable/bg_white_bg_10">
 
         <LinearLayout
@@ -22,22 +22,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_13"
+                android:layout_marginTop="@dimen/dp13"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="@dimen/dp_20"
-                    android:layout_marginStart="@dimen/dp_13"
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:layout_marginStart="@dimen/dp13"
                     android:src="@drawable/ic_edit_work_1" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_6"
+                    android:layout_marginStart="@dimen/dp6"
                     android:text="@string/work_information"
                     android:textColor="#333333"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp14"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -46,43 +46,43 @@
                 android:id="@+id/select_employment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp18"
                 app:edit_view_title="@string/employment" />
 
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_monthly_income"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp8"
                 app:edit_view_title="@string/monthly_income" />
 
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_position"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp8"
                 app:edit_view_title="@string/position" />
 
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_pay_period"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp8"
                 app:edit_view_title="@string/pay_period" />
 
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_has_other_outstand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp8"
                 app:edit_view_title="@string/do_you_have_any_outstand"
                 app:edit_view_title_line="2" />
 
             <com.chocolate.nigerialoanapp.widget.InfoEditView
                 android:id="@+id/edit_company_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp8"
                 app:edit_view_optional="true"
                 app:edit_view_title="@string/company_name" />
 
@@ -90,7 +90,7 @@
                 android:id="@+id/edit_company_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp8"
                 app:edit_view_optional="true"
                 app:edit_view_title="@string/company_phone_number" />
 
@@ -98,32 +98,32 @@
                 android:id="@+id/edit_company_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp8"
                 app:edit_view_optional="true"
                 app:edit_view_title="@string/company_address" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_edit_basic_next"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_13"
+                android:layout_height="@dimen/dp48"
+                android:layout_marginHorizontal="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp13"
                 android:background="@drawable/selector_btn_theme"
                 android:gravity="center"
                 android:text="@string/next"
                 android:textColor="#242424"
                 android:textStyle="bold"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp16" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_work_next_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_45"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp45"
                 android:gravity="center"
                 android:text="@string/please_read_all"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp14" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

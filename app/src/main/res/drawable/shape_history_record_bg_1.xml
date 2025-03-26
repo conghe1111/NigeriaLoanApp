@@ -4,10 +4,10 @@
 
     <solid android:color="#F1F1F1" />
 <!--    <stroke-->
-<!--        android:width="@dimen/dp_1"-->
+<!--        android:width="@dimen/dp1"-->
 <!--        android:color="#EBEBEB"/>-->
     <corners
-        android:topLeftRadius="@dimen/dp_10"
-        android:topRightRadius="@dimen/dp_10"
+        android:topLeftRadius="@dimen/dp10"
+        android:topRightRadius="@dimen/dp10"
         />
 </shape>

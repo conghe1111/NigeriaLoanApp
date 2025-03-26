@@ -8,12 +8,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_14"
-        android:layout_marginTop="@dimen/dp_14"
-        android:layout_marginBottom="@dimen/dp_30"
+        android:layout_marginHorizontal="@dimen/dp14"
+        android:layout_marginTop="@dimen/dp14"
+        android:layout_marginBottom="@dimen/dp30"
         android:background="@color/white"
-        app:cardCornerRadius="@dimen/dp_10"
-        app:cardElevation="@dimen/dp_8">
+        app:cardCornerRadius="@dimen/dp10"
+        app:cardElevation="@dimen/dp8">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,10 +24,10 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2"
-                android:layout_marginHorizontal="@dimen/dp_34"
-                android:layout_marginTop="@dimen/dp_14"
-                android:layout_marginBottom="@dimen/dp_16"
+                android:layout_height="@dimen/dp2"
+                android:layout_marginHorizontal="@dimen/dp34"
+                android:layout_marginTop="@dimen/dp14"
+                android:layout_marginBottom="@dimen/dp16"
                 android:background="@drawable/hor_hash_line" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -38,7 +38,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/register"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -46,19 +46,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp6"
                 android:includeFontPadding="false"
                 android:text="@string/dears_234_x"
                 android:textColor="#888888"
-                android:textSize="@dimen/sp_13"
+                android:textSize="@dimen/sp13"
                 android:textStyle="bold" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp44"
+                android:layout_marginHorizontal="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp10"
                 android:orientation="horizontal"
                 android:visibility="gone">
                 <!--            android:background="@drawable/bg_gray_bg"-->
@@ -67,41 +67,41 @@
                     android:id="@+id/tv_ussd"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/dp_5"
+                    android:layout_margin="@dimen/dp5"
                     android:layout_weight="1"
                     android:background="@drawable/selector_tv_register_bg"
                     android:gravity="center"
                     android:text="@string/ussd"
                     android:textColor="@drawable/selector_tv_register"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp14" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_sms"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/dp_5"
+                    android:layout_margin="@dimen/dp5"
                     android:layout_weight="1"
                     android:background="@drawable/selector_tv_register_bg"
                     android:gravity="center"
                     android:text="@string/sms"
                     android:textColor="@drawable/selector_tv_register"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp14" />
 
             </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp48"
+                android:layout_marginHorizontal="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp10"
                 android:background="@drawable/bg_edit">
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_get_code"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="@dimen/dp_5"
-                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_marginVertical="@dimen/dp5"
+                    android:layout_marginStart="@dimen/dp10"
                     android:background="@null"
                     android:hint="@string/enter_verification_code"
                     android:inputType="number"
@@ -111,35 +111,35 @@
                     android:singleLine="true"
                     android:textColorHint="#B3B3B3"
                     android:textCursorDrawable="@drawable/et_cursor_color"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp14" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_get_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
-                    android:padding="@dimen/dp_5"
-                    android:layout_marginEnd="@dimen/dp_3"
+                    android:padding="@dimen/dp5"
+                    android:layout_marginEnd="@dimen/dp3"
                     android:text="@string/get_code"
                     android:textColor="#75D7A1"
                     android:textStyle="bold"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp12" />
 
             </FrameLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp44"
+                android:layout_marginHorizontal="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp10"
                 android:background="@drawable/bg_edit">
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_set_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="@dimen/dp_5"
-                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_marginVertical="@dimen/dp5"
+                    android:layout_marginStart="@dimen/dp10"
                     android:background="@null"
                     android:hint="@string/set_up_digit_password"
                     android:inputType="numberPassword"
@@ -148,32 +148,32 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColorHint="#B3B3B3"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp12" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_set_pwd_mode"
-                    android:layout_width="@dimen/dp_29"
-                    android:layout_height="@dimen/dp_22"
+                    android:layout_width="@dimen/dp29"
+                    android:layout_height="@dimen/dp22"
                     android:layout_gravity="center|end"
-                    android:padding="@dimen/dp_5"
-                    android:layout_marginEnd="@dimen/dp_2"
+                    android:padding="@dimen/dp5"
+                    android:layout_marginEnd="@dimen/dp2"
                     android:src="@drawable/ic_pwd_mode" />
 
             </FrameLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp44"
+                android:layout_marginHorizontal="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp10"
                 android:background="@drawable/bg_edit">
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_again_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="@dimen/dp_5"
-                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_marginVertical="@dimen/dp5"
+                    android:layout_marginStart="@dimen/dp10"
                     android:background="@null"
                     android:hint="@string/enter_password"
                     android:inputType="numberPassword"
@@ -182,15 +182,15 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColorHint="#B3B3B3"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp12" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_again_pwd_mode"
-                    android:layout_width="@dimen/dp_29"
-                    android:layout_height="@dimen/dp_22"
-                    android:layout_marginEnd="@dimen/dp_2"
+                    android:layout_width="@dimen/dp29"
+                    android:layout_height="@dimen/dp22"
+                    android:layout_marginEnd="@dimen/dp2"
                     android:layout_gravity="center|end"
-                    android:padding="@dimen/dp_5"
+                    android:padding="@dimen/dp5"
                     android:src="@drawable/ic_pwd_mode" />
 
             </FrameLayout>
@@ -198,23 +198,23 @@
 <!--            <com.chocolate.nigerialoanapp.widget.EditClearContainer-->
 <!--                android:id="@+id/edit_clear_login"-->
 <!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/dp_48"-->
-<!--                android:layout_marginHorizontal="@dimen/dp_20"-->
-<!--                android:layout_marginTop="@dimen/dp_10"-->
+<!--                android:layout_height="@dimen/dp48"-->
+<!--                android:layout_marginHorizontal="@dimen/dp20"-->
+<!--                android:layout_marginTop="@dimen/dp10"-->
 <!--                app:edit_view_hint="@string/enter_password" />-->
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_sign_up"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_46"
-                android:layout_marginHorizontal="@dimen/dp_2"
-                android:layout_marginTop="@dimen/dp_17"
-                android:layout_marginBottom="@dimen/dp_20"
+                android:layout_height="@dimen/dp46"
+                android:layout_marginHorizontal="@dimen/dp2"
+                android:layout_marginTop="@dimen/dp17"
+                android:layout_marginBottom="@dimen/dp20"
                 android:background="@drawable/selector_btn_theme_2"
                 android:gravity="center"
                 android:text="@string/sign_up"
                 android:textColor="#242424"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:textStyle="bold" />
 
 

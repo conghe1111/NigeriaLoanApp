@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fl_setting_container"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_54"
+    android:layout_height="@dimen/dp54"
     android:background="?attr/selectableItemBackground">
 
     <LinearLayout
@@ -24,9 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#333333"
-            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp10"
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp14"
             android:text="1.0.0" />
     </LinearLayout>
 

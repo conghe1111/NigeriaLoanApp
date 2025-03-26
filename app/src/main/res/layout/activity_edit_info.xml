@@ -9,7 +9,7 @@
     <include
         android:layout_width="match_parent"
         layout="@layout/include_top_title"
-        android:layout_height="@dimen/dp_54"/>
+        android:layout_height="@dimen/dp54"/>
 
    <FrameLayout
        android:id="@+id/fl_edit_info_container"

@@ -21,13 +21,13 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_icon"
-        android:layout_width="@dimen/dp_179"
+        android:layout_width="@dimen/dp179"
         android:src="@drawable/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view_top"
         app:layout_constraintBottom_toTopOf="@id/view_bottom"
-        android:layout_height="@dimen/dp_150" />
+        android:layout_height="@dimen/dp150" />
 
 
     <View
@@ -40,14 +40,14 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_splash_icon"
-        android:layout_width="@dimen/dp_20"
+        android:layout_width="@dimen/dp20"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/ic_launcher"
         app:layout_constraintEnd_toStartOf="@id/tv_desc"
-        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
-        android:layout_height="@dimen/dp_20"/>
+        android:layout_height="@dimen/dp20"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_desc"
@@ -55,13 +55,13 @@
         android:text="@string/app_name"
         android:textColor="#333333"
         android:gravity="center"
-        android:layout_marginStart="@dimen/dp_4"
+        android:layout_marginStart="@dimen/dp4"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/iv_splash_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/iv_splash_icon"
         app:layout_constraintBottom_toBottomOf="@id/iv_splash_icon"
-        android:textSize="@dimen/sp_14"
+        android:textSize="@dimen/sp14"
         android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

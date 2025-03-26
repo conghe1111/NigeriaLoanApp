@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fl_item_container"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/dp_78"
-    android:layout_height="@dimen/dp_90">
+    android:layout_width="@dimen/dp78"
+    android:layout_height="@dimen/dp90">
 <!--    android:background="@drawable/bg_green_bg"-->
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -13,16 +13,16 @@
         android:gravity="center"
         android:textColor="#A1A1A1"
         android:layout_gravity="center_vertical"
-        android:textSize="@dimen/sp_14"
+        android:textSize="@dimen/sp14"
         android:layout_height="match_parent"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/tv_item_loan_apply_date_lock"
-            android:layout_width="@dimen/dp_11"
+            android:layout_width="@dimen/dp11"
             android:src="@drawable/ic_apply_lock"
             android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_4"
-            android:layout_height="@dimen/dp_14"/>
+            android:layout_marginEnd="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp4"
+            android:layout_height="@dimen/dp14"/>
 
 </FrameLayout>

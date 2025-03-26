@@ -63,9 +63,9 @@ class InfoSelectView : LinearLayout {
         }
         val layoutParams = topView.layoutParams
         if (defLine == 2) {
-            layoutParams.height = resources.getDimension(R.dimen.dp_27).toInt()
+            layoutParams.height = resources.getDimension(R.dimen.dp27).toInt()
         } else {
-            layoutParams.height = resources.getDimension(R.dimen.dp_11).toInt()
+            layoutParams.height = resources.getDimension(R.dimen.dp11).toInt()
         }
         topView.layoutParams = layoutParams
     }

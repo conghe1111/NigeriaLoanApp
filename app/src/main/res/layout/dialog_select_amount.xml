@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/white"
-        android:layout_marginHorizontal="@dimen/dp_22"
-        android:layout_marginBottom="@dimen/dp_24"
-        app:cardCornerRadius="@dimen/dp_10">
+        android:layout_marginHorizontal="@dimen/dp22"
+        android:layout_marginBottom="@dimen/dp24"
+        app:cardCornerRadius="@dimen/dp10">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,16 +27,16 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_amount_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44"
+                android:layout_height="@dimen/dp44"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp_15"
-                android:layout_marginBottom="@dimen/dp_11"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginBottom="@dimen/dp11"
                 android:background="@drawable/bg_select_amount_10"
                 android:gravity="center"
                 android:text="@string/confirm"
                 android:textColor="#242424"
                 android:textStyle="bold"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp14" />
 
         </LinearLayout>
 

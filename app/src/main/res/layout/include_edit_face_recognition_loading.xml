@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/dp_50"
+        android:layout_marginBottom="@dimen/dp50"
         android:orientation="vertical">
 
         <ProgressBar
-            android:layout_width="@dimen/dp_70"
-            android:layout_height="@dimen/dp_70"
+            android:layout_width="@dimen/dp70"
+            android:layout_height="@dimen/dp70"
             android:layout_gravity="center"
             android:indeterminateDrawable="@drawable/shape_scan_progress_bar" />
 
@@ -23,9 +23,9 @@
             android:text="@string/please_wait"
             android:layout_gravity="center"
             android:textColor="#333333"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp20"
             android:includeFontPadding="false"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp14"
             android:layout_height="wrap_content"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -35,8 +35,8 @@
             android:layout_gravity="center"
             android:textColor="#333333"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/dp_8"
-            android:textSize="@dimen/sp_24"
+            android:layout_marginTop="@dimen/dp8"
+            android:textSize="@dimen/sp24"
             android:layout_height="wrap_content"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -46,26 +46,26 @@
             android:textColor="#333333"
             android:gravity="center"
             android:background="@drawable/bg_green_bg_2"
-            android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginHorizontal="@dimen/dp_40"
-            android:textSize="@dimen/sp_12"
-            android:layout_height="@dimen/dp_53"/>
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp40"
+            android:textSize="@dimen/sp12"
+            android:layout_height="@dimen/dp53"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_face_recognition_continue"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_48"
+            android:layout_height="@dimen/dp48"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dp_40"
-            android:layout_marginTop="@dimen/dp_19"
+            android:layout_marginHorizontal="@dimen/dp40"
+            android:layout_marginTop="@dimen/dp19"
             android:background="@drawable/bg_recongnition_continue"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:paddingStart="@dimen/dp_85"
-            android:paddingEnd="@dimen/dp_85"
+            android:paddingStart="@dimen/dp85"
+            android:paddingEnd="@dimen/dp85"
             android:text="@string/continue_str"
             android:textColor="#40B950"
-            android:textSize="@dimen/sp_17"
+            android:textSize="@dimen/sp17"
             android:textStyle="bold" />
 
     </LinearLayout>

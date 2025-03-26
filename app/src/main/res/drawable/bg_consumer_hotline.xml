@@ -11,6 +11,6 @@
         android:useLevel="true" />
 
     <corners
-        android:radius="@dimen/dp_10"
+        android:radius="@dimen/dp10"
         />
 </shape>

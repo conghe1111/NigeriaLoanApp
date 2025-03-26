@@ -8,30 +8,30 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_13"
+        android:layout_marginStart="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp13"
         android:includeFontPadding="false"
         android:text="@string/disburse_fees"
         android:textColor="#333333"
-        android:textSize="@dimen/sp_14"
+        android:textSize="@dimen/sp14"
         android:drawableStart="@drawable/ic_loan_repay_icon"
-        android:drawablePadding="@dimen/dp_6"
+        android:drawablePadding="@dimen/dp6"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp14"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp10"
             android:includeFontPadding="false"
             android:text="@string/disbursal_amount"
             android:textColor="#333333"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/sp14" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_1_disbural_amount"
@@ -40,36 +40,36 @@
             android:layout_gravity="center_vertical|end"
             android:gravity="center_vertical|end"
             android:textColor="#333333"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp14"
             android:includeFontPadding="false"
             android:text="₦10,000,000"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10" />
+            android:layout_marginEnd="@dimen/dp10" />
 
     </LinearLayout>
 
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2"
-        android:layout_marginHorizontal="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="@dimen/dp2"
+        android:layout_marginHorizontal="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
         android:background="@drawable/hor_grey_hash_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp8"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp10"
             android:includeFontPadding="false"
             android:text="@string/interest"
             android:textColor="#999999"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/sp14" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_1_interest"
@@ -78,35 +78,35 @@
             android:layout_gravity="center_vertical|end"
             android:gravity="center_vertical|end"
             android:textColor="#999999"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp14"
             android:includeFontPadding="false"
             android:text="₦0,00"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10" />
+            android:layout_marginEnd="@dimen/dp10" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2"
-        android:layout_marginHorizontal="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="@dimen/dp2"
+        android:layout_marginHorizontal="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
         android:background="@drawable/hor_grey_hash_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp8"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp10"
             android:includeFontPadding="false"
             android:text="@string/processing_fee"
             android:textColor="#999999"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/sp14" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_1_process_fee"
@@ -115,35 +115,35 @@
             android:layout_gravity="center_vertical|end"
             android:gravity="center_vertical|end"
             android:textColor="#999999"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp14"
             android:includeFontPadding="false"
             android:text="₦0,00"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10" />
+            android:layout_marginEnd="@dimen/dp10" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2"
-        android:layout_marginHorizontal="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="@dimen/dp2"
+        android:layout_marginHorizontal="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
         android:background="@drawable/hor_grey_hash_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp8"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp10"
             android:includeFontPadding="false"
             android:text="@string/loan_amount"
             android:textColor="#333333"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/sp14" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_1_loan_amount"
@@ -152,19 +152,19 @@
             android:layout_gravity="center_vertical|end"
             android:gravity="center_vertical|end"
             android:textColor="#333333"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp14"
             android:includeFontPadding="false"
             android:text="₦100,0,00"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10" />
+            android:layout_marginEnd="@dimen/dp10" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2"
-        android:layout_marginHorizontal="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="@dimen/dp2"
+        android:layout_marginHorizontal="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
         android:background="@drawable/hor_grey_hash_line" />
 
 </LinearLayout>

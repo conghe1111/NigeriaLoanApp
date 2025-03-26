@@ -7,8 +7,8 @@
         android:endColor="#FFFFFF"
         android:startColor="#E7FFDC" />
 <!--    <stroke-->
-<!--        android:width="@dimen/dp_1"-->
+<!--        android:width="@dimen/dp1"-->
 <!--        android:color="#EBEBEB"/>-->
     <corners
-        android:radius="@dimen/dp_10" />
+        android:radius="@dimen/dp10" />
 </shape>

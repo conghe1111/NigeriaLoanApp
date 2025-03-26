@@ -10,7 +10,7 @@
     <include
         android:layout_width="match_parent"
         layout="@layout/include_top_title"
-        android:layout_height="@dimen/dp_54"/>
+        android:layout_height="@dimen/dp54"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -20,8 +20,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_history_record"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginHorizontal="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp5"
             android:layout_height="match_parent"/>
 
         <FrameLayout
@@ -34,7 +34,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/dp_59"
+                android:layout_marginTop="@dimen/dp59"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content">
 
@@ -48,8 +48,8 @@
                     android:layout_width="wrap_content"
                     android:text="@string/no_related_order_found"
                     android:textColor="#333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:textSize="@dimen/sp14"
+                    android:layout_marginTop="@dimen/dp10"
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>

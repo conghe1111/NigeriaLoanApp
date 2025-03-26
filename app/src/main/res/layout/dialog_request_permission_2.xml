@@ -8,8 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:layout_marginVertical="@dimen/dp_40"
+        android:layout_marginHorizontal="@dimen/dp20"
+        android:layout_marginVertical="@dimen/dp40"
         android:background="@drawable/bg_request_permission"
         android:orientation="vertical">
 
@@ -22,25 +22,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp14"
             android:background="#F4F5F7"
-            android:layout_marginBottom="@dimen/dp_14"
+            android:layout_marginBottom="@dimen/dp14"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginHorizontal="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp10"
                 android:layout_height="wrap_content">
                 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_select_state"
-                    android:layout_width="@dimen/dp_14"
+                    android:layout_width="@dimen/dp14"
                     android:src="@drawable/ic_select"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/dp_8"
-                    android:layout_height="@dimen/dp_14"/>
+                    android:layout_marginEnd="@dimen/dp8"
+                    android:layout_height="@dimen/dp14"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_request_permission_policy_term"
@@ -49,14 +49,14 @@
                     android:gravity="start|top"
                     android:text="@string/i_agree_to"
                     android:textColor="#666666"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp14" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_height="@dimen/dp_50">
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_height="@dimen/dp50">
 
                 <FrameLayout
                     android:layout_width="0dp"
@@ -66,23 +66,23 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_request_permission_cancel"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_42"
+                        android:layout_height="@dimen/dp42"
                         android:layout_gravity="center"
                         android:background="@drawable/request_permission_cancel_1"
                         android:gravity="center"
-                        android:paddingStart="@dimen/dp_4"
-                        android:paddingEnd="@dimen/dp_4"
+                        android:paddingStart="@dimen/dp4"
+                        android:paddingEnd="@dimen/dp4"
                         android:text="@string/reject"
-                        app:autoSizeMaxTextSize="@dimen/sp_16"
+                        app:autoSizeMaxTextSize="@dimen/sp16"
                         app:autoSizeMinTextSize="1sp"
                         app:autoSizeStepGranularity="1sp"
                         android:textStyle="bold"
                         android:includeFontPadding="false"
                         android:maxLines="1"
-                        android:layout_marginStart="@dimen/dp_24"
-                        android:layout_marginEnd="@dimen/dp_11_33"
+                        android:layout_marginStart="@dimen/dp24"
+                        android:layout_marginEnd="@dimen/dp11"
                         android:textColor="#40B950"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/sp16" />
 
                 </FrameLayout>
 
@@ -94,23 +94,23 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_request_permission_agree"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_42"
+                        android:layout_height="@dimen/dp42"
                         android:layout_gravity="center"
                         android:background="@drawable/request_permission_comfirm"
                         android:gravity="center"
-                        android:paddingStart="@dimen/dp_4"
-                        android:paddingEnd="@dimen/dp_4"
+                        android:paddingStart="@dimen/dp4"
+                        android:paddingEnd="@dimen/dp4"
                         android:text="@string/agree_and_continue"
-                        android:layout_marginStart="@dimen/dp_11_33"
-                        android:layout_marginEnd="@dimen/dp_24"
+                        android:layout_marginStart="@dimen/dp11"
+                        android:layout_marginEnd="@dimen/dp24"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:maxLines="2"
                         android:includeFontPadding="false"
-                        app:autoSizeMaxTextSize="@dimen/sp_16"
+                        app:autoSizeMaxTextSize="@dimen/sp16"
                         app:autoSizeMinTextSize="1sp"
                         app:autoSizeStepGranularity="1sp"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/sp16" />
 
                 </FrameLayout>
 

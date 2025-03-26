@@ -7,18 +7,18 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="@dimen/dp_14"
-        android:layout_marginTop="@dimen/dp_14"
-        app:cardCornerRadius="@dimen/dp_10"
+        android:layout_marginHorizontal="@dimen/dp14"
+        android:layout_marginTop="@dimen/dp14"
+        app:cardCornerRadius="@dimen/dp10"
         android:background="@color/white"
-        app:cardElevation="@dimen/dp_8"
-        android:layout_marginBottom="@dimen/dp_30"
+        app:cardElevation="@dimen/dp8"
+        android:layout_marginBottom="@dimen/dp30"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_10"
+            android:layout_marginHorizontal="@dimen/dp10"
             android:orientation="vertical">
 
             <include layout="@layout/include_login_app_detail"
@@ -26,20 +26,20 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_30"
-                android:layout_height="@dimen/dp_63">
+                android:layout_marginTop="@dimen/dp30"
+                android:layout_height="@dimen/dp63">
 
                 <View
                     android:id="@+id/view_login_top"
                     android:layout_width="match_parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/tv_login_item"
-                    android:layout_height="@dimen/dp_11"/>
+                    android:layout_height="@dimen/dp11"/>
 
                 <LinearLayout
                     android:id="@+id/tv_login_item"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_48"
+                    android:layout_height="@dimen/dp48"
                     app:layout_constraintTop_toBottomOf="@id/view_login_top"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:background="@drawable/bg_login_button"
@@ -55,17 +55,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/dp_10"
+                            android:layout_marginStart="@dimen/dp10"
                             android:src="@drawable/ic_country" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:textColor="#333333"
-                            android:textSize="@dimen/sp_12"
+                            android:textSize="@dimen/sp12"
                             android:textStyle="bold"
                             android:includeFontPadding="false"
                             android:text="+234"
-                            android:layout_marginStart="@dimen/dp_4"
+                            android:layout_marginStart="@dimen/dp4"
                             android:layout_gravity="center"
                             android:layout_height="wrap_content" />
 
@@ -74,8 +74,8 @@
                     <FrameLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/dp_8"
-                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp8"
+                        android:layout_marginStart="@dimen/dp8"
                         android:layout_height="match_parent">
 
                         <androidx.appcompat.widget.AppCompatEditText
@@ -88,10 +88,11 @@
                             android:inputType="number"
                             android:singleLine="true"
                             android:textColorHint="#AFAFAF"
-                            app:autoSizeMaxTextSize="@dimen/sp_12"
+                            app:autoSizeMaxTextSize="@dimen/sp12"
                             app:autoSizeMinTextSize="1sp"
                             app:autoSizeStepGranularity="1sp"
-                            android:textSize="@dimen/sp_12"
+                            android:textSize="@dimen/sp12"
+                            tools:hint="1111111111111111111111111111111111111111111111111111111111111222222222222222222222222222"
                             android:textCursorDrawable="@drawable/et_cursor_color"
                             android:layout_height="match_parent"/>
 
@@ -115,7 +116,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_login_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_23"
+                    android:layout_height="@dimen/dp23"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center"
@@ -124,8 +125,8 @@
                     android:text="@string/enter_phone_number"
                     android:textColor="#333333"
                     android:layout_marginBottom="-80dp"
-                    android:layout_marginStart="@dimen/dp_14"
-                    android:textSize="@dimen/sp_14"
+                    android:layout_marginStart="@dimen/dp14"
+                    android:textSize="@dimen/sp14"
                     android:textStyle="bold" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -133,24 +134,24 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_apply"
                 android:layout_width="match_parent"
-                android:layout_marginHorizontal="@dimen/dp_2"
+                android:layout_marginHorizontal="@dimen/dp2"
                 android:gravity="center"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:textColor="#242424"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/dp_17"
+                android:layout_marginTop="@dimen/dp17"
                 android:text="@string/login_register_apply"
                 android:background="@drawable/selector_btn_theme_2"
-                android:layout_height="@dimen/dp_46"/>
+                android:layout_height="@dimen/dp46"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_login_register_next_desc"
                 android:layout_width="match_parent"
                 android:text="@string/please_read_all"
-                android:textSize="@dimen/sp_13"
-                android:layout_marginTop="@dimen/dp_10"
+                android:textSize="@dimen/sp13"
+                android:layout_marginTop="@dimen/dp10"
                 android:gravity="center"
-                android:layout_marginBottom="@dimen/dp_45"
+                android:layout_marginBottom="@dimen/dp45"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>

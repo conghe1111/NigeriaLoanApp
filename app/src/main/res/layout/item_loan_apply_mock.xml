@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fl_item_container"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_42">
+    android:layout_height="@dimen/dp42">
     <!--    android:background="@drawable/bg_green_bg"-->
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -14,15 +14,15 @@
         android:textColor="#A1A1A1"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
-        android:textSize="@dimen/sp_15"
-        android:layout_height="@dimen/dp_38"/>
+        android:textSize="@dimen/sp15"
+        android:layout_height="@dimen/dp38"/>
 
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_item_lock"
-        android:layout_width="@dimen/dp_16"
+        android:layout_width="@dimen/dp16"
         android:src="@drawable/ic_lock"
         android:layout_gravity="center"
-        android:layout_height="@dimen/dp_20"/>
+        android:layout_height="@dimen/dp20"/>
 
 </FrameLayout>

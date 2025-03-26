@@ -5,22 +5,22 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape_toast_bg"
     android:gravity="center_vertical"
-    android:minWidth="@dimen/dp_210"
-    android:minHeight="@dimen/dp_65"
+    android:minWidth="@dimen/dp210"
+    android:minHeight="@dimen/dp65"
     android:orientation="horizontal">
 
     <ProgressBar
-        android:layout_width="@dimen/dp_32"
-        android:layout_height="@dimen/dp_32"
-        android:layout_marginLeft="@dimen/dp_15_33"
+        android:layout_width="@dimen/dp32"
+        android:layout_height="@dimen/dp32"
+        android:layout_marginLeft="@dimen/dp15"
         android:indeterminateDrawable="@drawable/shape_progress_bar" />
 
     <TextView
         android:id="@+id/tv_login_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginLeft="@dimen/dp18"
         android:text="@string/str_loading"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_14" />
+        android:textSize="@dimen/sp14" />
 </LinearLayout>

@@ -9,8 +9,8 @@
         android:id="@+id/include_start"
         layout="@layout/include_edit_face_recognition_start"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="@dimen/dp_10"
-        android:layout_marginVertical="@dimen/dp_10"
+        android:layout_marginHorizontal="@dimen/dp10"
+        android:layout_marginVertical="@dimen/dp10"
         android:visibility="gone"
         tools:visibility="gone"
         android:layout_height="match_parent" />

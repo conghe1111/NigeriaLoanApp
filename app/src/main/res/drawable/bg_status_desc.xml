@@ -9,7 +9,7 @@
     <!--        android:startColor="#b5ffffff"-->
     <!--        android:type="linear"-->
     <!--        android:useLevel="true" />-->
-    <corners android:radius="@dimen/dp_10" />
+    <corners android:radius="@dimen/dp10" />
 
     <gradient
         android:angle="180"

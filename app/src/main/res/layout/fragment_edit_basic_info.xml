@@ -10,8 +10,8 @@
         android:id="@+id/sv_content"
         android:layout_width="match_parent"
         android:background="@drawable/bg_white_bg_10"
-        android:layout_marginVertical="@dimen/dp_10"
-        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginVertical="@dimen/dp10"
+        android:layout_marginHorizontal="@dimen/dp10"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -22,22 +22,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/dp_13"
+                android:layout_marginTop="@dimen/dp13"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_20"
+                    android:layout_width="@dimen/dp20"
                     android:src="@drawable/ic_edit_basic_1"
-                    android:layout_marginStart="@dimen/dp_13"
-                    android:layout_height="@dimen/dp_20"/>
+                    android:layout_marginStart="@dimen/dp13"
+                    android:layout_height="@dimen/dp20"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:text="@string/basic_information"
                     android:textColor="#333333"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp14"
                     android:textStyle="bold"
-                    android:layout_marginStart="@dimen/dp_6"
+                    android:layout_marginStart="@dimen/dp6"
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
@@ -46,16 +46,16 @@
             <com.chocolate.nigerialoanapp.widget.InfoEditView
                 android:id="@+id/edit_first_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_18"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp18"
                 app:edit_view_hint="@string/please_fill_in"
                 app:edit_view_title="@string/first_name" />
 
             <com.chocolate.nigerialoanapp.widget.InfoEditView
                 android:id="@+id/edit_middle_name"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_height="@dimen/dp_66"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_height="@dimen/dp66"
                 app:edit_view_hint="@string/please_fill_in"
                 app:edit_view_optional="true"
                 app:edit_view_title="@string/middle_name" />
@@ -63,24 +63,24 @@
             <com.chocolate.nigerialoanapp.widget.InfoEditView
                 android:id="@+id/edit_last_name"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_height="@dimen/dp_66"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_height="@dimen/dp66"
                 app:edit_view_hint="@string/please_fill_in"
                 app:edit_view_title="@string/last_name" />
 
             <com.chocolate.nigerialoanapp.widget.InfoEditView
                 android:id="@+id/edit_bvn"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp10"
                 app:edit_view_hint="@string/please_fill_in"
                 app:edit_view_title="@string/bvn" />
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginEnd="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginStart="@dimen/dp20"
+                android:layout_marginEnd="@dimen/dp20"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -91,17 +91,17 @@
 
                     android:layout_gravity="center_vertical|start"
                     android:textStyle="bold"
-                    android:textSize="@dimen/sp_12"
+                    android:textSize="@dimen/sp12"
                     android:layout_height="wrap_content"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_know_bvn"
                     android:layout_width="wrap_content"
                     android:text="Dial*565*0#"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp13"
                     android:textColor="#40B950"
-                    android:paddingHorizontal="@dimen/dp_16"
-                    android:paddingVertical="@dimen/dp_4"
+                    android:paddingHorizontal="@dimen/dp16"
+                    android:paddingVertical="@dimen/dp4"
                     android:includeFontPadding="false"
                     android:gravity="center"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
@@ -114,74 +114,74 @@
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_birth"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp10"
                 app:edit_view_title="@string/date_of_birth" />
 
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_gender"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp10"
                 app:edit_view_title="@string/gender" />
 
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_marital"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp10"
                 app:edit_view_title="@string/marital_status" />
 
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_education"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp10"
                 app:edit_view_title="@string/level_of_education" />
 
             <com.chocolate.nigerialoanapp.widget.InfoEditView
                 android:id="@+id/edit_email"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp10"
                 app:edit_view_hint="@string/please_fill_in"
                 app:edit_view_title="@string/email" />
 
             <com.chocolate.nigerialoanapp.widget.InfoSelectView
                 android:id="@+id/select_address"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp10"
                 app:edit_view_title="@string/address" />
 
             <com.chocolate.nigerialoanapp.widget.InfoEditView
                 android:id="@+id/edit_street"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_66"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="@dimen/dp66"
+                android:layout_marginTop="@dimen/dp10"
                 app:edit_view_title="@string/street" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_edit_basic_next"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:textSize="@dimen/sp_20"
+                android:layout_marginHorizontal="@dimen/dp20"
+                android:textSize="@dimen/sp20"
                 android:textColor="#242424"
-                android:layout_marginTop="@dimen/dp_13"
+                android:layout_marginTop="@dimen/dp13"
                 android:text="@string/next"
                 android:textStyle="bold"
                 android:background="@drawable/selector_btn_theme"
-                android:layout_height="@dimen/dp_48"/>
+                android:layout_height="@dimen/dp48"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_basic_next_desc"
                 android:layout_width="match_parent"
                 android:text="@string/please_read_all"
-                android:textSize="@dimen/sp_14"
-                android:layout_marginTop="@dimen/dp_10"
+                android:textSize="@dimen/sp14"
+                android:layout_marginTop="@dimen/dp10"
                 android:gravity="center"
-                android:layout_marginBottom="@dimen/dp_45"
+                android:layout_marginBottom="@dimen/dp45"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>

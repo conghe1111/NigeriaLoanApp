@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_gray_bg"
-    android:layout_height="@dimen/dp_48">
+    android:layout_height="@dimen/dp48">
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_pwd"
@@ -17,10 +17,10 @@
         android:inputType="number"
         android:singleLine="true"
         android:password="true"
-        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp20"
         android:textColorHint="#AFAFAF"
-        android:textSize="@dimen/sp_14"
-        android:layout_marginVertical="@dimen/dp_5"
+        android:textSize="@dimen/sp14"
+        android:layout_marginVertical="@dimen/dp5"
         android:textCursorDrawable="@drawable/et_cursor_color"
         android:layout_height="match_parent"/>
 
@@ -32,20 +32,20 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_pwd_clear"
-            android:layout_width="@dimen/dp_25"
+            android:layout_width="@dimen/dp25"
             android:src="@drawable/iv_signin_clear"
             android:layout_gravity="center|end"
-            android:padding="@dimen/dp_5"
+            android:padding="@dimen/dp5"
             android:visibility="invisible"
-            android:layout_height="@dimen/dp_21"/>
+            android:layout_height="@dimen/dp21"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_pwd_mode"
-            android:layout_width="@dimen/dp_25"
+            android:layout_width="@dimen/dp25"
             android:src="@drawable/ic_pwd_mode"
-            android:padding="@dimen/dp_5"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:layout_height="@dimen/dp_21"/>
+            android:padding="@dimen/dp5"
+            android:layout_marginEnd="@dimen/dp10"
+            android:layout_height="@dimen/dp21"/>
 
 
     </LinearLayout>

@@ -90,7 +90,7 @@ abstract class BaseEditFragment : BaseFragment() {
     }
 
     protected fun scrollToPos(pos: Int, scrollView: NestedScrollView?) {
-        val height = resources.getDimension(com.chocolate.nigerialoanapp.R.dimen.dp_80) * (pos - 1)
+        val height = resources.getDimension(com.chocolate.nigerialoanapp.R.dimen.dp80) * (pos - 1)
         scrollView?.scrollTo(0, height.toInt())
     }
 

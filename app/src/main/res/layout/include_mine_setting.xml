@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/dp_10"
+    app:cardCornerRadius="@dimen/dp10"
     android:background="@drawable/bg_mine_setting_center"
     android:orientation="horizontal">
 
@@ -18,34 +18,40 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginVertical="@dimen/dp_17"
+            android:layout_marginVertical="@dimen/dp17"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/dp_13"
+                android:layout_marginBottom="@dimen/dp13"
                 android:src="@drawable/ic_mine_edit_infomation" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="@string/setting_information_2"
                 android:textColor="#333333"
+                android:lines="2"
+                android:layout_marginHorizontal="@dimen/dp2"
+                android:maxLines="2"
+                app:autoSizeMaxTextSize="@dimen/sp12"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeStepGranularity="1sp"
                 android:textStyle="bold"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp12" />
 
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
             android:background="#67DBA3"
-            android:layout_marginVertical="@dimen/dp_24"
+            android:layout_marginVertical="@dimen/dp24"
             android:layout_height="match_parent"/>
 
         <LinearLayout
@@ -53,19 +59,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginVertical="@dimen/dp_17"
+            android:layout_marginVertical="@dimen/dp17"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/dp_13"
+                android:layout_marginBottom="@dimen/dp13"
                 android:src="@drawable/ic_mine_customer_service" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
@@ -73,14 +79,20 @@
                 android:includeFontPadding="false"
                 android:text="@string/setting_customer_service_2"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_12" />
+                android:lines="2"
+                android:layout_marginHorizontal="@dimen/dp2"
+                android:maxLines="2"
+                app:autoSizeMaxTextSize="@dimen/sp12"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeStepGranularity="1sp"
+                android:textSize="@dimen/sp12" />
 
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
             android:background="#67DBA3"
-            android:layout_marginVertical="@dimen/dp_24"
+            android:layout_marginVertical="@dimen/dp24"
             android:layout_height="match_parent"/>
 
         <LinearLayout
@@ -88,34 +100,40 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginVertical="@dimen/dp_17"
+            android:layout_marginVertical="@dimen/dp17"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/dp_13"
+                android:layout_marginBottom="@dimen/dp13"
                 android:src="@drawable/ic_mine_history_record" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="@string/setting_history_record_2"
                 android:textColor="#333333"
+                android:lines="2"
+                android:layout_marginHorizontal="@dimen/dp2"
+                android:maxLines="2"
+                app:autoSizeMaxTextSize="@dimen/sp12"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeStepGranularity="1sp"
                 android:textStyle="bold"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp12" />
 
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
             android:background="#67DBA3"
-            android:layout_marginVertical="@dimen/dp_24"
+            android:layout_marginVertical="@dimen/dp24"
             android:layout_height="match_parent"/>
 
         <LinearLayout
@@ -123,27 +141,33 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginVertical="@dimen/dp_17"
+            android:layout_marginVertical="@dimen/dp17"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/dp_13"
+                android:layout_marginBottom="@dimen/dp13"
                 android:src="@drawable/ic_mine_notice_privacy" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="@string/setting_privacy_2"
                 android:textColor="#333333"
+                android:lines="2"
+                android:layout_marginHorizontal="@dimen/dp2"
+                android:maxLines="2"
+                app:autoSizeMaxTextSize="@dimen/sp12"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeStepGranularity="1sp"
                 android:textStyle="bold"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp12" />
 
         </LinearLayout>
 

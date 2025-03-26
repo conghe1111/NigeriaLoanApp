@@ -9,7 +9,7 @@
     <include
         layout="@layout/include_main_top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_232" />
+        android:layout_height="@dimen/dp232" />
 
 
     <LinearLayout
@@ -24,9 +24,9 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dp_210"
-                android:layout_height="@dimen/dp_160"
-                android:layout_marginTop="@dimen/dp_7"
+                android:layout_width="@dimen/dp210"
+                android:layout_height="@dimen/dp160"
+                android:layout_marginTop="@dimen/dp7"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_loan_declined" />
 
@@ -37,47 +37,47 @@
                 android:includeFontPadding="false"
                 android:text="@string/disbursement_fail"
                 android:textColor="#E40000"
-                android:textSize="@dimen/sp_18" />
+                android:textSize="@dimen/sp18" />
 
         </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_update_account"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_44"
-            android:layout_marginHorizontal="@dimen/dp_40"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_height="@dimen/dp44"
+            android:layout_marginHorizontal="@dimen/dp40"
+            android:layout_marginTop="@dimen/dp20"
             android:background="@drawable/bg_decline_update_account"
             android:gravity="center"
             android:text="@string/update_account"
             android:textColor="#242424"
             android:textStyle="bold"
-            android:textSize="@dimen/sp_15" />
+            android:textSize="@dimen/sp15" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_32"
-            app:cardCornerRadius="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_30"
-            app:cardElevation="@dimen/dp_8">
+            android:layout_marginHorizontal="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp32"
+            app:cardCornerRadius="@dimen/dp10"
+            android:layout_marginBottom="@dimen/dp30"
+            app:cardElevation="@dimen/dp8">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_120"
+                android:layout_height="@dimen/dp120"
                 android:background="@drawable/bg_status_desc"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginTop="@dimen/dp17"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/dp_30"
-                        android:layout_height="@dimen/dp_30"
+                        android:layout_width="@dimen/dp30"
+                        android:layout_height="@dimen/dp30"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="9dp"
                         android:src="@drawable/ic_loan_decline_delete" />
@@ -89,7 +89,7 @@
                         android:layout_marginStart="9dp"
                         android:text="@string/sorry"
                         android:textColor="#EA2A2A"
-                        android:textSize="@dimen/sp_18"
+                        android:textSize="@dimen/sp18"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -98,16 +98,16 @@
                     android:id="@+id/tv_verify_loan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginEnd="@dimen/dp_4"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginEnd="@dimen/dp4"
                     android:gravity="start"
                     android:includeFontPadding="false"
-                    android:paddingStart="@dimen/dp_15"
-                    android:paddingEnd="@dimen/dp_15"
+                    android:paddingStart="@dimen/dp15"
+                    android:paddingEnd="@dimen/dp15"
                     android:text="@string/loan_in_progress_desc"
                     android:textColor="#666666"
-                    android:textSize="@dimen/sp_14"
-                    app:autoSizeMaxTextSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp14"
+                    app:autoSizeMaxTextSize="@dimen/sp14"
                     app:autoSizeMinTextSize="1sp"
                     app:autoSizeStepGranularity="1sp" />
 

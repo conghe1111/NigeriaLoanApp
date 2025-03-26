@@ -10,11 +10,11 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/dp_14"
+            android:layout_width="@dimen/dp14"
             android:src="@drawable/ic_five_star"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_height="@dimen/dp_14"/>
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_height="@dimen/dp14"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_stage_1"
@@ -22,8 +22,8 @@
             android:layout_width="wrap_content"
             android:textColor="#75D7A1"
             android:textStyle="bold"
-            android:layout_marginStart="@dimen/dp_5"
-            android:textSize="@dimen/sp_14"
+            android:layout_marginStart="@dimen/dp5"
+            android:textSize="@dimen/sp14"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -31,15 +31,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp16"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:text="@string/repayment_date"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_21"
-            android:textSize="@dimen/sp_14"
+            android:layout_marginStart="@dimen/dp21"
+            android:textSize="@dimen/sp14"
             android:layout_height="wrap_content"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -47,11 +47,11 @@
             android:layout_width="0dp"
             android:text="@string/repayment_date"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp10"
             android:layout_gravity="center_vertical|end"
             android:gravity="center_vertical|end"
-            android:textSize="@dimen/sp_14"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:textSize="@dimen/sp14"
+            android:layout_marginEnd="@dimen/dp20"
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
 
@@ -60,10 +60,10 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:textColor="#F77575"
-        android:layout_marginTop="@dimen/dp_6"
-        android:textSize="@dimen/sp_14"
+        android:layout_marginTop="@dimen/dp6"
+        android:textSize="@dimen/sp14"
         android:text="@string/early_repay_will"
-        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginHorizontal="@dimen/dp20"
         android:visibility="gone"
         android:layout_height="wrap_content"/>
 
@@ -71,22 +71,22 @@
         android:id="@+id/rv_repayment_date"
         android:layout_width="match_parent"
         android:visibility="gone"
-        android:layout_marginTop="@dimen/dp_8"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:layout_height="@dimen/dp_90"/>
+        android:layout_marginTop="@dimen/dp8"
+        android:layout_marginHorizontal="@dimen/dp20"
+        android:layout_height="@dimen/dp90"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp20"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:text="@string/repayment_amount"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_21"
-            android:textSize="@dimen/sp_14"
+            android:layout_marginStart="@dimen/dp21"
+            android:textSize="@dimen/sp14"
             android:layout_height="wrap_content"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -94,11 +94,11 @@
             android:layout_width="0dp"
             android:text="₦5,702.00"
             android:textColor="#333333"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp10"
             android:layout_gravity="center_vertical|end"
             android:gravity="center_vertical|end"
-            android:textSize="@dimen/sp_14"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:textSize="@dimen/sp14"
+            android:layout_marginEnd="@dimen/dp20"
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
 
@@ -106,24 +106,24 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_11"
+        android:layout_marginTop="@dimen/dp11"
         android:orientation="vertical"
         android:background="@drawable/bg_stage_bg_1"
-        android:layout_marginHorizontal="@dimen/dp_22"
+        android:layout_marginHorizontal="@dimen/dp22"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_11"
+            android:layout_marginHorizontal="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp11"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:text="@string/loan_amount"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -131,10 +131,10 @@
                 android:layout_width="0dp"
                 android:text="₦5,702.00"
                 android:textColor="#333333"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp10"
                 android:layout_gravity="center_vertical|end"
                 android:gravity="center_vertical|end"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
 
@@ -143,16 +143,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/dp_11"
-            android:layout_marginBottom="@dimen/dp_11"
-            android:layout_marginHorizontal="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp11"
+            android:layout_marginBottom="@dimen/dp11"
+            android:layout_marginHorizontal="@dimen/dp10"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:text="@string/interest"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -160,10 +160,10 @@
                 android:layout_width="0dp"
                 android:text="₦5,702.00"
                 android:textColor="#333333"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp10"
                 android:layout_gravity="center_vertical|end"
                 android:gravity="center_vertical|end"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
 
@@ -172,24 +172,24 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_11"
+        android:layout_marginTop="@dimen/dp11"
         android:orientation="vertical"
         android:background="@drawable/bg_stage_bg_1"
-        android:layout_marginHorizontal="@dimen/dp_22"
+        android:layout_marginHorizontal="@dimen/dp22"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_11"
+            android:layout_marginHorizontal="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp11"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:text="@string/disbursal_amount"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -197,10 +197,10 @@
                 android:layout_width="0dp"
                 android:text="₦5,702.00"
                 android:textColor="#333333"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp10"
                 android:layout_gravity="center_vertical|end"
                 android:gravity="center_vertical|end"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
 
@@ -209,16 +209,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/dp_11"
-            android:layout_marginBottom="@dimen/dp_11"
-            android:layout_marginHorizontal="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp11"
+            android:layout_marginBottom="@dimen/dp11"
+            android:layout_marginHorizontal="@dimen/dp10"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:text="@string/service_fee"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -226,10 +226,10 @@
                 android:layout_width="0dp"
                 android:text="₦5,702.00"
                 android:textColor="#333333"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp10"
                 android:layout_gravity="center_vertical|end"
                 android:gravity="center_vertical|end"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp14"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
 
