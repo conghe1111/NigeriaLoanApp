@@ -63,6 +63,7 @@
         app:autoSizeMaxTextSize="@dimen/sp14"
         app:autoSizeMinTextSize="1sp"
         app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
         android:textColor="#333333"
         android:textSize="@dimen/sp14"
         android:textStyle="bold"

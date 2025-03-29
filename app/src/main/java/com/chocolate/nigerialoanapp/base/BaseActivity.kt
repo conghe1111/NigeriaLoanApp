@@ -1,6 +1,7 @@
 package com.chocolate.nigerialoanapp.base
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -211,5 +212,18 @@ open class BaseActivity : AppCompatActivity() {
 
     open fun useLogout(): Boolean {
         return false
+    }
+
+    override fun getResources(): Resources {
+        val resources = super.getResources()
+        val configuration = resources.configuration
+        if (configuration.fontScale != 1.0f) {
+            configuration.fontScale = 1.0f
+            // 但是这个函数被标记为过期了
+            //resources.updateConfiguration(configuration, resources.displayMetrics)
+            // 那么我们直接这么来
+            return createConfigurationContext(configuration).resources
+        }
+        return resources
     }
 }

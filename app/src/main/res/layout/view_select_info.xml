@@ -61,6 +61,7 @@
         android:paddingHorizontal="@dimen/dp2"
         android:text="First Time"
         android:textColor="#333333"
+        app:autoSizeTextType="uniform"
         android:textSize="@dimen/sp15"
         android:textStyle="bold"
         app:autoSizeMaxTextSize="@dimen/sp14"
