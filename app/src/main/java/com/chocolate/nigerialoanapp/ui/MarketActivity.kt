@@ -10,7 +10,6 @@ import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
-import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog2
 import com.chocolate.nigerialoanapp.ui.loan.Loan0NewProductFragment
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
@@ -38,8 +37,8 @@ class MarketActivity : BaseActivity() {
     }
 
     private fun requestPermissionInternal() {
-        val dialog: RequestPermissionDialog = RequestPermissionDialog(this, this@MarketActivity)
-        dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
+        val dialog: RequestPermissionDialog2 = RequestPermissionDialog2(this, this@MarketActivity)
+        dialog.setOnItemClickListener(object : RequestPermissionDialog2.OnItemClickListener() {
             override fun onClickAgree() {
                 SPUtils.getInstance().put(KEY_ALLOW_CONTACT, true)
 //                val utils = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

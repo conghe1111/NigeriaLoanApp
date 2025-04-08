@@ -1,122 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:layout_marginHorizontal="@dimen/dp20"
         android:layout_marginVertical="@dimen/dp40"
-        android:background="@drawable/bg_request_permission"
-        android:orientation="vertical">
-
-        <WebView
-            android:id="@+id/web_view_permission"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp"/>
+        app:cardCornerRadius="@dimen/dp15">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp14"
-            android:background="#F4F5F7"
-            android:layout_marginBottom="@dimen/dp14"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <WebView
+                android:id="@+id/web_view_permission"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginHorizontal="@dimen/dp10"
-                android:layout_marginTop="@dimen/dp10"
-                android:layout_height="wrap_content">
-                
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_select_state"
-                    android:layout_width="@dimen/dp14"
-                    android:src="@drawable/ic_select"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/dp8"
-                    android:layout_height="@dimen/dp14"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginBottom="@dimen/dp14"
+                android:background="#F4F5F7"
+                android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_request_permission_policy_term"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="start|top"
-                    android:text="@string/i_agree_to"
-                    android:textColor="#666666"
-                    android:textSize="@dimen/sp14" />
+                    android:layout_marginHorizontal="@dimen/dp10"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp10"
-                android:layout_height="@dimen/dp50">
-
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_select_state"
+                        android:layout_width="@dimen/dp14"
+                        android:layout_height="@dimen/dp14"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/dp8"
+                        android:src="@drawable/ic_select" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_request_permission_cancel"
+                        android:id="@+id/tv_request_permission_policy_term"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp42"
-                        android:layout_gravity="center"
-                        android:background="@drawable/request_permission_cancel_1"
-                        android:gravity="center"
-                        android:paddingStart="@dimen/dp4"
-                        android:paddingEnd="@dimen/dp4"
-                        android:text="@string/reject"
-                        app:autoSizeMaxTextSize="@dimen/sp16"
-                        app:autoSizeMinTextSize="1sp"
-                        app:autoSizeStepGranularity="1sp"
-                        android:textStyle="bold"
-                        android:includeFontPadding="false"
-                        android:maxLines="1"
-                        android:layout_marginStart="@dimen/dp24"
-                        android:layout_marginEnd="@dimen/dp11"
-                        android:textColor="#40B950"
-                        android:textSize="@dimen/sp16" />
+                        android:layout_height="wrap_content"
+                        android:gravity="start|top"
+                        android:text="@string/i_agree_to"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/sp14" />
 
-                </FrameLayout>
+                </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp50"
+                    android:layout_marginTop="@dimen/dp10">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_request_permission_agree"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp42"
-                        android:layout_gravity="center"
-                        android:background="@drawable/request_permission_comfirm"
-                        android:gravity="center"
-                        android:paddingStart="@dimen/dp4"
-                        android:paddingEnd="@dimen/dp4"
-                        android:text="@string/agree_and_continue"
-                        android:layout_marginStart="@dimen/dp11"
-                        android:layout_marginEnd="@dimen/dp24"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:maxLines="2"
-                        android:includeFontPadding="false"
-                        app:autoSizeMaxTextSize="@dimen/sp16"
-                        app:autoSizeMinTextSize="1sp"
-                        app:autoSizeStepGranularity="1sp"
-                        android:textSize="@dimen/sp16" />
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
-                </FrameLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_request_permission_cancel"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp42"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp24"
+                            android:layout_marginEnd="@dimen/dp11"
+                            android:background="@drawable/request_permission_cancel_1"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/dp4"
+                            android:paddingEnd="@dimen/dp4"
+                            android:text="@string/reject"
+                            android:textColor="#40B950"
+                            android:textSize="@dimen/sp16"
+                            android:textStyle="bold"
+                            app:autoSizeMaxTextSize="@dimen/sp16"
+                            app:autoSizeMinTextSize="1sp"
+                            app:autoSizeStepGranularity="1sp" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_request_permission_agree"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp42"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp11"
+                            android:layout_marginEnd="@dimen/dp24"
+                            android:background="@drawable/request_permission_comfirm"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:maxLines="2"
+                            android:paddingStart="@dimen/dp4"
+                            android:paddingEnd="@dimen/dp4"
+                            android:text="@string/agree_and_continue"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp16"
+                            android:textStyle="bold"
+                            app:autoSizeMaxTextSize="@dimen/sp16"
+                            app:autoSizeMinTextSize="1sp"
+                            app:autoSizeStepGranularity="1sp" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
-
         </LinearLayout>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.R
+import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
@@ -31,12 +32,12 @@ class RequestPermissionDialog2 constructor(context: Context, activity: Activity?
         val lp: WindowManager.LayoutParams? = window?.attributes
         if (lp != null) {
             lp.width = WindowManager.LayoutParams.MATCH_PARENT //设置宽度
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT //设置高度
+            lp.height = WindowManager.LayoutParams.MATCH_PARENT //设置高度
             lp.horizontalMargin = 0f
             lp.verticalMargin = 0f
             window?.attributes = lp
         }
-        setContentView(R.layout.dialog_request_permission)
+        setContentView(R.layout.dialog_request_permission_2)
         webView = findViewById<WebView>(R.id.web_view_permission)
         val tvCancel: TextView = findViewById<TextView>(R.id.tv_request_permission_cancel)
         val tvAgree: TextView = findViewById<TextView>(R.id.tv_request_permission_agree)
@@ -72,6 +73,7 @@ class RequestPermissionDialog2 constructor(context: Context, activity: Activity?
         }
         updateState()
         initializeData()
+        webView?.loadUrl(Api.PERMISSION)
     }
 
     private var mListener: OnItemClickListener? = null

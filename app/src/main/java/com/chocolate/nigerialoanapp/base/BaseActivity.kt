@@ -119,6 +119,10 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun checkNetWork(callBack: CallBack) {
+        if (true) {
+            callBack.onSuccess()
+            return
+        }
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
         } catch (e: JSONException) {

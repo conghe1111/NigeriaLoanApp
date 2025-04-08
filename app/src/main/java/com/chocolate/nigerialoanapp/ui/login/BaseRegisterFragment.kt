@@ -152,7 +152,7 @@ abstract class BaseRegisterFragment : BaseFragment() {
                 val setPwdStr = etSetPwd!!.text.toString()
                 val againPwdStr = etAgainPwd!!.text.toString()
 
-                if (TextUtils.isEmpty(getCodeStr) || TextUtils.isEmpty(setPwdStr)
+                if (TextUtils.isEmpty(setPwdStr)
                     || TextUtils.isEmpty(againPwdStr)
                 ) {
                     ToastUtils.showShort(resources.getString(R.string.str_login_password_error))
