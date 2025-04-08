@@ -4,7 +4,7 @@ import com.chocolate.nigerialoanapp.BuildConfig
 
 object Api {
     private val ONLINE_HOST = "https://srv.afrokash.com"
-//    private val ONLINE_HOST = "https://srv.afrokash.com"
+    private val ONLINE_URL = "https://www.afrokash.com"
     private val TEST_HOST = "https://srv.accecash.com"
     private val HOST = if (BuildConfig.USE_ONLINE_API) ONLINE_HOST else TEST_HOST
 
@@ -65,9 +65,9 @@ object Api {
     //FaceId
     val FACE_ID = "$HOST/app/v1/account/face_id"
 
-    val GET_POLICY: String = " https://www.afrokash.com/privacy-policy.html"
-    val GET_TERMS: String = "https://www.afrokash.com/user-terms.html"
-    val PERMISSION: String = "https://www.afroksah.com/user-permission.html"
+    val GET_POLICY: String = "$ONLINE_URL/privacy-policy.html"
+    val GET_TERMS: String = "$ONLINE_URL/user-terms.html"
+    val PERMISSION: String = "$ONLINE_URL/user-permission.html"
 
     val GET_ALL: String = "https://www.baidu.com"
 }
