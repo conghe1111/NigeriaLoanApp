@@ -7,9 +7,14 @@ import android.os.Bundle
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.SPUtils
+import com.blankj.utilcode.util.ThreadUtils
+import com.blankj.utilcode.util.ThreadUtils.SimpleTask
 import com.blankj.utilcode.util.ToastUtils
+import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
+import com.chocolate.nigerialoanapp.collect.LocationMgr
+import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.ui.dialog.RequestPermissionDialog2
 import com.chocolate.nigerialoanapp.ui.loan.Loan0NewProductFragment
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
@@ -32,39 +37,18 @@ class MarketActivity : BaseActivity() {
         toFragment(frament)
         allowFlag = SPUtils.getInstance().getBoolean(KEY_ALLOW_CONTACT, false)
         if (!allowFlag) {
+            requestPermissionDialog()
+        } else {
             requestPermissionInternal()
         }
     }
 
-    private fun requestPermissionInternal() {
+    private fun requestPermissionDialog() {
         val dialog: RequestPermissionDialog2 = RequestPermissionDialog2(this, this@MarketActivity)
         dialog.setOnItemClickListener(object : RequestPermissionDialog2.OnItemClickListener() {
             override fun onClickAgree() {
                 SPUtils.getInstance().put(KEY_ALLOW_CONTACT, true)
-//                val utils = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//                    PermissionUtils.permission(
-////                        Manifest.permission.READ_SMS,
-////                        Manifest.permission.ACCESS_COARSE_LOCATION,
-//                        Manifest.permission.POST_NOTIFICATIONSm
-//                    )
-//                } else {
-//                    PermissionUtils.permission(
-//                        Manifest.permission.READ_SMS,
-//                        Manifest.permission.ACCESS_COARSE_LOCATION
-//                    )
-//                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    val utils = PermissionUtils.permission(Manifest.permission.POST_NOTIFICATIONS)
-                    utils.callback(object : PermissionUtils.SimpleCallback {
-                        override fun onGranted() {
-                            FirebaseUtils.logEvent("SYSTEM_PERMISSION_RESULT")
-                        }
-
-                        override fun onDenied() {
-                            ToastUtils.showShort("please allow permission.")
-                        }
-                    }).request()
-                }
+                requestPermissionInternal()
             }
 
             override fun onClickCancel() {
@@ -76,29 +60,55 @@ class MarketActivity : BaseActivity() {
         FirebaseUtils.logEvent("SYSTEM_PERMISSION_ENTER")
     }
 
-    private fun requestPermission() {
-        PermissionUtils.permission(
-            Manifest.permission.POST_NOTIFICATIONS
-        ).request()
+    private fun requestPermissionInternal() {
+        val utils = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            PermissionUtils.permission(
+//                        Manifest.permission.READ_SMS,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.POST_NOTIFICATIONS
+            )
+        } else {
+            PermissionUtils.permission(
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        }
+        utils.callback(object : PermissionUtils.SimpleCallback {
+            override fun onGranted() {
+                FirebaseUtils.logEvent("SYSTEM_PERMISSION_RESULT")
+                executeCache()
+            }
 
-//        val hasPermission = PermissionUtils.isGranted(
-//            //            PermissionConstants.CAMERA,
-//            PermissionConstants.SMS
-//        )
-//        val hasPermissionCoarseLocation =
-//            PermissionUtils.isGranted(Manifest.permission.ACCESS_COARSE_LOCATION)
-//        //        val hasPermissionCallLog = PermissionUtils.isGranted(Manifest.permission.READ_CALL_LOG)
-////        val hasPermissionReadPhoneState =
-//        if (hasPermissionCoarseLocation && hasPermission) {
-//            executeCache()
-//        } else {
-//            requestPermissionInternal()
-//        }
+            override fun onDenied() {
+                ToastUtils.showShort("please allow permission.")
+            }
+        }).request()
+        FirebaseUtils.logEvent("SYSTEM_PERMISSION_ENTER")
     }
 
     fun toLogin() {
         val welcomeIntent = Intent(this@MarketActivity, LoginActivity::class.java)
         startActivity(welcomeIntent)
+    }
+
+    private fun executeCache() {
+        LogSaver.logToFile("execute next...")
+        ThreadUtils.executeByCached<Any>(object : SimpleTask<Any?>() {
+            @Throws(Throwable::class)
+            override fun doInBackground(): Any {
+
+                return ""
+            }
+
+            override fun onSuccess(result: Any?) {
+                try {
+                    LocationMgr.getInstance().getLocation()
+                } catch (e: Exception) {
+                    if (BuildConfig.DEBUG) {
+                        throw e
+                    }
+                }
+            }
+        })
     }
 
     override fun getFragmentContainerRes(): Int {
