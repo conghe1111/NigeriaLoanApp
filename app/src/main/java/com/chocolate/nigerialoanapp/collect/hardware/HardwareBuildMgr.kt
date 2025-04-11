@@ -39,7 +39,7 @@ object HardwareBuildMgr {
         // 产品的名称
         build.product = Build.PRODUCT
         // 设备型号
-        build.model = Build.BRAND + "_" + DeviceUtils.getModel()
+        build.model = Build.MANUFACTURER + "_" + DeviceUtils.getModel()
         // 出厂签名
         build.finger_print = ""
         // 序列号

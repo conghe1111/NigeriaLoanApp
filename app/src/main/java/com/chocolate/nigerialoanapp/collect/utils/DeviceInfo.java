@@ -61,7 +61,6 @@ public class DeviceInfo {
         getAndroidId();
         DeviceUtil.getDeviceID(mContext);
         getSystemLanguage();
-        getOsVersion();
     }
 
     /**
@@ -73,88 +72,6 @@ public class DeviceInfo {
         String lang = Locale.getDefault().getLanguage();
         return lang;
     }
-
-    /**
-     * 获取当前系统上的语言列表(Locale列表)
-     *
-     * @return 语言列表
-     */
-    public Locale[] getSystemLanguageList() {
-        return Locale.getAvailableLocales();
-    }
-
-    /**
-     * 获取当前手机系统版本号
-     *
-     * @return 系统版本号
-     */
-    public static String getSystemVersion() {
-        return Build.DISPLAY;
-    }
-
-
-    /**
-     * 获取设备名称
-     *
-     * @return 设备名称
-     */
-    public static String getDeviceName() {
-        return Build.DEVICE;
-    }
-
-
-    @SuppressLint({"NewApi", "MissingPermission"})
-    public static String getSerialNumber() {
-        String serial = "";
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) { // 9.0 +
-                serial = Build.getSerial();
-            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) { // 8.0 +
-                serial = Build.SERIAL;
-            } else { // 8.0 -
-                Class<?> c = Class.forName("android.os.SystemProperties");
-                Method get = c.getMethod("get", String.class);
-                serial = (String) get.invoke(c, "ro.serialno");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return serial;
-    }
-
-    /**
-     * 获取安卓系统版本
-     *
-     * @return
-     */
-    public static String getOsVersion() {
-        String version = Build.VERSION.RELEASE;
-        if (!version.startsWith("android")) {
-            version = "android" + Build.VERSION.RELEASE;
-            SPUtils.getInstance().put(LocalConfig.LC_OS, version);
-        }
-        return version;
-    }
-
-    /**
-     * 获取SDK版本号
-     *
-     * @return
-     */
-    public static int getCurrentVersion() {
-        return Build.VERSION.SDK_INT;
-    }
-
-
-    /**
-     * 获取手机厂商
-     *
-     * @return
-     */
-    public static String getDeviceManufacturer() {
-        return Build.MANUFACTURER;
-    }
-
 
     /**
      * 获取可用内存大小RAM

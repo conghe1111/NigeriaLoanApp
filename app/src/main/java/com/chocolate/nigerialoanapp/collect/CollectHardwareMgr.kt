@@ -25,7 +25,7 @@ import com.chocolate.nigerialoanapp.collect.hardware.HardwareNetWorkMgr
 import com.chocolate.nigerialoanapp.collect.hardware.HardwareSystemMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.log.LogSaver
-import com.google.android.gms.ads.identifier.AdvertisingIdClient
+import com.chocolate.nigerialoanapp.utils.GetIdUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -82,7 +82,7 @@ class CollectHardwareMgr {
         // 谷歌服务框架id
         deviceData.idInfo?.gsf_id = ""
         // google Ad ID
-        deviceData.idInfo?.gaid = getGaid(context)
+        deviceData.idInfo?.gaid = GetIdUtils.getGaid(context)
 
         deviceData.locationInfo = HardwareLocationMgr.getData(context)
         deviceData.networkInfo = HardwareNetWorkMgr.getNetWork(context)
@@ -146,19 +146,6 @@ class CollectHardwareMgr {
             batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)
         return chargePlug > 0 // 非零值表示正在充电
     }
-
-    private fun getGaid(context: Context): String {
-        try {
-            val advertisingId: String =
-                AdvertisingIdClient.getAdvertisingIdInfo(context).id.toString()
-            return advertisingId
-            // 使用 advertisingId 和 limitAdTrackingEnabled
-        } catch (e: Exception) {
-            // 处理异常，例如 Google Play services 不可用或发生错误等。
-        }
-        return ""
-    }
-
 
     @SuppressLint("MissingPermission")
     private fun getHardware(deviceData: DeviceData, observer: Observer?) {

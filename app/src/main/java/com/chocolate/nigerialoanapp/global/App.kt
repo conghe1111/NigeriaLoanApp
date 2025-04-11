@@ -15,6 +15,7 @@ import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.LocationMgr
 import com.chocolate.nigerialoanapp.log.LogSaver
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
+import com.chocolate.nigerialoanapp.utils.GetIdUtils
 import com.chocolate.nigerialoanapp.utils.GooglePlaySdk
 import com.easeid.opensdk.EaseID
 import com.easeid.opensdk.config.EaseConfig
@@ -76,7 +77,12 @@ class App : Application() {
         }
 
         AppUtils.registerAppStatusChangedListener(mListener)
-        if (Constant.isAuditMode()) {
+        val gaid = GetIdUtils.getGaid(this)
+        if (!TextUtils.isEmpty(gaid)) {
+            SPUtils.getInstance().put(LocalConfig.LC_GOOGLE_AD_ID, gaid)
+        }
+
+        if (BuildConfig.DEBUG) {
             initTest()
         } else {
 
@@ -90,9 +96,7 @@ class App : Application() {
     }
 
     private fun initTest() {
-        SPUtils.getInstance().put(LocalConfig.LC_FCM_TOKEN, "test111")
         SPUtils.getInstance().put(LocalConfig.LC_APPSFLYER_ID, "test44")
-        SPUtils.getInstance().put(LocalConfig.LC_GOOGLE_AD_ID, "test55")
         SPUtils.getInstance().put(LocalConfig.LC_CAMPAIGN, "test66")
     }
 
