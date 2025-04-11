@@ -165,12 +165,11 @@ class ConsumerHotlineActivity : BaseActivity() {
     }
 
     private fun getStaticConfigInternal() {
-        val jsonObject: JSONObject = JSONObject()
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        showProgressDialogFragment()
         OkGo.post<String>(Api.STATIC_CONFIG).tag(TAG)
             .params("data", NetworkUtils.toBuildParams(jsonObject))
             .execute(object : StringCallback() {
@@ -202,7 +201,6 @@ class ConsumerHotlineActivity : BaseActivity() {
                             throw e
                         }
                     }
-                    dismissProgressDialogFragment()
                 }
 
                 override fun onError(response: Response<String>) {
@@ -210,7 +208,6 @@ class ConsumerHotlineActivity : BaseActivity() {
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, " update contact = " + response.body())
                     }
-                    dismissProgressDialogFragment()
                 }
             })
     }

@@ -342,7 +342,7 @@ object ConfigMgr {
     }
 
     private fun getStaticConfigInternal() {
-        val jsonObject: JSONObject = JSONObject()
+        val jsonObject: JSONObject =  NetworkUtils.getJsonObject()
         try {
         } catch (e: JSONException) {
             e.printStackTrace()
