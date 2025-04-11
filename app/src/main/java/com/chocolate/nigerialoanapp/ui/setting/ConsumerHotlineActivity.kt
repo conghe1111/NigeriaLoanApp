@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.FileProvider
@@ -27,6 +28,7 @@ import com.blankj.utilcode.util.ZipUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseActivity
+import com.chocolate.nigerialoanapp.collect.CollectHardwareMgr
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.log.LogSaver
@@ -130,6 +132,17 @@ class ConsumerHotlineActivity : BaseActivity() {
         rvEmail?.adapter = emailAdapter
         var ivConsumer : AppCompatImageView? = findViewById<AppCompatImageView>(R.id.iv_consumer)
         ivConsumer?.visibility = View.GONE
+//
+//        CollectHardwareMgr.sInstance.collectHardware(this@ConsumerHotlineActivity, object : CollectHardwareMgr.Observer {
+//            override fun success(response: String) {
+//                Log.e("Test", " success")
+//            }
+//
+//            override fun failure(response: String?) {
+//                Log.e("Test", " failure")
+//            }
+//
+//        })
     }
 
     override fun getTitleStr(): String {

@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.loanapply
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
@@ -22,6 +24,7 @@ import com.chocolate.nigerialoanapp.bean.response.OrderApplyResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse.Trial
 import com.chocolate.nigerialoanapp.collect.CollectHardwareMgr
+import com.chocolate.nigerialoanapp.collect.LocationMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.LoanDetailDialog
@@ -163,23 +166,26 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         tvNext?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 FirebaseUtils.logEvent("CLICK_INDEX_APPLY")
-                FirebaseUtils.logEvent("CLICK_LOAN_CONFIRM")
-                showLoanDetailAndUploadHardware(mOrderId)
-//                PermissionUtils.permission(
-//                    Manifest.permission.READ_CALL_LOG,
-//                    Manifest.permission.READ_CONTACTS,
-//                    Manifest.permission.READ_SMS,
-//                    Manifest.permission.ACCESS_COARSE_LOCATION,
-//                    Manifest.permission.ACCESS_FINE_LOCATION,
+                PermissionUtils.permission(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
 //                    Manifest.permission.READ_PHONE_STATE,
-//                ).callback(object : PermissionUtils.SimpleCallback {
-//                    override fun onGranted() {
-//                    }
-//
-//                    override fun onDenied() {
-//                        ToastUtils.showShort("please allow permission for apply order.")
-//                    }
-//                }).request()
+                ).callback(object : PermissionUtils.SimpleCallback {
+                    override fun onGranted() {
+                        FirebaseUtils.logEvent("CLICK_LOAN_CONFIRM")
+                        try {
+                            LocationMgr.getInstance().getLocation()
+                        } catch (e: Exception) {
+                            if (BuildConfig.DEBUG) {
+                                throw e
+                            }
+                        }
+                        showLoanDetailAndUploadHardware(mOrderId)
+                    }
+
+                    override fun onDenied() {
+                        ToastUtils.showShort("please allow permission for apply order.")
+                    }
+                }).request()
             }
 
         })

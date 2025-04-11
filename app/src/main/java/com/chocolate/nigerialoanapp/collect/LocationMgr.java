@@ -273,58 +273,57 @@ public class LocationMgr {
     }
 
    private String getGpsInfoInternal(){
-       Pair<Double, Double> pair = LocationMgr.getInstance().getLocationInfo();
-       if ((pair.first == 0) || (pair.second == 0)) {
-           String longStr = SPUtils.getInstance().getString(LocalConfig.LC_LONGITUDE, "");
-           String latiStr = SPUtils.getInstance().getString(LocalConfig.LC_LATITUDE, "");
-           boolean needReturn = true;
-           if (!TextUtils.isEmpty(longStr) && !TextUtils.isEmpty(latiStr)) {
-               try {
-                   Double longL = Double.parseDouble(longStr);
-                   Double latiL = Double.parseDouble(latiStr);
-                   if (longL != 0d || latiL != 0d){
-                       pair = new Pair<>(longL, latiL);
-                       needReturn = false;
-                   }
-               } catch (Exception e) {
+        Address address = getLocationAddress();
 
-               }
-           }
-           if (needReturn) {
-               if (Constant.IS_COLLECT) {
-                   LogSaver.logToFile(" not get long lati " );
-               }
-               return "";
-           }
-       }
-       Geocoder gc =  new Geocoder(Utils.getApp(),  Locale.getDefault());
-       List<Address> list = null;
-       try {
-           list = gc.getFromLocation(pair.second, pair.first, 1);
-       } catch (Exception e) {
-           if (BuildConfig.DEBUG) {
-               Log.e("Test", "GPS get = ", e);
-           }
-           LogSaver.logToFile(" get gps failure = " + e.toString());
-       }
-       if (list != null && !list.isEmpty()) {
+       if (address != null) {
            if (Constant.IS_COLLECT) {
-                LogSaver.logToFile(" get gps success = " + JSON.toJSONString(list.get(0)));
+                LogSaver.logToFile(" get gps success = " + JSON.toJSONString(address));
            }
-           return JSON.toJSONString(list.get(0));
+           return JSON.toJSONString(address);
        }
        return "";
     }
 
-//    public LocationRequest getLocationBean(){
-//        LocationRequest request = new LocationRequest();
-//        request.setGpsLongitude(gpsLongitude);
-//        request.setGpsLatitude(gpsLatitude);
-//        request.setNetWorkLongitude(netWorkLongitude);
-//        request.setNetWorkLatitude(netWorkLatitude);
-//        request.setExtra(extra.toString());
-//        return request;
-//    }
+    public Address getLocationAddress() {
+        Pair<Double, Double> pair = LocationMgr.getInstance().getLocationInfo();
+        if ((pair.first == 0) || (pair.second == 0)) {
+            String longStr = SPUtils.getInstance().getString(LocalConfig.LC_LONGITUDE, "");
+            String latiStr = SPUtils.getInstance().getString(LocalConfig.LC_LATITUDE, "");
+            boolean needReturn = true;
+            if (!TextUtils.isEmpty(longStr) && !TextUtils.isEmpty(latiStr)) {
+                try {
+                    Double longL = Double.parseDouble(longStr);
+                    Double latiL = Double.parseDouble(latiStr);
+                    if (longL != 0d || latiL != 0d){
+                        pair = new Pair<>(longL, latiL);
+                        needReturn = false;
+                    }
+                } catch (Exception e) {
+
+                }
+            }
+            if (needReturn) {
+                if (Constant.IS_COLLECT) {
+                    LogSaver.logToFile(" not get long lati " );
+                }
+                return null;
+            }
+        }
+        Geocoder gc =  new Geocoder(Utils.getApp(),  Locale.getDefault());
+        List<Address> list = null;
+        try {
+            list = gc.getFromLocation(pair.second, pair.first, 1);
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG) {
+                Log.e("Test", "GPS get = ", e);
+            }
+            LogSaver.logToFile(" get gps failure = " + e.toString());
+        }
+        if (list != null && !list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
+    }
 
     public void onDestroy() {
         if (locationManager != null) {
