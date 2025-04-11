@@ -28,7 +28,7 @@ object ConfigMgr {
 
     private const val KEY_DATA_CONFIG = "key_data_config"
     private const val KEY_BANK_LIST = "key_bank_list"
-    private const val KEY_STATIC_DATA_CONFIG = "key_static_data_config"
+    const val KEY_STATIC_DATA_CONFIG = "key_static_data_config"
     private const val KEY_PROFILE_INFO = "key_profile_info"
 
     val mDebtList = ArrayList<Pair<String, String>>()
@@ -87,28 +87,29 @@ object ConfigMgr {
 
     fun getStaticConfig() {
         var staticDataConfig = SPUtils.getInstance().getString(KEY_STATIC_DATA_CONFIG)
-        staticDataConfig = ""
         if (!TextUtils.isEmpty(staticDataConfig)) {
             handleStaticConfig(staticDataConfig)
         } else {
-            mConsumerData = ConsumerData()
-            val list1 = ArrayList<String>()
-            list1.add("support@owocredit.com")
-            list1.add("customer@owocredit.com")
-            mConsumerData!!.email = list1
+            if (BuildConfig.DEBUG) {
+                mConsumerData = ConsumerData()
+                val list1 = ArrayList<String>()
+                list1.add("support@owocredit.com")
+                list1.add("customer@owocredit.com")
+                mConsumerData!!.email = list1
 
-            val list2 = ArrayList<String>()
-            list2.add("2341234567890")
-            list2.add("2341234567891")
-            list2.add("2341234567892")
-            mConsumerData!!.phone = list2
+                val list2 = ArrayList<String>()
+                list2.add("2341234567890")
+                list2.add("2341234567891")
+                list2.add("2341234567892")
+                mConsumerData!!.phone = list2
 
-            val list3 = ArrayList<String>()
-            list3.add("2341234567890")
-            list3.add("2341234567891")
-            mConsumerData!!.whatsapp = list3
+                val list3 = ArrayList<String>()
+                list3.add("2341234567890")
+                list3.add("2341234567891")
+                mConsumerData!!.whatsapp = list3
+            }
         }
-        if (!TextUtils.isEmpty(staticDataConfig) && BuildConfig.DEBUG) {
+        if (!TextUtils.isEmpty(staticDataConfig)) {
 
         } else {
             getStaticConfigInternal()
