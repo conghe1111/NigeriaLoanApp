@@ -58,8 +58,6 @@ public class DeviceInfo {
     }
 
     public void init() {
-        getAndroidId();
-        DeviceUtil.getDeviceID(mContext);
         getSystemLanguage();
     }
 
@@ -252,19 +250,6 @@ public class DeviceInfo {
         return imei;
     }
 
-    /**
-     * 获取 AndroidID
-     *
-     * @return
-     */
-    @SuppressLint("MissingPermission")
-    public String getAndroidId() {
-        String ANDROID_ID = Settings.System.getString(mContext.getContentResolver(), Settings.System.ANDROID_ID);
-        // TODO
-//        KvStorage.put(LocalConfig.LC_ANDROIDID, ANDROID_ID);
-        Log.d("TAG", "ANDROID_ID: "+ANDROID_ID);
-        return ANDROID_ID;
-    }
 
     /**
      * 获取是否开启开发者选项

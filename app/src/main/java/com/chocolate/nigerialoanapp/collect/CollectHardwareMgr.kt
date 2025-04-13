@@ -78,7 +78,7 @@ class CollectHardwareMgr {
             return deviceData
         }
         deviceData.idInfo = DeviceData.IdInfo()
-        deviceData.idInfo?.android_id = DeviceUtils.getAndroidID()
+        deviceData.idInfo?.android_id = GetIdUtils.getPhoneId()
         // 谷歌服务框架id
         deviceData.idInfo?.gsf_id = ""
         // google Ad ID

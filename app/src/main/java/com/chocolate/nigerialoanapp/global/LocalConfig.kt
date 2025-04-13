@@ -68,6 +68,7 @@ object LocalConfig {
 
     const val LC_ACCOUNT_ID = "account_id"
     const val LC_ACCOUNT_TOKEN = "account_token"
+    const val LC_ANDROID_ID = "android_id"
 
     const val LC_PHONE_NUM = "lc_phone_num"
     const val LC_PASSWORD = "lc_password"
