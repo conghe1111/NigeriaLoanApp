@@ -272,7 +272,11 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
 
                 override fun failure(response: String?) {
                     dismissProgressDialogFragment()
-                    ToastUtils.showShort("upload auth fail")
+                    if (Constant.isAabBuild()) {
+                        ToastUtils.showShort("upload auth fail")
+                    } else {
+                        ToastUtils.showShort("upload auth fail $response")
+                    }
                 }
 
             })

@@ -27,11 +27,11 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.dialog.selectdata.SelectDataDialog
-import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.UssdUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 import com.chocolate.nigerialoanapp.widget.InfoEditView
+import com.chocolate.nigerialoanapp.widget.InfoEditView2
 import com.chocolate.nigerialoanapp.widget.InfoSelectView
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -57,7 +57,7 @@ class Edit1BasicFragment : BaseEditFragment() {
     private var selectMarital: InfoSelectView? = null
     private var selectEducation: InfoSelectView? = null
 
-    private var editEmail: InfoEditView? = null
+    private var editEmail: InfoEditView2? = null
 
     private var selectAddress: InfoSelectView? = null
     private var editStreet: InfoEditView? = null
@@ -99,7 +99,7 @@ class Edit1BasicFragment : BaseEditFragment() {
         selectGender = view.findViewById<InfoSelectView>(R.id.select_gender)
         selectMarital = view.findViewById<InfoSelectView>(R.id.select_marital)
         selectEducation = view.findViewById<InfoSelectView>(R.id.select_education)
-        editEmail = view.findViewById<InfoEditView>(R.id.edit_email)
+        editEmail = view.findViewById<InfoEditView2>(R.id.edit_email)
         selectAddress = view.findViewById<InfoSelectView>(R.id.select_address)
         editStreet = view.findViewById<InfoEditView>(R.id.edit_street)
         tvNext = view.findViewById<AppCompatTextView>(R.id.tv_edit_basic_next)

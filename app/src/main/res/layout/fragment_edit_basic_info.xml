@@ -139,7 +139,7 @@
                 android:layout_marginTop="@dimen/dp10"
                 app:edit_view_title="@string/level_of_education" />
 
-            <com.chocolate.nigerialoanapp.widget.InfoEditView
+            <com.chocolate.nigerialoanapp.widget.InfoEditView2
                 android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp66"
