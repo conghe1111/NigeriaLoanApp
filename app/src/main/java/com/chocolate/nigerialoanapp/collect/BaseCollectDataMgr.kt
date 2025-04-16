@@ -136,14 +136,14 @@ abstract class BaseCollectDataMgr {
 
         })
     }
-
-    private fun getLocation(): String {
-        val locationStr = LocationMgr.getInstance().gpsStr
-        if (TextUtils.isEmpty(locationStr)) {
-            return ""
-        }
-        return locationStr
-    }
+//
+//    private fun getLocation(): String {
+//        val locationStr = LocationMgr.getInstance().gpsStr
+//        if (TextUtils.isEmpty(locationStr)) {
+//            return ""
+//        }
+//        return locationStr
+//    }
 
     @SuppressLint("MissingPermission")
     private fun buildClientRequest(

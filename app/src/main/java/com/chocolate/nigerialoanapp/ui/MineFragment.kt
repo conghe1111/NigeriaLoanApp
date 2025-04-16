@@ -21,6 +21,7 @@ import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.base.BaseFragment
 import com.chocolate.nigerialoanapp.bean.SettingMineBean
+import com.chocolate.nigerialoanapp.collect.CollectHardwareMgr
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
@@ -329,9 +330,19 @@ class MineFragment : BaseFragment() {
             }
 
             PageType.TEST_1 -> {
-                activity?.let {
-                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
-                }
+//                activity?.let {
+//                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
+//                }
+                CollectHardwareMgr.sInstance.collectHardware(activity, object : CollectHardwareMgr.Observer {
+                    override fun success(response: String) {
+
+                    }
+
+                    override fun failure(response: String?) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
 //                        activity?.let {
 //                            val dialog = LoanRetentionDialog(it)
 //                            dialog.show()

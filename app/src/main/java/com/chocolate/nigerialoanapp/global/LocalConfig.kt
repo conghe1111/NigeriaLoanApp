@@ -78,6 +78,8 @@ object LocalConfig {
     const val LC_IMEI = "lc_imei"
     const val LC_LONGITUDE = "lc_longitude"
     const val LC_LATITUDE = "lc_latitude"
+    const val LC_LOCATION_ADDRESS = "lc_location_address"
+
     const val LC_UTMSOURCE = "lc_utmsource"
     const val LC_UTMMEDIUM = "lc_utmmedium"
     const val LC_APPSFLYER_ID = "lc_appsflyer_id"

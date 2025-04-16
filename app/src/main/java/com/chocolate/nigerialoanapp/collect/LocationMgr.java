@@ -19,6 +19,7 @@ import android.util.Pair;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ThreadUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.chocolate.nigerialoanapp.BuildConfig;
@@ -198,21 +199,7 @@ public class LocationMgr {
             }
 
         }
-        List<Address> result = null;
         try {
-//            if (location != null) {
-//                Geocoder gc = new Geocoder(mContext, Locale.getDefault());
-//                result = gc.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-//                if (result == null || result.size() == 0) {
-//                    return;
-//                }
-//                extra = new StringBuffer();
-//                for (int i = 0; i < result.size(); i++) {
-//                    Address address = result.get(i);
-//                    extra.append("countryname" + address.getCountryName());
-//                    extra.append("countryCode" + address.getCountryCode());
-//                }
-//            }
             Pair<Double, Double> pair = getLocationInfo();
             double longitude = pair.first;
             double latitude = pair.second;
@@ -232,11 +219,19 @@ public class LocationMgr {
                     }
                 });
             }
-           String gps = getGpsInfoInternal();
-            if (!TextUtils.isEmpty(gps)) {
-                gpsStr = gps;
-            }
+            getLocationAddress(new CallBack() {
+                @Override
+                public void onSuccess(Address address, String gps) {
+                    if (!TextUtils.isEmpty(gps)) {
+                        gpsStr = gps;
+                    }
+                }
 
+                @Override
+                public void onFailure(Exception e) {
+
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -254,37 +249,28 @@ public class LocationMgr {
         return new Pair<>(0d, 0d);
     }
 
-    public String getGpsStr(){
-        if (!TextUtils.isEmpty(gpsStr)){
-            return gpsStr;
-        }
-        return getGpsInfoInternal();
-    }
-
     public void cacheGps(){
-        String gps = getGpsInfoInternal();
-        if (!TextUtils.isEmpty(gps)) {
-            gpsStr = gps;
-            LogSaver.logToFile("cache gps success.");
-            if (BuildConfig.DEBUG) {
-                Log.e("Test", "cache gps success = " + gpsStr);
+        getLocationAddress(new CallBack() {
+            @Override
+            public void onSuccess(Address address, String gps) {
+                if (!TextUtils.isEmpty(gps)) {
+                    gpsStr = gps;
+                    LogSaver.logToFile("cache gps success.");
+                    if (BuildConfig.DEBUG) {
+                        Log.e("Test", "cache gps success = " + gpsStr);
+                    }
+                }
             }
-        }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+
     }
 
-   private String getGpsInfoInternal(){
-        Address address = getLocationAddress();
-
-       if (address != null) {
-           if (Constant.IS_COLLECT) {
-                LogSaver.logToFile(" get gps success = " + JSON.toJSONString(address));
-           }
-           return JSON.toJSONString(address);
-       }
-       return "";
-    }
-
-    public Address getLocationAddress() {
+    public void getLocationAddress(CallBack callBack) {
         Pair<Double, Double> pair = LocationMgr.getInstance().getLocationInfo();
         if ((pair.first == 0) || (pair.second == 0)) {
             String longStr = SPUtils.getInstance().getString(LocalConfig.LC_LONGITUDE, "");
@@ -306,23 +292,45 @@ public class LocationMgr {
                 if (Constant.IS_COLLECT) {
                     LogSaver.logToFile(" not get long lati " );
                 }
+                callBack.onFailure(new IllegalArgumentException("not get long lati "));
+            }
+        }
+        Pair<Double, Double> finalPair = pair;
+        ThreadUtils.executeByCached(new ThreadUtils.SimpleTask<Address>() {
+            @Override
+            public Address doInBackground() throws Throwable {
+                List<Address> list = null;
+                try {
+                    Geocoder gc =  new Geocoder(Utils.getApp(),  Locale.getDefault());
+                    list = gc.getFromLocation(finalPair.second, finalPair.first, 1);
+                } catch (Exception e) {
+                    if (BuildConfig.DEBUG) {
+                        Log.e("Test", "GPS get = ", e);
+                    }
+                    LogSaver.logToFile(" get gps failure = " + e.toString());
+
+                }
+                if (list != null && !list.isEmpty()) {
+                    return list.get(0);
+                }
                 return null;
             }
-        }
-        Geocoder gc =  new Geocoder(Utils.getApp(),  Locale.getDefault());
-        List<Address> list = null;
-        try {
-            list = gc.getFromLocation(pair.second, pair.first, 1);
-        } catch (Exception e) {
-            if (BuildConfig.DEBUG) {
-                Log.e("Test", "GPS get = ", e);
+
+            @Override
+            public void onSuccess(Address address) {
+                if (address != null) {
+                    String addressJson = JSON.toJSONString(address);
+                    if (Constant.IS_COLLECT) {
+                        Log.e("Test", " get gps success = " + addressJson);
+                        LogSaver.logToFile(" get gps success = " + addressJson);
+                    }
+                    SPUtils.getInstance().put(LocalConfig.LC_LOCATION_ADDRESS, addressJson);
+                    callBack.onSuccess(address, addressJson);
+                } else {
+                    callBack.onFailure(new IllegalArgumentException("get address null"));
+                }
             }
-            LogSaver.logToFile(" get gps failure = " + e.toString());
-        }
-        if (list != null && !list.isEmpty()) {
-            return list.get(0);
-        }
-        return null;
+        });
     }
 
     public void onDestroy() {
@@ -330,5 +338,11 @@ public class LocationMgr {
             locationManager.removeUpdates(netWorkLocationListener);
             locationManager.removeUpdates(gpsLocationListener);
         }
+    }
+
+    interface CallBack {
+        void onSuccess(Address address, String json);
+
+        void onFailure(Exception e);
     }
 }
