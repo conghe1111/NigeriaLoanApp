@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.base.BaseFragment
+import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
 class LoanApplyMockSuccessFragment : BaseFragment() {
 
@@ -31,6 +32,12 @@ class LoanApplyMockSuccessFragment : BaseFragment() {
 
         mMyTimeCount = MyTimeCount(10 * 1000, 1000)
         mMyTimeCount?.start()
+        tvOk?.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View?) {
+                finishPage()
+            }
+
+        })
     }
 
 
@@ -43,7 +50,11 @@ class LoanApplyMockSuccessFragment : BaseFragment() {
         }
 
         override fun onFinish() {
-            activity?.finish()
+            finishPage()
         }
+    }
+
+    private fun finishPage() {
+        activity?.finish()
     }
 }
