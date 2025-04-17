@@ -330,19 +330,19 @@ class MineFragment : BaseFragment() {
             }
 
             PageType.TEST_1 -> {
-//                activity?.let {
-//                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
-//                }
-                CollectHardwareMgr.sInstance.collectHardware(activity, object : CollectHardwareMgr.Observer {
-                    override fun success(response: String) {
-
-                    }
-
-                    override fun failure(response: String?) {
-                        TODO("Not yet implemented")
-                    }
-
-                })
+                activity?.let {
+                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
+                }
+//                CollectHardwareMgr.sInstance.collectHardware(activity, object : CollectHardwareMgr.Observer {
+//                    override fun success(response: String) {
+//
+//                    }
+//
+//                    override fun failure(response: String?) {
+//                        TODO("Not yet implemented")
+//                    }
+//
+//                })
 //                        activity?.let {
 //                            val dialog = LoanRetentionDialog(it)
 //                            dialog.show()

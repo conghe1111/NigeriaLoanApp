@@ -204,4 +204,5 @@
     <string name="unlock_the_next_loan">Unlock the next loan</string>
     <string name="apply_1">Apply</string>
     <string name="your_loan_application">Your loan application has been Submitted successfully.Verification processing</string>
+    <string name="smart_selfie_processing_msg">Afrokash is checking your face</string>
 </resources>
