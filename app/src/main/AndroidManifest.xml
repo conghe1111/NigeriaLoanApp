@@ -80,8 +80,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-<!--               oyocredit://page/main-->
-                <data android:scheme="oyocredit" android:host="page" android:pathPrefix="/main" />
+<!--               afrokash://page/main-->
+                <data android:scheme="afrokash" android:host="page" android:pathPrefix="/main" />
             </intent-filter>
 
         </activity>

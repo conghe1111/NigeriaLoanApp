@@ -18,8 +18,8 @@ object Constant {
     var mAccountId: String? = null
 
     var mToken: String? = null
-    val APP_ID: String = "oyo"
-    val USSD: String = "_oyo"
+    val APP_ID: String = "afrokash"
+    val USSD: String = "_afrokash"
 
     val DEEP_LINK: String = "afrokash://page/main"
 
