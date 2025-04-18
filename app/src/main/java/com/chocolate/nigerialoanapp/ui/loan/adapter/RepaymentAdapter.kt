@@ -27,7 +27,11 @@ class RepaymentAdapter(val repayAmountList : List<Long>) : RecyclerView.Adapter<
         val amount = repayAmountList[position]
         val text = SpanUtils.getShowText(amount)
         val spanString = SpannableString(text)
-        spanString.setSpan(UnderlineSpan(), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        try {
+            spanString.setSpan(UnderlineSpan(), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        } catch (e : Exception) {
+
+        }
         holder.tvTotalPrice?.text = spanString
 
         holder.tvTotalPrice?.setOnClickListener(object : NoDoubleClickListener() {
