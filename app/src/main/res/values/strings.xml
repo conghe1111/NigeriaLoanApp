@@ -71,6 +71,7 @@
     <string name="loan_amount">Loan amount</string>
     <string name="loan_amount_cap">Loan Amount</string>
     <string name="Interest">Interest</string>
+    <string name="late_payment_fee">Late Payment Fee</string>
     <string name="service_fee">Service Fee</string>
     <string name="amount_of_reduction">Amount of reduction</string>
     <string name="overdue_x_days">Overdue</string>

@@ -17,6 +17,7 @@ class Loan9OverdueFragment : BaseRepaymentFragment() {
     private var llOverdue : View? = null
     private var llPending : View? = null
     private var llOverdueDesc : View? = null
+    private var llOrderNumView: View? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,6 +26,9 @@ class Loan9OverdueFragment : BaseRepaymentFragment() {
         llPending =  view.findViewById<View>(R.id.ll_loan_pending)
         llOverdueDesc =  view.findViewById<View>(R.id.ll_overdue_desc)
         tvOverdueDay =  view.findViewById<AppCompatTextView>(R.id.tv_due_day)
+        llOrderNumView = view.findViewById<View>(R.id.ll_order_num)
+
+        llOrderNumView?.visibility = View.GONE
         llPending?.visibility = View.GONE
         tvOverdue?.visibility = View.VISIBLE
         llOverdue?.visibility = View.VISIBLE

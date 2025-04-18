@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse
 
-class RepaymentDetailAdapter(val stages : List<OrderDetailResponse.Stage>) : RecyclerView.Adapter<RepaymentDetailAdapter.RepaymentDetailHolder>() {
+class RepaymentDetailAdapter(val stages : List<OrderDetailResponse.Stage>, val isOverDue : Boolean = false) : RecyclerView.Adapter<RepaymentDetailAdapter.RepaymentDetailHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepaymentDetailHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_loan_repayment_detail, parent, false)
@@ -26,7 +26,15 @@ class RepaymentDetailAdapter(val stages : List<OrderDetailResponse.Stage>) : Rec
         holder.tvLoanAmount?.text = stage.amount.toString()
         holder.tvInterest?.text = stage.interest.toString()
         holder.tvServiceFee?.text = stage.service_fee.toString()
-        holder.tvAmountReduction?.text = stage.penalty.toString()
+//        holder.tvAmountReduction?.text = stage.penalty.toString()
+        if (isOverDue) {
+            holder.latePaymentFeeView?.visibility = View.VISIBLE
+            holder.latePaymentFeeViewLine?.visibility = View.VISIBLE
+            holder.tvLatePaymentFee?.text = stage.penalty.toString()
+        } else {
+            holder.latePaymentFeeView?.visibility = View.GONE
+            holder.latePaymentFeeViewLine?.visibility = View.GONE
+        }
     }
 
     inner class RepaymentDetailHolder : RecyclerView.ViewHolder {
@@ -36,6 +44,9 @@ class RepaymentDetailAdapter(val stages : List<OrderDetailResponse.Stage>) : Rec
         var tvInterest: TextView? = null
         var tvServiceFee: TextView? = null
         var tvAmountReduction: TextView? = null
+        var latePaymentFeeView: View? = null
+        var latePaymentFeeViewLine: View? = null
+        var tvLatePaymentFee: TextView? = null
 
         constructor(itemView: View) : super(itemView) {
             tvRepaymentTime = itemView.findViewById(R.id.tv_repayment_time)
@@ -44,6 +55,9 @@ class RepaymentDetailAdapter(val stages : List<OrderDetailResponse.Stage>) : Rec
             tvInterest = itemView.findViewById(R.id.tv_interest)
             tvServiceFee = itemView.findViewById(R.id.tv_service_fee)
             tvAmountReduction = itemView.findViewById(R.id.tv_amount_reduction)
+            latePaymentFeeView = itemView.findViewById(R.id.ll_late_payment_fee)
+            latePaymentFeeViewLine = itemView.findViewById(R.id.ll_late_payment_fee_line)
+            tvLatePaymentFee = itemView.findViewById(R.id.tv_late_payment_fee)
         }
     }
 }

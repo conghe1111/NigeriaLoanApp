@@ -49,6 +49,7 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
     private var tvOverdue: AppCompatTextView? = null
     private var tvOrderNum: AppCompatTextView? = null
     private var ivPaste: AppCompatImageView? = null
+    private var llOrderNumView: View? = null
     private val mStages = ArrayList<Stage>()
 
     private var mRepaymentAdapter: RepaymentAdapter? = null
@@ -69,6 +70,7 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvRepayment = view.findViewById<RecyclerView>(R.id.rv_repayment)
+        llOrderNumView = view.findViewById<View>(R.id.ll_order_num)
         tvPending = view.findViewById<AppCompatTextView>(R.id.tv_loan_pending)
         tvOverdue = view.findViewById<AppCompatTextView>(R.id.tv_loan_overdue)
         tvOrderNum = view.findViewById<AppCompatTextView>(R.id.tv_order_num)
@@ -81,7 +83,7 @@ open class BaseRepaymentFragment : BaseLoanStatusFragment() {
         mStages.clear()
         mRepayAmountList.clear()
         mRepaymentAdapter = RepaymentAdapter(mRepayAmountList)
-        mRepaymentDetailAdapter = RepaymentDetailAdapter(mStages)
+        mRepaymentDetailAdapter = RepaymentDetailAdapter(mStages, this@BaseRepaymentFragment is Loan9OverdueFragment)
 
         rvRepayment?.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
