@@ -5,22 +5,26 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_loan_2">
 
-
-    <include
-        layout="@layout/include_main_top"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp232" />
-
+        android:layout_height="@dimen/dp232"
+        android:background="@drawable/bg_mine_top" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/main_margin_top"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
+        <include
+            layout="@layout/include_main_top_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp18" />
+
         <FrameLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp12"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -65,7 +69,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp120"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_status_desc"
                 android:orientation="vertical">
 
@@ -108,6 +112,7 @@
                     android:textColor="#666666"
                     android:textSize="@dimen/sp14"
                     app:autoSizeMaxTextSize="@dimen/sp14"
+                    android:layout_marginVertical="@dimen/dp14"
                     app:autoSizeMinTextSize="1sp"
                     app:autoSizeStepGranularity="1sp" />
 

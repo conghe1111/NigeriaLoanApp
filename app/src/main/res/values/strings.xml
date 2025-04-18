@@ -47,7 +47,7 @@
     <string name="under_review">Under Review</string>
     <string name="we_are_currently_verifying">We are currently verifying your loan details. The results will be available soon.</string>
     <string name="loan_in_progress">Loan in progress</string>
-    <string name="loan_in_progress_desc">We are processing your loan disbursement, you should receive the fund in 2 hours, Thanks for your patience.</string>
+    <string name="loan_in_progress_desc">The reason for the failure of loan issuance may be that your receiving account information is incorrect or other reason. Please check it and reapply again later.</string>
     <string name="disbursement_fail">Disbursement failed</string>
     <string name="update_account">Update Account</string>
     <string name="the_system_detect_that">The system detects that your  bank account information is incorrect, please check and modify it.</string>

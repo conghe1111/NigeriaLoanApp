@@ -1,13 +1,14 @@
 package com.chocolate.nigerialoanapp.ui.loan.adapter
 
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.chocolate.nigerialoanapp.R
-import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse
-import com.chocolate.nigerialoanapp.bean.response.OrderDetailResponse.Stage
 import com.chocolate.nigerialoanapp.utils.SpanUtils
 import com.chocolate.nigerialoanapp.utils.interf.NoDoubleClickListener
 
@@ -24,7 +25,10 @@ class RepaymentAdapter(val repayAmountList : List<Long>) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: RepaymentHolder, position: Int) {
         val amount = repayAmountList[position]
-        holder.tvTotalPrice?.text = SpanUtils.getShowText(amount)
+        val text = SpanUtils.getShowText(amount)
+        val spanString = SpannableString(text)
+        spanString.setSpan(UnderlineSpan(), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        holder.tvTotalPrice?.text = spanString
 
         holder.tvTotalPrice?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
@@ -32,7 +36,7 @@ class RepaymentAdapter(val repayAmountList : List<Long>) : RecyclerView.Adapter<
             }
 
         })
-
+//        tv_item_total_price
         holder.tvRepayment?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 mListener?.onItemClickRepay(amount,position)

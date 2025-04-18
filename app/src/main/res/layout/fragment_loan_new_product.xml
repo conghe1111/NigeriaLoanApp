@@ -6,309 +6,314 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_loan_2">
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp232"
+        android:background="@drawable/bg_mine_top" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <include layout="@layout/include_main_top" />
-
-            <LinearLayout
+            <include
+                layout="@layout/include_main_top_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp93"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp18" />
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp12"
+                android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/ic_person" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dp20"
-                            android:text="@string/max_amount"
-                            android:textColor="#333333"
-                            android:textSize="@dimen/sp14" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_loan_max_amount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dp20"
-                            android:layout_marginTop="@dimen/dp6"
-                            android:text="0"
-                            android:textColor="#32483C"
-                            android:textSize="@dimen/sp18"
-                            android:textStyle="bold" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_loan_apply_now"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp51"
-                            android:layout_marginHorizontal="@dimen/dp20"
-                            android:layout_marginTop="@dimen/dp13"
-                            android:background="@drawable/bg_loan_apply_loan"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:includeFontPadding="false"
-                            android:paddingStart="@dimen/dp44"
-                            android:paddingEnd="@dimen/dp44"
-                            android:text="@string/apply_now"
-                            android:textColor="#357050"
-                            android:textSize="@dimen/sp18" />
-
-
-                    </LinearLayout>
-
-
-                </FrameLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp17"
-                    android:layout_marginTop="@dimen/dp20">
-
-                    <LinearLayout
-                        android:id="@+id/ll_left"
-                        android:layout_width="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/ll_right"
-                        app:layout_constraintHorizontal_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp17"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_new_product_item"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/dp88"
-                            android:layout_height="@dimen/dp72"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp22"
-                            android:src="@drawable/ic_home_1" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp18"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:text="@string/high_loan_amount"
-                            android:textColor="#242424"
-                            android:textSize="@dimen/sp15"
-                            android:textStyle="bold" />
-
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_product_left_desc1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp8"
-                            android:layout_marginBottom="@dimen/dp20"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:lines="2"
-                            android:text=""
-                            android:textColor="#242424"
-                            android:textSize="@dimen/sp12"
-                            app:autoSizeMaxTextSize="@dimen/sp12"
-                            app:autoSizeMinTextSize="1sp"
-                            tools:text="1111111111111111111111111111111111111111111111111111111111" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_right"
-                        android:layout_width="0dp"
-                        app:layout_constraintStart_toEndOf="@id/ll_left"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp17"
-                        app:layout_constraintHorizontal_weight="1"
-                        android:layout_weight="1"
-                        app:layout_constraintTop_toTopOf="@id/ll_left"
-                        app:layout_constraintBottom_toBottomOf="@id/ll_left"
-                        android:background="@drawable/bg_new_product_item"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/dp78"
-                            android:layout_height="@dimen/dp72"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp22"
-                            android:src="@drawable/ic_home_2" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp18"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:text="@string/multi_term_loan"
-                            android:textColor="#242424"
-                            android:textSize="@dimen/sp15"
-                            android:textStyle="bold" />
-
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_product_right_desc1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp8"
-                            android:layout_marginBottom="@dimen/dp20"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:lines="2"
-                            android:text=""
-                            android:textColor="#242424"
-                            android:textSize="@dimen/sp12"
-                            app:autoSizeMaxTextSize="@dimen/sp12"
-                            app:autoSizeMinTextSize="1sp"
-                            tools:text="10000" />
-
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_gravity="bottom|end"
+                    android:src="@drawable/ic_person" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp4"
-                    android:layout_marginTop="@dimen/dp20"
-                    android:background="@drawable/bg_product_item_4"
+                    android:layout_gravity="bottom"
                     android:orientation="vertical">
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp16"
-                        android:layout_marginTop="@dimen/dp20"
-                        android:drawableStart="@drawable/ic_loan_charact"
-                        android:drawablePadding="@dimen/dp6"
-                        android:text="@string/loan_characteristics"
+                        android:layout_marginStart="@dimen/dp20"
+                        android:text="@string/max_amount"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/sp14" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_loan_max_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp20"
+                        android:layout_marginTop="@dimen/dp6"
+                        android:text="0"
+                        android:textColor="#32483C"
+                        android:textSize="@dimen/sp18"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_loan_apply_now"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp51"
+                        android:layout_marginHorizontal="@dimen/dp20"
+                        android:layout_marginTop="@dimen/dp13"
+                        android:background="@drawable/bg_loan_apply_loan"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false"
+                        android:paddingStart="@dimen/dp44"
+                        android:paddingEnd="@dimen/dp44"
+                        android:text="@string/apply_now"
+                        android:textColor="#357050"
+                        android:textSize="@dimen/sp18" />
+
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp17"
+                android:layout_marginTop="@dimen/dp20">
+
+                <LinearLayout
+                    android:id="@+id/ll_left"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ll_right"
+                    app:layout_constraintHorizontal_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp17"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_new_product_item"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/dp88"
+                        android:layout_height="@dimen/dp72"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp22"
+                        android:src="@drawable/ic_home_1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp18"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/high_loan_amount"
                         android:textColor="#242424"
                         android:textSize="@dimen/sp15"
                         android:textStyle="bold" />
 
-                    <LinearLayout
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_product_left_desc1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp16"
-                        android:layout_marginTop="@dimen/dp13"
-                        android:orientation="horizontal">
-
-                        <View
-                            android:layout_width="@dimen/dp8"
-                            android:layout_height="@dimen/dp8"
-                            android:layout_gravity="center_vertical"
-                            android:background="@drawable/oval_green_8" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dp6"
-                            android:layout_marginEnd="@dimen/dp15"
-                            android:gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:maxLines="2"
-                            android:text="@string/quick_approval"
-                            tools:text="111111111111111111111111111111111111111111111111111111111111111111111111"
-                            android:textColor="#242424"
-                            android:textSize="@dimen/sp12"
-                            app:autoSizeMaxTextSize="@dimen/sp12"
-                            app:autoSizeMinTextSize="1sp" />
-
-                    </LinearLayout>
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp20"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:lines="2"
+                        android:text=""
+                        android:textColor="#242424"
+                        android:textSize="@dimen/sp12"
+                        app:autoSizeMaxTextSize="@dimen/sp12"
+                        app:autoSizeMinTextSize="1sp"
+                        tools:text="1111111111111111111111111111111111111111111111111111111111" />
 
 
-                    <LinearLayout
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_right"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toEndOf="@id/ll_left"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp17"
+                    app:layout_constraintHorizontal_weight="1"
+                    android:layout_weight="1"
+                    app:layout_constraintTop_toTopOf="@id/ll_left"
+                    app:layout_constraintBottom_toBottomOf="@id/ll_left"
+                    android:background="@drawable/bg_new_product_item"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/dp78"
+                        android:layout_height="@dimen/dp72"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp22"
+                        android:src="@drawable/ic_home_2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp18"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/multi_term_loan"
+                        android:textColor="#242424"
+                        android:textSize="@dimen/sp15"
+                        android:textStyle="bold" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_product_right_desc1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp20"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:lines="2"
+                        android:text=""
+                        android:textColor="#242424"
+                        android:textSize="@dimen/sp12"
+                        app:autoSizeMaxTextSize="@dimen/sp12"
+                        app:autoSizeMinTextSize="1sp"
+                        tools:text="10000" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@drawable/bg_product_item_4"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:drawableStart="@drawable/ic_loan_charact"
+                    android:drawablePadding="@dimen/dp6"
+                    android:text="@string/loan_characteristics"
+                    android:textColor="#242424"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp13"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/dp8"
+                        android:layout_height="@dimen/dp8"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/oval_green_8" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp16"
-                        android:layout_marginTop="@dimen/dp11"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dp6"
+                        android:layout_marginEnd="@dimen/dp15"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:maxLines="2"
+                        android:text="@string/quick_approval"
+                        tools:text="111111111111111111111111111111111111111111111111111111111111111111111111"
+                        android:textColor="#242424"
+                        android:textSize="@dimen/sp12"
+                        app:autoSizeMaxTextSize="@dimen/sp12"
+                        app:autoSizeMinTextSize="1sp" />
 
-                        <View
-                            android:layout_width="@dimen/dp8"
-                            android:layout_height="@dimen/dp8"
-                            android:layout_gravity="center_vertical"
-                            android:background="@drawable/oval_green_8" />
+                </LinearLayout>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dp6"
-                            android:gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:maxLines="1"
-                            android:text="@string/unsecured_pure_credit"
-                            android:textColor="#242424"
-                            android:textSize="@dimen/sp12"
-                            app:autoSizeMaxTextSize="@dimen/sp12"
-                            app:autoSizeMinTextSize="1sp" />
 
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp11"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
+                    <View
+                        android:layout_width="@dimen/dp8"
+                        android:layout_height="@dimen/dp8"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/oval_green_8" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp16"
-                        android:layout_marginTop="@dimen/dp11"
-                        android:layout_marginBottom="@dimen/dp18"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dp6"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="@string/unsecured_pure_credit"
+                        android:textColor="#242424"
+                        android:textSize="@dimen/sp12"
+                        app:autoSizeMaxTextSize="@dimen/sp12"
+                        app:autoSizeMinTextSize="1sp" />
 
-                        <View
-                            android:layout_width="@dimen/dp8"
-                            android:layout_height="@dimen/dp8"
-                            android:layout_gravity="center_vertical"
-                            android:background="@drawable/oval_green_8" />
+                </LinearLayout>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dp6"
-                            android:gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:maxLines="2"
-                            android:text="@string/protect_your_privacy"
-                            android:textColor="#242424"
-                            android:textSize="@dimen/sp12"
-                            app:autoSizeMaxTextSize="@dimen/sp12"
-                            app:autoSizeMinTextSize="1sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp11"
+                    android:layout_marginBottom="@dimen/dp18"
+                    android:orientation="horizontal">
 
-                    </LinearLayout>
+                    <View
+                        android:layout_width="@dimen/dp8"
+                        android:layout_height="@dimen/dp8"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/oval_green_8" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dp6"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:maxLines="2"
+                        android:text="@string/protect_your_privacy"
+                        android:textColor="#242424"
+                        android:textSize="@dimen/sp12"
+                        app:autoSizeMaxTextSize="@dimen/sp12"
+                        app:autoSizeMinTextSize="1sp" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </FrameLayout>
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
