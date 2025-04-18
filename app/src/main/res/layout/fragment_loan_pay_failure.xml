@@ -108,7 +108,7 @@
                     android:includeFontPadding="false"
                     android:paddingStart="@dimen/dp15"
                     android:paddingEnd="@dimen/dp15"
-                    android:text="@string/loan_in_progress_desc"
+                    android:text="@string/the_reason_for_failure"
                     android:textColor="#666666"
                     android:textSize="@dimen/sp14"
                     app:autoSizeMaxTextSize="@dimen/sp14"
