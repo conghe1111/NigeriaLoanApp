@@ -62,7 +62,7 @@ class LoginActivity : BaseActivity() {
 
 
     fun setBackVisible(visibleFlag : Boolean) {
-        ivBack?.visibility = if (visibleFlag) View.VISIBLE else View.GONE
+        ivBack?.visibility = if (visibleFlag) View.VISIBLE else View.INVISIBLE
     }
 
     override fun onBackPressed() {
