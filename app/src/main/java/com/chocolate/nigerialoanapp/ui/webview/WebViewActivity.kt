@@ -25,6 +25,7 @@ class WebViewActivity : BaseActivity() {
         const val TYPE_PRIVACY = 111
         const val TYPE_TERMS = 112
         const val TYPE_REPAY = 113
+        const val TYPE_USER_AGREE = 114
 
         fun launchWebView(context: Context, url: String, type: Int) {
             var intent = Intent(context, WebViewActivity::class.java)
@@ -69,6 +70,8 @@ class WebViewActivity : BaseActivity() {
             titleStr = getString(R.string.about_privacy)
         } else if (mType == TYPE_REPAY) {
             titleStr = getString(R.string.repayment)
+        } else if (mType == TYPE_USER_AGREE){
+            titleStr = getString(R.string.user_agreement)
         } else {
             titleStr = getString(R.string.about_terms)
         }

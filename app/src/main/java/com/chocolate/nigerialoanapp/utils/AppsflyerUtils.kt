@@ -8,7 +8,7 @@ import com.chocolate.nigerialoanapp.global.App
 object AppsflyerUtils {
 
 
-    private const val AF_DEV_KEY = "yoYniZRmUgmoBEhDuzrarX"
+    const val AF_DEV_KEY = "yoYniZRmUgmoBEhDuzrarX"
     private const val LOG_TAG = "AppsflyerUtils"
 
 

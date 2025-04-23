@@ -110,8 +110,8 @@ object SpanUtils {
             override fun onClick(widget: View) {
                 WebViewActivity.launchWebView(
                     activity,
-                    Api.GET_POLICY,
-                    WebViewActivity.TYPE_PRIVACY
+                    Api.USER_AGREEMENT,
+                    WebViewActivity.TYPE_USER_AGREE
                 )
             }
         }

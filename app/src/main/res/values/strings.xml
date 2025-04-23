@@ -187,6 +187,7 @@
     <string name="i_agree_to_loan_contact">I agree to the &#60;Loan Contract&#62;</string>
     <string name="about_terms">Terms of Service</string>
     <string name="about_privacy">Privacy Policy</string>
+    <string name="user_agreement">User Agreement</string>
     <string name="please_select_loan_contract">Please select the &#60;Loan Contract&#62;</string>
     <string name="network_abnormal_please_try_again"> The network is abnormal, please try again</string>
     <string name="open">Open</string>

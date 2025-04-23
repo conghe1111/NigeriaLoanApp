@@ -37,7 +37,7 @@ object NetworkUtils {
         header.put("AppVersion",appVersion)
         header.put("VersionCode",versionCode)
 //        AppId	string	Y	客户端APPID	1
-//        AppName	string	Y	客户端APP名字	APPName=owo credit 只要传owo
+//        AppName	string	Y	客户端APP名字	APPName
 //        AppVersion	string	Y	客户端版本号，字符串类型	例如：1.0.1
 //        VersionCode	string	Y	客户端版本号，数字类型	例如：101
 

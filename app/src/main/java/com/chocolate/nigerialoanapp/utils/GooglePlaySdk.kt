@@ -41,6 +41,8 @@ class GooglePlaySdk {
                                     if (Constant.IS_COLLECT) {
                                         LogSaver.logToFile(" refer url = " + referrerUrl)
                                     }
+
+                                    SPUtils.getInstance().put(LocalConfig.LC_UTMSOURCE, referrerUrl)
                                     SPUtils.getInstance().put(LocalConfig.LC_UTMSOURCE, referrerUrl)
 //                                    var utmSource = tryGetUtmSource(referrerUrl)
 //                                    if (!TextUtils.isEmpty(utmSource)) {
