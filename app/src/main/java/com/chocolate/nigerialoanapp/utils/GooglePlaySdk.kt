@@ -41,13 +41,14 @@ class GooglePlaySdk {
                                     if (Constant.IS_COLLECT) {
                                         LogSaver.logToFile(" refer url = " + referrerUrl)
                                     }
-
-                                    SPUtils.getInstance().put(LocalConfig.LC_UTMSOURCE, referrerUrl)
-                                    SPUtils.getInstance().put(LocalConfig.LC_UTMSOURCE, referrerUrl)
-//                                    var utmSource = tryGetUtmSource(referrerUrl)
-//                                    if (!TextUtils.isEmpty(utmSource)) {
+                                    val temp = SPUtils.getInstance().getString(LocalConfig.LC_UTMSOURCE)
+                                    if (TextUtils.isEmpty(temp)) {
+                                        var utmSource = tryGetUtmSource(referrerUrl)
+                                        if (!TextUtils.isEmpty(utmSource)) {
+                                            SPUtils.getInstance().put(LocalConfig.LC_UTMSOURCE, utmSource)
+                                        }
+                                    }
 //                                        OkGo.getInstance().addCommonHeaders(BuildRequestJsonUtils.buildUtmSource(utmSource!!))
-//                                    }
                                     var utmMedium = tryGetUtmMedium(referrerUrl)
                                     if (TextUtils.isEmpty(utmMedium)) {
                                         utmMedium = tryGetGCLID(referrerUrl)

@@ -1,9 +1,14 @@
 package com.chocolate.nigerialoanapp.utils
 
+import android.text.TextUtils
 import android.util.Log
+import com.appsflyer.AppsFlyerConversionListener
 import com.appsflyer.AppsFlyerLib
 import com.appsflyer.attribution.AppsFlyerRequestListener
+import com.blankj.utilcode.util.SPUtils
+import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.global.App
+import com.chocolate.nigerialoanapp.global.LocalConfig
 
 object AppsflyerUtils {
 
@@ -13,11 +18,42 @@ object AppsflyerUtils {
 
 
     fun initAppsflyer() {
-        Log.d(LOG_TAG, "initAppsflyer")
+        if (BuildConfig.DEBUG) {
+            Log.d(LOG_TAG, "initAppsflyer")
+        }
         if (App.instance == null) {
             return
         }
-        AppsFlyerLib.getInstance().init(AF_DEV_KEY, null, App.instance!!.applicationContext)
+        AppsFlyerLib.getInstance().init(AF_DEV_KEY, object : AppsFlyerConversionListener {
+            override fun onConversionDataSuccess(conversionData: MutableMap<String, Any>?) {
+                conversionData ?: return
+                val afCampaign = saveData("campaign", conversionData)
+                val afMediaSource = saveData("source", conversionData)
+                if (BuildConfig.DEBUG) {
+                    Log.d(LOG_TAG, "afMediaSource = $afMediaSource")
+                    Log.d(LOG_TAG, "afCampaign = $afCampaign")
+                }
+                if (!TextUtils.isEmpty(afCampaign)) {
+                    SPUtils.getInstance().put(LocalConfig.LC_CAMPAIGN, afCampaign)
+                }
+                if (!TextUtils.isEmpty(afMediaSource)) {
+                    SPUtils.getInstance().put(LocalConfig.LC_UTMSOURCE, afMediaSource)
+                }
+            }
+
+            override fun onConversionDataFail(p0: String?) {
+
+            }
+
+            override fun onAppOpenAttribution(p0: MutableMap<String, String>?) {
+
+            }
+
+            override fun onAttributionFailure(p0: String?) {
+
+            }
+
+        }, App.instance!!.applicationContext)
 
         AppsFlyerLib.getInstance().start(
             App.instance!!.applicationContext,
@@ -37,6 +73,11 @@ object AppsflyerUtils {
                     )
                 }
             })
+    }
+
+    private fun saveData(key: String, conversionData: MutableMap<String, Any>): String {
+        val value = conversionData.get(key).toString()
+        return value
     }
 
     // 发送应用内事件

@@ -9,7 +9,7 @@ object Api {
     private val TEST_HOST = "https://srv.ghsgkfdhkg.com"
     private val HOST = if (BuildConfig.USE_ONLINE_API) ONLINE_HOST else TEST_HOST
 
-    val LIVE = "$HOST/api/v1/monitor/live"
+    val LIVE = "$HOST/rest/v1/monitor/live"
     //验证手机号码是否注册
     val CHECK_PHONE_NUMBER = "$HOST/rest/v1/check_mobile"
     //发送短信验证码
