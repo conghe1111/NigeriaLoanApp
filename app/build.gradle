@@ -211,6 +211,7 @@ dependencies {
     //debug包 请使用 SNAPSHOT版本
 //    implementation "com.easeid.opensdk:liveness-sdk-android:0.0.10-SNAPSHOT"
     //###################################################
+    implementation 'com.appsflyer:af-android-sdk:6.9.0'
 }
 
 aabResGuard {

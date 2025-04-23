@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.Utils.OnAppStatusChangedListener
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.collect.LocationMgr
 import com.chocolate.nigerialoanapp.log.LogSaver
+import com.chocolate.nigerialoanapp.utils.AppsflyerUtils
 import com.chocolate.nigerialoanapp.utils.FirebaseUtils
 import com.chocolate.nigerialoanapp.utils.GetIdUtils
 import com.chocolate.nigerialoanapp.utils.GooglePlaySdk
@@ -47,6 +48,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        AppsflyerUtils.initAppsflyer()
         FirebaseApp.initializeApp(this)
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->

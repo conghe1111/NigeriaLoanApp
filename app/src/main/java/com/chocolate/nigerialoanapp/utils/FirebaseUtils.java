@@ -120,6 +120,7 @@ public class FirebaseUtils {
         if (App.Companion.getInstance() == null) {
             return;
         }
+        AppsflyerUtils.INSTANCE.logEvent(event);
         // TODO
         if (true) {
             return;

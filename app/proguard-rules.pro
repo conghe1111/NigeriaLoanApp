@@ -300,3 +300,4 @@ public static java.lang.String TABLENAME;
 -keep class  new.** {*;}
 -keep class  this.** {*;}
 -keep class  try.** {*;}
+-keep class com.appsflyer.** { *; }
