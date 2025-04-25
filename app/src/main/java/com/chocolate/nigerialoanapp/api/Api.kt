@@ -3,10 +3,9 @@ package com.chocolate.nigerialoanapp.api
 import com.chocolate.nigerialoanapp.BuildConfig
 
 object Api {
-    private val ONLINE_HOST = "https://srv.afrokash.com"
+    private val ONLINE_HOST = "https://api.afrokash.com"
     private val ONLINE_URL = "https://www.afrokash.com"
-//    private val TEST_HOST = "https://srv.accecash.com"
-    private val TEST_HOST = "https://srv.ghsgkfdhkg.com"
+    private val TEST_HOST = "https://www.ghsgkfdhkg.com"
     private val HOST = if (BuildConfig.USE_ONLINE_API) ONLINE_HOST else TEST_HOST
 
     val LIVE = "$HOST/rest/v1/monitor/live"
