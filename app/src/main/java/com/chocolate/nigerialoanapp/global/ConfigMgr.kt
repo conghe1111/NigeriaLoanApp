@@ -58,8 +58,8 @@ object ConfigMgr {
         initPayPeriod()
 
         mGenderList.clear()
-        mGenderList.add(Pair("male", "1"))
-        mGenderList.add(Pair("female", "2"))
+        mGenderList.add(Pair("Male", "1"))
+        mGenderList.add(Pair("Female", "2"))
 
         val dataConfig = SPUtils.getInstance().getString(KEY_DATA_CONFIG)
         if (!TextUtils.isEmpty(dataConfig)) {
