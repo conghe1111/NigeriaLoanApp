@@ -84,8 +84,9 @@ object SpanUtils {
         tv.text = spannableString
     }
 
-
-    fun setLoanContactString(tv: AppCompatTextView?, activity: Activity?) {
+    fun setLoanContactString(tv: AppCompatTextView?, activity: Activity?, bankAccountNum : String?, bankName : String?,
+                             loanAmount  : String?, dueDate : String?, interestPayment : String?,  totalRepaymentPayable : String?,
+                             tenure : String? = null, interestRate : String? = null) {
         if (tv == null || activity == null) {
             return
         }
@@ -103,14 +104,18 @@ object SpanUtils {
             startIndex,
             endIndex + 1,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
+        )
+//            "&tenure=${}" +
+//            "&interestRate=${}" +
+        var url = Api.USER_AGREEMENT + "?accountNumber=" + bankAccountNum + "&bankName=" + bankName +
+             "&loanAmount=" + loanAmount +  "&dueDate=" + dueDate + "&interestPayment=" + interestPayment + "&totalRepaymentPayable=" + totalRepaymentPayable
 
         //点击1
         val serveClickableSpan = object : NoUnderlineClickSpan() {
             override fun onClick(widget: View) {
                 WebViewActivity.launchWebView(
                     activity,
-                    Api.USER_AGREEMENT,
+                    url,
                     WebViewActivity.TYPE_USER_AGREE
                 )
             }

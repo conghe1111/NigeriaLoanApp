@@ -48,19 +48,18 @@ object ConfigMgr {
 
     fun getAllConfig() {
         mDebtList.clear()
-        mDebtList.add(Pair("yes", "0"))
-        mDebtList.add(Pair("no", "1"))
+        mDebtList.add(Pair("Yes", "0"))
+        mDebtList.add(Pair("No", "1"))
 
         mHaveOtherDebtList.clear()
-        mHaveOtherDebtList.add(Pair("no", "1"))
-        mHaveOtherDebtList.add(Pair("yes", "2"))
+        mHaveOtherDebtList.add(Pair("No", "1"))
+        mHaveOtherDebtList.add(Pair("Yes", "2"))
 
         initPayPeriod()
 
         mGenderList.clear()
         mGenderList.add(Pair("male", "1"))
         mGenderList.add(Pair("female", "2"))
-        mGenderList.add(Pair("third gender", "3"))
 
         val dataConfig = SPUtils.getInstance().getString(KEY_DATA_CONFIG)
         if (!TextUtils.isEmpty(dataConfig)) {

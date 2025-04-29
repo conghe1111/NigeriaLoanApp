@@ -41,6 +41,7 @@ import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
+import kotlin.concurrent.thread
 
 class LoanApplyActivity : BaseLoanApplyActivity() {
 
@@ -172,13 +173,16 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
                 ).callback(object : PermissionUtils.SimpleCallback {
                     override fun onGranted() {
                         FirebaseUtils.logEvent("CLICK_LOAN_CONFIRM")
-                        try {
-                            LocationMgr.getInstance().getLocation()
-                        } catch (e: Exception) {
-                            if (BuildConfig.DEBUG) {
-                                throw e
+                        thread {
+                            try {
+                                LocationMgr.getInstance().getLocation()
+                            } catch (e: Exception) {
+                                if (BuildConfig.DEBUG) {
+                                    throw e
+                                }
                             }
                         }
+
                         showLoanDetailAndUploadHardware(mOrderId)
                     }
 

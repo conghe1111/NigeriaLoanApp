@@ -16,8 +16,8 @@ android {
         applicationId "com.afrokash.easymoni.nigeria"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 10007
-        versionName "1.0.7"
+        versionCode 10010
+        versionName "1.0.10"
         flavorDimensions("default")
         // dex突破65535的限制
         multiDexEnabled true

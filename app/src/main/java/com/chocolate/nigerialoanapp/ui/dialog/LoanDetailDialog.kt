@@ -28,18 +28,26 @@ import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
 
-class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): Dialog(context)   {
+class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) : Dialog(context) {
 
     companion object {
         const val TAG = "LoanDetailDialog"
     }
 
-    private var hasSelect : Boolean = false
+    private var hasSelect: Boolean = false
     private var ivSelect: ImageView? = null
 
     private var tvBankName: TextView? = null
     private var tvBankNum: TextView? = null
     private var tvAgree: AppCompatTextView? = null
+
+    private var bankName: String? = null
+    private var bankNum: String? = null
+    private var loanAmount: String? = null
+    private var dueDate: String? = null
+    private var interestPayment: String? = null
+    private var totalRepaymentPayable: String? = null
+
 
     init {
         window?.decorView?.setPadding(0, 0, 0, 0)
@@ -53,7 +61,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
             window?.attributes = lp
         }
         setContentView(R.layout.dialog_loan_detail)
-        val ivClose : ImageView = findViewById<ImageView>(R.id.iv_close)
+        val ivClose: ImageView = findViewById<ImageView>(R.id.iv_close)
         val tvDisbursalAmount: TextView = findViewById<TextView>(R.id.tv_disbursal_amount)
         val tvDuelAmount: TextView = findViewById<TextView>(R.id.tv_due_amount)
         val tvDueDay: TextView = findViewById<TextView>(R.id.tv_due_day)
@@ -69,6 +77,11 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
                 tvDisbursalAmount.text = trial.disburse_amount.toString()
                 tvDuelAmount.text = trial.total.toString()
                 tvDueDay.text = trial.repay_date.toString()
+
+                loanAmount = trial.disburse_amount.toString()
+                dueDate = trial.repay_date.toString()
+                totalRepaymentPayable = trial.total.toString()
+                interestPayment = trial.interest.toString()
             }
         }
 
@@ -88,7 +101,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
             }
 
         })
-        tvConfirm?.setOnClickListener(object :NoDoubleClickListener() {
+        tvConfirm?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 if (!hasSelect) {
                     val toastStr = context.resources.getString(R.string.please_select_loan_contract)
@@ -103,7 +116,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
             }
 
         })
-        ivClose?.setOnClickListener(object :NoDoubleClickListener() {
+        ivClose?.setOnClickListener(object : NoDoubleClickListener() {
             override fun onNoDoubleClick(v: View?) {
                 if (mCallBack != null) {
                     mCallBack!!.onClickCancel()
@@ -114,7 +127,16 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
 
         })
         if (tvAgree != null && context is Activity) {
-            SpanUtils.setLoanContactString(tvAgree!!, context)
+            SpanUtils.setLoanContactString(
+                tvAgree!!,
+                context,
+                bankNum,
+                bankName,
+                loanAmount,
+                dueDate,
+                interestPayment,
+                totalRepaymentPayable
+            )
         }
         updateSelect()
         getBankInfo()
@@ -161,6 +183,8 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?): 
                         BankInfoResponse::class.java
                     )
                     if (bankInfo != null) {
+                        bankName = bankInfo?.bank_name
+                        bankNum = bankInfo?.bank_account_num
                         tvBankName?.text = bankInfo?.bank_name.toString()
                         tvBankNum?.text = bankInfo?.bank_account_num.toString()
                     }
