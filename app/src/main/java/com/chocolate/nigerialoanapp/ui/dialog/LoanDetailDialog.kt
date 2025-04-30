@@ -215,9 +215,15 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
 
                 override fun onError(response: Response<String>) {
                     super.onError(response)
-                    if (BuildConfig.DEBUG) {
-                        Log.e(TAG, " update contact = " + response.body())
+                    try {
+                        ToastUtils.showShort("get bank info error = " + response.body())
+                        if (BuildConfig.DEBUG) {
+                            Log.e(TAG, " get bank info error = " + response.body())
+                        }
+                    } catch (e : Exception) {
+
                     }
+
                 }
             })
     }
