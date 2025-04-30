@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -43,10 +44,15 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
 
     private var bankName: String? = null
     private var bankNum: String? = null
+    private var accountName: String? = null
+
     private var loanAmount: String? = null
     private var dueDate: String? = null
     private var interestPayment: String? = null
     private var totalRepaymentPayable: String? = null
+    private var tenure: String? = null
+    private var interestRate: String? = null
+    private var serviceFeeRate: String? = null
 
 
     init {
@@ -82,6 +88,14 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
                 dueDate = trial.repay_date.toString()
                 totalRepaymentPayable = trial.total.toString()
                 interestPayment = trial.interest.toString()
+                tenure = trial.period.toString()
+                try {
+                    interestRate = trial.interest_rate.toString()
+                    serviceFeeRate =  trial.service_fee_rate.toString()
+                } catch (e : Exception) {
+
+                }
+
             }
         }
 
@@ -126,16 +140,24 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
             }
 
         })
+
         if (tvAgree != null && context is Activity) {
             SpanUtils.setLoanContactString(
                 tvAgree!!,
-                context,
-                bankNum,
-                bankName,
-                loanAmount,
-                dueDate,
-                interestPayment,
-                totalRepaymentPayable
+                context as Activity,
+                object : SpanUtils.CallBack {
+                    override fun getUrl(): String {
+                        if (TextUtils.isEmpty(bankNum)) {
+                            return ""
+                        }
+                        return Api.USER_AGREEMENT + "?accountNumber=" + bankNum + "&bankName=" + bankName +
+                                "&accountName=" + accountName + "&tenure=" + tenure + "&interestRate=" + interestRate + "&serviceFeeRate=" + serviceFeeRate +
+                                "&loanAmount=" + loanAmount + "&dueDate=" + dueDate + "&interestPayment=" + interestPayment + "&totalRepaymentPayable=" + totalRepaymentPayable
+
+                    }
+
+                }
+
             )
         }
         updateSelect()
@@ -185,6 +207,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
                     if (bankInfo != null) {
                         bankName = bankInfo?.bank_name
                         bankNum = bankInfo?.bank_account_num
+                        accountName = bankInfo?.bank_account_num
                         tvBankName?.text = bankInfo?.bank_name.toString()
                         tvBankNum?.text = bankInfo?.bank_account_num.toString()
                     }

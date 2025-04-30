@@ -26,6 +26,7 @@ public class ProductTrialResponse {
     public static class Trial {
         private int stage_no;   //当前期数
         private int stage_total;   //总期数
+        private int period;   //总期数
         private String name;   //产品名字
         private String repay_date;   //还款日期
         private Long repay_date_time;   //还款日期
@@ -33,8 +34,35 @@ public class ProductTrialResponse {
         private int amount;   //本金
         private int disburse_amount;   //放款金额
         private int service_fee;   //服务费
+
+        public int getPeriod() {
+            return period;
+        }
+
+        public void setPeriod(int period) {
+            this.period = period;
+        }
+
+        public int getService_fee_rate() {
+            return service_fee_rate;
+        }
+
+        public void setService_fee_rate(int service_fee_rate) {
+            this.service_fee_rate = service_fee_rate;
+        }
+
+        public int getInterest_rate() {
+            return interest_rate;
+        }
+
+        public void setInterest_rate(int interest_rate) {
+            this.interest_rate = interest_rate;
+        }
+
+        private int service_fee_rate;   //服务费
         private int service_fee_prepaid;   //砍头服务费，非砍头产品为0
         private int interest;   //利息
+        private int interest_rate;   //利息
         private int interest_prepaid;   //砍头利息，非砍头产品为0
 
         public int getStage_no() {

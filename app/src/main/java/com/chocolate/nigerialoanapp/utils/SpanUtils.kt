@@ -3,6 +3,7 @@ package com.chocolate.nigerialoanapp.utils
 import android.app.Activity
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
@@ -84,9 +85,7 @@ object SpanUtils {
         tv.text = spannableString
     }
 
-    fun setLoanContactString(tv: AppCompatTextView?, activity: Activity?, bankAccountNum : String?, bankName : String?,
-                             loanAmount  : String?, dueDate : String?, interestPayment : String?,  totalRepaymentPayable : String?,
-                             tenure : String? = null, interestRate : String? = null) {
+    fun setLoanContactString(tv: AppCompatTextView?, activity: Activity?, callBack: CallBack) {
         if (tv == null || activity == null) {
             return
         }
@@ -105,14 +104,14 @@ object SpanUtils {
             endIndex + 1,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-//            "&tenure=${}" +
-//            "&interestRate=${}" +
-        var url = Api.USER_AGREEMENT + "?accountNumber=" + bankAccountNum + "&bankName=" + bankName +
-             "&loanAmount=" + loanAmount +  "&dueDate=" + dueDate + "&interestPayment=" + interestPayment + "&totalRepaymentPayable=" + totalRepaymentPayable
 
         //点击1
         val serveClickableSpan = object : NoUnderlineClickSpan() {
             override fun onClick(widget: View) {
+                var url = callBack.getUrl()
+                if (TextUtils.isEmpty(url)) {
+                    return
+                }
                 WebViewActivity.launchWebView(
                     activity,
                     url,
@@ -341,4 +340,7 @@ object SpanUtils {
         tv.setText(spannableString)
     }
 
+    interface CallBack {
+        fun getUrl() : String
+    }
 }

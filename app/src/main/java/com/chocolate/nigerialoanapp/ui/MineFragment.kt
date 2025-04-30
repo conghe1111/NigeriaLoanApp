@@ -330,9 +330,9 @@ class MineFragment : BaseFragment() {
             }
 
             PageType.TEST_1 -> {
-                activity?.let {
-                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
-                }
+//                activity?.let {
+//                    EditInfoActivity.showActivity(it, EditInfoActivity.STEP_5)
+//                }
 //                CollectHardwareMgr.sInstance.collectHardware(activity, object : CollectHardwareMgr.Observer {
 //                    override fun success(response: String) {
 //
@@ -347,9 +347,9 @@ class MineFragment : BaseFragment() {
 //                            val dialog = LoanRetentionDialog(it)
 //                            dialog.show()
 //                        }
-//                        activity?.let {
-//                            LoanApplyActivity.startActivity(it, "")
-//                        }
+                        activity?.let {
+                            LoanApplyActivity.startActivity(it, "")
+                        }
 //                        context?.let {
 //                            val dialog: RequestPermissionDialog = RequestPermissionDialog(it, activity)
 //                            dialog.setOnItemClickListener(object : RequestPermissionDialog.OnItemClickListener() {
