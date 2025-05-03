@@ -38,6 +38,7 @@ import com.chocolate.nigerialoanapp.network.NetworkUtils
 import com.chocolate.nigerialoanapp.ui.login.LoginRegisterFragment
 import com.chocolate.nigerialoanapp.ui.setting.adapter.ConsumerHotlineAdapter
 import com.chocolate.nigerialoanapp.utils.JumpUtils
+import com.chocolate.nigerialoanapp.utils.UssdUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -213,26 +214,11 @@ class ConsumerHotlineActivity : BaseActivity() {
     }
 
     private fun executeCallPhone(phoneNum: String) {
-        var hasPermissions: Boolean = PermissionUtils.isGranted(Manifest.permission.CALL_PHONE)
-        if (hasPermissions) {
-            executeCallPhoneInternal(phoneNum)
-        } else {
-            PermissionUtils.permission(Manifest.permission.CALL_PHONE)
-                .callback(object : PermissionUtils.SimpleCallback {
-                    override fun onGranted() {
-                        executeCallPhoneInternal(phoneNum)
-                    }
-
-                    override fun onDenied() {
-                        ToastUtils.showShort("Please allow permission")
-                    }
-                }).request()
-        }
+        executeCallPhoneInternal(phoneNum)
     }
 
-    @SuppressLint("MissingPermission")
     private fun executeCallPhoneInternal(phoneNum: String) {
-        PhoneUtils.call(phoneNum)
+        UssdUtils.toSendUssdCodeActivity(this@ConsumerHotlineActivity, phoneNum)
     }
 
     private fun checkAndToWhatApp(context: Context?, mobile: String) {
