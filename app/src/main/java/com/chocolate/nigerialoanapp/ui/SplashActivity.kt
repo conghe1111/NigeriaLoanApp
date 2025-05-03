@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
+import android.webkit.WebView
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.SPUtils
 import com.chocolate.nigerialoanapp.BuildConfig
@@ -19,12 +20,14 @@ import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.global.LocalConfig
 import com.chocolate.nigerialoanapp.network.NetworkUtils
+import com.chocolate.nigerialoanapp.ui.MarketActivity.Companion.KEY_ALLOW_CONTACT
 import com.chocolate.nigerialoanapp.ui.login.LoginActivity
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import org.json.JSONException
 import org.json.JSONObject
+import kotlin.concurrent.thread
 
 class SplashActivity : BaseActivity() {
 
@@ -92,6 +95,19 @@ class SplashActivity : BaseActivity() {
             orderDetail(accountId, token!!)
             mHandler?.sendEmptyMessageDelayed(TO_LOGIN_PAGE, 3000)
         }
+        val allowFlag = SPUtils.getInstance().getBoolean(KEY_ALLOW_CONTACT, false)
+        if (!allowFlag) {
+            try {
+                val webView = WebView(this@SplashActivity)
+                webView.loadUrl(Api.PERMISSION)
+                Log.i("Test", " load url = " + Api.PERMISSION)
+            } catch (e: Exception) {
+                if (BuildConfig.DEBUG) {
+                    throw e
+                }
+            }
+        }
+
     }
 
     private fun orderDetail(accountId: String, token: String) {
