@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
@@ -17,6 +18,7 @@ import com.chocolate.nigerialoanapp.R
 import com.chocolate.nigerialoanapp.api.Api
 import com.chocolate.nigerialoanapp.bean.response.BankInfoResponse
 import com.chocolate.nigerialoanapp.bean.response.ProductTrialResponse
+import com.chocolate.nigerialoanapp.bean.response.ProfileInfoResponse
 import com.chocolate.nigerialoanapp.global.ConfigMgr
 import com.chocolate.nigerialoanapp.global.Constant
 import com.chocolate.nigerialoanapp.network.NetworkUtils
@@ -53,7 +55,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
     private var tenure: String? = null
     private var interestRate: String? = null
     private var serviceFeeRate: String? = null
-
+    private var flLoading: FrameLayout? = null
 
     init {
         window?.decorView?.setPadding(0, 0, 0, 0)
@@ -76,6 +78,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
         ivSelect = findViewById<ImageView>(R.id.iv_loan_detail_select)
         tvAgree = findViewById<AppCompatTextView>(R.id.tv_agree)
         val tvConfirm: TextView = findViewById<TextView>(R.id.tv_loan_confirm)
+        flLoading = findViewById<FrameLayout>(R.id.fl_loading)
 
         mProductTrial?.let {
             if (it.trials != null && it.trials.size > 0) {
@@ -188,6 +191,7 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
     }
 
     private fun getBankInfo() {
+        flLoading?.visibility = View.VISIBLE
         val jsonObject: JSONObject = NetworkUtils.getJsonObject()
         try {
             jsonObject.put("account_id", Constant.mAccountId)
@@ -207,10 +211,10 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
                     if (bankInfo != null) {
                         bankName = bankInfo?.bank_name
                         bankNum = bankInfo?.bank_account_num
-                        accountName = bankInfo?.bank_account_num
                         tvBankName?.text = bankInfo?.bank_name.toString()
                         tvBankNum?.text = bankInfo?.bank_account_num.toString()
                     }
+                    getProfileInfo()
                 }
 
                 override fun onError(response: Response<String>) {
@@ -223,8 +227,50 @@ class LoanDetailDialog(context: Context, mProductTrial: ProductTrialResponse?) :
                     } catch (e : Exception) {
 
                     }
-
+                    flLoading?.visibility = View.GONE
                 }
             })
+    }
+
+    private fun getProfileInfo() {
+        val jsonObject: JSONObject = NetworkUtils.getJsonObject()
+        try {
+            jsonObject.put("account_id", Constant.mAccountId)
+            jsonObject.put("access_token", Constant.mToken) //FCM Token
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        if (BuildConfig.DEBUG) {
+            Log.i("OkHttpClient", " get profile info = " + jsonObject.toString())
+        }
+        //        Log.e(TAG, "111 id = " + Constant.mAccountId);
+        OkGo.post<String>(Api.PROFILE_INFO).tag(TAG)
+            .params("data", NetworkUtils.toBuildParams(jsonObject))
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>) {
+                    flLoading?.visibility = View.GONE
+                    val profileInfo: ProfileInfoResponse? =
+                        NetworkUtils.checkResponseSuccess(response, ProfileInfoResponse::class.java)
+                    if (profileInfo == null) {
+                        Log.e(TAG, " profile info error ." + response.body())
+                        return
+                    }
+                    accountName = profileInfo?.account_profile?.first_name
+                }
+
+                override fun onError(response: Response<String>) {
+                    super.onError(response)
+
+                    flLoading?.visibility = View.GONE
+                    if (BuildConfig.DEBUG) {
+                        Log.e(TAG, "order profile failure = " + response.body())
+                    }
+                }
+            })
+    }
+
+    override fun onDetachedFromWindow() {
+        OkGo.getInstance().cancelTag(TAG)
+        super.onDetachedFromWindow()
     }
 }

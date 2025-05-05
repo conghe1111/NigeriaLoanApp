@@ -3,192 +3,216 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@color/black"
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <LinearLayout
-        android:id="@+id/ll_bottom_container"
+    <FrameLayout
+        android:id="@+id/fl_bottom_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="@dimen/dp21"
-        android:layout_marginBottom="@dimen/dp16"
-        android:background="@drawable/bg_white_bg"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp14"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/loan_detail"
-            android:textColor="#333333"
-            android:textSize="@dimen/sp15"
-            android:textStyle="bold" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp10"
-            android:layout_marginTop="@dimen/dp14"
+            android:layout_marginHorizontal="@dimen/dp21"
+            android:layout_marginBottom="@dimen/dp16"
+            android:background="@drawable/bg_white_bg"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/style_item_repayment_detail"
-                    android:text="@string/disbursal_amount" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_disbursal_amount"
-                    style="@style/style_item_repayment_detail_desc" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp2"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/style_item_repayment_detail"
-                    android:text="@string/due_amount" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_due_amount"
-                    style="@style/style_item_repayment_detail_desc" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp2"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/style_item_repayment_detail"
-                    android:text="@string/due_day" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_due_day"
-                    style="@style/style_item_repayment_detail_desc" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp10"
-            android:layout_marginTop="@dimen/dp14"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/style_item_repayment_detail"
-                    android:text="@string/bank_name" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_bank_name"
-                    style="@style/style_item_repayment_detail_desc" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp2"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/style_item_repayment_detail"
-                    android:text="@string/bank_account_number" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_bank_num"
-                    style="@style/style_item_repayment_detail_desc" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:background="@drawable/hor_grey_hash_line"
-                android:layout_height="@dimen/dp2"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp13"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_loan_detail_select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_select" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_agree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp14"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/loan_detail"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp14"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/style_item_repayment_detail"
+                        android:text="@string/disbursal_amount" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_disbursal_amount"
+                        style="@style/style_item_repayment_detail_desc" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@drawable/hor_grey_hash_line"
+                    android:layout_height="@dimen/dp2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/style_item_repayment_detail"
+                        android:text="@string/due_amount" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_due_amount"
+                        style="@style/style_item_repayment_detail_desc" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@drawable/hor_grey_hash_line"
+                    android:layout_height="@dimen/dp2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/style_item_repayment_detail"
+                        android:text="@string/due_day" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_due_day"
+                        style="@style/style_item_repayment_detail_desc" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@drawable/hor_grey_hash_line"
+                    android:layout_height="@dimen/dp2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp14"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/style_item_repayment_detail"
+                        android:text="@string/bank_name" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bank_name"
+                        style="@style/style_item_repayment_detail_desc" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@drawable/hor_grey_hash_line"
+                    android:layout_height="@dimen/dp2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/style_item_repayment_detail"
+                        android:text="@string/bank_account_number" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bank_num"
+                        style="@style/style_item_repayment_detail_desc" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@drawable/hor_grey_hash_line"
+                    android:layout_height="@dimen/dp2"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="#333333"
-                android:textSize="@dimen/sp12"
-                android:layout_marginStart="@dimen/dp6"
-                android:text="@string/i_agree_to_loan_contact" />
+                android:layout_marginTop="@dimen/dp13"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_loan_detail_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_select" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_agree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/sp12"
+                    android:layout_marginStart="@dimen/dp6"
+                    android:text="@string/i_agree_to_loan_contact" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_loan_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp40"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp11"
+                android:layout_marginBottom="@dimen/dp10"
+                android:background="@drawable/bg_select_amount_10"
+                android:gravity="center"
+                android:text="@string/confirm"
+                android:textColor="#242424"
+                android:textSize="@dimen/sp14"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_loan_confirm"
+        <FrameLayout
+            android:id="@+id/fl_loading"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp40"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp11"
-            android:layout_marginBottom="@dimen/dp10"
-            android:background="@drawable/bg_select_amount_10"
-            android:gravity="center"
-            android:text="@string/confirm"
-            android:textColor="#242424"
-            android:textSize="@dimen/sp14"
-            android:textStyle="bold" />
+            android:clickable="true"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_height="match_parent">
 
-    </LinearLayout>
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/theme_color" />
+
+
+        </FrameLayout>
+
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_close"
@@ -198,7 +222,7 @@
         android:layout_marginBottom="-13dp"
         android:layout_alignParentEnd="true"
         android:src="@drawable/ic_close_2"
-        android:layout_above="@id/ll_bottom_container"
+        android:layout_above="@id/fl_bottom_container"
         tools:background="@color/teal_200" />
 
 </RelativeLayout>

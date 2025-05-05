@@ -294,9 +294,7 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         if (mDialog?.isShowing == true) {
             mDialog?.dismiss()
         }
-        if (mDialog == null) {
-            mDialog = LoanDetailDialog(this@LoanApplyActivity, mProductTrial)
-        }
+        mDialog = LoanDetailDialog(this@LoanApplyActivity, mProductTrial)
         mDialog?.setCallBack(object : LoanDetailDialog.CallBack() {
             override fun onClickAgree() {
                 if (isFinishing || isDestroyed) {
