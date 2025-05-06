@@ -73,7 +73,7 @@ class InputLoanNumDialog(
                         ToastUtils.showShort("Please input less than $maxV")
                         return
                     }
-                    if (numV < 100) {
+                    if (numV <= 100) {
                         ToastUtils.showShort("Please input more than 100")
                         return
                     }
