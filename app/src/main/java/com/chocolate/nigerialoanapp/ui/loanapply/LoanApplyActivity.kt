@@ -282,10 +282,33 @@ class LoanApplyActivity : BaseLoanApplyActivity() {
         val tvProcessFee = container?.findViewById<TextView>(R.id.tv_item_1_process_fee)
         val tvLoanAmount = container?.findViewById<TextView>(R.id.tv_item_1_loan_amount)
 
-        tvDisburalAmount?.text = SpanUtils.getShowText1(trial?.disburse_amount?.toLong())
-        tvInterest?.text = SpanUtils.getShowText1(trial?.interest?.toLong())
-        tvProcessFee?.text = SpanUtils.getShowText1(trial?.service_fee?.toLong())
-        tvLoanAmount?.text = SpanUtils.getShowText1(trial?.amount?.toLong())
+        var disburse_amount : Long = 0
+        var interest : Long = 0
+        var service_fee : Long = 0
+        var amount : Long = 0
+        for (index in 0 until productTrial.trials.size) {
+            val itemTrail = productTrial.trials[index]
+            if (itemTrail != null) {
+                itemTrail.disburse_amount.let {
+                    disburse_amount += it.toLong()
+                }
+                itemTrail.interest.let {
+                    interest += it.toLong()
+                }
+                itemTrail.service_fee.let {
+                    service_fee += it.toLong()
+                }
+                itemTrail.amount.let {
+                    amount += it.toLong()
+                }
+            }
+
+        }
+
+        tvDisburalAmount?.text = SpanUtils.getShowText1(disburse_amount)
+        tvInterest?.text = SpanUtils.getShowText1(interest)
+        tvProcessFee?.text = SpanUtils.getShowText1(service_fee)
+        tvLoanAmount?.text = SpanUtils.getShowText1(amount)
     }
 
 
