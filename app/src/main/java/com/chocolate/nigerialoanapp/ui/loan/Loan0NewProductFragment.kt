@@ -263,7 +263,7 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
             CollectDataMgr.sInstance.collectAuthData(object : BaseCollectDataMgr.Observer {
                 override fun success(response: UploadAuthResponse?) {
                     if (orderCheekBean.order_id == 0L) {
-                        orderCheek()
+                        ToastUtils.showShort("need loan apply orderId")
                     } else {
                         dismissProgressDialogFragment()
                         toLoanApplyPage(orderCheekBean.order_id)
