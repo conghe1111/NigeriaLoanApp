@@ -64,10 +64,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('../sign/oyocredit')
-            storePassword 'oyo123456'
-            keyAlias 'key0'
-            keyPassword 'oyo123456'
+//            storeFile file('../sign/oyocredit')
+//            storePassword 'oyo123456'
+//            keyAlias 'key0'
+//            keyPassword 'oyo123456'
             //添加V1V2签名
             v1SigningEnabled true
             v2SigningEnabled true
