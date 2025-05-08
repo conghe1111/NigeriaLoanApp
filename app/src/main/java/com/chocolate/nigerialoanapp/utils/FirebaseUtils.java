@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.chocolate.nigerialoanapp.BuildConfig;
 import com.chocolate.nigerialoanapp.global.App;
 import com.chocolate.nigerialoanapp.global.Constant;
 import com.chocolate.nigerialoanapp.log.LogSaver;
@@ -106,7 +107,7 @@ public class FirebaseUtils {
      *
      */
 
-    private static final String TAG = "KudiCreditFirebase";
+    private static final String TAG = "AsyoCreditFirebase";
 
     public static void setUserId(Context context, String userId) {
         FirebaseAnalytics.getInstance(context).setUserId(userId);
@@ -121,27 +122,21 @@ public class FirebaseUtils {
             return;
         }
         AppsflyerUtils.INSTANCE.logEvent(event);
-        // TODO
-        if (true) {
-            return;
-        }
+
         Context context = App.Companion.getInstance();
         Bundle params = new Bundle();
         if (!Constant.INSTANCE.isAabBuild()) {
-            Log.e(TAG, " log event = " + event);
-            Toast.makeText(context, "埋点 = " + event, Toast.LENGTH_SHORT).show();
+            if (BuildConfig.DEBUG) {
+                Log.e(TAG, " log event = " + event);
+            }
+//            Toast.makeText(context, "埋点 = " + event, Toast.LENGTH_SHORT).show();
             LogSaver.logToFile("log event = " + event);
         }
-        // TODO
-//        FirebaseAnalytics.getInstance(context).logEvent(event, params);
+        FirebaseAnalytics.getInstance(context).logEvent(event, params);
     }
 
     public static void logEvent(String event, String paramsKey, String paramsValue, String pKey2, String pValue2) {
         if (App.Companion.getInstance() == null) {
-            return;
-        }
-        // TODO
-        if (true) {
             return;
         }
         Context context = App.Companion.getInstance();
@@ -158,14 +153,15 @@ public class FirebaseUtils {
 
             }
             String result =  event + " " + jsonObject.toString();
-            Log.e(TAG, " log event = " + result);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                Toast.makeText(context, jsonObject.toString(), Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+            if (BuildConfig.DEBUG) {
+                Log.e(TAG, " log event = " + result);
             }
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//                Toast.makeText(context, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+//            }
         }
-        // TODO
-//        FirebaseAnalytics.getInstance(context).logEvent(event, params);
+        FirebaseAnalytics.getInstance(context).logEvent(event, params);
     }
 }

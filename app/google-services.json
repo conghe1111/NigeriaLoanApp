@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "927810951646",
+    "project_id": "afrokash-87fcb",
+    "storage_bucket": "afrokash-87fcb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927810951646:android:897b0a3a8511be0008654f",
+        "android_client_info": {
+          "package_name": "com.afrokash.easymoni.nigeria"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCreGdrAwwUN8v2OcrJ1uEujKtsNa5lWwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
