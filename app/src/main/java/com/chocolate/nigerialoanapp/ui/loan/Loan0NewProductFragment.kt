@@ -1,5 +1,6 @@
 package com.chocolate.nigerialoanapp.ui.loan
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.compose.ui.graphics.Color
+import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chocolate.nigerialoanapp.BuildConfig
 import com.chocolate.nigerialoanapp.R
@@ -97,7 +99,15 @@ class Loan0NewProductFragment : BaseLoanStatusFragment() {
                         it.toLogin()
                     } else {
                         FirebaseUtils.logEvent("CLICK_INDEX_APPLY")
-                        orderCheek()
+                        PermissionUtils.permission(Manifest.permission.READ_SMS)
+                            .callback(object : PermissionUtils.SimpleCallback {
+                                override fun onGranted() {
+                                    orderCheek()
+                                }
+
+                                override fun onDenied() {
+                                }
+                            }).request()
                     }
                 }
             }

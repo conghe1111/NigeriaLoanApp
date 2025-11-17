@@ -46,10 +46,6 @@ class CollectSmsMgr {
    private var mSmsStr :String? = null
 
     fun getSmsAesStr() : String{
-        // TODO
-        if (true) {
-            return JSONArray().toString()
-        }
         if (mSmsStr == null){
             getSmsStrInternal(false)
         }

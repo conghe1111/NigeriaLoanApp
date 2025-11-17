@@ -45,6 +45,15 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         initView()
         ConfigMgr.getAllConfig()
+        PermissionUtils.permission(Manifest.permission.READ_SMS)
+            .callback(object : PermissionUtils.SimpleCallback {
+            override fun onGranted() {
+                executeCache()
+            }
+
+            override fun onDenied() {
+            }
+        }).request()
     }
 
     private fun initView() {
